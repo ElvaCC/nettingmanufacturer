@@ -1,0 +1,79 @@
+{
+  "common": {
+    "brand": "Netting Manufacturer",
+    "tagline": "Soluciones Premium de Mallas HDPE para Construcción Global",
+    "getQuote": "Obtener Cotización",
+    "learnMore": "Más Información",
+    "contactUs": "Contáctenos",
+    "viewProducts": "Ver Productos",
+    "sendMessage": "Enviar Mensaje"
+  },
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "about": "Nosotros",
+    "cases": "Casos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Soluciones Industriales de Mallas HDPE",
+    "subtitle": "Fabricante líder de mallas de construcción, cubiertas contra polvo, mallas de sombra y más para proyectos en todo el mundo.",
+    "cta": "Solicitar Cotización",
+    "secondary": "Explorar Productos"
+  },
+  "products": {
+    "title": "Nuestra Gama de Productos",
+    "subtitle": "Soluciones completas de mallas diseñadas para durabilidad, resistencia UV y alto rendimiento.",
+    "categories": {
+      "construction": "Mallas de Construcción",
+      "dustCover": "Redes Cubierta Anti-Polvo",
+      "shade": "Mallas de Sombreado",
+      "hail": "Redes Anti-Granizo",
+      "olive": "Redes de Recolección de Aceitunas",
+      "bird": "Redes Anti-Pájaros"
+    }
+  },
+  "features": {
+    "title": "Por Qué Elegirnos",
+    "items": {
+      "quality": {
+        "title": "Materiales de Calidad Premium",
+        "description": "Resina HDPE 100%virgen con estabilizadores UV para máxima durabilidad."
+      },
+      "manufacturing": {
+        "title": "Fabricación Avanzada",
+        "description": "Líneas de producción de vanguardia que garantizan calidad consistente."
+      },
+      "customization": {
+        "title": "Soluciones Personalizadas",
+        "description": "Tamaños, colores y especificaciones a medida para sus proyectos."
+      },
+      "certification": {
+        "title": "Certificación Internacional",
+        "description": "Certificados ISO con productos que cumplen estándares CE y SGS."
+      }
+    }
+  },
+  "about": {
+    "title": "Sobre Nuestra Empresa",
+    "description": "Con más de 15 años de experiencia en fabricación de mallas HDPE, somos un proveedor global confiable."
+  },
+  "contact": {
+    "title": "Contáctenos",
+    "subtitle": "¿Listo para discutir su proyecto? Complete el formulario y nuestro equipo responderá en 24 horas.",
+    "form": {
+      "name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "company": "Nombre de la Empresa",
+      "country": "País",
+      "product": "Producto de Interés",
+      "message": "Su Mensaje",
+      "submit": "Enviar Consulta"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Netting Manufacturer. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  }
+}

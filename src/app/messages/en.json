@@ -1,0 +1,79 @@
+{
+  "common": {
+    "brand": "Netting Manufacturer",
+    "tagline": "Premium HDPE Netting Solutions for Global Construction",
+    "getQuote": "Get Quote",
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "viewProducts": "View Products",
+    "sendMessage": "Send Message"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "cases": "Cases",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Industrial-Grade HDPE Netting Solutions",
+    "subtitle": "Leading manufacturer of construction mesh, dust cover nets, shade nets, and more for projects worldwide.",
+    "cta": "Request a Quote",
+    "secondary": "Explore Products"
+  },
+  "products": {
+    "title": "Our Product Range",
+    "subtitle": "Comprehensive netting solutions engineered for durability, UV resistance, and performance in demanding environments.",
+    "categories": {
+      "construction": "Construction Mesh",
+      "dustCover": "Dust Cover Nets",
+      "shade": "Shade Nets",
+      "hail": "Hail Protection Nets",
+      "olive": "Olive Collection Nets",
+      "bird": "Bird Protection Nets"
+    }
+  },
+  "features": {
+    "title": "Why Choose Us",
+    "items": {
+      "quality": {
+        "title": "Premium Quality Materials",
+        "description": "100% virgin HDPE resin with UV stabilizers for maximum durability and longevity."
+      },
+      "manufacturing": {
+        "title": "Advanced Manufacturing",
+        "description": "State-of-the-art production lines ensuring consistent quality and precise specifications."
+      },
+      "customization": {
+        "title": "Custom Solutions",
+        "description": "Tailored sizes, colors, and specifications to meet your exact project requirements."
+      },
+      "certification": {
+        "title": "International Certification",
+        "description": "ISO certified with products meeting CE, SGS, and global quality standards."
+      }
+    }
+  },
+  "about": {
+    "title": "About Our Company",
+    "description": "With over 15 years of experience in HDPE netting manufacturing, we have established ourselves as a trusted global supplier for construction, agriculture, and industrial applications."
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to discuss your project? Fill out the form below and our team will respond within 24 hours.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "company": "Company Name",
+      "country": "Country",
+      "product": "Interested Product",
+      "message": "Your Message",
+      "submit": "Send Inquiry"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Netting Manufacturer. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
