@@ -40,13 +40,13 @@ const languages = [
   { code: "ar", name: "العربية", flag: "🇸🇦" },
 ];
 
-export default function Header() {
+export default function Header({ locale: localeProp }: { locale?: string }) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const params = useParams();
   const router = useRouter();
-  const locale = (params.locale as string) || "en";
+  const locale = localeProp || (params.locale as string) || "en";
   const currentLang = languages.find(l => l.code === locale) || languages[0];
 
   const getPath = (href: string) => locale === "en" ? href : `/${locale}${href}`;
