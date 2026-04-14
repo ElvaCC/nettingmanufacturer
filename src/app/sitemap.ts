@@ -12,11 +12,11 @@ const staticPages = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = staticPages.flatMap((page) =>
+  const pages: MetadataRoute.Sitemap = staticPages.flatMap((page) =>
     locales.map((locale) => ({
       url: `${baseUrl}${locale === "en" ? "" : `/${locale}`}${page}`,
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+      changeFrequency: "weekly",
       priority: page === "" ? 1 : 0.8,
     }))
   );
