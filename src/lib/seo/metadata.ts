@@ -11,7 +11,7 @@ const defaultMetadata = {
   authors: [{ name: "Netting Manufacturer" }],
   creator: "Netting Manufacturer",
   publisher: "Netting Manufacturer",
-  metadataBase: "https://www.nettingmanufacturer.com",
+  metadataBase: new URL("https://www.nettingmanufacturer.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
