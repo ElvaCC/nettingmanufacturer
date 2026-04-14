@@ -74,13 +74,13 @@ const navItems = [
   },
 ];
 
-export default function Header() {
+export default function Header({ locale: localeProp }: { locale?: string }) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const params = useParams();
   const router = useRouter();
-  const locale = (params.locale as string) || "en";
+  const locale = localeProp || (params.locale as string) || "en";
 
   const currentLang = languages.find((l) => l.code === locale) || languages[0];
 
@@ -235,9 +235,11 @@ export default function Header() {
           margin: 0 auto;
           padding: 0 24px;
           height: 70px;
-          display: flex;
+          display: flex !important;
+          flex-direction: row;
           align-items: center;
           justify-content: space-between;
+          flex: 1;
         }
 
         .logo {
@@ -246,6 +248,7 @@ export default function Header() {
           text-decoration: none;
           font-weight: 700;
           font-size: 18px;
+          flex-shrink: 0;
         }
 
         .logo-text {
@@ -258,19 +261,25 @@ export default function Header() {
         }
 
         .nav-desktop {
-          display: flex;
+          display: flex !important;
+          flex-direction: row;
+          flex: 1;
+          justify-content: center;
         }
 
         .nav-list {
-          display: flex;
+          display: flex !important;
+          flex-direction: row;
           list-style: none;
           margin: 0;
           padding: 0;
           gap: 4px;
+          flex-wrap: nowrap;
         }
 
         .nav-item {
           position: relative;
+          flex-shrink: 0;
         }
 
         .nav-link {
@@ -334,6 +343,7 @@ export default function Header() {
           display: flex;
           align-items: center;
           gap: 12px;
+          flex-shrink: 0;
         }
 
         .icon-btn {
@@ -427,7 +437,7 @@ export default function Header() {
 
         @media (min-width: 900px) {
           .mobile-menu-btn {
-            display: none;
+            display: none !important;
           }
         }
 
