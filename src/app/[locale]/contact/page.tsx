@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import InquiryForm from "@/components/forms/InquiryForm";
 import { Mail, Phone, MessageCircle, MapPin, Clock } from "lucide-react";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const contactInfo = [
   {
@@ -42,6 +43,9 @@ export default async function ContactPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
 
   return (
     <>

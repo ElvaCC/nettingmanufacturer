@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import ProductShowcase from "@/components/home/ProductShowcase";
@@ -11,6 +11,10 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
+
   const messages = await getMessages();
 
   return (

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import ProductGrid from "@/components/products/ProductGrid";
 import { getLocalizedMetadata } from "@/lib/seo/metadata";
 import { organizationSchema, generateWebsiteSchema } from "@/lib/seo/schema";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -18,6 +19,9 @@ export default async function ProductsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
 
   return (
     <>

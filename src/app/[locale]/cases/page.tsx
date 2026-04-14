@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const cases = [
   {
@@ -40,12 +41,27 @@ const cases = [
   },
 ];
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Project Cases | Netting Manufacturer",
+    description: "Explore our successful projects across the globe, serving diverse industries with HDPE netting solutions.",
+  };
+}
+
 export default async function CasesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
 
   return (
     <>

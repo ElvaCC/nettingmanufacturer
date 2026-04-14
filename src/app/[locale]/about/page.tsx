@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import { getLocalizedMetadata } from "@/lib/seo/metadata";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 const stats = [
   { value: "15+", label: "Years Experience" },
@@ -16,12 +17,24 @@ const certifications = [
   { name: "BV", desc: "Verification & Testing" },
 ];
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return getLocalizedMetadata(locale as any);
+}
+
 export default async function AboutPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
 
   return (
     <>

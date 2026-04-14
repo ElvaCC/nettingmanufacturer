@@ -2,7 +2,7 @@ import { locales, isRtlLocale } from "@/app/i18n";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -16,6 +16,10 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Enable static rendering
+  unstable_setRequestLocale(locale);
+
   const isRtl = isRtlLocale(locale as any);
   const messages = await getMessages();
 

@@ -19,6 +19,10 @@ export function isRtlLocale(locale: Locale): boolean {
 }
 
 export default getRequestConfig(async ({ locale }) => {
+  // Enable static rendering
+  const { unstable_setRequestLocale } = await import("next-intl/server");
+  unstable_setRequestLocale(locale);
+
   if (!locales.includes(locale as Locale)) notFound();
 
   return {
