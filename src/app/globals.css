@@ -36,3 +36,19 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Force horizontal navigation */
+.header-container {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.nav-desktop {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.nav-list {
+  display: flex !important;
+  flex-direction: row !important;
+}
