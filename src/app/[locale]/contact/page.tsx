@@ -1,43 +1,25 @@
-// 联系页 - 仅包含内容，Header/Footer 由 layout 提供
-import Contact from "@/components/home/Contact";
-
+// 联系页 - 仅框架
 export default function ContactPage() {
   return (
     <>
-      {/* Page Header */}
       <section className="page-header">
-        <div className="container">
-          <h1>Contact Us</h1>
-          <p>Let&apos;s Work Together</p>
-        </div>
+        <h1>Contact Us</h1>
+        <p>Get In Touch</p>
       </section>
 
-      {/* Contact Section */}
-      <Contact />
+      <section className="contact-section">
+        <div className="contact-info">Contact Info</div>
+        <div className="contact-form">Contact Form</div>
+      </section>
 
       <style jsx>{`
-        .page-header {
-          background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
-          padding: 80px 24px;
-          text-align: center;
-        }
-
-        .container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .page-header h1 {
-          font-size: 48px;
-          color: #ffffff;
-          margin: 0 0 12px 0;
-        }
-
-        .page-header p {
-          font-size: 18px;
-          color: rgba(255, 255, 255, 0.9);
-          margin: 0;
-        }
+        .page-header { background: #1e3a5f; padding: 80px 24px; text-align: center; }
+        .page-header h1 { color: #fff; font-size: 48px; margin: 0; }
+        .page-header p { color: rgba(255,255,255,0.8); font-size: 18px; margin: 12px 0 0 0; }
+        
+        .contact-section { padding: 60px 24px; background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .contact-info { background: #f8fafc; border-radius: 8px; padding: 40px; color: #666; }
+        .contact-form { background: #f8fafc; border-radius: 8px; padding: 40px; color: #666; }
       `}</style>
     </>
   );
