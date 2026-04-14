@@ -1,24 +1,19 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import ContactSection from "@/components/home/Contact";
+// 联系页 - 仅包含内容，Header/Footer 由 layout 提供
+import Contact from "@/components/home/Contact";
 
 export default function ContactPage() {
   return (
     <>
-      <Header />
-      <main>
-        {/* Page Header */}
-        <section className="page-header">
-          <div className="container">
-            <h1>Contact Us</h1>
-            <p>Let&apos;s Work Together</p>
-          </div>
-        </section>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="container">
+          <h1>Contact Us</h1>
+          <p>Let&apos;s Work Together</p>
+        </div>
+      </section>
 
-        {/* Contact Section */}
-        <ContactSection />
-      </main>
-      <Footer />
+      {/* Contact Section */}
+      <Contact />
 
       <style jsx>{`
         .page-header {

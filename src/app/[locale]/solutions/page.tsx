@@ -1,6 +1,4 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
+// 解决方案页 - 仅包含内容，Header/Footer 由 layout 提供
 const solutions = [
   {
     title: "Custom Logo Printing",
@@ -17,42 +15,38 @@ const solutions = [
 export default function SolutionsPage() {
   return (
     <>
-      <Header />
-      <main>
-        {/* Page Header */}
-        <section className="page-header">
-          <div className="container">
-            <h1>Solutions</h1>
-            <p>Customized Services for Your Business</p>
-          </div>
-        </section>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="container">
+          <h1>Solutions</h1>
+          <p>Customized Services for Your Business</p>
+        </div>
+      </section>
 
-        {/* Solutions Grid */}
-        <section className="solutions-section">
-          <div className="container">
-            <div className="solutions-grid">
-              {solutions.map((solution, index) => (
-                <div key={index} className="solution-card">
-                  <div className="solution-image">
-                    <span>Solution Image</span>
-                  </div>
-                  <div className="solution-content">
-                    <h3>{solution.title}</h3>
-                    <p>{solution.desc}</p>
-                    <ul className="features-list">
-                      {solution.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
-                    <a href="/contact" className="btn-primary">Get Quote →</a>
-                  </div>
+      {/* Solutions Grid */}
+      <section className="solutions-section">
+        <div className="container">
+          <div className="solutions-grid">
+            {solutions.map((solution, index) => (
+              <div key={index} className="solution-card">
+                <div className="solution-image">
+                  <span>Solution Image</span>
                 </div>
-              ))}
-            </div>
+                <div className="solution-content">
+                  <h3>{solution.title}</h3>
+                  <p>{solution.desc}</p>
+                  <ul className="features-list">
+                    {solution.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                  <a href="/contact" className="btn-primary">Get Quote →</a>
+                </div>
+              </div>
+            ))}
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
 
       <style jsx>{`
         .page-header {
@@ -64,6 +58,7 @@ export default function SolutionsPage() {
         .container {
           max-width: 1200px;
           margin: 0 auto;
+          padding: 0 24px;
         }
 
         .page-header h1 {
@@ -79,7 +74,7 @@ export default function SolutionsPage() {
         }
 
         .solutions-section {
-          padding: 60px 24px;
+          padding: 60px 0;
           background: #f8fafc;
         }
 

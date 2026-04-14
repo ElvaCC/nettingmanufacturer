@@ -1,6 +1,4 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
+// 应用场景页 - 仅包含内容，Header/Footer 由 layout 提供
 const applications = [
   { name: "Construction", desc: "Safety debris netting for building sites and scaffolding" },
   { name: "Agriculture", desc: "Crop protection, greenhouse shading, and orchard netting" },
@@ -11,37 +9,33 @@ const applications = [
 export default function ApplicationsPage() {
   return (
     <>
-      <Header />
-      <main>
-        {/* Page Header */}
-        <section className="page-header">
-          <div className="container">
-            <h1>Applications</h1>
-            <p>Comprehensive Solutions for Multiple Industries</p>
-          </div>
-        </section>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="container">
+          <h1>Applications</h1>
+          <p>Comprehensive Solutions for Multiple Industries</p>
+        </div>
+      </section>
 
-        {/* Applications Grid */}
-        <section className="apps-section">
-          <div className="container">
-            <div className="apps-grid">
-              {applications.map((app, index) => (
-                <a key={index} href={`/applications/${index}`} className="app-card">
-                  <div className="app-image">
-                    <span>Application Image</span>
-                  </div>
-                  <div className="app-content">
-                    <h3>{app.name}</h3>
-                    <p>{app.desc}</p>
-                    <span className="read-more">LEARN MORE +</span>
-                  </div>
-                </a>
-              ))}
-            </div>
+      {/* Applications Grid */}
+      <section className="apps-section">
+        <div className="container">
+          <div className="apps-grid">
+            {applications.map((app, index) => (
+              <a key={index} href={`/applications/${index}`} className="app-card">
+                <div className="app-image">
+                  <span>Application Image</span>
+                </div>
+                <div className="app-content">
+                  <h3>{app.name}</h3>
+                  <p>{app.desc}</p>
+                  <span className="read-more">LEARN MORE +</span>
+                </div>
+              </a>
+            ))}
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
 
       <style jsx>{`
         .page-header {
@@ -53,6 +47,7 @@ export default function ApplicationsPage() {
         .container {
           max-width: 1200px;
           margin: 0 auto;
+          padding: 0 24px;
         }
 
         .page-header h1 {
@@ -68,7 +63,7 @@ export default function ApplicationsPage() {
         }
 
         .apps-section {
-          padding: 60px 24px;
+          padding: 60px 0;
           background: #f8fafc;
         }
 

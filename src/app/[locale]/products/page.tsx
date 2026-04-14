@@ -1,6 +1,4 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
+// 产品页 - 仅包含内容，Header/Footer 由 layout 提供
 const products = [
   { name: "HDPE Safety Net", slug: "hdpe-safety-net", desc: "High-quality construction safety debris netting" },
   { name: "Shade Net", slug: "shade-net", desc: "UV protection shade netting for agriculture" },
@@ -13,37 +11,33 @@ const products = [
 export default function ProductsPage() {
   return (
     <>
-      <Header />
-      <main>
-        {/* Page Header */}
-        <section className="page-header">
-          <div className="container">
-            <h1>Products</h1>
-            <p>Professional HDPE Netting Solutions</p>
-          </div>
-        </section>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="container">
+          <h1>Products</h1>
+          <p>Professional HDPE Netting Solutions</p>
+        </div>
+      </section>
 
-        {/* Products Grid */}
-        <section className="products-section">
-          <div className="container">
-            <div className="products-grid">
-              {products.map((product) => (
-                <a key={product.slug} href={`/products/${product.slug}`} className="product-card">
-                  <div className="product-image">
-                    <span>Product Image</span>
-                  </div>
-                  <div className="product-info">
-                    <h3>{product.name}</h3>
-                    <p>{product.desc}</p>
-                    <span className="read-more">READ MORE +</span>
-                  </div>
-                </a>
-              ))}
-            </div>
+      {/* Products Grid */}
+      <section className="products-section">
+        <div className="container">
+          <div className="products-grid">
+            {products.map((product) => (
+              <a key={product.slug} href={`/products/${product.slug}`} className="product-card">
+                <div className="product-image">
+                  <span>Product Image</span>
+                </div>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.desc}</p>
+                  <span className="read-more">READ MORE +</span>
+                </div>
+              </a>
+            ))}
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
 
       <style jsx>{`
         .page-header {
@@ -55,6 +49,7 @@ export default function ProductsPage() {
         .container {
           max-width: 1400px;
           margin: 0 auto;
+          padding: 0 24px;
         }
 
         .page-header h1 {
@@ -70,7 +65,7 @@ export default function ProductsPage() {
         }
 
         .products-section {
-          padding: 60px 24px;
+          padding: 60px 0;
           background: #f8fafc;
         }
 

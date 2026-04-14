@@ -1,6 +1,4 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
+// 博客页 - 仅包含内容，Header/Footer 由 layout 提供
 const blogPosts = [
   { title: "How to Choose the Right Shade Net", date: "2024-12-15", excerpt: "Learn about the key factors..." },
   { title: "Benefits of Anti-hail Nets", date: "2024-12-10", excerpt: "Protect your fruit orchards..." },
@@ -13,38 +11,34 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <>
-      <Header />
-      <main>
-        {/* Page Header */}
-        <section className="page-header">
-          <div className="container">
-            <h1>Blog</h1>
-            <p>Industry Insights and Company Updates</p>
-          </div>
-        </section>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="container">
+          <h1>Blog</h1>
+          <p>Industry Insights and Company Updates</p>
+        </div>
+      </section>
 
-        {/* Blog Grid */}
-        <section className="blog-section">
-          <div className="container">
-            <div className="blog-grid">
-              {blogPosts.map((post, index) => (
-                <a key={index} href={`/blog/${index}`} className="blog-card">
-                  <div className="blog-image">
-                    <span>Blog Image</span>
-                  </div>
-                  <div className="blog-content">
-                    <span className="blog-date">{post.date}</span>
-                    <h3>{post.title}</h3>
-                    <p>{post.excerpt}</p>
-                    <span className="read-more">READ MORE +</span>
-                  </div>
-                </a>
-              ))}
-            </div>
+      {/* Blog Grid */}
+      <section className="blog-section">
+        <div className="container">
+          <div className="blog-grid">
+            {blogPosts.map((post, index) => (
+              <a key={index} href={`/blog/${index}`} className="blog-card">
+                <div className="blog-image">
+                  <span>Blog Image</span>
+                </div>
+                <div className="blog-content">
+                  <span className="blog-date">{post.date}</span>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <span className="read-more">READ MORE +</span>
+                </div>
+              </a>
+            ))}
           </div>
-        </section>
-      </main>
-      <Footer />
+        </div>
+      </section>
 
       <style jsx>{`
         .page-header {
@@ -56,6 +50,7 @@ export default function BlogPage() {
         .container {
           max-width: 1200px;
           margin: 0 auto;
+          padding: 0 24px;
         }
 
         .page-header h1 {
@@ -71,7 +66,7 @@ export default function BlogPage() {
         }
 
         .blog-section {
-          padding: 60px 24px;
+          padding: 60px 0;
           background: #f8fafc;
         }
 
@@ -141,7 +136,6 @@ export default function BlogPage() {
           font-weight: 600;
         }
       `}</style>
-    </main>
     </>
   );
 }
