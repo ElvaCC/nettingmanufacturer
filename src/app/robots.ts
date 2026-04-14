@@ -3,10 +3,10 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/admin/", "/_next/"],
+        disallow: "/",
       },
     ],
-    sitemap: "https://www.nettingmanufacturer.com/sitemap.xml",
+    // Uncomment the line below when ready to go live
+    // sitemap: "https://www.nettingmanufacturer.com/sitemap.xml",
   };
 }
