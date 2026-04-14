@@ -1,124 +1,153 @@
 "use client";
 
-import Link from "next/link";
-import { Phone, Mail } from "lucide-react";
-
-const footerLinks = {
-  company: [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Our Factory", href: "/about" },
-    { label: "Contact Us", href: "/contact" },
-  ],
-  products: [
-    { label: "Construction Safety Netting", href: "/products" },
-    { label: "Hail Netting", href: "/products" },
-    { label: "Shade Net", href: "/products" },
-    { label: "Mesh Tarp", href: "/products" },
-    { label: "Olive Net", href: "/products" },
-    { label: "Privacy Fence Screen", href: "/products" },
-    { label: "Bird Netting", href: "/products" },
-    { label: "Anti Insect Net", href: "/products" },
-  ],
-  support: [
-    { label: "Company News", href: "/news" },
-    { label: "Industry News", href: "/news" },
-    { label: "FAQ", href: "/contact" },
-  ],
-};
-
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white">
-      {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Company Links */}
-          <div>
-            <h3 className="font-bold mb-4">Company</h3>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-grid">
+          {/* Column 1: About */}
+          <div className="footer-col">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="#">Company Profile</a></li>
+              <li><a href="#">Factory Introduction</a></li>
+              <li><a href="#">Certifications</a></li>
             </ul>
           </div>
 
-          {/* Products Links */}
-          <div className="col-span-2 md:col-span-1">
-            <h3 className="font-bold mb-4">Products</h3>
-            <ul className="space-y-2">
-              {footerLinks.products.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+          {/* Column 2: Products */}
+          <div className="footer-col">
+            <h4>Products</h4>
+            <ul>
+              <li><a href="#">HDPE Safety Net</a></li>
+              <li><a href="#">Shade Net</a></li>
+              <li><a href="#">Anti-hail Net</a></li>
+              <li><a href="#">Olive Net</a></li>
+              <li><a href="#">Bird Net</a></li>
+              <li><a href="#">Privacy Screen</a></li>
             </ul>
           </div>
 
-          {/* Support Links */}
-          <div>
-            <h3 className="font-bold mb-4">Support</h3>
-            <ul className="space-y-2">
-              {footerLinks.support.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+          {/* Column 3: Applications */}
+          <div className="footer-col">
+            <h4>Applications</h4>
+            <ul>
+              <li><a href="#">Construction</a></li>
+              <li><a href="#">Agriculture</a></li>
+              <li><a href="#">Sports</a></li>
+              <li><a href="#">Dust Cover</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-bold mb-4">Contact</h3>
-            <div className="space-y-3 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <Phone size={16} />
-                <span>+86 XXX XXXX XXXX</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail size={16} />
-                <span>info@nettingmanufacturer.com</span>
-              </div>
-            </div>
+          {/* Column 4: Solutions */}
+          <div className="footer-col">
+            <h4>Solutions</h4>
+            <ul>
+              <li><a href="#">Custom Logo Printing</a></li>
+              <li><a href="#">Custom Specifications</a></li>
+            </ul>
           </div>
+
+          {/* Column 5: Blog */}
+          <div className="footer-col">
+            <h4>Blog</h4>
+            <ul>
+              <li><a href="#">Industry News</a></li>
+              <li><a href="#">Company Updates</a></li>
+              <li><a href="#">Technical Articles</a></li>
+            </ul>
+          </div>
+
+          {/* Column 6: Contact */}
+          <div className="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+              <li>Tel: +86 156 2876 4579</li>
+              <li>Email: sales@nettingmanufacturer.com</li>
+              <li>Address: Shandong, China</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="footer-bottom">
+          <p>Copyright © 2024 NettingManufacturer. All Rights Reserved.</p>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-700">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-gray-400">
-              Copyright © 2026 Netting Manufacturer Co., Ltd All Rights Reserved
-            </p>
-            <div className="flex items-center gap-4 text-sm text-gray-400">
-              <Link href="/privacy" className="hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <style jsx>{`
+        .footer {
+          background: #1e3a5f;
+          color: #ffffff;
+          padding: 60px 24px 24px;
+        }
+
+        .container {
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+          .footer-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .footer-grid {
+            grid-template-columns: repeat(6, 1fr);
+          }
+        }
+
+        .footer-col h4 {
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0 0 16px 0;
+          color: #fbbf24;
+        }
+
+        .footer-col ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .footer-col li {
+          margin-bottom: 10px;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-col a {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+          color: #fbbf24;
+        }
+
+        .footer-bottom {
+          margin-top: 40px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          text-align: center;
+        }
+
+        .footer-bottom p {
+          margin: 0;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.6);
+        }
+      `}</style>
     </footer>
   );
 }

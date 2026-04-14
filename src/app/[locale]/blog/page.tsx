@@ -1,16 +1,16 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const products = [
-  { name: "HDPE Safety Net", slug: "hdpe-safety-net", desc: "High-quality construction safety debris netting" },
-  { name: "Shade Net", slug: "shade-net", desc: "UV protection shade netting for agriculture" },
-  { name: "Anti-hail Net", slug: "anti-hail-net", desc: "Crop protection anti-hail netting" },
-  { name: "Olive Net", slug: "olive-net", desc: "Olive harvest collection net" },
-  { name: "Bird Net", slug: "bird-net", desc: "Garden and orchard bird protection net" },
-  { name: "Privacy Screen", slug: "privacy-screen", desc: "Fence privacy screen netting" },
+const blogPosts = [
+  { title: "How to Choose the Right Shade Net", date: "2024-12-15", excerpt: "Learn about the key factors..." },
+  { title: "Benefits of Anti-hail Nets", date: "2024-12-10", excerpt: "Protect your fruit orchards..." },
+  { title: "Safety Standards for Debris Netting", date: "2024-12-05", excerpt: "Understanding safety requirements..." },
+  { title: "HDPE vs PVC Netting", date: "2024-11-28", excerpt: "Compare material differences..." },
+  { title: "Installation Tips for Safety Nets", date: "2024-11-20", excerpt: "Professional installation guide..." },
+  { title: "Maintenance of Shade Nets", date: "2024-11-15", excerpt: "Extend the lifespan of your nets..." },
 ];
 
-export default function ProductsPage() {
+export default function BlogPage() {
   return (
     <>
       <Header />
@@ -18,23 +18,24 @@ export default function ProductsPage() {
         {/* Page Header */}
         <section className="page-header">
           <div className="container">
-            <h1>Products</h1>
-            <p>Professional HDPE Netting Solutions</p>
+            <h1>Blog</h1>
+            <p>Industry Insights and Company Updates</p>
           </div>
         </section>
 
-        {/* Products Grid */}
-        <section className="products-section">
+        {/* Blog Grid */}
+        <section className="blog-section">
           <div className="container">
-            <div className="products-grid">
-              {products.map((product) => (
-                <a key={product.slug} href={`/products/${product.slug}`} className="product-card">
-                  <div className="product-image">
-                    <span>Product Image</span>
+            <div className="blog-grid">
+              {blogPosts.map((post, index) => (
+                <a key={index} href={`/blog/${index}`} className="blog-card">
+                  <div className="blog-image">
+                    <span>Blog Image</span>
                   </div>
-                  <div className="product-info">
-                    <h3>{product.name}</h3>
-                    <p>{product.desc}</p>
+                  <div className="blog-content">
+                    <span className="blog-date">{post.date}</span>
+                    <h3>{post.title}</h3>
+                    <p>{post.excerpt}</p>
                     <span className="read-more">READ MORE +</span>
                   </div>
                 </a>
@@ -53,7 +54,7 @@ export default function ProductsPage() {
         }
 
         .container {
-          max-width: 1400px;
+          max-width: 1200px;
           margin: 0 auto;
         }
 
@@ -69,24 +70,24 @@ export default function ProductsPage() {
           margin: 0;
         }
 
-        .products-section {
+        .blog-section {
           padding: 60px 24px;
           background: #f8fafc;
         }
 
-        .products-grid {
+        .blog-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           gap: 24px;
         }
 
         @media (min-width: 768px) {
-          .products-grid {
+          .blog-grid {
             grid-template-columns: repeat(3, 1fr);
           }
         }
 
-        .product-card {
+        .blog-card {
           background: #ffffff;
           border-radius: 12px;
           overflow: hidden;
@@ -94,13 +95,13 @@ export default function ProductsPage() {
           transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .product-card:hover {
+        .blog-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .product-image {
-          aspect-ratio: 4/3;
+        .blog-image {
+          aspect-ratio: 16/9;
           background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
           display: flex;
           align-items: center;
@@ -109,21 +110,29 @@ export default function ProductsPage() {
           font-size: 14px;
         }
 
-        .product-info {
-          padding: 20px;
+        .blog-content {
+          padding: 24px;
         }
 
-        .product-info h3 {
+        .blog-date {
+          font-size: 13px;
+          color: #2563eb;
+          font-weight: 600;
+        }
+
+        .blog-content h3 {
           font-size: 18px;
           font-weight: 600;
           color: #1e3a5f;
-          margin: 0 0 8px 0;
+          margin: 8px 0 12px 0;
+          line-height: 1.4;
         }
 
-        .product-info p {
+        .blog-content p {
           font-size: 14px;
           color: #666;
-          margin: 0 0 12px 0;
+          margin: 0 0 16px 0;
+          line-height: 1.6;
         }
 
         .read-more {
@@ -132,6 +141,7 @@ export default function ProductsPage() {
           font-weight: 600;
         }
       `}</style>
+    </main>
     </>
   );
 }

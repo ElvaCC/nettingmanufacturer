@@ -1,133 +1,503 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import { Menu, X, Globe, ChevronRight } from "lucide-react";
-import { locales, localeNames, type Locale } from "@/app/i18n";
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
-const navLinks = [
-  { key: "home", href: "/", productKeywords: "HDPE Netting" },
-  { key: "products", href: "/products", productKeywords: "Construction Mesh, Shade Net" },
-  { key: "about", href: "/about", productKeywords: "Factory, Manufacturer" },
-  { key: "cases", href: "/cases", productKeywords: "Project, Case Study" },
-  { key: "contact", href: "/contact", productKeywords: "Quote, Inquiry" },
+// Language options with flags
+const languages = [
+  { code: "en", name: "English", flag: "🇺🇸", href: "" },
+  { code: "es", name: "Español", flag: "🇪🇸", href: "/es" },
+  { code: "ru", name: "Русский", flag: "🇷🇺", href: "/ru" },
+  { code: "ar", name: "العربية", flag: "🇸🇦", href: "/ar" },
 ];
 
-export default function Header({ locale }: { locale: string }) {
-  const t = useTranslations("nav");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+// Navigation items
+const navItems = [
+  {
+    label: "Home",
+    href: "",
+    hasDropdown: false,
+  },
+  {
+    label: "Products",
+    href: "/products",
+    hasDropdown: true,
+    dropdown: [
+      { label: "HDPE Safety Net", href: "/products/safety-net" },
+      { label: "Shade Net", href: "/products/shade-net" },
+      { label: "Anti-hail Net", href: "/products/anti-hail-net" },
+      { label: "Olive Net", href: "/products/olive-net" },
+      { label: "Bird Net", href: "/products/bird-net" },
+      { label: "Privacy Screen", href: "/products/privacy-screen" },
+    ],
+  },
+  {
+    label: "Applications",
+    href: "/applications",
+    hasDropdown: true,
+    dropdown: [
+      { label: "Construction", href: "/applications/construction" },
+      { label: "Agriculture", href: "/applications/agriculture" },
+      { label: "Sports Facilities", href: "/applications/sports" },
+      { label: "Dust Cover", href: "/applications/dust-cover" },
+    ],
+  },
+  {
+    label: "Our Factory",
+    href: "/factory",
+    hasDropdown: true,
+    dropdown: [
+      { label: "Production Line", href: "/factory/production" },
+      { label: "Quality Control", href: "/factory/quality" },
+      { label: "Certifications", href: "/factory/certifications" },
+    ],
+  },
+  {
+    label: "Solutions",
+    href: "/solutions",
+    hasDropdown: true,
+    dropdown: [
+      { label: "Custom Logo Printing", href: "/solutions/logo-printing" },
+      { label: "Custom Specifications", href: "/solutions/custom-specs" },
+    ],
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+    hasDropdown: false,
+  },
+  {
+    label: "Contact Us",
+    href: "/contact",
+    hasDropdown: false,
+  },
+];
+
+export default function Header() {
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const params = useParams();
+  const router = useRouter();
+  const locale = (params.locale as string) || "en";
+
+  const currentLang = languages.find((l) => l.code === locale) || languages[0];
+
+  const handleLangChange = (lang: (typeof languages)[0]) => {
+    const currentPath = window.location.pathname;
+    const pathWithoutLocale = currentPath.replace(/^\/(en|es|ru|ar)/, "");
+    const newPath = lang.code === "en" ? pathWithoutLocale || "/" : `/${lang.code}${pathWithoutLocale}`;
+    router.push(newPath);
+    setIsLangOpen(false);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-      {/* Skip to main content - Accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded">
-        Skip to main content
-      </a>
-
-      <nav className="container mx-auto px-4 h-16 flex items-center justify-between" aria-label="Main navigation">
+    <header className="header">
+      <div className="header-container">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2" aria-label="Netting Manufacturer Home">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center" role="img" aria-label="Netting Manufacturer Logo">
-            <span className="text-white font-bold text-lg" aria-hidden="true">N</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="font-bold text-primary">Netting</span>
-            <span className="text-gray-500 text-sm block -mt-1">Manufacturer</span>
-          </div>
+        <Link href={`/${locale === "en" ? "" : locale}`} className="logo">
+          <span className="logo-text">NETTING</span>
+          <span className="logo-highlight">MANUFACTURER</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8" role="list">
-          {navLinks.map((link) => (
-            <Link
-              key={link.key}
-              href={`/${locale}${link.href}`}
-              className="text-text-primary hover:text-primary transition-colors font-medium relative group"
-              role="listitem"
-            >
-              {t(link.key)}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-            </Link>
-          ))}
-        </div>
+        <nav className="nav-desktop">
+          <ul className="nav-list">
+            {navItems.map((item) => (
+              <li
+                key={item.label}
+                className="nav-item"
+                onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.label)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <Link href={`/${locale === "en" ? "" : locale}${item.href}`} className="nav-link">
+                  {item.label}
+                  {item.hasDropdown && <span className="dropdown-arrow">▼</span>}
+                </Link>
 
-        {/* Right Section */}
-        <div className="flex items-center gap-4">
+                {/* Dropdown Menu */}
+                {item.hasDropdown && activeDropdown === item.label && (
+                  <div className="dropdown">
+                    {item.dropdown?.map((subItem) => (
+                      <Link
+                        key={subItem.label}
+                        href={`/${locale === "en" ? "" : locale}${subItem.href}`}
+                        className="dropdown-link"
+                      >
+                        {subItem.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Right Side: Search + Language + Mobile Menu */}
+        <div className="header-right">
+          {/* Search Icon */}
+          <button className="icon-btn search-btn" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+          </button>
+
           {/* Language Selector */}
-          <div className="relative">
+          <div className="lang-selector">
             <button
+              className="lang-btn"
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors"
-              aria-label="Select language"
-              aria-expanded={isLangOpen}
+              aria-label="Change language"
             >
-              <Globe size={20} aria-hidden="true" />
-              <span className="hidden sm:inline text-sm uppercase font-medium">{locale}</span>
+              <span className="lang-flag">{currentLang.flag}</span>
+              <span className="lang-code">{currentLang.code.toUpperCase()}</span>
+              <span className="dropdown-arrow">▼</span>
             </button>
+
             {isLangOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-100 py-2" role="menu">
-                {locales.map((loc) => (
-                  <Link
-                    key={loc}
-                    href={`/${loc}`}
-                    className={`block px-4 py-2 text-sm hover:bg-gray-50 ${loc === locale ? "text-primary font-medium" : "text-text-primary"}`}
-                    role="menuitem"
-                    onClick={() => setIsLangOpen(false)}
+              <div className="lang-dropdown">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    className={`lang-option ${lang.code === locale ? "active" : ""}`}
+                    onClick={() => handleLangChange(lang)}
                   >
-                    {localeNames[loc]}
-                  </Link>
+                    <span className="lang-flag">{lang.flag}</span>
+                    <span className="lang-name">{lang.name}</span>
+                  </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* CTA Button */}
-          <Link
-            href={`/${locale}/contact`}
-            className="hidden sm:inline-flex items-center px-4 py-2 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-colors"
-          >
-            Get Quote
-          </Link>
-
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-text-primary"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
+            className="mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <span className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
           </button>
         </div>
-      </nav>
+      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100" role="navigation" aria-label="Mobile navigation">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.key}
-                href={`/${locale}${link.href}`}
-                className="text-text-primary hover:text-primary transition-colors font-medium py-2 flex items-center gap-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <ChevronRight size={16} aria-hidden="true" />
-                {t(link.key)}
-              </Link>
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <nav className="nav-mobile">
+          <ul className="mobile-nav-list">
+            {navItems.map((item) => (
+              <li key={item.label} className="mobile-nav-item">
+                <Link
+                  href={`/${locale === "en" ? "" : locale}${item.href}`}
+                  className="mobile-nav-link"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+                {item.hasDropdown && (
+                  <div className="mobile-dropdown">
+                    {item.dropdown?.map((subItem) => (
+                      <Link
+                        key={subItem.label}
+                        href={`/${locale === "en" ? "" : locale}${subItem.href}`}
+                        className="mobile-dropdown-link"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {subItem.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
             ))}
-            <Link
-              href={`/${locale}/contact`}
-              className="inline-flex items-center justify-center px-4 py-2 bg-accent text-white font-medium rounded-lg mt-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Get Quote
-            </Link>
-          </div>
-        </div>
+          </ul>
+        </nav>
       )}
+
+      <style jsx>{`
+        .header {
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          background: #ffffff;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .logo {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 18px;
+        }
+
+        .logo-text {
+          color: #1a1a1a;
+        }
+
+        .logo-highlight {
+          color: #2563eb;
+          margin-left: 4px;
+        }
+
+        .nav-desktop {
+          display: none;
+        }
+
+        @media (min-width: 1024px) {
+          .nav-desktop {
+            display: block;
+          }
+        }
+
+        .nav-list {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          gap: 8px;
+        }
+
+        .nav-item {
+          position: relative;
+        }
+
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 8px 16px;
+          color: #333;
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 500;
+          transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+          color: #2563eb;
+        }
+
+        .dropdown-arrow {
+          font-size: 10px;
+          margin-left: 2px;
+        }
+
+        .dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #ffffff;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+          border-radius: 8px;
+          padding: 8px 0;
+          min-width: 200px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(10px);
+          transition: all 0.2s;
+        }
+
+        .nav-item:hover .dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        .dropdown-link {
+          display: block;
+          padding: 10px 20px;
+          color: #333;
+          text-decoration: none;
+          font-size: 14px;
+          transition: background 0.2s;
+        }
+
+        .dropdown-link:hover {
+          background: #f3f4f6;
+          color: #2563eb;
+        }
+
+        .header-right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .icon-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+          color: #333;
+          transition: color 0.2s;
+        }
+
+        .icon-btn:hover {
+          color: #2563eb;
+        }
+
+        .lang-selector {
+          position: relative;
+        }
+
+        .lang-btn {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 12px;
+          background: #f3f4f6;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #333;
+        }
+
+        .lang-btn:hover {
+          background: #e5e7eb;
+        }
+
+        .lang-flag {
+          font-size: 16px;
+        }
+
+        .lang-code {
+          font-weight: 600;
+        }
+
+        .lang-dropdown {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          margin-top: 8px;
+          background: #ffffff;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+          border-radius: 8px;
+          padding: 8px 0;
+          min-width: 160px;
+        }
+
+        .lang-option {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 100%;
+          padding: 10px 16px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          color: #333;
+          text-align: left;
+        }
+
+        .lang-option:hover {
+          background: #f3f4f6;
+        }
+
+        .lang-option.active {
+          background: #e0e7ff;
+          color: #2563eb;
+        }
+
+        .lang-name {
+          flex: 1;
+        }
+
+        .mobile-menu-btn {
+          display: flex;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+        }
+
+        @media (min-width: 1024px) {
+          .mobile-menu-btn {
+            display: none;
+          }
+        }
+
+        .hamburger {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          width: 24px;
+        }
+
+        .hamburger span {
+          display: block;
+          height: 2px;
+          background: #333;
+          transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .nav-mobile {
+          background: #ffffff;
+          border-top: 1px solid #e5e7eb;
+          padding: 16px;
+        }
+
+        .mobile-nav-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .mobile-nav-item {
+          border-bottom: 1px solid #e5e7eb;
+        }
+
+        .mobile-nav-link {
+          display: block;
+          padding: 16px 0;
+          color: #333;
+          text-decoration: none;
+          font-weight: 500;
+        }
+
+        .mobile-dropdown {
+          padding-bottom: 8px;
+        }
+
+        .mobile-dropdown-link {
+          display: block;
+          padding: 8px 0 8px 16px;
+          color: #666;
+          text-decoration: none;
+          font-size: 14px;
+        }
+      `}</style>
     </header>
   );
 }

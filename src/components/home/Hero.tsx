@@ -1,93 +1,241 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, Search } from "lucide-react";
-
-export default function Hero({ locale }: { locale: string }) {
-  const keywords = [
-    "HDPE Netting Manufacturer",
-    "Safety Debris Netting Factory",
-    "Hail Netting from China",
-    "Shade Net Supplier",
-    "Olive Net Factory",
-    "Privacy Fence Screen Manufacturer",
-  ];
-
+export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <section className="hero">
+      {/* Background placeholder */}
+      <div className="hero-bg">
+        <div className="hero-overlay"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Company Name */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Netting Manufacturer Co., Ltd
+      <div className="hero-content">
+        {/* Left: Main content */}
+        <div className="hero-left">
+          <h1 className="hero-title">
+            Professional HDPE Netting
+            <br />
+            <span className="highlight">Manufacturer & Exporter</span>
           </h1>
-
-          {/* Tagline */}
-          <p className="text-lg sm:text-xl text-blue-200 mb-8">
-            Leading Manufacturer of HDPE Industrial Netting Solutions
+          <p className="hero-subtitle">
+            High-quality Safety Net, Shade Net, Anti-hail Net, Olive Net, Bird Net and more
           </p>
-
-          {/* Keywords Tags */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {keywords.map((keyword) => (
-              <span
-                key={keyword}
-                className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm border border-white/20"
-              >
-                {keyword}
-              </span>
-            ))}
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link
-              href={`/${locale}/products`}
-              className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
-            >
-              View Products <ArrowRight size={18} />
-            </Link>
-            <Link
-              href={`/${locale}/about`}
-              className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/20 transition-all border border-white/30"
-            >
-              About Us
-            </Link>
-          </div>
-
-          {/* Search Box */}
-          <div className="max-w-xl mx-auto">
-            <div className="flex items-center bg-white rounded-lg overflow-hidden shadow-xl">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="flex-1 px-4 py-3 text-gray-800 outline-none"
-              />
-              <button className="px-6 py-3 bg-blue-600 text-white hover:bg-blue-700 transition-colors flex items-center gap-2">
-                <Search size={18} />
-                Search
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="text-white/60 text-sm mb-2">Scroll</div>
-          <div className="flex items-center justify-center gap-2 text-white/60">
-            <span>←</span>
-            <span>↓</span>
-            <span>→</span>
+        {/* Right: Featured Products */}
+        <div className="hero-right">
+          <div className="featured-products">
+            <h3>Featured Products</h3>
+            <ul className="product-tags">
+              <li>Safety Debris Netting</li>
+              <li>Shade Net</li>
+              <li>Anti-hail Net</li>
+              <li>Olive Harvest Net</li>
+              <li>Bird Netting</li>
+              <li>Privacy Screen Fence</li>
+            </ul>
+            <a href="#" className="btn-primary">View All Products →</a>
           </div>
         </div>
       </div>
+
+      {/* Bottom: Core Advantages */}
+      <div className="hero-advantages">
+        <div className="advantage-item">
+          <div className="advantage-icon">🏭</div>
+          <div className="advantage-text">Factory Direct</div>
+        </div>
+        <div className="advantage-item">
+          <div className="advantage-icon">✓</div>
+          <div className="advantage-text">ISO Certified</div>
+        </div>
+        <div className="advantage-item">
+          <div className="advantage-icon">🚢</div>
+          <div className="advantage-text">Global Shipping</div>
+        </div>
+        <div className="advantage-item">
+          <div className="advantage-icon">24</div>
+          <div className="advantage-text">24/7 Support</div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .hero {
+          position: relative;
+          min-height: 600px;
+          display: flex;
+          flex-direction: column;
+          background: #f8fafc;
+        }
+
+        .hero-bg {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+        }
+
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23ffffff" fill-opacity="0.05" width="100" height="100"/></svg>');
+          background-size: 20px 20px;
+        }
+
+        .hero-content {
+          position: relative;
+          z-index: 1;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 60px 24px;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 40px;
+          flex: 1;
+        }
+
+        @media (min-width: 1024px) {
+          .hero-content {
+            grid-template-columns: 1.5fr 1fr;
+            padding: 80px 24px;
+          }
+        }
+
+        .hero-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .hero-title {
+          font-size: 36px;
+          font-weight: 700;
+          color: #ffffff;
+          line-height: 1.2;
+          margin: 0 0 20px 0;
+        }
+
+        @media (min-width: 768px) {
+          .hero-title {
+            font-size: 48px;
+          }
+        }
+
+        .highlight {
+          color: #fbbf24;
+        }
+
+        .hero-subtitle {
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.9);
+          margin: 0;
+          line-height: 1.6;
+        }
+
+        .hero-right {
+          display: flex;
+          align-items: center;
+        }
+
+        .featured-products {
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 12px;
+          padding: 24px;
+          width: 100%;
+        }
+
+        .featured-products h3 {
+          font-size: 18px;
+          font-weight: 600;
+          color: #1e3a5f;
+          margin: 0 0 16px 0;
+          padding-bottom: 12px;
+          border-bottom: 2px solid #2563eb;
+        }
+
+        .product-tags {
+          list-style: none;
+          margin: 0 0 20px 0;
+          padding: 0;
+        }
+
+        .product-tags li {
+          padding: 10px 0;
+          color: #333;
+          font-size: 15px;
+          border-bottom: 1px solid #e5e7eb;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .product-tags li:before {
+          content: "→";
+          color: #2563eb;
+        }
+
+        .product-tags li:last-child {
+          border-bottom: none;
+        }
+
+        .btn-primary {
+          display: inline-block;
+          padding: 12px 24px;
+          background: #2563eb;
+          color: #ffffff;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 600;
+          transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+          background: #1d4ed8;
+        }
+
+        .hero-advantages {
+          position: relative;
+          z-index: 1;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          padding: 20px 24px;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          max-width: 1400px;
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        @media (min-width: 768px) {
+          .hero-advantages {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .advantage-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .advantage-icon {
+          width: 48px;
+          height: 48px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          color: #ffffff;
+          font-weight: 700;
+        }
+
+        .advantage-text {
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 15px;
+        }
+      `}</style>
     </section>
   );
 }
