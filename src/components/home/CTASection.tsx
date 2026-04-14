@@ -1,129 +1,240 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useState } from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { MessageSquare, Send, CheckCircle, Loader2 } from "lucide-react";
+
+const faqItems = [
+  {
+    question: "What is your minimum order quantity?",
+    answer: "Our MOQ varies by product type. Standard products start from 500 sqm, while custom specifications may require larger orders. Contact us for detailed quotes based on your requirements."
+  },
+  {
+    question: "Do you offer OEM/ODM services?",
+    answer: "Yes, we provide comprehensive OEM and ODM services including custom logos, packaging, colors, and specifications to meet your exact needs."
+  },
+  {
+    question: "What are your payment terms?",
+    answer: "We accept T/T (30% deposit, 70% balance), L/C, and PayPal. For bulk orders, we offer flexible payment terms to long-term partners."
+  },
+  {
+    question: "How long is production and delivery time?",
+    answer: "Standard products ship within 7-15 days. Custom orders typically require 20-30 days. Global shipping takes 15-45 days depending on destination."
+  },
+];
+
+const productOptions = [
+  "Dust Cover Nets",
+  "Shade Nets",
+  "Hail Protection Nets",
+  "Olive Nets",
+  "Bird Protection Nets",
+  "Safety Mesh",
+  "Other",
+];
 
 export default function CTASection({ locale }: { locale: string }) {
-  const t = useTranslations("contact");
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    product: "",
+    quantity: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate submission
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary via-primary-light to-primary relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-          backgroundSize: "40px 40px",
-        }} />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Content */}
-            <div className="text-white">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Ready to Get Your Custom Quote?
+    <>
+      {/* FAQ Section */}
+      <section className="py-16 lg:py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* FAQ Content */}
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Frequently Asked Questions
               </h2>
-              <p className="text-white/80 mb-8">
-                Contact us today and our team will provide you with a detailed quotation 
-                tailored to your project requirements within 24 hours.
+              <p className="text-lg text-gray-600 mb-8">
+                Find quick answers to common questions about our HDPE netting products and services.
               </p>
-              
+
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <Mail className="w-5 h-5" />
+                {faqItems.map((faq, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl shadow-sm overflow-hidden"
+                  >
+                    <button
+                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                      className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-medium text-gray-900 pr-4">{faq.question}</span>
+                      <span className={`text-primary transition-transform ${expandedFaq === index ? "rotate-180" : ""}`}>
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </span>
+                    </button>
+                    {expandedFaq === index && (
+                      <div className="px-5 pb-5 text-gray-600">
+                        {faq.answer}
+                      </div>
+                    )}
                   </div>
-                  <div>
-                    <div className="text-white/60 text-sm">Email Us</div>
-                    <div className="font-medium">info@nettingmanufacturer.com</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-white/60 text-sm">Call Us</div>
-                    <div className="font-medium">+86 XXX XXXX XXXX</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-white/60 text-sm">Response Time</div>
-                    <div className="font-medium">Within 24 Hours</div>
-                  </div>
-                </div>
+                ))}
               </div>
+
+              <Link
+                href={`/${locale}/contact`}
+                className="inline-flex items-center gap-2 mt-6 text-primary font-medium hover:underline"
+              >
+                <MessageSquare size={18} />
+                Contact us for more questions →
+              </Link>
             </div>
 
-            {/* Right - CTA Card */}
-            <div className="bg-white rounded-2xl p-8 shadow-2xl">
-              <h3 className="text-2xl font-bold text-text-primary mb-6">
-                Request Your Free Quote
-              </h3>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-text-primary mb-1">
-                    Product Interest
-                  </label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
-                    <option value="">Select a product category</option>
-                    <option value="construction">Construction Mesh</option>
-                    <option value="dust-cover">Dust Cover Nets</option>
-                    <option value="shade">Shade Nets</option>
-                    <option value="hail">Hail Protection Nets</option>
-                    <option value="olive">Olive Collection Nets</option>
-                    <option value="bird">Bird Protection Nets</option>
-                  </select>
+            {/* Quick Quote Form */}
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Get a Free Quote</h3>
+              <p className="text-gray-600 mb-6">Fill out the form and we will respond within 24 hours.</p>
+
+              {isSubmitted ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">Thank You!</h4>
+                  <p className="text-gray-600">Your inquiry has been submitted. We will contact you soon.</p>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="John Smith"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="john@company.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="+1 234 567 890"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                      <input
+                        type="text"
+                        value={formData.quantity}
+                        onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="e.g., 5000 sqm"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
-                      placeholder="Your name"
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Product Interest</label>
+                    <select
+                      value={formData.product}
+                      onChange={(e) => setFormData({ ...formData, product: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary bg-white"
+                    >
+                      <option value="">Select a product</option>
+                      {productOptions.map((p) => (
+                        <option key={p} value={p}>{p}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Your Requirements</label>
+                    <textarea
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+                      placeholder="Describe your requirements: specifications, destination port, delivery timeline..."
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-text-primary mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none"
-                    placeholder="Tell us about your project requirements..."
-                  />
-                </div>
-                <Link
-                  href={`/${locale}/contact`}
-                  className="w-full block text-center px-6 py-3 bg-accent text-white font-semibold rounded-lg hover:bg-accent-hover transition-colors"
-                >
-                  Submit Inquiry
-                </Link>
-              </form>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Submit Inquiry
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* FAQ Schema Markup */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faqItems.map((faq) => ({
+                "@type": "Question",
+                "name": faq.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": faq.answer
+                }
+              }))
+            })
+          }}
+        />
+      </section>
+    </>
   );
 }
