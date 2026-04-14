@@ -258,13 +258,7 @@ export default function Header() {
         }
 
         .nav-desktop {
-          display: none;
-        }
-
-        @media (min-width: 1024px) {
-          .nav-desktop {
-            display: block;
-          }
+          display: flex;
         }
 
         .nav-list {
@@ -272,7 +266,7 @@ export default function Header() {
           list-style: none;
           margin: 0;
           padding: 0;
-          gap: 8px;
+          gap: 4px;
         }
 
         .nav-item {
@@ -283,12 +277,13 @@ export default function Header() {
           display: flex;
           align-items: center;
           gap: 4px;
-          padding: 8px 16px;
+          padding: 8px 12px;
           color: #333;
           text-decoration: none;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 500;
           transition: color 0.2s;
+          white-space: nowrap;
         }
 
         .nav-link:hover {
@@ -308,7 +303,7 @@ export default function Header() {
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
           padding: 8px 0;
-          min-width: 200px;
+          min-width: 180px;
           opacity: 0;
           visibility: hidden;
           transform: translateY(10px);
@@ -430,7 +425,7 @@ export default function Header() {
           padding: 8px;
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 900px) {
           .mobile-menu-btn {
             display: none;
           }
