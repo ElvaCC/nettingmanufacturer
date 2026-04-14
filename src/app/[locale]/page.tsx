@@ -4,6 +4,8 @@ import Hero from "@/components/home/Hero";
 import Features from "@/components/home/Features";
 import ProductShowcase from "@/components/home/ProductShowcase";
 import CTASection from "@/components/home/CTASection";
+import NewsSection from "@/components/home/NewsSection";
+import Footer from "@/components/layout/Footer";
 
 export default async function HomePage({
   params,
@@ -11,17 +13,15 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  // Enable static rendering
   unstable_setRequestLocale(locale);
-
   const messages = await getMessages();
 
   return (
     <NextIntlClientProvider messages={messages}>
       <Hero locale={locale} />
-      <Features />
+      <Features locale={locale} />
       <ProductShowcase locale={locale} />
+      <NewsSection locale={locale} />
       <CTASection locale={locale} />
     </NextIntlClientProvider>
   );

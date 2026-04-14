@@ -1,44 +1,83 @@
-import Link from "next/link";
+"use client";
 
-const footerLinks = [
-  { key: "products", href: "/products" },
-  { key: "about", href: "/about" },
-  { key: "cases", href: "/cases" },
-];
+import Link from "next/link";
+import { Phone, Mail } from "lucide-react";
+
+const footerLinks = {
+  company: [
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "Our Factory", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
+  ],
+  products: [
+    { label: "Construction Safety Netting", href: "/products" },
+    { label: "Hail Netting", href: "/products" },
+    { label: "Shade Net", href: "/products" },
+    { label: "Mesh Tarp", href: "/products" },
+    { label: "Olive Net", href: "/products" },
+    { label: "Privacy Fence Screen", href: "/products" },
+    { label: "Bird Netting", href: "/products" },
+    { label: "Anti Insect Net", href: "/products" },
+  ],
+  support: [
+    { label: "Company News", href: "/news" },
+    { label: "Industry News", href: "/news" },
+    { label: "FAQ", href: "/contact" },
+  ],
+};
 
 export default function Footer() {
   return (
-    <footer className="bg-background-dark text-white">
+    <footer className="bg-gray-800 text-white">
+      {/* Main Footer */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary-light rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">N</span>
-              </div>
-              <div>
-                <span className="font-bold">Netting</span>
-                <span className="text-gray-400 text-sm block -mt-1">Manufacturer</span>
-              </div>
-            </div>
-            <p className="text-gray-400 text-sm max-w-md">
-              Leading manufacturer of industrial HDPE netting solutions for construction, agriculture, 
-              and commercial applications. Trusted by partners worldwide since 2008.
-            </p>
-          </div>
-
-          {/* Quick Links */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Company Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h3 className="font-bold mb-4">Company</h3>
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.key}>
+              {footerLinks.company.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm capitalize"
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
-                    {link.key}
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Products Links */}
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="font-bold mb-4">Products</h3>
+            <ul className="space-y-2">
+              {footerLinks.products.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support Links */}
+          <div>
+            <h3 className="font-bold mb-4">Support</h3>
+            <ul className="space-y-2">
+              {footerLinks.support.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                  >
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -47,27 +86,36 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Email: info@nettingmanufacturer.com</li>
-              <li>Tel: +86 XXX XXXX XXXX</li>
-              <li>WeChat: netting_mfr</li>
-            </ul>
+            <h3 className="font-bold mb-4">Contact</h3>
+            <div className="space-y-3 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <Phone size={16} />
+                <span>+86 XXX XXXX XXXX</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={16} />
+                <span>info@nettingmanufacturer.com</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
-            © 2024 Netting Manufacturer. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-gray-500 hover:text-white text-sm transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-gray-500 hover:text-white text-sm transition-colors">
-              Terms of Service
-            </Link>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-700">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-400">
+              Copyright © 2026 Netting Manufacturer Co., Ltd All Rights Reserved
+            </p>
+            <div className="flex items-center gap-4 text-sm text-gray-400">
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>
