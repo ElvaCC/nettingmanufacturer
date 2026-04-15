@@ -1,153 +1,76 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-grid">
-          {/* Column 1: About */}
-          <div className="footer-col">
-            <h4>About Us</h4>
-            <ul>
-              <li><a href="#">Company Profile</a></li>
-              <li><a href="#">Factory Introduction</a></li>
-              <li><a href="#">Certifications</a></li>
+    <footer style={{ background: "#1e3a5f", color: "#fff", padding: "60px 24px 24px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+        {/* Footer Grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 32 }}>
+          {/* About */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>About Us</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/about" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Company Profile</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/factory" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Factory</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/certifications" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Certifications</Link></li>
             </ul>
           </div>
 
-          {/* Column 2: Products */}
-          <div className="footer-col">
-            <h4>Products</h4>
-            <ul>
-              <li><a href="#">HDPE Safety Net</a></li>
-              <li><a href="#">Shade Net</a></li>
-              <li><a href="#">Anti-hail Net</a></li>
-              <li><a href="#">Olive Net</a></li>
-              <li><a href="#">Bird Net</a></li>
-              <li><a href="#">Privacy Screen</a></li>
+          {/* Products */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Products</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/products" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>HDPE Safety Net</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/products" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Shade Net</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/products" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Anti-hail Net</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/products" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Bird Net</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: Applications */}
-          <div className="footer-col">
-            <h4>Applications</h4>
-            <ul>
-              <li><a href="#">Construction</a></li>
-              <li><a href="#">Agriculture</a></li>
-              <li><a href="#">Sports</a></li>
-              <li><a href="#">Dust Cover</a></li>
+          {/* Applications */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Applications</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/applications" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Construction</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/applications" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Agriculture</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/applications" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Sports</Link></li>
             </ul>
           </div>
 
-          {/* Column 4: Solutions */}
-          <div className="footer-col">
-            <h4>Solutions</h4>
-            <ul>
-              <li><a href="#">Custom Logo Printing</a></li>
-              <li><a href="#">Custom Specifications</a></li>
+          {/* Solutions */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Solutions</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/solutions" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Custom Logo</Link></li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/solutions" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>Custom Specs</Link></li>
             </ul>
           </div>
 
-          {/* Column 5: Blog */}
-          <div className="footer-col">
-            <h4>Blog</h4>
-            <ul>
-              <li><a href="#">Industry News</a></li>
-              <li><a href="#">Company Updates</a></li>
-              <li><a href="#">Technical Articles</a></li>
+          {/* Blog */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Blog</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}><Link href="/blog" style={{ color: "rgba(255,255,255,0.8)", textDecoration: "none" }}>News</Link></li>
             </ul>
           </div>
 
-          {/* Column 6: Contact */}
-          <div className="footer-col">
-            <h4>Contact Us</h4>
-            <ul>
-              <li>Tel: +86 156 2876 4579</li>
-              <li>Email: sales@nettingmanufacturer.com</li>
-              <li>Address: Shandong, China</li>
+          {/* Contact */}
+          <div>
+            <h4 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Contact Us</h4>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}>Tel: +86 156 2876 4579</li>
+              <li style={{ marginBottom: 10, fontSize: 14, color: "rgba(255,255,255,0.8)" }}>sales@nettingmanufacturer.com</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="footer-bottom">
-          <p>Copyright © 2024 NettingManufacturer. All Rights Reserved.</p>
+        <div style={{ marginTop: 40, paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.1)", textAlign: "center" }}>
+          <p style={{ margin: 0, fontSize: 14, color: "rgba(255,255,255,0.6)" }}>Copyright © 2024 NettingManufacturer. All Rights Reserved.</p>
         </div>
       </div>
-
-      <style jsx>{`
-        .footer {
-          background: #1e3a5f;
-          color: #ffffff;
-          padding: 60px 24px 24px;
-        }
-
-        .container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .footer-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 32px;
-        }
-
-        @media (min-width: 768px) {
-          .footer-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .footer-grid {
-            grid-template-columns: repeat(6, 1fr);
-          }
-        }
-
-        .footer-col h4 {
-          font-size: 16px;
-          font-weight: 600;
-          margin: 0 0 16px 0;
-          color: #fbbf24;
-        }
-
-        .footer-col ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        .footer-col li {
-          margin-bottom: 10px;
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer-col a {
-          color: rgba(255, 255, 255, 0.8);
-          text-decoration: none;
-          font-size: 14px;
-          transition: color 0.2s;
-        }
-
-        .footer-col a:hover {
-          color: #fbbf24;
-        }
-
-        .footer-bottom {
-          margin-top: 40px;
-          padding-top: 24px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          text-align: center;
-        }
-
-        .footer-bottom p {
-          margin: 0;
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.6);
-        }
-      `}</style>
     </footer>
   );
 }
