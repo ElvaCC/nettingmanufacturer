@@ -217,7 +217,11 @@ export default function AdminPage() {
               <label style={{ display: "block", fontWeight: "600", marginBottom: "5px" }}>特点列表（用逗号分隔）</label>
               <textarea
                 value={content.about.features.join(', ')}
-                onChange={(e) => updateAbout('features', e.target.value.split(',').map(s => s.trim()))}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                  const newContent = { ...content };
+                  newContent.about.features = e.target.value.split(',').map((s: string) => s.trim()).filter((s: string) => s);
+                  setContent(newContent);
+                }}
                 rows={4}
                 style={{
                   width: "100%",
