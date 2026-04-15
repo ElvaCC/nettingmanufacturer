@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import contentData from '@/data/content.json';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
+  const { contact } = contentData;
 
   return (
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
@@ -21,8 +23,8 @@ export default function Contact() {
 
               {/* Company Name */}
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>Shandong Jiacheng Chemical Fiber Products Co., Ltd</div>
-                <div style={{ fontSize: 13, color: "#888" }}>(山东嘉城化纤制品有限公司)</div>
+                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>JIACHENG NETTING</div>
+                <div style={{ fontSize: 13, color: "#888" }}>(山东佳诚网具)</div>
               </div>
 
               {/* Contact Details */}
@@ -31,7 +33,7 @@ export default function Contact() {
                   <span style={{ fontSize: 20, flexShrink: 0 }}>📍</span>
                   <div>
                     <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Factory Address</div>
-                    <div style={{ fontSize: 13, color: "#666" }}>Zhanjia Industrial Park, Zhenglu Town, Zhangqiu County, Jinan City, Shandong Province, China</div>
+                    <div style={{ fontSize: 13, color: "#666" }}>{contact.address}</div>
                   </div>
                 </div>
 
@@ -39,23 +41,24 @@ export default function Contact() {
                   <span style={{ fontSize: 20, flexShrink: 0 }}>📧</span>
                   <div>
                     <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Email</div>
-                    <div style={{ fontSize: 13, color: "#2563eb" }}>Netfactory@factory-jc.com</div>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>🌐</span>
-                  <div>
-                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Website</div>
-                    <div style={{ fontSize: 13, color: "#2563eb" }}>www.nettingfactory.com</div>
+                    <div style={{ fontSize: 13, color: "#2563eb" }}>{contact.email}</div>
                   </div>
                 </div>
 
                 <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <span style={{ fontSize: 20, flexShrink: 0 }}>📱</span>
                   <div>
-                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>WhatsApp / WeChat</div>
-                    <div style={{ fontSize: 13, color: "#2563eb" }}>+86 156 2876 4579</div>
+                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Phone / WhatsApp</div>
+                    <div style={{ fontSize: 13, color: "#2563eb" }}>{contact.phone}</div>
+                    <div style={{ fontSize: 13, color: "#25D366" }}>WhatsApp: {contact.whatsapp}</div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: 20, flexShrink: 0 }}>⏰</span>
+                  <div>
+                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Working Hours</div>
+                    <div style={{ fontSize: 13, color: "#666" }}>{contact.workingHours}</div>
                   </div>
                 </div>
               </div>
