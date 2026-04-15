@@ -7,29 +7,18 @@ import { useParams, useRouter } from "next/navigation";
 const navItems = [
   { label: "Home", href: "/", hasDropdown: false },
   { label: "Products", href: "/products", hasDropdown: true, dropdown: [
-    { label: "HDPE Safety Net", href: "/products/safety-net" },
-    { label: "Shade Net", href: "/products/shade-net" },
-    { label: "Anti-hail Net", href: "/products/anti-hail-net" },
+    { label: "Debris Netting", href: "/products/debris-netting" },
+    { label: "Scaffolding Net", href: "/products/scaffolding-net" },
+    { label: "Mesh Tarp / Shade Net", href: "/products/shade-net" },
+    { label: "Tape Shade Net", href: "/products/tape-shade-net" },
+    { label: "Shade Sail", href: "/products/shade-sail" },
+    { label: "Anti Hail Net", href: "/products/anti-hail-net" },
     { label: "Olive Net", href: "/products/olive-net" },
-    { label: "Bird Net", href: "/products/bird-net" },
-    { label: "Privacy Screen", href: "/products/privacy-screen" },
+    { label: "Privacy Net", href: "/products/privacy-net" },
+    { label: "Anti Bee/Bird Net", href: "/products/anti-bird-net" },
+    { label: "Weed Barrier Fabric", href: "/products/weed-barrier" },
   ]},
-  { label: "Applications", href: "/applications", hasDropdown: true, dropdown: [
-    { label: "Construction", href: "/applications/construction" },
-    { label: "Agriculture", href: "/applications/agriculture" },
-    { label: "Sports Facilities", href: "/applications/sports" },
-    { label: "Dust Cover", href: "/applications/dust-cover" },
-  ]},
-  { label: "Our Factory", href: "/factory", hasDropdown: true, dropdown: [
-    { label: "Production Line", href: "/factory/production" },
-    { label: "Quality Control", href: "/factory/quality" },
-    { label: "Certifications", href: "/factory/certifications" },
-  ]},
-  { label: "Solutions", href: "/solutions", hasDropdown: true, dropdown: [
-    { label: "Custom Logo Printing", href: "/solutions/logo-printing" },
-    { label: "Custom Specifications", href: "/solutions/custom-specs" },
-  ]},
-  { label: "Blog", href: "/blog", hasDropdown: false },
+  { label: "Factory", href: "/factory", hasDropdown: false },
   { label: "Contact Us", href: "/contact", hasDropdown: false },
 ];
 
@@ -64,8 +53,8 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
         
         {/* Logo */}
         <Link href={getPath("/")} style={{ display: "flex", alignItems: "center", textDecoration: "none", fontWeight: 700, fontSize: 18, flexShrink: 0 }}>
-          <span style={{ color: "#1a1a1a" }}>NETTING</span>
-          <span style={{ color: "#2563eb", marginLeft: 4 }}>MANUFACTURER</span>
+          <span style={{ color: "#1e3a5f" }}>JIACHENG</span>
+          <span style={{ color: "#2563eb", marginLeft: 4 }}>NETTING</span>
         </Link>
 
         {/* Navigation - 横向排列 */}
