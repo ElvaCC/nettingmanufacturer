@@ -1,31 +1,18 @@
-// 产品页 - 仅框架
 export default function ProductsPage() {
   return (
-    <>
-      <section className="page-header">
-        <h1>Products</h1>
-        <p>Product Listing</p>
-      </section>
-
-      <section className="products-grid">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="product-card">
-            <div className="image-placeholder">Image</div>
-            <div className="content-placeholder">Product Content</div>
-          </div>
-        ))}
-      </section>
-
-      <style jsx>{`
-        .page-header { background: #1e3a5f; padding: 80px 24px; text-align: center; }
-        .page-header h1 { color: #fff; font-size: 48px; margin: 0; }
-        .page-header p { color: rgba(255,255,255,0.8); font-size: 18px; margin: 12px 0 0 0; }
+    <div style={{ padding: "80px 24px", background: "#f9fafb", minHeight: "100vh" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 48 }}>Our Products</h1>
         
-        .products-grid { padding: 60px 24px; background: #f8fafc; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-        .product-card { background: #fff; border-radius: 8px; overflow: hidden; }
-        .image-placeholder { aspect-ratio: 4/3; background: #e5e7eb; display: flex; align-items: center; justify-content: center; color: #9ca3af; }
-        .content-placeholder { padding: 20px; color: #666; }
-      `}</style>
-    </>
+        {/* Products Grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} style={{ border: "2px dashed #ccc", padding: 40, minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
+              <span style={{ color: "#999" }}>Product {i}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
