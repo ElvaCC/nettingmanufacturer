@@ -3,6 +3,93 @@
 import { useState } from 'react';
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleLogin = () => {
+    if (password === 'wode2020') {
+      setIsAuthenticated(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
+  // 密码登录页面
+  if (!isAuthenticated) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5f7fa',
+        fontFamily: 'system-ui, sans-serif'
+      }}>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '40px',
+          borderRadius: '16px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          width: '100%',
+          maxWidth: '400px',
+          textAlign: 'center'
+        }}>
+          <h1 style={{ color: '#1e40af', marginBottom: '8px', fontSize: '24px' }}>网站后台管理</h1>
+          <p style={{ color: '#6b7280', marginBottom: '24px', fontSize: '14px' }}>请输入访问密码</p>
+          
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(false); }}
+            onKeyPress={handleKeyPress}
+            placeholder="请输入密码"
+            style={{
+              width: '100%',
+              padding: '14px',
+              border: `2px solid ${error ? '#ef4444' : '#e5e7eb'}`,
+              borderRadius: '10px',
+              fontSize: '16px',
+              boxSizing: 'border-box',
+              marginBottom: '16px'
+            }}
+          />
+          
+          {error && (
+            <p style={{ color: '#ef4444', fontSize: '14px', marginBottom: '16px' }}>
+              密码错误，请重试
+            </p>
+          )}
+          
+          <button
+            onClick={handleLogin}
+            style={{
+              width: '100%',
+              padding: '14px',
+              backgroundColor: '#1e40af',
+              color: 'white',
+              border: 'none',
+              borderRadius: '10px',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            登录
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // 已登录 - 显示管理面板
   const [activeTab, setActiveTab] = useState('hero');
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
