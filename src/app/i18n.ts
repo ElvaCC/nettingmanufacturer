@@ -26,6 +26,7 @@ export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as Locale)) notFound();
 
   return {
+    locale,  // 明确返回 locale
     messages: (await import(`./messages/${locale}.json`)).default,
   };
 });
