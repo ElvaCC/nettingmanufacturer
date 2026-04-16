@@ -8,9 +8,11 @@ export default createMiddleware({
 
 export const config = {
   matcher: [
-    // 排除 /admin 和 /api 路径
-    "/((?!admin|api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
-    // locale 路由
-    "/(en|es|ru|ar)/:path*"
+    // 精确匹配首页
+    "/",
+    // 匹配 locale 前缀的路径
+    "/(en|es|ru|ar)/:path*",
+    // 排除特定路径
+    "/((?!admin|api|_next|.*\\..*).*)"
   ],
 };
