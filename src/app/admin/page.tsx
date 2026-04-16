@@ -1,28 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('hero');
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
-  
-  const [content, setContent] = useState({
-    hero: { title: '', subtitle: '', cta1: '', cta2: '' },
+  const [content, setContent] = useState<any>({
+    hero: { title: '', subtitle: '', cta1: 'Get Free Quote', cta2: 'View Products' },
     about: { title: '', subtitle: '', description: '', features: '' },
     contact: { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
-    footer: { company: '', copyright: '' },
+    footer: { company: 'JIACHENG NETTING', copyright: '© 2024 JIACHENG NETTING' },
   });
+  const [loaded, setLoaded] = useState(false);
 
-  // Load data on mount
-  useState(() => {
+  useEffect(() => {
     fetch('/api/admin/content')
       .then(r => r.json())
       .then(data => {
-        if (data.hero) setContent(prev => ({ ...prev, ...data }));
+        if (data.hero) {
+          setContent(prev => ({ ...prev, ...data }));
+          setLoaded(true);
+        }
       })
-      .catch(() => {});
-  });
+      .catch(err => {
+        console.error('Load error:', err);
+        setLoaded(true);
+      });
+  }, []);
 
   const handleSave = async () => {
     setLoading(true);
@@ -32,40 +37,61 @@ export default function AdminPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(content),
       });
-      if (res.ok) { setSaved(true); setTimeout(() => setSaved(false), 3000); }
-      else alert('保存失败');
-    } catch { alert('网络错误'); }
+      if (res.ok) {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+      } else {
+        alert('保存失败');
+      }
+    } catch {
+      alert('网络错误');
+    }
     setLoading(false);
   };
 
   const inputStyle = { width: "100%", padding: "12px", border: "1px solid #ddd", borderRadius: "8px", fontSize: "14px", boxSizing: "border-box" as const };
+  const textareaStyle = { ...inputStyle, fontFamily: "monospace", resize: "vertical" as const };
   const labelStyle = { display: "block" as const, fontWeight: "600" as const, marginBottom: "5px" };
 
-  const Field = ({ label, field, area }: { label: string; field: string; area?: boolean }) => (
+  const Field = ({ label, value, onChange, area }: { label: string; value: string; onChange: (v: string) => void; area?: boolean }) => (
     <div>
       <label style={labelStyle}>{label}</label>
       {area ? (
-        <textarea
-          value={(content as any)[field]}
-          onChange={e => setContent(p => ({ ...p, [field]: e.target.value }))}
-          rows={4} style={{ ...inputStyle, fontFamily: "monospace" }}
-        />
+        <textarea value={value} onChange={e => onChange(e.target.value)} rows={4} style={textareaStyle} />
       ) : (
-        <input
-          type="text"
-          value={(content as any)[field]}
-          onChange={e => setContent(p => ({ ...p, [field]: e.target.value }))}
-          style={inputStyle}
-        />
+        <input type="text" value={value} onChange={e => onChange(e.target.value)} style={inputStyle} />
       )}
     </div>
   );
+
+  const updateContent = (path: string, value: any) => {
+    setContent((prev: any) => {
+      const next = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let obj: any = next;
+      for (let i = 0; i < keys.length - 1; i++) {
+        obj = obj[keys[i]];
+      }
+      obj[keys[keys.length - 1]] = value;
+      return next;
+    });
+  };
+
+  const getValue = (path: string): string => {
+    const keys = path.split('.');
+    let val: any = content;
+    for (const k of keys) {
+      val = val?.[k];
+    }
+    return val ?? '';
+  };
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f5f7fa", fontFamily: "sans-serif" }}>
       {/* Header */}
       <header style={{
-        background: "#2563eb", color: "white", padding: "20px 30px",
+        background: "linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)",
+        color: "white", padding: "20px 30px",
         display: "flex", justifyContent: "space-between", alignItems: "center"
       }}>
         <div>
@@ -75,7 +101,8 @@ export default function AdminPage() {
         <button onClick={handleSave} disabled={loading} style={{
           padding: "12px 28px", fontSize: "16px", fontWeight: "600",
           border: "none", borderRadius: "8px", cursor: loading ? "not-allowed" : "pointer",
-          backgroundColor: saved ? "#22c55e" : "white", color: saved ? "white" : "#2563eb"
+          backgroundColor: saved ? "#22c55e" : "white", color: saved ? "white" : "#1e40af",
+          transition: "all 0.3s"
         }}>
           {saved ? '✅ 已保存！' : loading ? '保存中...' : '💾 保存更改'}
         </button>
@@ -102,19 +129,26 @@ export default function AdminPage() {
               {tab.label}
             </button>
           ))}
+          
+          <div style={{ marginTop: "20px", padding: "0 20px" }}>
+            <p style={{ fontSize: "12px", color: "#9ca3af", fontWeight: "600", marginBottom: "8px" }}>快速链接</p>
+            <a href="/" target="_blank" style={{ display: "block", padding: "8px 0", color: "#6b7280", textDecoration: "none", fontSize: "13px" }}>
+              → 网站首页
+            </a>
+          </div>
         </aside>
 
         {/* Content */}
         <main style={{ flex: 1, padding: "30px", overflowY: "auto" }}>
           {activeTab === 'hero' && (
             <div style={{ maxWidth: "700px" }}>
-              <h2 style={{ marginTop: 0 }}>首页 Hero 设置</h2>
+              <h2 style={{ marginTop: 0, color: "#1e40af" }}>首页 Hero 设置</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                <Field label="主标题" field="hero.title" area />
-                <Field label="副标题" field="hero.subtitle" area />
+                <Field label="主标题 (Title)" value={getValue('hero.title')} onChange={v => updateContent('hero.title', v)} area />
+                <Field label="副标题 (Subtitle)" value={getValue('hero.subtitle')} onChange={v => updateContent('hero.subtitle', v)} area />
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-                  <Field label="按钮1文字" field="hero.cta1" />
-                  <Field label="按钮2文字" field="hero.cta2" />
+                  <Field label="按钮1文字" value={getValue('hero.cta1')} onChange={v => updateContent('hero.cta1', v)} />
+                  <Field label="按钮2文字" value={getValue('hero.cta2')} onChange={v => updateContent('hero.cta2', v)} />
                 </div>
               </div>
             </div>
@@ -122,40 +156,38 @@ export default function AdminPage() {
 
           {activeTab === 'about' && (
             <div style={{ maxWidth: "700px" }}>
-              <h2 style={{ marginTop: 0 }}>关于我们</h2>
+              <h2 style={{ marginTop: 0, color: "#1e40af" }}>关于我们</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                <Field label="标题" field="about.title" />
-                <Field label="副标题" field="about.subtitle" />
-                <Field label="公司描述" field="about.description" area />
-                <Field label="特点（逗号分隔）" field="about.features" area />
+                <Field label="标题" value={getValue('about.title')} onChange={v => updateContent('about.title', v)} />
+                <Field label="副标题" value={getValue('about.subtitle')} onChange={v => updateContent('about.subtitle', v)} />
+                <Field label="公司描述" value={getValue('about.description')} onChange={v => updateContent('about.description', v)} area />
+                <Field label="特点（逗号分隔）" value={getValue('about.features')} onChange={v => updateContent('about.features', v)} area />
               </div>
             </div>
           )}
 
           {activeTab === 'contact' && (
             <div style={{ maxWidth: "700px" }}>
-              <h2 style={{ marginTop: 0 }}>联系方式</h2>
+              <h2 style={{ marginTop: 0, color: "#1e40af" }}>联系方式</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                <Field label="📧 邮箱" field="contact.email" />
-                <Field label="📱 电话" field="contact.phone" />
-                <Field label="💬 WhatsApp" field="contact.whatsapp" />
-                <Field label="📍 地址" field="contact.address" area />
-                <Field label="⏰ 工作时间" field="contact.workingHours" />
+                <Field label="📧 邮箱" value={getValue('contact.email')} onChange={v => updateContent('contact.email', v)} />
+                <Field label="📱 电话" value={getValue('contact.phone')} onChange={v => updateContent('contact.phone', v)} />
+                <Field label="💬 WhatsApp" value={getValue('contact.whatsapp')} onChange={v => updateContent('contact.whatsapp', v)} />
+                <Field label="📍 地址" value={getValue('contact.address')} onChange={v => updateContent('contact.address', v)} area />
+                <Field label="⏰ 工作时间" value={getValue('contact.workingHours')} onChange={v => updateContent('contact.workingHours', v)} />
               </div>
             </div>
           )}
 
           {activeTab === 'footer' && (
             <div style={{ maxWidth: "700px" }}>
-              <h2 style={{ marginTop: 0 }}>页脚设置</h2>
+              <h2 style={{ marginTop: 0, color: "#1e40af" }}>页脚设置</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-                <Field label="公司名称" field="footer.company" />
-                <Field label="版权信息" field="footer.copyright" />
+                <Field label="公司名称" value={getValue('footer.company')} onChange={v => updateContent('footer.company', v)} />
+                <Field label="版权信息" value={getValue('footer.copyright')} onChange={v => updateContent('footer.copyright', v)} />
               </div>
             </div>
           )}
-
-          {!['hero','about','contact','footer'].includes(activeTab) && <p>请选择左侧标签页</p>}
         </main>
       </div>
     </div>
