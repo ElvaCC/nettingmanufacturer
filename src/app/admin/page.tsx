@@ -717,7 +717,7 @@ export default function AdminPage() {
           ))}
           
           {/* Quick Links */}
-          <div style={{ marginTop: "30px", borderTop: "1px solid #e0e0e0", paddingTop: "20px", paddingHorizontal: "20px" }}>
+          <div style={{ marginTop: "30px", borderTop: "1px solid #e0e0e0", paddingTop: "20px", paddingLeft: "20px", paddingRight: "20px" }}>
             <p style={{ fontSize: "12px", color: "#9ca3af", fontWeight: "600", marginBottom: "10px" }}>快速链接</p>
             <a href="/" target="_blank" style={{ display: "block", padding: "10px", color: "#6b7280", textDecoration: "none", fontSize: "13px" }}>→ 查看网站首页</a>
             <a href="/vercel" target="_blank" style={{ display: "block", padding: "10px", color: "#6b7280", textDecoration: "none", fontSize: "13px" }}>→ Vercel 部署</a>
