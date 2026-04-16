@@ -17,9 +17,9 @@ export default function AdminPage() {
   useEffect(() => {
     fetch('/api/admin/content')
       .then(r => r.json())
-      .then(data => {
+      .then((data: any) => {
         if (data.hero) {
-          setContent(prev => ({ ...prev, ...data }));
+          setContent((prev: any) => ({ ...prev, ...data }));
           setLoaded(true);
         }
       })
