@@ -7,5 +7,10 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ["/", "/(en|es|ru|ar)/:path*"],
+  matcher: [
+    // 排除 /admin 和 /api 路径
+    "/((?!admin|api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
+    // locale 路由
+    "/(en|es|ru|ar)/:path*"
+  ],
 };
