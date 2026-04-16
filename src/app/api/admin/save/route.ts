@@ -4,18 +4,31 @@ import path from 'path';
 
 export async function POST(request: NextRequest) {
   try {
-    const content = await request.json();
+    const data = await request.json();
     
-    // Write to content.json
+    // Read existing content
     const filePath = path.join(process.cwd(), 'src/data/content.json');
-    fs.writeFileSync(filePath, JSON.stringify(content, null, 2), 'utf-8');
+    let existing: Record<string, any> = {};
+    try {
+      existing = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    } catch { /* file may not exist */ }
     
-    return NextResponse.json({ success: true, message: 'Content saved successfully' });
+    // Merge - handle nested objects
+    if (data.hero) existing.hero = { ...existing.hero, ...data.hero };
+    if (data.about) {
+      existing.about = { ...existing.about, ...data.about };
+      if (data.about.features) {
+        existing.about.features = String(data.about.features).split(',').map((s: string) => s.trim()).filter(Boolean);
+      }
+    }
+    if (data.contact) existing.contact = { ...existing.contact, ...data.contact };
+    if (data.footer) existing.footer = { ...existing.footer, ...data.footer };
+    
+    fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), 'utf-8');
+    
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Save error:', error);
-    return NextResponse.json(
-      { success: false, message: 'Failed to save content' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Failed to save' }, { status: 500 });
   }
 }
