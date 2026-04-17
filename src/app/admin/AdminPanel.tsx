@@ -1,0 +1,175 @@
+'use client';
+
+import { useState } from 'react';
+
+type ContentType = {
+  hero: { title: string; subtitle: string; cta1: string; cta2: string };
+  about: { title: string; subtitle: string; description: string; features: string };
+  contact: { email: string; phone: string; whatsapp: string; address: string; workingHours: string };
+  footer: { company: string; copyright: string };
+};
+
+export default function AdminPanel() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [activeTab, setActiveTab] = useState('hero');
+  const [saved, setSaved] = useState(false);
+
+  const [content, setContent] = useState<ContentType>({
+    hero: {
+      title: 'Professional HDPE Plastic Netting Manufacturer Since 2005',
+      subtitle: 'Leading manufacturer of construction safety nets, agricultural nets, and specialty plastic netting solutions.',
+      cta1: 'Get Free Quote',
+      cta2: 'View Products'
+    },
+    about: {
+      title: 'About JIACHENG NETTING',
+      subtitle: 'Your Trusted HDPE Netting Partner Since 2005',
+      description: 'JIACHENG NETTING is a leading manufacturer of high-quality HDPE plastic netting products.',
+      features: 'BSCI Certified, ISO14001 Certified, 20,000m² Production, Export to 50+ Countries'
+    },
+    contact: {
+      email: 'sales@jiachengnetting.com',
+      phone: '+86 531 8888 8888',
+      whatsapp: '+86 138 0000 0000',
+      address: 'No. 88 Industrial Park Road, Jinan City, Shandong Province, China',
+      workingHours: 'Monday - Saturday: 8:00 AM - 6:00 PM (CST)'
+    },
+    footer: {
+      company: 'JIACHENG NETTING',
+      copyright: '© 2024 JIACHENG NETTING. All Rights Reserved.'
+    }
+  });
+
+  const handleLogin = () => {
+    if (password === 'wode2020') {
+      setIsAuthenticated(true);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const updateHero = (field: keyof ContentType['hero'], value: string) => {
+    setContent(prev => ({ ...prev, hero: { ...prev.hero, [field]: value } }));
+  };
+
+  const updateAbout = (field: keyof ContentType['about'], value: string) => {
+    setContent(prev => ({ ...prev, about: { ...prev.about, [field]: value } }));
+  };
+
+  const updateContact = (field: keyof ContentType['contact'], value: string) => {
+    setContent(prev => ({ ...prev, contact: { ...prev.contact, [field]: value } }));
+  };
+
+  const updateFooter = (field: keyof ContentType['footer'], value: string) => {
+    setContent(prev => ({ ...prev, footer: { ...prev.footer, [field]: value } }));
+  };
+
+  const handleSave = () => {
+    setSaved(true);
+    setTimeout(() => setSaved(false), 3000);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f7fa' }}>
+        <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
+          <h1 style={{ color: '#1e40af', marginBottom: '8px' }}>网站后台管理</h1>
+          <p style={{ color: '#6b7280', marginBottom: '24px' }}>请输入访问密码</p>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(false); }}
+            onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+            placeholder="请输入密码"
+            style={{ width: '100%', padding: '14px', border: `2px solid ${error ? '#ef4444' : '#e5e7eb'}`, borderRadius: '10px', fontSize: '16px', marginBottom: '16px', boxSizing: 'border-box' }}
+          />
+          {error && <p style={{ color: '#ef4444', fontSize: '14px', marginBottom: '16px' }}>密码错误，请重试</p>}
+          <button 
+            onClick={handleLogin} 
+            style={{ width: '100%', padding: '14px', backgroundColor: '#1e40af', color: 'white', border: 'none', borderRadius: '10px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
+          >
+            登录
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const inputStyle = { width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', boxSizing: 'border-box' as const };
+  const textareaStyle = { ...inputStyle, fontFamily: 'monospace', resize: 'vertical' as const };
+  const labelStyle = { display: 'block' as const, fontWeight: '600' as const, marginBottom: '5px', color: '#374151' as const };
+
+  return (
+    <div style={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
+      <header style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)', color: 'white', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '700' }}>网站后台管理</h1>
+          <p style={{ margin: '5px 0 0 0', opacity: 0.9, fontSize: '14px' }}>JIACHENG NETTING</p>
+        </div>
+        <button onClick={handleSave} style={{ padding: '12px 30px', fontSize: '16px', fontWeight: '600', border: 'none', borderRadius: '8px', cursor: 'pointer', backgroundColor: saved ? '#22c55e' : 'white', color: saved ? 'white' : '#1e40af' }}>
+          {saved ? '✓ 已保存' : '💾 保存更改'}
+        </button>
+      </header>
+
+      <div style={{ display: 'flex' }}>
+        <aside style={{ width: '240px', backgroundColor: 'white', borderRight: '1px solid #e0e0e0', padding: '20px 0', minHeight: 'calc(100vh - 80px)' }}>
+          <button onClick={() => setActiveTab('hero')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'hero' ? '#eff6ff' : 'transparent', color: activeTab === 'hero' ? '#2563eb' : '#374151', fontWeight: activeTab === 'hero' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'hero' ? '4px solid #3b82f6' : '4px solid transparent' }}>🏠 首页 Hero</button>
+          <button onClick={() => setActiveTab('about')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'about' ? '#eff6ff' : 'transparent', color: activeTab === 'about' ? '#2563eb' : '#374151', fontWeight: activeTab === 'about' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'about' ? '4px solid #3b82f6' : '4px solid transparent' }}>📋 关于我们</button>
+          <button onClick={() => setActiveTab('contact')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'contact' ? '#eff6ff' : 'transparent', color: activeTab === 'contact' ? '#2563eb' : '#374151', fontWeight: activeTab === 'contact' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'contact' ? '4px solid #3b82f6' : '4px solid transparent' }}>📞 联系方式</button>
+          <button onClick={() => setActiveTab('footer')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'footer' ? '#eff6ff' : 'transparent', color: activeTab === 'footer' ? '#2563eb' : '#374151', fontWeight: activeTab === 'footer' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'footer' ? '4px solid #3b82f6' : '4px solid transparent' }}>🔽 页脚 Footer</button>
+        </aside>
+
+        <main style={{ flex: 1, padding: '40px' }}>
+          {activeTab === 'hero' && (
+            <div style={{ maxWidth: '800px' }}>
+              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>首页 Hero 设置</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div><label style={labelStyle}>主标题</label><textarea value={content.hero.title} onChange={(e) => updateHero('title', e.target.value)} rows={3} style={textareaStyle} /></div>
+                <div><label style={labelStyle}>副标题</label><textarea value={content.hero.subtitle} onChange={(e) => updateHero('subtitle', e.target.value)} rows={4} style={textareaStyle} /></div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div><label style={labelStyle}>按钮 1 文字</label><input type="text" value={content.hero.cta1} onChange={(e) => updateHero('cta1', e.target.value)} style={inputStyle} /></div>
+                  <div><label style={labelStyle}>按钮 2 文字</label><input type="text" value={content.hero.cta2} onChange={(e) => updateHero('cta2', e.target.value)} style={inputStyle} /></div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'about' && (
+            <div style={{ maxWidth: '800px' }}>
+              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>关于我们</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div><label style={labelStyle}>标题</label><input type="text" value={content.about.title} onChange={(e) => updateAbout('title', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>副标题</label><input type="text" value={content.about.subtitle} onChange={(e) => updateAbout('subtitle', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>公司描述</label><textarea value={content.about.description} onChange={(e) => updateAbout('description', e.target.value)} rows={5} style={textareaStyle} /></div>
+                <div><label style={labelStyle}>特点列表</label><textarea value={content.about.features} onChange={(e) => updateAbout('features', e.target.value)} rows={3} style={textareaStyle} /></div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'contact' && (
+            <div style={{ maxWidth: '800px' }}>
+              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>联系方式</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div><label style={labelStyle}>邮箱</label><input type="text" value={content.contact.email} onChange={(e) => updateContact('email', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>电话</label><input type="text" value={content.contact.phone} onChange={(e) => updateContact('phone', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>WhatsApp</label><input type="text" value={content.contact.whatsapp} onChange={(e) => updateContact('whatsapp', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>地址</label><textarea value={content.contact.address} onChange={(e) => updateContact('address', e.target.value)} rows={3} style={textareaStyle} /></div>
+                <div><label style={labelStyle}>工作时间</label><input type="text" value={content.contact.workingHours} onChange={(e) => updateContact('workingHours', e.target.value)} style={inputStyle} /></div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'footer' && (
+            <div style={{ maxWidth: '800px' }}>
+              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>页脚设置</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div><label style={labelStyle}>公司名称</label><input type="text" value={content.footer.company} onChange={(e) => updateFooter('company', e.target.value)} style={inputStyle} /></div>
+                <div><label style={labelStyle}>版权信息</label><input type="text" value={content.footer.copyright} onChange={(e) => updateFooter('copyright', e.target.value)} style={inputStyle} /></div>
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
+    </div>
+  );
+}
