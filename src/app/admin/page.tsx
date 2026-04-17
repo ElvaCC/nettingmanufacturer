@@ -1,14 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const ADMIN_PASSWORD = 'wode2020';
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   const handleLogin = () => {
-    if (password === 'wode2020') {
+    if (password === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       setError(false);
     } else {
@@ -21,6 +28,22 @@ export default function AdminPage() {
       handleLogin();
     }
   };
+
+  // 加载中
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5f7fa',
+        fontFamily: 'system-ui, sans-serif'
+      }}>
+        <p>加载中...</p>
+      </div>
+    );
+  }
 
   // 密码登录页面
   if (!isAuthenticated) {
