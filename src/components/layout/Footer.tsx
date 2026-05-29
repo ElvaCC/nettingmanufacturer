@@ -21,7 +21,7 @@ export default function Footer() {
             <p style={{ fontSize: 13, lineHeight: 1.8, color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
               Professional manufacturer of HDPE plastic netting since 2005.
             </p>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>✓ BSCI Certified • ✓ NFPA 701</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>✓ BSCI Certified • ✓ NFPA-701 Certificate • 21+ Years Experience</div>
           </div>
 
           {/* Products */}
