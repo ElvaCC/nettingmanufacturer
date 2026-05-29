@@ -85,7 +85,7 @@ export default function Factory() {
             { title: "Factory Area", value: "20,000 m²", icon: "🏭" },
             { title: "Location", value: "Zhanjia Industrial Park, Jinan, China", icon: "📍" },
             { title: "Export Markets", value: "50+ Countries Worldwide", icon: "🌍" },
-            { title: "Certifications", value: "BSCI & ISO14001", icon: "✅" },
+            { title: "Certifications", value: "BSCI & NFPA 701", icon: "✅" },
             { title: "Production Capacity", value: "Custom Orders Welcome", icon: "⚙️" },
             { title: "Export Regions", value: "North America, Europe, Middle East, Asia, Africa", icon: "🚢" },
           ].map((info) => (

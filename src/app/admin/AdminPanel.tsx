@@ -27,7 +27,7 @@ export default function AdminPanel() {
       title: 'About Jiacheng Netting',
       subtitle: 'Your Trusted HDPE Netting Partner Since 2005',
       description: 'Jiacheng Netting is a leading manufacturer of high-quality HDPE plastic netting products.',
-      features: 'BSCI Certified, ISO14001 Certified, 20,000m² Production, Export to 50+ Countries'
+      features: 'BSCI Certified, NFPA 701 Certified, 20,000m² Production, Export to 50+ Countries'
     },
     contact: {
       email: 'sales@jiachengnetting.com',

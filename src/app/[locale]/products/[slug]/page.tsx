@@ -149,7 +149,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   <span>📧</span> Netfactory@factory-jc.com
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span>🏭</span> BSCI & ISO14001 Certified
+                  <span>🏭</span> BSCI & NFPA 701 Certified
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@ export default async function AboutPage({
                 <p>
                   As an enterprise driven by innovation, we have a high-quality R&D team that continuously 
                   develops and manufactures new products. We place great emphasis on product quality and 
-                  technological innovation, and have obtained BSCI and ISO14001 certifications.
+                  technological innovation, and have obtained BSCI and NFPA 701 certifications.
                 </p>
               </div>
             </div>
