@@ -6,6 +6,36 @@ export default function Factory() {
         <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Our Factory</h2>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>20,000 sqm production facility with advanced technology</p>
 
+        {/* Factory Photo Gallery */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 48 }}>
+          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
+            <img
+              src="/images/factory/hdpe-netting-production-line.jpg"
+              alt="HDPE netting production line with multiple warp knitting machines manufacturing construction safety nets, shade nets, and debris netting in JIACHENG factory"
+              width={600}
+              height={450}
+              loading="lazy"
+              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+            />
+            <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
+              Production Line — Warp Knitting Machines
+            </div>
+          </div>
+          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
+            <img
+              src="/images/factory/jiacheng-factory-exterior.jpg"
+              alt="JIACHENG NETTING factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
+              width={600}
+              height={450}
+              loading="lazy"
+              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+            />
+            <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
+              Factory Exterior — Container Loading & Export
+            </div>
+          </div>
+        </div>
+
         {/* Production Process */}
         <div style={{ background: "#fff", borderRadius: 16, padding: 48, border: "1px solid #e5e7eb", marginBottom: 40 }}>
           <h3 style={{ fontSize: 24, fontWeight: 600, color: "#1e3a5f", marginBottom: 32, textAlign: "center" }}>Production Process</h3>
