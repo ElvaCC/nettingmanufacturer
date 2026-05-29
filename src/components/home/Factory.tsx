@@ -1,86 +1,300 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+
+const images = [
+  {
+    src: "/images/factory/jiacheng-factory-panorama.jpg",
+    webp: "/images/factory/jiacheng-factory-panorama.webp",
+    alt: "Panoramic exterior view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China with container loading area and packaged net rolls for export",
+    width: 1920,
+    height: 464,
+    label: "Factory Exterior",
+  },
+  {
+    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.jpg",
+    webp: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.webp",
+    alt: "Interior warehouse at Jiacheng Netting storing finished HDPE plastic netting rolls organized on racks ready for bulk wholesale export to construction and agriculture markets",
+    width: 2250,
+    height: 1125,
+    label: "Finished Goods Warehouse",
+  },
+  {
+    src: "/images/factory/jiacheng-warp-knitting-production-line-1.jpg",
+    webp: "/images/factory/jiacheng-warp-knitting-production-line-1.webp",
+    alt: "Advanced Karl Mayer warp knitting machines producing high-strength HDPE plastic nets for construction safety debris netting and agricultural shade netting applications",
+    width: 1440,
+    height: 1080,
+    label: "Warp Knitting Lines",
+  },
+  {
+    src: "/images/factory/jiacheng-warp-knitting-production-line-2.jpg",
+    webp: "/images/factory/jiacheng-warp-knitting-production-line-2.webp",
+    alt: "Skilled technicians operating multiple warp knitting production lines in Jiacheng Netting\u0027s 20,000 square meter manufacturing workshop for custom HDPE netting orders",
+    width: 1440,
+    height: 1080,
+    label: "Production Floor",
+  },
+  {
+    src: "/images/factory/jiacheng-colored-hdpe-netting-products.jpg",
+    webp: "/images/factory/jiacheng-colored-hdpe-netting-products.webp",
+    alt: "Wide range of custom colored HDPE warp-knitted netting products including red construction safety nets, blue shade nets, green privacy screens, and olive harvest nets",
+    width: 1920,
+    height: 248,
+    label: "Product Variety",
+  },
+];
+
+function getSrcSet(basePath: string, name: string, ext: string) {
+  return `${basePath}/640w-${name}.${ext} 640w, ${basePath}/960w-${name}.${ext} 960w, ${basePath}/1200w-${name}.${ext} 1200w, ${basePath}/${name}.${ext} 1920w`;
+}
+
 export default function Factory() {
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % images.length), []);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + images.length) % images.length), []);
+
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  const img = images[current];
+
   return (
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        {/* Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Our Factory</h2>
-        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>20,000 sqm production facility with advanced technology</p>
+        {/* Section Header */}
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+          Our Factory
+        </h2>
+        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>
+          20,000 m² production facility with advanced technology
+        </p>
 
-        {/* Factory Photo Gallery */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 48 }}>
-          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/images/factory/640w-jiacheng-factory-hero.webp 640w, /images/factory/960w-jiacheng-factory-hero.webp 960w, /images/factory/1200w-jiacheng-factory-hero.webp 1200w, /images/factory/jiacheng-factory-hero.webp 1920w"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <img
-                src="/images/factory/jiacheng-factory-hero.jpg"
-                srcSet="/images/factory/640w-jiacheng-factory-hero.jpg 640w, /images/factory/960w-jiacheng-factory-hero.jpg 960w, /images/factory/1200w-jiacheng-factory-hero.jpg 1200w, /images/factory/jiacheng-factory-hero.jpg 1920w"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="Jiacheng Netting HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
-                width={1920}
-                height={1440}
-                loading="lazy"
-                decoding="async"
-                style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
-              />
-            </picture>
-            <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
-              Factory Panorama — Production & Export Operations
+        {/* Two-Column Layout */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 40,
+            alignItems: "start",
+          }}
+        >
+          {/* Left: Image Carousel */}
+          <div>
+            <div
+              style={{
+                position: "relative",
+                borderRadius: 16,
+                overflow: "hidden",
+                border: "1px solid #e5e7eb",
+                background: "#fff",
+                aspectRatio: "16 / 9",
+              }}
+            >
+              {/* Main Image with WebP + srcSet */}
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={getSrcSet("/images/factory", img.src.split("/").pop()!.replace(".jpg", ""), "webp")}
+                  sizes="(max-width: 1200px) 50vw, 560px"
+                />
+                <img
+                  src={img.src}
+                  srcSet={getSrcSet("/images/factory", img.src.split("/").pop()!.replace(".jpg", ""), "jpg")}
+                  sizes="(max-width: 1200px) 50vw, 560px"
+                  alt={img.alt}
+                  width={img.width}
+                  height={img.height}
+                  loading="lazy"
+                  decoding="async"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </picture>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={prev}
+                aria-label="Previous factory photo"
+                style={{
+                  position: "absolute",
+                  left: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  border: "none",
+                  background: "rgba(0,0,0,0.4)",
+                  color: "#fff",
+                  fontSize: 20,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backdropFilter: "blur(4px)",
+                }}
+              >
+                &#8249;
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next factory photo"
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  border: "none",
+                  background: "rgba(0,0,0,0.4)",
+                  color: "#fff",
+                  fontSize: 20,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backdropFilter: "blur(4px)",
+                }}
+              >
+                &#8250;
+              </button>
+
+              {/* Slide Counter */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 12,
+                  right: 16,
+                  background: "rgba(0,0,0,0.5)",
+                  color: "#fff",
+                  fontSize: 12,
+                  padding: "4px 10px",
+                  borderRadius: 12,
+                  backdropFilter: "blur(4px)",
+                }}
+              >
+                {current + 1} / {images.length}
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div style={{ display: "flex", gap: 10, marginTop: 14, justifyContent: "center" }}>
+              {images.map((item, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`View ${item.label}`}
+                  style={{
+                    width: 64,
+                    height: 44,
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    border: i === current ? "2px solid #2563eb" : "2px solid transparent",
+                    padding: 0,
+                    cursor: "pointer",
+                    opacity: i === current ? 1 : 0.6,
+                    transition: "opacity 0.2s",
+                  }}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    width={64}
+                    height={44}
+                    loading="lazy"
+                    decoding="async"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                </button>
+              ))}
             </div>
           </div>
-          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/images/factory/640w-jiacheng-factory-exterior.webp 640w, /images/factory/960w-jiacheng-factory-exterior.webp 960w, /images/factory/1200w-jiacheng-factory-exterior.webp 1200w, /images/factory/jiacheng-factory-exterior.webp 1920w"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <img
-                src="/images/factory/jiacheng-factory-exterior.jpg"
-                srcSet="/images/factory/640w-jiacheng-factory-exterior.jpg 640w, /images/factory/960w-jiacheng-factory-exterior.jpg 960w, /images/factory/1200w-jiacheng-factory-exterior.jpg 1200w, /images/factory/jiacheng-factory-exterior.jpg 1920w"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="Jiacheng Netting factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
-                width={1920}
-                height={871}
-                loading="lazy"
-                decoding="async"
-                style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
-              />
-            </picture>
-            <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
-              Factory Exterior — Container Loading & Export
-            </div>
-          </div>
-        </div>
 
-        {/* Production Process */}
-        <div style={{ background: "#fff", borderRadius: 16, padding: 48, border: "1px solid #e5e7eb", marginBottom: 40 }}>
-          <h3 style={{ fontSize: 24, fontWeight: 600, color: "#1e3a5f", marginBottom: 32, textAlign: "center" }}>Production Process</h3>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          {/* Right: Factory Highlights */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <h3 style={{ fontSize: 28, fontWeight: 700, color: "#1e3a5f", marginBottom: 8 }}>
+              Why Choose Jiacheng Netting
+            </h3>
+
             {[
-              { step: "1", name: "Virgin HDPE", desc: "100% raw material" },
-              { step: "2", name: "Drawing", desc: "Fiber extrusion" },
-              { step: "3", name: "Threading", desc: "Needle threading" },
-              { step: "4", name: "Knitting", desc: "Warp knitting process" },
-              { step: "5", name: "Quality Testing", desc: "Strict inspection" },
-              { step: "6", name: "Rolling", desc: "Final rolling" },
-              { step: "7", name: "Packaging", desc: "Custom packaging" },
-              { step: "8", name: "Loading Container", desc: "Global shipping" },
-            ].map((process) => (
-              <div key={process.step} style={{ textAlign: "center", padding: 24, background: "#f9fafb", borderRadius: 12, border: "1px solid #e5e7eb" }}>
-                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#2563eb", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, margin: "0 auto 12px", fontSize: 18 }}>{process.step}</div>
-                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 14, marginBottom: 4 }}>{process.name}</div>
-                <div style={{ fontSize: 12, color: "#888" }}>{process.desc}</div>
+              {
+                icon: "⚙️",
+                title: "Advanced Warp Knitting Lines",
+                desc: "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting.",
+              },
+              {
+                icon: "🏭",
+                title: "20,000 m² Workshop",
+                desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong.",
+              },
+              {
+                icon: "👷",
+                title: "Skilled QC Team",
+                desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch.",
+              },
+              {
+                icon: "✅",
+                title: "BSCI & NFPA-701 Certified",
+                desc: "Audited social compliance and fire-retardant certification for construction and public safety projects.",
+              },
+              {
+                icon: "📦",
+                title: "OEM / ODM Available",
+                desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs.",
+              },
+              {
+                icon: "🌍",
+                title: "Export to 50+ Countries",
+                desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                style={{
+                  display: "flex",
+                  gap: 16,
+                  padding: "18px 20px",
+                  background: "#fff",
+                  borderRadius: 12,
+                  border: "1px solid #e5e7eb",
+                }}
+              >
+                <span style={{ fontSize: 28, lineHeight: 1 }}>{item.icon}</span>
+                <div>
+                  <div style={{ fontWeight: 700, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>
+                    {item.title}
+                  </div>
+                  <div style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>{item.desc}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Factory Info Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+        {/* Bottom: Factory Info Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 24,
+            marginTop: 56,
+          }}
+        >
           {[
             { title: "Factory Area", value: "20,000 m²", icon: "🏭" },
             { title: "Location", value: "Zhanjia Industrial Park, Jinan, China", icon: "📍" },
@@ -89,7 +303,18 @@ export default function Factory() {
             { title: "Production Capacity", value: "Custom Orders Welcome", icon: "⚙️" },
             { title: "Export Regions", value: "North America, Europe, Middle East, Asia, Africa", icon: "🚢" },
           ].map((info) => (
-            <div key={info.title} style={{ background: "#fff", padding: 28, borderRadius: 12, border: "1px solid #e5e7eb", display: "flex", alignItems: "center", gap: 16 }}>
+            <div
+              key={info.title}
+              style={{
+                background: "#fff",
+                padding: 28,
+                borderRadius: 12,
+                border: "1px solid #e5e7eb",
+                display: "flex",
+                alignItems: "center",
+                gap: 16,
+              }}
+            >
               <span style={{ fontSize: 28 }}>{info.icon}</span>
               <div>
                 <div style={{ fontSize: 13, color: "#888", marginBottom: 2 }}>{info.title}</div>
