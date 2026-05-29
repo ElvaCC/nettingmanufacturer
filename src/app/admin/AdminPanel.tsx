@@ -24,9 +24,9 @@ export default function AdminPanel() {
       cta2: 'View Products'
     },
     about: {
-      title: 'About JIACHENG NETTING',
+      title: 'About Jiacheng Netting',
       subtitle: 'Your Trusted HDPE Netting Partner Since 2005',
-      description: 'JIACHENG NETTING is a leading manufacturer of high-quality HDPE plastic netting products.',
+      description: 'Jiacheng Netting is a leading manufacturer of high-quality HDPE plastic netting products.',
       features: 'BSCI Certified, ISO14001 Certified, 20,000m² Production, Export to 50+ Countries'
     },
     contact: {
@@ -37,8 +37,8 @@ export default function AdminPanel() {
       workingHours: 'Monday - Saturday: 8:00 AM - 6:00 PM (CST)'
     },
     footer: {
-      company: 'JIACHENG NETTING',
-      copyright: '© 2024 JIACHENG NETTING. All Rights Reserved.'
+      company: 'Jiacheng Netting',
+      copyright: '© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved.'
     }
   });
 
@@ -107,7 +107,7 @@ export default function AdminPanel() {
       <header style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)', color: 'white', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '700' }}>网站后台管理</h1>
-          <p style={{ margin: '5px 0 0 0', opacity: 0.9, fontSize: '14px' }}>JIACHENG NETTING</p>
+          <p style={{ margin: '5px 0 0 0', opacity: 0.9, fontSize: '14px' }}>Jiacheng Netting</p>
         </div>
         <button onClick={handleSave} style={{ padding: '12px 30px', fontSize: '16px', fontWeight: '600', border: 'none', borderRadius: '8px', cursor: 'pointer', backgroundColor: saved ? '#22c55e' : 'white', color: saved ? 'white' : '#1e40af' }}>
           {saved ? '✓ 已保存' : '💾 保存更改'}

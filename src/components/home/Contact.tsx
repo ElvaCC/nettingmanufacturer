@@ -23,8 +23,8 @@ export default function Contact() {
 
               {/* Company Name */}
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>JIACHENG NETTING</div>
-                <div style={{ fontSize: 13, color: "#888" }}>(山东佳诚网具)</div>
+                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>Jiacheng Netting</div>
+                <div style={{ fontSize: 13, color: "#888" }}>Shandong Jiacheng Chemical Fiber Products Co., Ltd.</div>
               </div>
 
               {/* Contact Details */}

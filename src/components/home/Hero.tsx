@@ -24,7 +24,7 @@ export default function Hero() {
         {/* Factory Photo — fits 1200px container, full display, no crop */}
         <img
           src="/images/factory/jiacheng-factory-hero.jpg"
-          alt="JIACHENG NETTING factory exterior and HDPE netting production line in Jinan Shandong China with container loading and warp knitting machines"
+          alt="Exterior view of Shandong Jiacheng Chemical Fiber Products Co., Ltd. facility, a leading HDPE netting manufacturer in China, showing a shipping container truck being loaded with finished netting rolls ready for bulk export and direct factory supply"
           width={1920}
           height={800}
           loading="eager"

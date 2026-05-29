@@ -43,7 +43,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       {/* Hero */}
       <div style={{ background: '#1e3a5f', color: '#fff', padding: '48px 24px 40px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <p style={{ fontSize: 13, opacity: 0.6, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>JIACHENG NETTING</p>
+          <p style={{ fontSize: 13, opacity: 0.6, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>Jiacheng Netting</p>
           <h1 style={{ fontSize: 38, fontWeight: 800, marginBottom: 8 }}>{product.name}</h1>
           {(product as any).nameZh && (
             <p style={{ fontSize: 16, opacity: 0.7 }}>{(product as any).nameZh}</p>

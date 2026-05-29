@@ -11,7 +11,7 @@ export default function Factory() {
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
             <img
               src="/images/factory/jiacheng-factory-hero.jpg"
-              alt="JIACHENG NETTING HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
+              alt="Jiacheng Netting HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
               width={600}
               height={450}
               loading="lazy"
@@ -24,7 +24,7 @@ export default function Factory() {
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
             <img
               src="/images/factory/jiacheng-factory-exterior.jpg"
-              alt="JIACHENG NETTING factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
+              alt="Jiacheng Netting factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
               width={600}
               height={450}
               loading="lazy"
