@@ -13,57 +13,39 @@ export default function Hero() {
     <section
       style={{
         position: "relative",
-        minHeight: 600,
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden",
+        background: "#fff",
       }}
     >
-      {/* Full-screen Background Image */}
+      {/* Full Factory Photo — displayed completely, no cropping */}
+      <img
+        src="/images/factory/jiacheng-factory-hero.jpg"
+        alt="JIACHENG NETTING factory exterior and HDPE netting production line in Jinan Shandong China with container loading and warp knitting machines"
+        width={1920}
+        height={800}
+        loading="eager"
+        style={{
+          width: "100%",
+          height: "auto",
+          display: "block",
+        }}
+      />
+
+      {/* Content — overlaid on top of image */}
       <div style={{
         position: "absolute",
         top: 0,
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 0,
-      }}>
-        <img
-          src="/images/factory/jiacheng-factory-hero.jpg"
-          alt="JIACHENG NETTING factory exterior and HDPE netting production line in Jinan Shandong China with container loading and warp knitting machines"
-          width={1920}
-          height={800}
-          loading="eager"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center center",
-          }}
-        />
-      </div>
-
-      {/* Light Overlay — lets factory photo show through */}
-      <div style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        background: "linear-gradient(135deg, rgba(15,30,60,0.45) 0%, rgba(15,30,60,0.25) 50%, rgba(20,50,120,0.35) 100%)",
-        zIndex: 1,
-      }} />
-
-      {/* Content */}
-      <div style={{
-        position: "relative",
-        zIndex: 2,
-        maxWidth: 880,
-        margin: "0 auto",
-        padding: "80px 24px 80px",
-        textAlign: "center",
-        color: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "60px 24px",
       }}>
         <h1 style={{ fontSize: 46, fontWeight: 800, marginBottom: 20, lineHeight: 1.15, letterSpacing: "-0.5px", textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.4)" }}>
           {hero.title}
