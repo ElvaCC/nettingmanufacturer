@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Netting Manufacturer",
-    "tagline": "Premium HDPE Netting Solutions for Global Construction",
+    "brand": "JIACHENG NETTING",
+    "tagline": "Premium HDPE Netting Solutions Since 2005",
     "getQuote": "Get Quote",
     "learnMore": "Learn More",
     "contactUs": "Contact Us",
@@ -16,8 +16,8 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Industrial-Grade HDPE Netting Solutions",
-    "subtitle": "Leading manufacturer of construction mesh, dust cover nets, shade nets, and more for projects worldwide.",
+    "title": "Professional HDPE Netting Manufacturer",
+    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — 20+ years of expertise in construction safety nets, shade nets, agricultural nets, and custom netting solutions.",
     "cta": "Request a Quote",
     "secondary": "Explore Products"
   },
@@ -25,38 +25,38 @@
     "title": "Our Product Range",
     "subtitle": "Comprehensive netting solutions engineered for durability, UV resistance, and performance in demanding environments.",
     "categories": {
-      "construction": "Construction Mesh",
-      "dustCover": "Dust Cover Nets",
-      "shade": "Shade Nets",
+      "construction": "Construction Safety Nets",
+      "dustCover": "Scaffolding & Debris Nets",
+      "shade": "Shade Nets & Sails",
       "hail": "Hail Protection Nets",
-      "olive": "Olive Collection Nets",
-      "bird": "Bird Protection Nets"
+      "olive": "Harvest Nets",
+      "bird": "Bird & Bee Protection"
     }
   },
   "features": {
-    "title": "Why Choose Us",
+    "title": "Why Choose Jiacheng",
     "items": {
       "quality": {
-        "title": "Premium Quality Materials",
-        "description": "100% virgin HDPE resin with UV stabilizers for maximum durability and longevity."
+        "title": "100% Virgin HDPE",
+        "description": "All products made from premium virgin HDPE resin with UV stabilizers for maximum durability and 5+ year lifespan."
       },
       "manufacturing": {
-        "title": "Advanced Manufacturing",
-        "description": "State-of-the-art production lines ensuring consistent quality and precise specifications."
+        "title": "20,000㎡ Factory",
+        "description": "Established in 2005, our modern facility spans 20,000 square meters with state-of-the-art production lines."
       },
       "customization": {
         "title": "Custom Solutions",
-        "description": "Tailored sizes, colors, and specifications to meet your exact project requirements."
+        "description": "Tailored sizes, colors, densities, and specifications to meet your exact project requirements."
       },
       "certification": {
-        "title": "International Certification",
-        "description": "ISO certified with products meeting CE, SGS, and global quality standards."
+        "title": "BSCI & ISO14001 Certified",
+        "description": "Internationally certified factory with products meeting NFPA 701 fire-retardant standards."
       }
     }
   },
   "about": {
-    "title": "About Our Company",
-    "description": "With over 15 years of experience in HDPE netting manufacturing, we have established ourselves as a trusted global supplier for construction, agriculture, and industrial applications."
+    "title": "About Jiacheng Netting",
+    "description": "Founded in 2005, Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional manufacturer of HDPE netting with over 20 years of experience. Our 20,000㎡ factory exports to North America, South America, Europe, the Middle East, Asia, and Africa."
   },
   "contact": {
     "title": "Get In Touch",
@@ -72,7 +72,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Netting Manufacturer. All rights reserved.",
+    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
   }

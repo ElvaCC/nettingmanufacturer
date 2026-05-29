@@ -4,17 +4,17 @@ import { getLocalizedMetadata } from "@/lib/seo/metadata";
 import { unstable_setRequestLocale } from "next-intl/server";
 
 const stats = [
-  { value: "15+", label: "Years Experience" },
+  { value: "21+", label: "Years Experience" },
   { value: "50+", label: "Countries Served" },
   { value: "1000+", label: "Happy Clients" },
-  { value: "20+", label: "Production Lines" },
+  { value: "20,000", label: "m² Factory Area" },
 ];
 
 const certifications = [
-  { name: "ISO 9001", desc: "Quality Management System" },
-  { name: "CE", desc: "European Safety Standards" },
-  { name: "SGS", desc: "Global Inspection Services" },
-  { name: "BV", desc: "Verification & Testing" },
+  { name: "BSCI", desc: "Business Social Compliance Initiative" },
+  { name: "ISO 14001", desc: "Environmental Management System" },
+  { name: "NFPA 701", desc: "Fire-Retardant Standard Method II" },
+  { name: "OEM/ODM", desc: "Custom Manufacturing Service" },
 ];
 
 export async function generateMetadata({
@@ -44,7 +44,7 @@ export default async function AboutPage({
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">About Our Company</h1>
             <p className="text-xl text-white/80">
-              With over 15 years of experience, we are a trusted global leader in HDPE netting manufacturing.
+              With over 21 years of experience, we are a trusted global leader in HDPE netting manufacturing.
             </p>
           </div>
         </div>
@@ -58,17 +58,23 @@ export default async function AboutPage({
               <h2 className="text-3xl font-bold text-text-primary mb-6">Our Story</h2>
               <div className="space-y-4 text-text-secondary">
                 <p>
-                  Founded in 2008, Netting Manufacturer has grown from a small family workshop 
+                  Founded in 2005, SHANDONG JIACHENG CHEMICAL FIBER PRODUCTS CO., LTD has grown from a small family workshop 
                   to one of the leading HDPE netting manufacturers in China.
                 </p>
                 <p>
-                  Our state-of-the-art facility spans over 50,000 square meters, equipped with 
-                  more than 20 advanced production lines capable of producing over 5,000 tons 
-                  of netting products annually.
+                  Our state-of-the-art facility spans over 20,000 square meters, equipped with 
+                  modern production equipment and a top-notch technical team capable of producing a wide range of 
+                  warp knitting plastic netting products.
                 </p>
                 <p>
-                  We serve customers in over 50 countries, providing custom solutions for 
+                  We serve customers in over 50 countries across North America, South America, Europe, 
+                  the Middle East, Asia, and Africa, providing custom solutions for 
                   construction, agriculture, horticulture, and industrial applications.
+                </p>
+                <p>
+                  As an enterprise driven by innovation, we have a high-quality R&D team that continuously 
+                  develops and manufactures new products. We place great emphasis on product quality and 
+                  technological innovation, and have obtained BSCI and ISO14001 certifications.
                 </p>
               </div>
             </div>
@@ -113,7 +119,7 @@ export default async function AboutPage({
                 className="p-6 bg-white rounded-xl shadow-sm border border-gray-100 text-center"
               >
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-primary">{cert.name}</span>
+                  <span className="text-lg font-bold text-primary">{cert.name}</span>
                 </div>
                 <h3 className="font-semibold text-text-primary mb-1">{cert.name}</h3>
                 <p className="text-sm text-text-secondary">{cert.desc}</p>

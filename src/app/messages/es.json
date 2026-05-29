@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Netting Manufacturer",
-    "tagline": "Soluciones Premium de Mallas HDPE para Construcción Global",
+    "brand": "JIACHENG NETTING",
+    "tagline": "Soluciones Premium de Mallas HDPE desde 2005",
     "getQuote": "Obtener Cotización",
     "learnMore": "Más Información",
     "contactUs": "Contáctenos",
@@ -16,8 +16,8 @@
     "contact": "Contacto"
   },
   "hero": {
-    "title": "Soluciones Industriales de Mallas HDPE",
-    "subtitle": "Fabricante líder de mallas de construcción, cubiertas contra polvo, mallas de sombra y más para proyectos en todo el mundo.",
+    "title": "Fabricante Profesional de Mallas HDPE",
+    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — Más de 20 años de experiencia en redes de seguridad para construcción, mallas de sombra, redes agrícolas y soluciones personalizadas.",
     "cta": "Solicitar Cotización",
     "secondary": "Explorar Productos"
   },
@@ -25,38 +25,38 @@
     "title": "Nuestra Gama de Productos",
     "subtitle": "Soluciones completas de mallas diseñadas para durabilidad, resistencia UV y alto rendimiento.",
     "categories": {
-      "construction": "Mallas de Construcción",
-      "dustCover": "Redes Cubierta Anti-Polvo",
-      "shade": "Mallas de Sombreado",
-      "hail": "Redes Anti-Granizo",
-      "olive": "Redes de Recolección de Aceitunas",
-      "bird": "Redes Anti-Pájaros"
+      "construction": "Redes de Seguridad para Construcción",
+      "dustCover": "Redes de Andamio y Escombros",
+      "shade": "Mallas de Sombra y Velas",
+      "hail": "Redes Antigranizo",
+      "olive": "Redes de Cosecha",
+      "bird": "Protección contra Aves y Abejas"
     }
   },
   "features": {
-    "title": "Por Qué Elegirnos",
+    "title": "Por Qué Elegir Jiacheng",
     "items": {
       "quality": {
-        "title": "Materiales de Calidad Premium",
-        "description": "Resina HDPE 100%virgen con estabilizadores UV para máxima durabilidad."
+        "title": "HDPE 100% Virgen",
+        "description": "Todos los productos fabricados con resina HDPE virgen premium y estabilizadores UV para máxima durabilidad."
       },
       "manufacturing": {
-        "title": "Fabricación Avanzada",
-        "description": "Líneas de producción de vanguardia que garantizan calidad consistente."
+        "title": "Fábrica de 20.000 m²",
+        "description": "Fundada en 2005, nuestra instalación moderna abarca 20.000 metros cuadrados con líneas de producción de vanguardia."
       },
       "customization": {
         "title": "Soluciones Personalizadas",
-        "description": "Tamaños, colores y especificaciones a medida para sus proyectos."
+        "description": "Tamaños, colores, densidades y especificaciones a medida para sus proyectos."
       },
       "certification": {
-        "title": "Certificación Internacional",
-        "description": "Certificados ISO con productos que cumplen estándares CE y SGS."
+        "title": "Certificaciones BSCI e ISO14001",
+        "description": "Fábrica con certificación internacional y productos que cumplen la norma NFPA 701 ignífuga."
       }
     }
   },
   "about": {
-    "title": "Sobre Nuestra Empresa",
-    "description": "Con más de 15 años de experiencia en fabricación de mallas HDPE, somos un proveedor global confiable."
+    "title": "Sobre Jiacheng Netting",
+    "description": "Fundada en 2005, Shandong Jiacheng Chemical Fiber Products Co., Ltd. es un fabricante profesional de mallas HDPE con más de 20 años de experiencia. Nuestra fábrica de 20.000 m² exporta a Norteamérica, Sudamérica, Europa, Medio Oriente, Asia y África."
   },
   "contact": {
     "title": "Contáctenos",
@@ -72,7 +72,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Netting Manufacturer. Todos los derechos reservados.",
+    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio"
   }

@@ -21,7 +21,7 @@ export default function Hero() {
         {/* Key Advantages */}
         <div style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap", marginTop: 60 }}>
           <div style={{ textAlign: "center", padding: "20px 30px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 12 }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#fbbf24" }}>18+</div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#fbbf24" }}>21+</div>
             <div style={{ fontSize: 14, opacity: 0.8, marginTop: 4 }}>Years Experience</div>
           </div>
           <div style={{ textAlign: "center", padding: "20px 30px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 12 }}>
