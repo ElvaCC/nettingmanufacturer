@@ -10,15 +10,15 @@ export default function Factory() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 48 }}>
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
             <img
-              src="/images/factory/hdpe-netting-production-line.jpg"
-              alt="HDPE netting production line with multiple warp knitting machines manufacturing construction safety nets, shade nets, and debris netting in JIACHENG factory"
+              src="/images/factory/jiacheng-factory-hero.jpg"
+              alt="JIACHENG NETTING HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
               width={600}
               height={450}
               loading="lazy"
               style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
             />
             <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
-              Production Line — Warp Knitting Machines
+              Factory Panorama — Production & Export Operations
             </div>
           </div>
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
