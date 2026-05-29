@@ -6,62 +6,49 @@ interface FactoryImage {
   src: string;
   alt: string;
   label: string;
-  /** "full" spans all columns, "normal" takes 1 grid slot */
-  span: "full" | "normal";
   objectPosition: string;
-  objectFit: "cover" | "contain";
 }
 
 /**
- * Layout plan (Masonry Grid):
+ * Layout — Magazine Editorial Grid
  *
- *  Row 1: [     Image 1 — Panorama (4:1) full width     ]
- *  Row 2: [ Img 2 (4:3) ] [ Img 3 (2:1) ] [ Img 4 (4:3) ]
- *  Row 3: [     Image 5 — Products (8:1) full width      ]
+ *  ┌─────────────────────────────┬───────────────┐
+ *  │  ① Factory Panorama (60%)    │  ② Workshop   │
+ *  │  cover, left 3/5            │  (top-right)  │
+ *  │                             ├───────────────┤
+ *  │  row-span 2                 │  ③ Product    │
+ *  │                             │  close-up     │
+ *  └─────────────────────────────┴───────────────┘
+ *  ├─────────────────────────────────────────────┤
+ *  │  ④ Warehouse (full-width strip)             │
+ *  └─────────────────────────────────────────────┘
  *
- *  Each image preserves its original aspect ratio — zero cropping.
- *  Ultra-wide images become "signature strips" across the full width.
+ *  gap: 16px | border-radius: 8px | hover scale(1.02)
  */
 const images: FactoryImage[] = [
   {
     src: "/images/factory/jiacheng-factory-panorama.jpg",
-    alt: "Panoramic exterior view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China with container loading area and packaged net rolls for export",
-    label: "Factory Exterior",
-    span: "full",
+    alt: "Panoramic aerial view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park, Jinan, Shandong, China — 20,000 m² production base with factory buildings, container loading area, and packaged net rolls for global export",
+    label: "Factory Exterior — 20,000 m² Base",
     objectPosition: "center center",
-    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-line-2.jpg",
-    alt: "Skilled technicians operating multiple warp knitting production lines in Jiacheng Netting's 20,000 square meter manufacturing workshop for custom HDPE netting orders",
-    label: "Production Floor",
-    span: "normal",
+    alt: "Interior view of Jiacheng Netting's clean production workshop with skilled technicians operating advanced warp knitting lines for custom HDPE plastic netting manufacturing",
+    label: "Clean Workshop",
     objectPosition: "center top",
-    objectFit: "cover",
-  },
-  {
-    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.jpg",
-    alt: "Interior warehouse at Jiacheng Netting storing finished HDPE plastic netting rolls organized on racks ready for bulk wholesale export to construction and agriculture markets",
-    label: "Finished Goods Warehouse",
-    span: "normal",
-    objectPosition: "center center",
-    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-line-1.jpg",
-    alt: "Advanced Karl Mayer warp knitting machines producing high-strength HDPE plastic nets for construction safety debris netting and agricultural shade netting applications",
-    label: "Warp Knitting Lines",
-    span: "normal",
+    alt: "Close-up of Karl Mayer warp knitting machines weaving high-strength HDPE plastic net products for construction safety and agricultural shade applications",
+    label: "Warp Knitting in Action",
     objectPosition: "center left",
-    objectFit: "cover",
   },
   {
-    src: "/images/factory/jiacheng-colored-hdpe-netting-products.jpg",
-    alt: "Wide range of custom colored HDPE warp-knitted netting products including red construction safety nets, blue shade nets, green privacy screens, and olive harvest nets",
-    label: "Product Variety",
-    span: "full",
+    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.jpg",
+    alt: "Bulk warehouse at Jiacheng Netting storing large volumes of finished HDPE plastic netting rolls on industrial racks ready for wholesale container export",
+    label: "Bulk Warehouse & Ready for Export",
     objectPosition: "center center",
-    objectFit: "cover",
   },
 ];
 
@@ -84,6 +71,8 @@ export default function Factory() {
     };
   }, [lightbox]);
 
+  const openLightbox = useCallback((i: number) => setLightbox(i), []);
+
   return (
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -95,50 +84,129 @@ export default function Factory() {
           20,000 m&sup2; production facility with advanced technology
         </p>
 
-        {/* ── Masonry Photo Grid ── */}
-        <div className="factory-masonry">
-          {images.map((item, i) => {
-            const webpSrc = item.src.replace(".jpg", ".webp");
-            return (
-              <div
-                key={i}
-                className={`factory-masonry-item${item.span === "full" ? " factory-masonry-full" : ""}`}
-                onClick={() => setLightbox(i)}
-                role="button"
-                tabIndex={0}
-                aria-label={`View ${item.label} — click to enlarge`}
-                onKeyDown={(e) => { if (e.key === "Enter") setLightbox(i); }}
-              >
-                <picture>
-                  <source type="image/webp" srcSet={webpSrc} />
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    loading={i < 2 ? "eager" : "lazy"}
-                    decoding="async"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: item.objectFit,
-                      objectPosition: item.objectPosition,
-                      display: "block",
-                    }}
-                  />
-                </picture>
+        {/* ═══════════════════════════════════════════
+           Magazine Editorial Grid
+           ═══════════════════════════════════════════ */}
+        <div className="factory-editorial">
+          {/* ① Panorama — left 60%, spans 2 rows */}
+          <div
+            className="factory-editorial-item factory-editorial-hero"
+            onClick={() => openLightbox(0)}
+            role="button"
+            tabIndex={0}
+            aria-label="View factory exterior panorama — click to enlarge"
+            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(0); }}
+          >
+            <picture>
+              <source type="image/webp" srcSet={images[0].src.replace(".jpg", ".webp")} />
+              <img
+                src={images[0].src}
+                alt={images[0].alt}
+                loading="eager"
+                decoding="async"
+                style={{ objectPosition: images[0].objectPosition }}
+              />
+            </picture>
+            <div className="factory-editorial-overlay">
+              <div className="factory-editorial-label">{images[0].label}</div>
+              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+          </div>
 
-                {/* Hover overlay with label + zoom icon */}
-                <div className="factory-masonry-overlay">
-                  <div className="factory-masonry-label">{item.label}</div>
-                  <svg className="factory-masonry-zoom" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    <line x1="11" y1="8" x2="11" y2="14" />
-                    <line x1="8" y1="11" x2="14" y2="11" />
-                  </svg>
-                </div>
-              </div>
-            );
-          })}
+          {/* ② Workshop — top-right */}
+          <div
+            className="factory-editorial-item"
+            onClick={() => openLightbox(1)}
+            role="button"
+            tabIndex={0}
+            aria-label="View production workshop — click to enlarge"
+            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(1); }}
+          >
+            <picture>
+              <source type="image/webp" srcSet={images[1].src.replace(".jpg", ".webp")} />
+              <img
+                src={images[1].src}
+                alt={images[1].alt}
+                loading="eager"
+                decoding="async"
+                style={{ objectPosition: images[1].objectPosition }}
+              />
+            </picture>
+            <div className="factory-editorial-overlay">
+              <div className="factory-editorial-label">{images[1].label}</div>
+              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+          </div>
+
+          {/* ③ Product close-up — bottom-right */}
+          <div
+            className="factory-editorial-item"
+            onClick={() => openLightbox(2)}
+            role="button"
+            tabIndex={0}
+            aria-label="View warp knitting production close-up — click to enlarge"
+            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(2); }}
+          >
+            <picture>
+              <source type="image/webp" srcSet={images[2].src.replace(".jpg", ".webp")} />
+              <img
+                src={images[2].src}
+                alt={images[2].alt}
+                loading="lazy"
+                decoding="async"
+                style={{ objectPosition: images[2].objectPosition }}
+              />
+            </picture>
+            <div className="factory-editorial-overlay">
+              <div className="factory-editorial-label">{images[2].label}</div>
+              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+          </div>
+
+          {/* ④ Warehouse — full-width bottom strip */}
+          <div
+            className="factory-editorial-item factory-editorial-strip"
+            onClick={() => openLightbox(3)}
+            role="button"
+            tabIndex={0}
+            aria-label="View bulk warehouse — click to enlarge"
+            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(3); }}
+          >
+            <picture>
+              <source type="image/webp" srcSet={images[3].src.replace(".jpg", ".webp")} />
+              <img
+                src={images[3].src}
+                alt={images[3].alt}
+                loading="lazy"
+                decoding="async"
+                style={{ objectPosition: images[3].objectPosition }}
+              />
+            </picture>
+            <div className="factory-editorial-overlay">
+              <div className="factory-editorial-label">{images[3].label}</div>
+              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <line x1="11" y1="8" x2="11" y2="14" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* ── Factory Highlights (3-column grid) ── */}
@@ -241,67 +309,78 @@ export default function Factory() {
       {/* Scoped Styles */}
       <style jsx>{`
         /* ═══════════════════════════════════════════
-           Masonry Photo Grid
+           Magazine Editorial Grid
            ═══════════════════════════════════════════ */
-        .factory-masonry {
+        .factory-editorial {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
+          grid-template-columns: 3fr 2fr;
+          grid-template-rows: 1fr 1fr auto;
+          gap: 16px;
         }
 
-        /* Full-width items span all 3 columns */
-        .factory-masonry-full {
-          grid-column: 1 / -1;
-        }
-
-        /* Each masonry cell */
-        .factory-masonry-item {
+        .factory-editorial-item {
           position: relative;
-          border-radius: 12px;
+          border-radius: 8px;
           overflow: hidden;
           cursor: zoom-in;
           background: #e5e7eb;
-          min-height: 180px;
         }
 
-        /* Full-width items: preserve original aspect ratio */
-        .factory-masonry-full img {
-          aspect-ratio: auto;
-          max-height: 500px;
+        /* ① Hero — left 60%, spans 2 rows */
+        .factory-editorial-hero {
+          grid-column: 1;
+          grid-row: 1 / 3;
+          min-height: 380px;
+        }
+
+        /* ② Workshop — top-right */
+        /* ③ Product — bottom-right: auto placement */
+
+        /* ④ Warehouse — full-width bottom */
+        .factory-editorial-strip {
+          grid-column: 1 / -1;
+          grid-row: 3;
+          min-height: 220px;
+          max-height: 320px;
+        }
+
+        /* Image inside cell */
+        .factory-editorial-item img {
+          display: block;
+          width: 100%;
+          height: 100%;
           object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+        .factory-editorial-item:hover img {
+          transform: scale(1.02);
         }
 
-        /* Normal items: preserve natural height from aspect ratio */
-        .factory-masonry-item:not(.factory-masonry-full) img {
-          aspect-ratio: auto;
-        }
-
-        /* ── Hover overlay ── */
-        .factory-masonry-overlay {
+        /* Overlay */
+        .factory-editorial-overlay {
           position: absolute;
           inset: 0;
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
-          padding: 16px 18px;
+          padding: 14px 16px;
           background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 60%);
           opacity: 0;
           transition: opacity 0.3s ease;
           pointer-events: none;
         }
-        .factory-masonry-item:hover .factory-masonry-overlay {
+        .factory-editorial-item:hover .factory-editorial-overlay {
           opacity: 1;
         }
-
-        .factory-masonry-label {
+        .factory-editorial-label {
           color: #fff;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
-          text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+          text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
-        .factory-masonry-zoom {
+        .factory-editorial-zoom {
           color: #fff;
-          filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+          filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
           flex-shrink: 0;
         }
 
@@ -461,11 +540,19 @@ export default function Factory() {
            Responsive
            ═══════════════════════════════════════════ */
         @media (max-width: 900px) {
-          .factory-masonry {
-            grid-template-columns: repeat(2, 1fr);
+          .factory-editorial {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
           }
-          .factory-masonry-full img {
-            max-height: 360px;
+          .factory-editorial-hero {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            min-height: 280px;
+          }
+          .factory-editorial-strip {
+            grid-column: 1 / -1;
+            grid-row: 4;
+            min-height: 180px;
           }
           .factory-highlights-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -478,11 +565,19 @@ export default function Factory() {
           .factory-lightbox-overlay { padding: 60px 20px 20px; }
         }
         @media (max-width: 600px) {
-          .factory-masonry {
+          .factory-editorial {
             grid-template-columns: 1fr;
+            grid-template-rows: auto;
           }
-          .factory-masonry-full img {
-            max-height: 240px;
+          .factory-editorial-hero {
+            grid-column: 1;
+            grid-row: auto;
+            min-height: 200px;
+          }
+          .factory-editorial-strip {
+            grid-column: 1;
+            grid-row: auto;
+            min-height: 160px;
           }
           .factory-highlights-grid {
             grid-template-columns: 1fr;
