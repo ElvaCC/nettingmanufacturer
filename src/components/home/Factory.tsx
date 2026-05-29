@@ -7,6 +7,10 @@ interface FactoryImage {
   alt: string;
   label: string;
   objectPosition: string;
+  /** Per-image aspect ratio to prevent stretching/blurring */
+  aspectRatio: string;
+  /** "cover" fills container but may crop; "contain" shows full image with padding */
+  objectFit: "cover" | "contain";
 }
 
 const images: FactoryImage[] = [
@@ -15,29 +19,39 @@ const images: FactoryImage[] = [
     alt: "Panoramic exterior view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China with container loading area and packaged net rolls for export",
     label: "Factory Exterior",
     objectPosition: "center",
+    aspectRatio: "4 / 1",
+    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.jpg",
     alt: "Interior warehouse at Jiacheng Netting storing finished HDPE plastic netting rolls organized on racks ready for bulk wholesale export to construction and agriculture markets",
     label: "Finished Goods Warehouse",
     objectPosition: "center",
+    aspectRatio: "2 / 1",
+    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-line-1.jpg",
     alt: "Advanced Karl Mayer warp knitting machines producing high-strength HDPE plastic nets for construction safety debris netting and agricultural shade netting applications",
     label: "Warp Knitting Lines",
     objectPosition: "center",
+    aspectRatio: "4 / 3",
+    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-line-2.jpg",
-    alt: "Skilled technicians operating multiple warp knitting production lines in Jiacheng Netting\u0027s 20,000 square meter manufacturing workshop for custom HDPE netting orders",
+    alt: "Skilled technicians operating multiple warp knitting production lines in Jiacheng Netting's 20,000 square meter manufacturing workshop for custom HDPE netting orders",
     label: "Production Floor",
-    objectPosition: "center",
+    objectPosition: "center top",
+    aspectRatio: "4 / 3",
+    objectFit: "cover",
   },
   {
     src: "/images/factory/jiacheng-colored-hdpe-netting-products.jpg",
     alt: "Wide range of custom colored HDPE warp-knitted netting products including red construction safety nets, blue shade nets, green privacy screens, and olive harvest nets",
     label: "Product Variety",
+    aspectRatio: "8 / 1",
+    objectFit: "cover",
     objectPosition: "center",
   },
 ];
@@ -53,13 +67,9 @@ export default function Factory() {
     return () => clearInterval(timer);
   }, [next]);
 
-  // Reset auto-play timer on manual navigation
-  const goTo = useCallback(
-    (index: number) => {
-      setCurrent(index);
-    },
-    []
-  );
+  const goTo = useCallback((index: number) => {
+    setCurrent(index);
+  }, []);
 
   const img = images[current];
   const webpSrc = img.src.replace(".jpg", ".webp");
@@ -79,20 +89,24 @@ export default function Factory() {
         <div className="factory-grid">
           {/* Left: Image Carousel */}
           <div>
-            {/* Carousel Container — fixed 4:3 on desktop, responsive on mobile */}
-            <div className="factory-carousel">
-              {/* WebP with JPG fallback — use full-resolution originals only */}
+            {/* Carousel Container — aspect ratio adapts per image */}
+            <div
+              className="factory-carousel"
+              style={{ aspectRatio: img.aspectRatio }}
+            >
+              {/* WebP with JPG fallback */}
               <picture>
                 <source type="image/webp" srcSet={webpSrc} />
                 <img
                   src={img.src}
                   alt={img.alt}
-                  width={1440}
-                  height={1080}
                   loading="lazy"
                   decoding="async"
                   className="factory-carousel-img"
-                  style={{ objectPosition: img.objectPosition }}
+                  style={{
+                    objectPosition: img.objectPosition,
+                    objectFit: img.objectFit,
+                  }}
                 />
               </picture>
 
@@ -226,25 +240,21 @@ export default function Factory() {
           align-items: start;
         }
 
-        /* ── Carousel Container ── */
+        /* ── Carousel Container — aspect ratio is set inline per image ── */
         .factory-carousel {
           position: relative;
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid #e5e7eb;
           background: #e5e7eb;
-          /* 4:3 on desktop — fits most factory photos well */
-          aspect-ratio: 4 / 3;
+          transition: aspect-ratio 0.3s ease;
         }
 
-        /* ── Main Image: no stretch, no blur, always sharp ── */
+        /* ── Main Image ── */
         .factory-carousel-img {
           display: block;
           width: 100%;
           height: 100%;
-          object-fit: cover;
-          object-position: center;
-          /* Prevent any browser-level downscaling artifacts */
           image-rendering: auto;
         }
 
