@@ -3,10 +3,9 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        disallow: "/",
+        disallow: ["/admin", "/api/"],
       },
     ],
-    // Uncomment the line below when ready to go live
-    // sitemap: "https://www.nettingmanufacturer.com/sitemap.xml",
+    sitemap: "https://www.nettingmanufacturer.com/sitemap.xml",
   };
 }

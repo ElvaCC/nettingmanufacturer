@@ -5,7 +5,37 @@ import contentData from '@/data/content.json';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const { contact } = contentData;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          country: "",
+          product: formData.message.substring(0, 100),
+          message: formData.message,
+          phone: formData.phone,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", company: "", phone: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
@@ -76,7 +106,7 @@ export default function Contact() {
           <div style={{ background: "#fff", borderRadius: 12, padding: 36, border: "1px solid #e5e7eb" }}>
             <h3 style={{ fontSize: 22, fontWeight: 600, color: "#1e3a5f", marginBottom: 24 }}>Send Inquiry</h3>
 
-            <form onSubmit={(e) => e.preventDefault()} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: "#555", display: "block", marginBottom: 4 }}>Your Name *</label>
@@ -116,10 +146,10 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit"
-                style={{ padding: "14px 32px", background: "#2563eb", color: "#fff", border: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, cursor: "pointer", alignSelf: "flex-start" }}
+              <button type="submit" disabled={status === "sending"}
+                style={{ padding: "14px 32px", background: status === "sending" ? "#93c5fd" : "#2563eb", color: "#fff", border: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, cursor: status === "sending" ? "not-allowed" : "pointer", alignSelf: "flex-start" }}
               >
-                Send Message →
+                {status === "sending" ? "Sending..." : status === "success" ? "✓ Sent Successfully!" : status === "error" ? "✕ Failed, Try Again" : "Send Message →"}
               </button>
             </form>
           </div>

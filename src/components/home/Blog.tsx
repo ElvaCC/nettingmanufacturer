@@ -37,13 +37,6 @@ export default function Blog() {
             </article>
           ))}
         </div>
-
-        {/* View All Button */}
-        <div style={{ textAlign: "center", marginTop: 40 }}>
-          <a href={`/${locale}/blog`} style={{ display: "inline-block", padding: "12px 32px", background: "#2563eb", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 600 }}>
-            Read All Articles →
-          </a>
-        </div>
       </div>
     </section>
   );

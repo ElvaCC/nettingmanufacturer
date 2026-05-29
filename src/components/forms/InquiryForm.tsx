@@ -50,21 +50,38 @@ export default function InquiryForm({ locale }: { locale: string }) {
 
     setStatus("loading");
     
-    // Simulate form submission (replace with actual API call)
+    // Submit to API
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setStatus("success");
-      setFormData({
-        name: "",
-        company: "",
-        email: "",
-        phone: "",
-        country: "",
-        product: "",
-        quantity: "",
-        unit: "sqm",
-        message: "",
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
+          country: formData.country,
+          product: formData.product,
+          message: `${formData.quantity} ${formData.unit} - ${formData.message}`,
+        }),
       });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          phone: "",
+          country: "",
+          product: "",
+          quantity: "",
+          unit: "sqm",
+          message: "",
+        });
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }

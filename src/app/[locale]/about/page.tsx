@@ -6,15 +6,15 @@ import { unstable_setRequestLocale } from "next-intl/server";
 const stats = [
   { value: "21+", label: "Years Experience" },
   { value: "50+", label: "Countries Served" },
-  { value: "1000+", label: "Happy Clients" },
+  { value: "11", label: "Product Lines" },
   { value: "20,000", label: "m² Factory Area" },
 ];
 
 const certifications = [
   { name: "BSCI", desc: "Business Social Compliance Initiative" },
-  { name: "ISO 14001", desc: "Environmental Management System" },
-  { name: "NFPA 701", desc: "Fire-Retardant Standard Method II" },
+  { name: "NFPA-701", desc: "Fire-Retardant Standard Method II" },
   { name: "OEM/ODM", desc: "Custom Manufacturing Service" },
+  { name: "21+ Years", desc: "Industry Experience Since 2005" },
 ];
 
 export async function generateMetadata({
@@ -80,8 +80,8 @@ export default async function AboutPage({
             </div>
             <div className="relative h-96 rounded-2xl overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&h=600&fit=crop"
-                alt="Our factory"
+                src="/images/factory/jiacheng-factory-hero.jpg"
+                alt="Jiacheng Netting factory exterior showing HDPE netting production facility with shipping containers"
                 fill
                 className="object-cover"
               />
