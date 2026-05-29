@@ -34,12 +34,14 @@ export default function Hero() {
             sizes="(max-width: 640px) 100vw, (max-width: 960px) 100vw, (max-width: 1200px) 100vw, 1200px"
             alt="Exterior view of Shandong Jiacheng Chemical Fiber Products Co., Ltd. facility, a leading HDPE netting manufacturer in China, showing a shipping container truck being loaded with finished netting rolls ready for bulk export and direct factory supply"
             width={1920}
-            height={1440}
+            height={1322}
             loading="eager"
             decoding="async"
             style={{
               width: "100%",
               height: "auto",
+              aspectRatio: "2 / 1",
+              objectFit: "cover",
               display: "block",
               borderRadius: 12,
               boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
