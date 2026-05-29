@@ -1,8 +1,12 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import contentData from '@/data/content.json';
 
 export default function Hero() {
+  const params = useParams();
+  const locale = (params?.locale as string) || 'en';
+  const getPath = (href: string) => `/${locale}${href}`;
   const { hero } = contentData;
   
   return (
@@ -40,10 +44,10 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div style={{ marginTop: 50, display: "flex", justifyContent: "center", gap: 16 }}>
-          <a href="/products" style={{ display: "inline-block", padding: "14px 36px", background: "#fbbf24", color: "#1e3a5f", textDecoration: "none", borderRadius: 8, fontWeight: 600, fontSize: 16 }}>
+          <a href={getPath("/products")} style={{ display: "inline-block", padding: "14px 36px", background: "#fbbf24", color: "#1e3a5f", textDecoration: "none", borderRadius: 8, fontWeight: 600, fontSize: 16 }}>
             {hero.cta2}
           </a>
-          <a href="/contact" style={{ display: "inline-block", padding: "14px 36px", background: "transparent", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, border: "2px solid #fff" }}>
+          <a href={getPath("/contact")} style={{ display: "inline-block", padding: "14px 36px", background: "transparent", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, border: "2px solid #fff" }}>
             {hero.cta1}
           </a>
         </div>

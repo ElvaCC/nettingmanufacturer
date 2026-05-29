@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const getPath = (href: string) => `/${locale}${href}`;
   const product = contentData.products.find((p) => p.id === slug);
 
   if (!product) {
@@ -31,9 +32,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
       {/* Breadcrumb */}
       <div style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', padding: '12px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#888' }}>
-          <Link href="/" style={{ color: '#2563eb', textDecoration: 'none' }}>Home</Link>
+          <Link href={getPath("/")} style={{ color: '#2563eb', textDecoration: 'none' }}>Home</Link>
           <span>›</span>
-          <Link href="/products" style={{ color: '#2563eb', textDecoration: 'none' }}>Products</Link>
+          <Link href={getPath("/products")} style={{ color: '#2563eb', textDecoration: 'none' }}>Products</Link>
           <span>›</span>
           <span style={{ color: '#333' }}>{product.name}</span>
         </div>
@@ -165,7 +166,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               .map((p) => (
                 <Link
                   key={p.id}
-                  href={`/products/${p.id}`}
+                  href={getPath(`/products/${p.id}`)}
                   style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', textDecoration: 'none', display: 'block', transition: 'box-shadow 0.2s' }}
                 >
                   {p.images && p.images[0] ? (

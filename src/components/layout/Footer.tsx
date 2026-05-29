@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import contentData from '@/data/content.json';
 
 export default function Footer() {
+  const params = useParams();
+  const locale = (params?.locale as string) || "en";
+  const getPath = (href: string) => `/${locale}${href}`;
   const { footer, contact, products } = contentData;
   
   return (
@@ -25,7 +29,7 @@ export default function Footer() {
             <h4 style={{ fontSize: 15, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>Products</h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {products.slice(0, 6).map((item) => (
-                <li key={item.id} style={{ marginBottom: 8, fontSize: 13 }}><Link href="/products" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>{item.name}</Link></li>
+                <li key={item.id} style={{ marginBottom: 8, fontSize: 13 }}><Link href={getPath("/products")} style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>{item.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -35,7 +39,7 @@ export default function Footer() {
             <h4 style={{ fontSize: 15, fontWeight: 600, marginBottom: 16, color: "#fbbf24" }}>More Products</h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {products.slice(6, 12).map((item) => (
-                <li key={item.id} style={{ marginBottom: 8, fontSize: 13 }}><Link href="/products" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>{item.name}</Link></li>
+                <li key={item.id} style={{ marginBottom: 8, fontSize: 13 }}><Link href={getPath("/products")} style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>{item.name}</Link></li>
               ))}
             </ul>
           </div>
@@ -58,10 +62,10 @@ export default function Footer() {
             {footer.copyright}
           </p>
           <div style={{ display: "flex", gap: 16, fontSize: 13 }}>
-            <Link href="/" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Home</Link>
-            <Link href="/products" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Products</Link>
-            <Link href="/factory" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Factory</Link>
-            <Link href="/contact" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Contact</Link>
+            <Link href={getPath("/")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Home</Link>
+            <Link href={getPath("/products")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Products</Link>
+            <Link href={getPath("/factory")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Factory</Link>
+            <Link href={getPath("/contact")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Contact</Link>
           </div>
         </div>
       </div>

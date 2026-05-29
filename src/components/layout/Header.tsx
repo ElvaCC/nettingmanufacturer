@@ -39,7 +39,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
   const locale = localeProp || (params.locale as string) || "en";
   const currentLang = languages.find(l => l.code === locale) || languages[0];
 
-  const getPath = (href: string) => locale === "en" ? href : `/${locale}${href}`;
+  const getPath = (href: string) => `/${locale}${href}`;
 
   const handleLang = (code: string) => {
     const path = window.location.pathname.replace(/^\/(en|es|ru|ar)/, "");

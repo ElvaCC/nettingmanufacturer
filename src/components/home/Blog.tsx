@@ -1,4 +1,11 @@
+'use client';
+
+import { useParams } from 'next/navigation';
+
 export default function Blog() {
+  const params = useParams();
+  const locale = (params?.locale as string) || 'en';
+
   return (
     <section style={{ padding: "80px 24px", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -33,7 +40,7 @@ export default function Blog() {
 
         {/* View All Button */}
         <div style={{ textAlign: "center", marginTop: 40 }}>
-          <a href="/blog" style={{ display: "inline-block", padding: "12px 32px", background: "#2563eb", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 600 }}>
+          <a href={`/${locale}/blog`} style={{ display: "inline-block", padding: "12px 32px", background: "#2563eb", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 600 }}>
             Read All Articles →
           </a>
         </div>
