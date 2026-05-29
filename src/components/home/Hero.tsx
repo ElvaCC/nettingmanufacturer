@@ -44,14 +44,14 @@ export default function Hero() {
         />
       </div>
 
-      {/* Dark Overlay for readability */}
+      {/* Light Overlay — lets factory photo show through */}
       <div style={{
         position: "absolute",
         top: 0,
         left: 0,
         width: "100%",
         height: "100%",
-        background: "linear-gradient(135deg, rgba(15,30,60,0.85) 0%, rgba(20,50,120,0.75) 40%, rgba(37,99,235,0.6) 100%)",
+        background: "linear-gradient(135deg, rgba(15,30,60,0.45) 0%, rgba(15,30,60,0.25) 50%, rgba(20,50,120,0.35) 100%)",
         zIndex: 1,
       }} />
 
@@ -65,26 +65,26 @@ export default function Hero() {
         textAlign: "center",
         color: "#fff",
       }}>
-        <h1 style={{ fontSize: 46, fontWeight: 800, marginBottom: 20, lineHeight: 1.15, letterSpacing: "-0.5px" }}>
+        <h1 style={{ fontSize: 46, fontWeight: 800, marginBottom: 20, lineHeight: 1.15, letterSpacing: "-0.5px", textShadow: "0 2px 16px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.4)" }}>
           {hero.title}
         </h1>
-        <p style={{ fontSize: 18, marginBottom: 36, opacity: 0.92, maxWidth: 650, margin: "0 auto 36px", lineHeight: 1.65 }}>
+        <p style={{ fontSize: 18, marginBottom: 36, opacity: 0.95, maxWidth: 650, margin: "0 auto 36px", lineHeight: 1.65, textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
           {hero.subtitle}
         </p>
 
         {/* Stats Row */}
         <div style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap", marginBottom: 40 }}>
           <div>
-            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24" }}>21+</div>
-            <div style={{ fontSize: 13, opacity: 0.8 }}>Years Experience</div>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>21+</div>
+            <div style={{ fontSize: 13, opacity: 0.9, textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>Years Experience</div>
           </div>
           <div>
-            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24" }}>50+</div>
-            <div style={{ fontSize: 13, opacity: 0.8 }}>Countries Served</div>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>50+</div>
+            <div style={{ fontSize: 13, opacity: 0.9, textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>Countries Served</div>
           </div>
           <div>
-            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24" }}>20,000m²</div>
-            <div style={{ fontSize: 13, opacity: 0.8 }}>Factory Area</div>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#fbbf24", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>20,000m²</div>
+            <div style={{ fontSize: 13, opacity: 0.9, textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>Factory Area</div>
           </div>
         </div>
 
@@ -99,9 +99,9 @@ export default function Hero() {
         </div>
 
         {/* Factory Badge */}
-        <div style={{ marginTop: 44, display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 22px", borderRadius: 50, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(8px)" }}>
+        <div style={{ marginTop: 44, display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 22px", borderRadius: 50, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(8px)" }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", display: "inline-block", boxShadow: "0 0 8px rgba(74,222,128,0.5)" }} />
-          <span style={{ fontSize: 13, opacity: 0.9, fontWeight: 500 }}>Real Factory · Jinan, China · BSCI & ISO14001 Certified</span>
+          <span style={{ fontSize: 13, opacity: 0.95, fontWeight: 500, textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>Real Factory · Jinan, China · BSCI & ISO14001 Certified</span>
         </div>
       </div>
     </section>
