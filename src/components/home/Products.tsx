@@ -13,8 +13,7 @@ export default function Products() {
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Our Products</h2>
-        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48, maxWidth: 800, margin: "0 auto 48px" }}>Made of 100% Virgin HDPE — Fire-Retardant &bull; UV-Treated &bull; Customizable Colors &amp; Specs</p>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 48, color: "#1e3a5f" }}>Our Products</h2>
 
         {/* Products Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
