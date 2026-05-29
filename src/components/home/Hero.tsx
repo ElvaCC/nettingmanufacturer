@@ -21,21 +21,31 @@ export default function Hero() {
           {hero.subtitle}
         </p>
 
-        {/* Factory Photo — fits 1200px container, full display, no crop */}
-        <img
-          src="/images/factory/jiacheng-factory-hero.jpg"
-          alt="Exterior view of Shandong Jiacheng Chemical Fiber Products Co., Ltd. facility, a leading HDPE netting manufacturer in China, showing a shipping container truck being loaded with finished netting rolls ready for bulk export and direct factory supply"
-          width={1920}
-          height={800}
-          loading="eager"
-          style={{
-            width: "100%",
-            height: "auto",
-            display: "block",
-            borderRadius: 12,
-            boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-          }}
-        />
+        {/* Factory Photo — WebP with srcSet + JPG fallback for SEO & PageSpeed */}
+        <picture>
+          <source
+            type="image/webp"
+            srcSet="/images/factory/640w-jiacheng-factory-hero.webp 640w, /images/factory/960w-jiacheng-factory-hero.webp 960w, /images/factory/1200w-jiacheng-factory-hero.webp 1200w, /images/factory/jiacheng-factory-hero.webp 1920w"
+            sizes="(max-width: 640px) 100vw, (max-width: 960px) 100vw, (max-width: 1200px) 100vw, 1200px"
+          />
+          <img
+            src="/images/factory/jiacheng-factory-hero.jpg"
+            srcSet="/images/factory/640w-jiacheng-factory-hero.jpg 640w, /images/factory/960w-jiacheng-factory-hero.jpg 960w, /images/factory/1200w-jiacheng-factory-hero.jpg 1200w, /images/factory/jiacheng-factory-hero.jpg 1920w"
+            sizes="(max-width: 640px) 100vw, (max-width: 960px) 100vw, (max-width: 1200px) 100vw, 1200px"
+            alt="Exterior view of Shandong Jiacheng Chemical Fiber Products Co., Ltd. facility, a leading HDPE netting manufacturer in China, showing a shipping container truck being loaded with finished netting rolls ready for bulk export and direct factory supply"
+            width={1920}
+            height={1440}
+            loading="eager"
+            decoding="async"
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              borderRadius: 12,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+            }}
+          />
+        </picture>
       </div>
 
       {/* Stats + CTA strip — dark band below image */}

@@ -9,27 +9,47 @@ export default function Factory() {
         {/* Factory Photo Gallery */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 48 }}>
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
-            <img
-              src="/images/factory/jiacheng-factory-hero.jpg"
-              alt="Jiacheng Netting HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
-              width={600}
-              height={450}
-              loading="lazy"
-              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/images/factory/640w-jiacheng-factory-hero.webp 640w, /images/factory/960w-jiacheng-factory-hero.webp 960w, /images/factory/1200w-jiacheng-factory-hero.webp 1200w, /images/factory/jiacheng-factory-hero.webp 1920w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <img
+                src="/images/factory/jiacheng-factory-hero.jpg"
+                srcSet="/images/factory/640w-jiacheng-factory-hero.jpg 640w, /images/factory/960w-jiacheng-factory-hero.jpg 960w, /images/factory/1200w-jiacheng-factory-hero.jpg 1200w, /images/factory/jiacheng-factory-hero.jpg 1920w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="Jiacheng Netting HDPE plastic netting factory panorama showing production workshop with warp knitting machines and container loading area for global export in Jinan Shandong China"
+                width={1920}
+                height={1440}
+                loading="lazy"
+                decoding="async"
+                style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+              />
+            </picture>
             <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
               Factory Panorama — Production & Export Operations
             </div>
           </div>
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #e5e7eb", background: "#fff" }}>
-            <img
-              src="/images/factory/jiacheng-factory-exterior.jpg"
-              alt="Jiacheng Netting factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
-              width={600}
-              height={450}
-              loading="lazy"
-              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/images/factory/640w-jiacheng-factory-exterior.webp 640w, /images/factory/960w-jiacheng-factory-exterior.webp 960w, /images/factory/1200w-jiacheng-factory-exterior.webp 1200w, /images/factory/jiacheng-factory-exterior.webp 1920w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <img
+                src="/images/factory/jiacheng-factory-exterior.jpg"
+                srcSet="/images/factory/640w-jiacheng-factory-exterior.jpg 640w, /images/factory/960w-jiacheng-factory-exterior.jpg 960w, /images/factory/1200w-jiacheng-factory-exterior.jpg 1200w, /images/factory/jiacheng-factory-exterior.jpg 1920w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="Jiacheng Netting factory exterior in Zhanjia Industrial Park Jinan Shandong China with container loading for global export of HDPE plastic netting products"
+                width={1920}
+                height={871}
+                loading="lazy"
+                decoding="async"
+                style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+              />
+            </picture>
             <div style={{ padding: "16px 20px", fontSize: 14, color: "#374151", fontWeight: 600 }}>
               Factory Exterior — Container Loading & Export
             </div>
