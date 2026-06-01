@@ -137,6 +137,8 @@ export default function AdminPanel() {
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
+      // Notify ContentProvider to refetch
+      window.dispatchEvent(new Event('content-updated'));
     } catch {
       setTimeout(() => setSaving(false), 3000);
     }

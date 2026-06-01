@@ -1,13 +1,20 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { getContentOverride } from '@/lib/kv';
 
 export async function GET() {
   try {
+    // 1. Try KV first (persistent store on Vercel)
+    const kvData = await getContentOverride();
+    if (kvData) {
+      return NextResponse.json(kvData);
+    }
+
+    // 2. Fallback to static content.json (build-time data)
     const filePath = path.join(process.cwd(), 'src/data/content.json');
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
-    // Return raw data (features stays as array, stats stays as array)
     const raw = {
       hero: data.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
       about: data.about || { title: '', subtitle: '', description: '', features: [], stats: [] },

@@ -1,43 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { getContentOverride, setContentOverride } from '@/lib/kv';
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
+    const patch = await request.json();
 
-    const filePath = path.join(process.cwd(), 'src/data/content.json');
-    let existing: Record<string, any> = {};
-    try {
-      existing = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    } catch { /* file may not exist */ }
-
-    // Merge each section
-    if (data.hero) existing.hero = { ...existing.hero, ...data.hero };
-    if (data.about) {
-      existing.about = { ...existing.about, ...data.about };
-      if (data.about.features && typeof data.about.features === 'string') {
-        existing.about.features = data.about.features.split(',').map((s: string) => s.trim()).filter(Boolean);
-      }
-      if (data.about.stats && Array.isArray(data.about.stats)) {
-        existing.about.stats = data.about.stats;
+    // 1. Load current full data (from KV or file)
+    let existing: Record<string, any> = (await getContentOverride()) || {};
+    if (!Object.keys(existing).length) {
+      try {
+        const filePath = path.join(process.cwd(), 'src/data/content.json');
+        existing = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      } catch {
+        existing = {};
       }
     }
-    if (data.contact) existing.contact = { ...existing.contact, ...data.contact };
-    if (data.footer) existing.footer = { ...existing.footer, ...data.footer };
-    if (data.factory) existing.factory = { ...existing.factory, ...data.factory };
-    if (data.products) existing.products = data.products;
-    if (data.blog) existing.blog = data.blog;
 
-    fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), 'utf-8');
+    // 2. Merge patch into existing
+    if (patch.hero) existing.hero = { ...existing.hero, ...patch.hero };
+    if (patch.about) {
+      existing.about = { ...existing.about, ...patch.about };
+      if (patch.about.features && typeof patch.about.features === 'string') {
+        existing.about.features = patch.about.features.split(',').map((s: string) => s.trim()).filter(Boolean);
+      }
+      if (patch.about.stats && Array.isArray(patch.about.stats)) {
+        existing.about.stats = patch.about.stats;
+      }
+    }
+    if (patch.contact) existing.contact = { ...existing.contact, ...patch.contact };
+    if (patch.footer) existing.footer = { ...existing.footer, ...patch.footer };
+    if (patch.factory) existing.factory = { ...existing.factory, ...patch.factory };
+    if (patch.products) existing.products = patch.products;
+    if (patch.blog) existing.blog = patch.blog;
 
-    // Trigger ISR revalidation for all pages
+    // 3. Save to KV (persistent on Vercel)
+    await setContentOverride(existing);
+
+    // 4. Also update local file (for development / fallback)
     try {
-      const baseUrl = process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : 'http://localhost:3000';
-      await fetch(`${baseUrl}/api/revalidate`, { method: 'POST' });
-    } catch { /* revalidation is optional */ }
+      const filePath = path.join(process.cwd(), 'src/data/content.json');
+      fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), 'utf-8');
+    } catch { /* Vercel read-only, ignore */ }
 
     return NextResponse.json({ success: true });
   } catch (error) {
