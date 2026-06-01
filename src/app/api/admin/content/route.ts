@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getContentOverride } from '@/lib/github-store';
+import { getContentOverride } from '@/lib/jsonblob-store';
 
 export async function GET() {
   try {
@@ -16,7 +16,7 @@ export async function GET() {
         factory: ghData.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
         products: ghData.products || [],
         blog: ghData.blog || [],
-        _source: 'github',
+        _source: 'jsonblob',
       };
       return NextResponse.json(result);
     }

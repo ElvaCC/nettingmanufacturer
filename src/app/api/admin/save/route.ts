@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getContentOverride, setContentOverride } from '@/lib/github-store';
+import { getContentOverride, setContentOverride } from '@/lib/jsonblob-store';
 
 export async function POST(request: NextRequest) {
   try {
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     } catch { /* Vercel read-only, ignore */ }
 
     if (!saved) {
-      return NextResponse.json({ success: false, message: 'GITHUB_TOKEN not configured on Vercel' }, { status: 500 });
+      return NextResponse.json({ success: false, message: 'Failed to save to remote storage' }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
