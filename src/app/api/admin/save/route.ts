@@ -1,18 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getContentOverride, setContentOverride } from '@/lib/kv';
+import { getContentOverride, setContentOverride } from '@/lib/github-store';
 
 export async function POST(request: NextRequest) {
   try {
     const patch = await request.json();
 
-    // 1. Load current full data (from KV or file)
+    // 1. Load current full data (from GitHub API or local file)
     let existing: Record<string, any> = (await getContentOverride()) || {};
     if (!Object.keys(existing).length) {
       try {
         const filePath = path.join(process.cwd(), 'src/data/content.json');
-        existing = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        existing = JSON.parse(raw);
       } catch {
         existing = {};
       }
@@ -35,14 +36,18 @@ export async function POST(request: NextRequest) {
     if (patch.products) existing.products = patch.products;
     if (patch.blog) existing.blog = patch.blog;
 
-    // 3. Save to KV (persistent on Vercel)
-    await setContentOverride(existing);
+    // 3. Save to GitHub (persistent)
+    const saved = await setContentOverride(existing);
 
-    // 4. Also update local file (for development / fallback)
+    // 4. Also update local file (for development fallback)
     try {
       const filePath = path.join(process.cwd(), 'src/data/content.json');
       fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), 'utf-8');
     } catch { /* Vercel read-only, ignore */ }
+
+    if (!saved) {
+      return NextResponse.json({ success: false, message: 'GITHUB_TOKEN not configured on Vercel' }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
