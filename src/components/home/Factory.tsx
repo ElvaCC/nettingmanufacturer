@@ -9,6 +9,8 @@ interface FactoryImage {
   objectPosition: string;
   /** "full" = spans all columns, "half" = takes 1 grid slot in 2-col row */
   span: "full" | "half";
+  /** Native aspect ratio so the container matches — prevents object-fit:cover from cropping */
+  aspectRatio: string;
 }
 
 /**
@@ -29,6 +31,7 @@ const images: FactoryImage[] = [
     label: "Factory Exterior — 20,000 m\u00B2 Manufacturing Base",
     objectPosition: "center center",
     span: "full",
+    aspectRatio: "1885 / 541",
   },
   {
     src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg",
@@ -36,6 +39,7 @@ const images: FactoryImage[] = [
     label: "Karl Mayer Warp Knitting Lines",
     objectPosition: "center center",
     span: "half",
+    aspectRatio: "4 / 3",
   },
   {
     src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg",
@@ -43,6 +47,7 @@ const images: FactoryImage[] = [
     label: "Production Workshop",
     objectPosition: "center center",
     span: "half",
+    aspectRatio: "4 / 3",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
@@ -50,6 +55,7 @@ const images: FactoryImage[] = [
     label: "Custom Colored HDPE Netting Production",
     objectPosition: "center center",
     span: "full",
+    aspectRatio: "1956 / 253",
   },
   {
     src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
@@ -57,6 +63,7 @@ const images: FactoryImage[] = [
     label: "Bulk Inventory — Ready for Global Export",
     objectPosition: "center center",
     span: "full",
+    aspectRatio: "2250 / 837",
   },
 ];
 
@@ -99,6 +106,7 @@ export default function Factory() {
             <div
               key={i}
               className={`factory-grid-item${item.span === "full" ? " factory-grid-full" : ""}`}
+              style={{ aspectRatio: item.aspectRatio }}
               onClick={() => openLightbox(i)}
               role="button"
               tabIndex={0}
