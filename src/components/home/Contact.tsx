@@ -108,14 +108,6 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
-
-                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>⏰</span>
-                  <div>
-                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Working Hours</div>
-                    <div style={{ fontSize: 13, color: "#666" }}>{contact.workingHours}</div>
-                  </div>
-                </div>
               </div>
 
               {/* Export Info */}

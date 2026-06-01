@@ -70,15 +70,6 @@ export default function ContactPage() {
                   <div style={{ color: "#555", fontSize: 15, lineHeight: 1.6 }}>{contact.address}</div>
                 </div>
               </div>
-
-              {/* Working Hours */}
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
-                <div style={{ width: 48, height: 48, background: "#1e3a5f", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>🕐</div>
-                <div>
-                  <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>Working Hours</div>
-                  <div style={{ color: "#555", fontSize: 15 }}>{contact.workingHours}</div>
-                </div>
-              </div>
             </div>
           </div>
 
