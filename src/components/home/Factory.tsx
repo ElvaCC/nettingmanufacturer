@@ -7,55 +7,62 @@ interface FactoryImage {
   alt: string;
   label: string;
   objectPosition: string;
+  /** "full" = spans all columns, "half" = takes 1 grid slot in 2-col row */
+  span: "full" | "half";
 }
 
 /**
- * Layout — Magazine Editorial Grid
+ * Layout — Striped Editorial Grid
  *
- *  ┌─────────────────────────────┬───────────────┐
- *  │  ① Factory Panorama (60%)    │  ② Workshop   │
- *  │  cover, left 3/5            │  (top-right)  │
- *  │                             ├───────────────┤
- *  │  row-span 2                 │  ③ Product    │
- *  │                             │  close-up     │
- *  └─────────────────────────────┴───────────────┘
- *  ├─────────────────────────────────────────────┤
- *  │  ④ Warehouse (full-width strip)             │
- *  └─────────────────────────────────────────────┘
+ *  Row 1: [  ① Factory Exterior Panorama — full width (3.48:1)  ]
+ *  Row 2: [  ② Karl Mayer Machines  ] [  ③ Workshop Wide Angle   ]
+ *  Row 3: [  ④ Colorful Net Production — full width (7.73:1)     ]
+ *  Row 4: [  ⑤ Warehouse Stacked Rolls — full width (2.69:1)   ]
  *
- *  gap: 16px | border-radius: 8px | hover scale(1.02)
+ *  gap: 16px | border-radius: 8px | hover: scale(1.02)
+ *  Ultra-wide images become "signature strips" at full width — zero cropping.
  */
 const images: FactoryImage[] = [
   {
-    src: "/images/factory/jiacheng-factory-panorama.jpg",
-    alt: "Panoramic aerial view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park, Jinan, Shandong, China — 20,000 m² production base with factory buildings, container loading area, and packaged net rolls for global export",
-    label: "Factory Exterior — 20,000 m² Base",
+    src: "/images/factory/jiacheng-factory-exterior-panorama.jpg",
+    alt: "Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China showing factory buildings and packaged net rolls ready for bulk export",
+    label: "Factory Exterior — 20,000 m\u00B2 Manufacturing Base",
     objectPosition: "center center",
+    span: "full",
   },
   {
-    src: "/images/factory/jiacheng-warp-knitting-production-line-2.jpg",
-    alt: "Interior view of Jiacheng Netting's clean production workshop with skilled technicians operating advanced warp knitting lines for custom HDPE plastic netting manufacturing",
-    label: "Clean Workshop",
-    objectPosition: "center top",
-  },
-  {
-    src: "/images/factory/jiacheng-warp-knitting-production-line-1.jpg",
-    alt: "Close-up of Karl Mayer warp knitting machines weaving high-strength HDPE plastic net products for construction safety and agricultural shade applications",
-    label: "Warp Knitting in Action",
-    objectPosition: "center left",
-  },
-  {
-    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls.jpg",
-    alt: "Bulk warehouse at Jiacheng Netting storing large volumes of finished HDPE plastic netting rolls on industrial racks ready for wholesale container export",
-    label: "Bulk Warehouse & Ready for Export",
+    src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg",
+    alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20,000 square meter workshop",
+    label: "Karl Mayer Warp Knitting Lines",
     objectPosition: "center center",
+    span: "half",
+  },
+  {
+    src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg",
+    alt: "Wide angle view of Jiacheng Netting modern production workshop showing multiple warp knitting machines and skilled workers for custom HDPE netting",
+    label: "Production Workshop",
+    objectPosition: "center center",
+    span: "half",
+  },
+  {
+    src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
+    alt: "Multiple warp knitting machines producing custom colored HDPE netting in red blue green yellow and white at Jiacheng Netting factory for construction safety and agricultural shade bulk orders",
+    label: "Custom Colored HDPE Netting Production",
+    objectPosition: "center center",
+    span: "full",
+  },
+  {
+    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
+    alt: "Large scale warehouse at Jiacheng Netting with thousands of finished HDPE netting rolls stacked on racks ready for container shipment and wholesale export",
+    label: "Bulk Inventory — Ready for Global Export",
+    objectPosition: "center center",
+    span: "full",
   },
 ];
 
 export default function Factory() {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  // Lightbox keyboard navigation
   useEffect(() => {
     if (lightbox === null) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -85,163 +92,51 @@ export default function Factory() {
         </p>
 
         {/* ═══════════════════════════════════════════
-           Magazine Editorial Grid
+           Photo Grid — Striped Layout
            ═══════════════════════════════════════════ */}
-        <div className="factory-editorial">
-          {/* ① Panorama — left 60%, spans 2 rows */}
-          <div
-            className="factory-editorial-item factory-editorial-hero"
-            onClick={() => openLightbox(0)}
-            role="button"
-            tabIndex={0}
-            aria-label="View factory exterior panorama — click to enlarge"
-            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(0); }}
-          >
-            <picture>
-              <source type="image/webp" srcSet={images[0].src.replace(".jpg", ".webp")} />
-              <img
-                src={images[0].src}
-                alt={images[0].alt}
-                loading="eager"
-                decoding="async"
-                style={{ objectPosition: images[0].objectPosition }}
-              />
-            </picture>
-            <div className="factory-editorial-overlay">
-              <div className="factory-editorial-label">{images[0].label}</div>
-              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
+        <div className="factory-grid">
+          {images.map((item, i) => (
+            <div
+              key={i}
+              className={`factory-grid-item${item.span === "full" ? " factory-grid-full" : ""}`}
+              onClick={() => openLightbox(i)}
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${item.label} — click to enlarge`}
+              onKeyDown={(e) => { if (e.key === "Enter") openLightbox(i); }}
+            >
+              <picture>
+                <source type="image/webp" srcSet={item.src.replace(".jpg", ".webp")} />
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                  style={{ objectPosition: item.objectPosition }}
+                />
+              </picture>
+              <div className="factory-grid-overlay">
+                <div className="factory-grid-label">{item.label}</div>
+                <svg className="factory-grid-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+              </div>
             </div>
-          </div>
-
-          {/* ② Workshop — top-right */}
-          <div
-            className="factory-editorial-item"
-            onClick={() => openLightbox(1)}
-            role="button"
-            tabIndex={0}
-            aria-label="View production workshop — click to enlarge"
-            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(1); }}
-          >
-            <picture>
-              <source type="image/webp" srcSet={images[1].src.replace(".jpg", ".webp")} />
-              <img
-                src={images[1].src}
-                alt={images[1].alt}
-                loading="eager"
-                decoding="async"
-                style={{ objectPosition: images[1].objectPosition }}
-              />
-            </picture>
-            <div className="factory-editorial-overlay">
-              <div className="factory-editorial-label">{images[1].label}</div>
-              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
-            </div>
-          </div>
-
-          {/* ③ Product close-up — bottom-right */}
-          <div
-            className="factory-editorial-item"
-            onClick={() => openLightbox(2)}
-            role="button"
-            tabIndex={0}
-            aria-label="View warp knitting production close-up — click to enlarge"
-            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(2); }}
-          >
-            <picture>
-              <source type="image/webp" srcSet={images[2].src.replace(".jpg", ".webp")} />
-              <img
-                src={images[2].src}
-                alt={images[2].alt}
-                loading="lazy"
-                decoding="async"
-                style={{ objectPosition: images[2].objectPosition }}
-              />
-            </picture>
-            <div className="factory-editorial-overlay">
-              <div className="factory-editorial-label">{images[2].label}</div>
-              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
-            </div>
-          </div>
-
-          {/* ④ Warehouse — full-width bottom strip */}
-          <div
-            className="factory-editorial-item factory-editorial-strip"
-            onClick={() => openLightbox(3)}
-            role="button"
-            tabIndex={0}
-            aria-label="View bulk warehouse — click to enlarge"
-            onKeyDown={(e) => { if (e.key === "Enter") openLightbox(3); }}
-          >
-            <picture>
-              <source type="image/webp" srcSet={images[3].src.replace(".jpg", ".webp")} />
-              <img
-                src={images[3].src}
-                alt={images[3].alt}
-                loading="lazy"
-                decoding="async"
-                style={{ objectPosition: images[3].objectPosition }}
-              />
-            </picture>
-            <div className="factory-editorial-overlay">
-              <div className="factory-editorial-label">{images[3].label}</div>
-              <svg className="factory-editorial-zoom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg>
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* ── Factory Highlights (3-column grid) ── */}
+        {/* ── Factory Highlights (3-column) ── */}
         <div className="factory-highlights-grid">
           {[
-            {
-              icon: "⚙️",
-              title: "Advanced Warp Knitting Lines",
-              desc: "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting.",
-            },
-            {
-              icon: "🏭",
-              title: "20,000 m² Workshop",
-              desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong.",
-            },
-            {
-              icon: "👷",
-              title: "Skilled QC Team",
-              desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch.",
-            },
-            {
-              icon: "✅",
-              title: "BSCI & NFPA-701 Certified",
-              desc: "Audited social compliance and fire-retardant certification for construction and public safety projects.",
-            },
-            {
-              icon: "📦",
-              title: "OEM / ODM Available",
-              desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs.",
-            },
-            {
-              icon: "🌍",
-              title: "Export to 50+ Countries",
-              desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents.",
-            },
+            { icon: "\u2699\uFE0F", title: "Advanced Warp Knitting Lines", desc: "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting." },
+            { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
+            { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
+            { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
+            { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs." },
+            { icon: "\uD83C\uDF0D", title: "Export to 50+ Countries", desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents." },
           ].map((item) => (
             <div key={item.title} className="factory-highlight-card">
               <span style={{ fontSize: 28, lineHeight: 1 }}>{item.icon}</span>
@@ -256,12 +151,12 @@ export default function Factory() {
         {/* ── Bottom: Factory Info Grid ── */}
         <div className="factory-info-grid">
           {[
-            { title: "Factory Area", value: "20,000 m²", icon: "🏭" },
-            { title: "Location", value: "Zhanjia Industrial Park, Jinan, China", icon: "📍" },
-            { title: "Export Markets", value: "50+ Countries Worldwide", icon: "🌍" },
-            { title: "Certifications", value: "BSCI & NFPA-701 Certificate", icon: "✅" },
-            { title: "Production Capacity", value: "Custom Orders Welcome", icon: "⚙️" },
-            { title: "Export Regions", value: "North America, Europe, Middle East, Asia, Africa", icon: "🚢" },
+            { title: "Factory Area", value: "20,000 m\u00B2", icon: "\uD83C\uDFED" },
+            { title: "Location", value: "Zhanjia Industrial Park, Jinan, China", icon: "\uD83D\uDCCD" },
+            { title: "Export Markets", value: "50+ Countries Worldwide", icon: "\uD83C\uDF0D" },
+            { title: "Certifications", value: "BSCI & NFPA-701 Certificate", icon: "\u2705" },
+            { title: "Production Capacity", value: "Custom Orders Welcome", icon: "\u2699\uFE0F" },
+            { title: "Export Regions", value: "North America, Europe, Middle East, Asia, Africa", icon: "\uD83D\uDEA2" },
           ].map((info) => (
             <div key={info.title} className="factory-info-card">
               <span style={{ fontSize: 28 }}>{info.icon}</span>
@@ -309,55 +204,43 @@ export default function Factory() {
       {/* Scoped Styles */}
       <style jsx>{`
         /* ═══════════════════════════════════════════
-           Magazine Editorial Grid
+           Photo Grid — Striped Layout
            ═══════════════════════════════════════════ */
-        .factory-editorial {
+        .factory-grid {
           display: grid;
-          grid-template-columns: 3fr 2fr;
-          grid-template-rows: 1fr 1fr auto;
+          grid-template-columns: 1fr 1fr;
           gap: 16px;
         }
 
-        .factory-editorial-item {
+        .factory-grid-item {
           position: relative;
           border-radius: 8px;
           overflow: hidden;
           cursor: zoom-in;
           background: #e5e7eb;
+          min-height: 200px;
         }
 
-        /* ① Hero — left 60%, spans 2 rows */
-        .factory-editorial-hero {
-          grid-column: 1;
-          grid-row: 1 / 3;
-          min-height: 380px;
-        }
-
-        /* ② Workshop — top-right */
-        /* ③ Product — bottom-right: auto placement */
-
-        /* ④ Warehouse — full-width bottom */
-        .factory-editorial-strip {
+        /* Full-width items span both columns */
+        .factory-grid-full {
           grid-column: 1 / -1;
-          grid-row: 3;
-          min-height: 220px;
-          max-height: 320px;
+          min-height: 180px;
         }
 
         /* Image inside cell */
-        .factory-editorial-item img {
+        .factory-grid-item img {
           display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.4s ease;
         }
-        .factory-editorial-item:hover img {
+        .factory-grid-item:hover img {
           transform: scale(1.02);
         }
 
-        /* Overlay */
-        .factory-editorial-overlay {
+        /* Hover overlay */
+        .factory-grid-overlay {
           position: absolute;
           inset: 0;
           display: flex;
@@ -369,16 +252,16 @@ export default function Factory() {
           transition: opacity 0.3s ease;
           pointer-events: none;
         }
-        .factory-editorial-item:hover .factory-editorial-overlay {
+        .factory-grid-item:hover .factory-grid-overlay {
           opacity: 1;
         }
-        .factory-editorial-label {
+        .factory-grid-label {
           color: #fff;
           font-size: 13px;
           font-weight: 600;
           text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
-        .factory-editorial-zoom {
+        .factory-grid-zoom {
           color: #fff;
           filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
           flex-shrink: 0;
@@ -540,19 +423,11 @@ export default function Factory() {
            Responsive
            ═══════════════════════════════════════════ */
         @media (max-width: 900px) {
-          .factory-editorial {
+          .factory-grid {
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto auto;
           }
-          .factory-editorial-hero {
+          .factory-grid-full {
             grid-column: 1 / -1;
-            grid-row: 1;
-            min-height: 280px;
-          }
-          .factory-editorial-strip {
-            grid-column: 1 / -1;
-            grid-row: 4;
-            min-height: 180px;
           }
           .factory-highlights-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -565,18 +440,13 @@ export default function Factory() {
           .factory-lightbox-overlay { padding: 60px 20px 20px; }
         }
         @media (max-width: 600px) {
-          .factory-editorial {
+          .factory-grid {
             grid-template-columns: 1fr;
-            grid-template-rows: auto;
           }
-          .factory-editorial-hero {
+          .factory-grid-full {
             grid-column: 1;
-            grid-row: auto;
-            min-height: 200px;
           }
-          .factory-editorial-strip {
-            grid-column: 1;
-            grid-row: auto;
+          .factory-grid-item {
             min-height: 160px;
           }
           .factory-highlights-grid {
