@@ -46,7 +46,7 @@ export default function ProductsPage() {
                       <h2 style={{ fontSize: 26, fontWeight: 700, color: "#1e3a5f", marginBottom: 4 }}>{product.name}</h2>
                       {product.nameZh && <p style={{ fontSize: 14, color: "#888" }}>{product.nameZh}</p>}
                     </div>
-                    <a href="mailto:Netfactory@factory-jc.com" style={{ flexShrink: 0, marginLeft: 16, padding: "10px 20px", background: "#2563eb", color: "#fff", textDecoration: "none", borderRadius: 8, fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" }}>
+                    <a href="mailto:Netfactory01@factory-jc.com" style={{ flexShrink: 0, marginLeft: 16, padding: "10px 20px", background: "#2563eb", color: "#fff", textDecoration: "none", borderRadius: 8, fontSize: 14, fontWeight: 600, whiteSpace: "nowrap" }}>
                       Get Quote
                     </a>
                   </div>
@@ -121,7 +121,7 @@ export default function ProductsPage() {
         <div style={{ marginTop: 64, padding: 48, background: "#1e3a5f", borderRadius: 16, textAlign: "center", color: "#fff" }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12 }}>Can&apos;t find what you need?</h2>
           <p style={{ opacity: 0.85, marginBottom: 28, fontSize: 15 }}>We offer OEM/ODM customization. Tell us your requirements and we&apos;ll make it.</p>
-          <a href="mailto:Netfactory@factory-jc.com" style={{ display: "inline-block", padding: "14px 36px", background: "#fff", color: "#1e3a5f", textDecoration: "none", borderRadius: 8, fontWeight: 700, fontSize: 16 }}>
+          <a href="mailto:Netfactory01@factory-jc.com" style={{ display: "inline-block", padding: "14px 36px", background: "#fff", color: "#1e3a5f", textDecoration: "none", borderRadius: 8, fontWeight: 700, fontSize: 16 }}>
             Contact Us for Custom Order →
           </a>
         </div>

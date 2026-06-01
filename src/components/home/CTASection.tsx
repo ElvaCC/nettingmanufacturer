@@ -39,7 +39,7 @@ export default function CTASection({ locale }: { locale: string }) {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">E-mail</h3>
-                  <p className="text-gray-300">info@nettingmanufacturer.com</p>
+                  <p className="text-gray-300">Netfactory01@factory-jc.com</p>
                 </div>
               </div>
 

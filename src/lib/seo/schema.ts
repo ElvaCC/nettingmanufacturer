@@ -25,7 +25,7 @@ export const organizationSchema = {
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+86-531-8888-8888",
-    "email": "Netfactory@factory-jc.com",
+    "email": "Netfactory01@factory-jc.com",
     "contactType": "sales",
     "availableLanguage": ["English", "Spanish", "Russian", "Arabic", "Chinese"]
   },

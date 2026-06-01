@@ -132,7 +132,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 Contact us for custom sizes, colors, certifications and OEM/ODM services.
               </p>
               <a
-                href={`mailto:Netfactory@factory-jc.com?subject=Quote Request: ${product.name}`}
+                href={`mailto:Netfactory01@factory-jc.com?subject=Quote Request: ${product.name}`}
                 style={{ display: 'block', width: '100%', padding: '14px 0', background: '#2563eb', color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', boxSizing: 'border-box', marginBottom: 12 }}
               >
                 ✉ Email Quote Request
@@ -146,7 +146,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
               <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.2)', fontSize: 13, opacity: 0.8 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                  <span>📧</span> Netfactory@factory-jc.com
+                  <span>📧</span> Netfactory01@factory-jc.com
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span>🏭</span> BSCI & NFPA-701 Certificate
