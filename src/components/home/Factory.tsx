@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useContent } from "@/context/ContentContext";
 
 interface FactoryImage {
   src: string;
@@ -63,7 +64,25 @@ const images: FactoryImage[] = [
 ];
 
 export default function Factory() {
+  const { factory } = useContent();
   const [lightbox, setLightbox] = useState<number | null>(null);
+
+  // Fallback data (used before content loads or if API fails)
+  const defaultHighlights = [
+    { icon: "\u2699\uFE0F", title: "Advanced Warp Knitting Lines", desc: "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting." },
+    { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
+    { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
+    { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
+    { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs." },
+    { icon: "\uD83C\uDF0D", title: "Export to 50+ Countries", desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents." },
+  ];
+  const defaultInfoCards = [
+    { icon: "\uD83C\uDFED", title: "Factory Area", value: "20,000 m\u00B2" },
+    { icon: "\u2699\uFE0F", title: "Production Capacity", value: "Custom Orders Welcome" },
+  ];
+
+  const highlights = factory?.highlights?.length ? factory.highlights : defaultHighlights;
+  const infoCards = factory?.infoCards?.length ? factory.infoCards : defaultInfoCards;
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -132,14 +151,7 @@ export default function Factory() {
 
         {/* ── Factory Highlights (3-column) ── */}
         <div className="factory-highlights-grid">
-          {[
-            { icon: "\u2699\uFE0F", title: "Advanced Warp Knitting Lines", desc: "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting." },
-            { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
-            { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
-            { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
-            { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs." },
-            { icon: "\uD83C\uDF0D", title: "Export to 50+ Countries", desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents." },
-          ].map((item) => (
+          {highlights.map((item) => (
             <div key={item.title} className="factory-highlight-card">
               <span style={{ fontSize: 28, lineHeight: 1 }}>{item.icon}</span>
               <div>
@@ -152,10 +164,7 @@ export default function Factory() {
 
         {/* ── Bottom: Factory Info Grid ── */}
         <div className="factory-info-grid">
-          {[
-            { title: "Factory Area", value: "20,000 m\u00B2", icon: "\uD83C\uDFED" },
-            { title: "Production Capacity", value: "Custom Orders Welcome", icon: "\u2699\uFE0F" },
-          ].map((info) => (
+          {infoCards.map((info) => (
             <div key={info.title} className="factory-info-card">
               <span style={{ fontSize: 28 }}>{info.icon}</span>
               <div>

@@ -155,6 +155,18 @@
             {"step": "06", "title": "Rolling", "desc": "Professional rolling and winding"},
             {"step": "07", "title": "Packaging", "desc": "Professional packaging for export standards"},
             {"step": "08", "title": "Loading Container", "desc": "Global logistics coordination and delivery"}
+        ],
+        "highlights": [
+            {"icon": "⚙️", "title": "Advanced Warp Knitting Lines", "desc": "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting."},
+            {"icon": "🏭", "title": "20,000 m² Workshop", "desc": "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong."},
+            {"icon": "👷", "title": "Skilled QC Team", "desc": "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch."},
+            {"icon": "✅", "title": "BSCI & NFPA-701 Certified", "desc": "Audited social compliance and fire-retardant certification for construction and public safety projects."},
+            {"icon": "📦", "title": "OEM / ODM Available", "desc": "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs."},
+            {"icon": "🌍", "title": "Export to 50+ Countries", "desc": "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents."}
+        ],
+        "infoCards": [
+            {"icon": "🏭", "title": "Factory Area", "value": "20,000 m²"},
+            {"icon": "⚙️", "title": "Production Capacity", "value": "Custom Orders Welcome"}
         ]
     },
     "contact": {

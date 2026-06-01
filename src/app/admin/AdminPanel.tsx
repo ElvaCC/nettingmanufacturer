@@ -9,6 +9,18 @@ interface FactoryImage {
   span: 'full' | 'half';
 }
 
+interface FactoryHighlight {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+interface FactoryInfoCard {
+  icon: string;
+  title: string;
+  value: string;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -33,7 +45,7 @@ interface SiteContent {
   about: { title: string; subtitle: string; description: string; features: string };
   contact: { email: string; phone: string; whatsapp: string; address: string; workingHours: string };
   footer: { company: string; copyright: string };
-  factory: { title: string; subtitle: string; description: string };
+  factory: { title: string; subtitle: string; description: string; highlights: FactoryHighlight[]; infoCards: FactoryInfoCard[] };
   factoryImages: FactoryImage[];
   products: Product[];
   blog: BlogPost[];
@@ -44,7 +56,7 @@ const defaultContent: SiteContent = {
   about: { title: '', subtitle: '', description: '', features: '' },
   contact: { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
   footer: { company: 'Jiacheng Netting', copyright: '' },
-  factory: { title: '', subtitle: '', description: '' },
+  factory: { title: '', subtitle: '', description: '', highlights: [], infoCards: [] },
   factoryImages: [],
   products: [],
   blog: [],
@@ -102,7 +114,11 @@ export default function AdminPanel() {
           },
           contact: data.contact || defaultContent.contact,
           footer: data.footer || defaultContent.footer,
-          factory: data.factory || defaultContent.factory,
+          factory: {
+            ...(data.factory || defaultContent.factory),
+            highlights: (data.factory?.highlights || defaultContent.factory.highlights),
+            infoCards: (data.factory?.infoCards || defaultContent.factory.infoCards),
+          },
           factoryImages: [
             { src: '/images/factory/jiacheng-factory-exterior-panorama.jpg', alt: 'Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Jinan Shandong China', label: 'Factory Exterior - 20,000m2 Manufacturing Base', span: 'full' },
             { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets', label: 'Karl Mayer Warp Knitting Lines', span: 'half' },
@@ -236,6 +252,34 @@ export default function AdminPanel() {
         </div>
       ))}
       <button onClick={() => setContent({ ...content, factoryImages: [...content.factoryImages, { src: '/images/factory/new-image.jpg', alt: 'New factory image', label: 'New Image', span: 'full' }] })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Image</button>
+
+      {/* Highlights */}
+      <h3 style={{ color: '#1e3a5f', marginTop: 32, marginBottom: 12 }}>Factory Highlights ({content.factory.highlights.length})</h3>
+      {content.factory.highlights.map((h, i) => (
+        <div key={i} style={card}>
+          <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr 80px', gap: 12, alignItems: 'end' }}>
+            <div><label style={lbl}>Icon</label><input type="text" value={h.icon} onChange={e => { const n = [...content.factory.highlights]; n[i] = { ...n[i], icon: e.target.value }; setContent({ ...content, factory: { ...content.factory, highlights: n } }); }} style={s()} /></div>
+            <div><label style={lbl}>Title</label><input type="text" value={h.title} onChange={e => { const n = [...content.factory.highlights]; n[i] = { ...n[i], title: e.target.value }; setContent({ ...content, factory: { ...content.factory, highlights: n } }); }} style={s()} /></div>
+            <div><label style={lbl}>Description</label><input type="text" value={h.desc} onChange={e => { const n = [...content.factory.highlights]; n[i] = { ...n[i], desc: e.target.value }; setContent({ ...content, factory: { ...content.factory, highlights: n } }); }} style={s()} /></div>
+            <button onClick={() => setContent({ ...content, factory: { ...content.factory, highlights: content.factory.highlights.filter((_, idx) => idx !== i) } })} style={{ padding: '8px 14px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>Delete</button>
+          </div>
+        </div>
+      ))}
+      <button onClick={() => setContent({ ...content, factory: { ...content.factory, highlights: [...content.factory.highlights, { icon: '', title: '', desc: '' }] } })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Highlight</button>
+
+      {/* Info Cards */}
+      <h3 style={{ color: '#1e3a5f', marginTop: 32, marginBottom: 12 }}>Factory Info Cards ({content.factory.infoCards.length})</h3>
+      {content.factory.infoCards.map((info, i) => (
+        <div key={i} style={card}>
+          <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr 80px', gap: 12, alignItems: 'end' }}>
+            <div><label style={lbl}>Icon</label><input type="text" value={info.icon} onChange={e => { const n = [...content.factory.infoCards]; n[i] = { ...n[i], icon: e.target.value }; setContent({ ...content, factory: { ...content.factory, infoCards: n } }); }} style={s()} /></div>
+            <div><label style={lbl}>Title</label><input type="text" value={info.title} onChange={e => { const n = [...content.factory.infoCards]; n[i] = { ...n[i], title: e.target.value }; setContent({ ...content, factory: { ...content.factory, infoCards: n } }); }} style={s()} /></div>
+            <div><label style={lbl}>Value</label><input type="text" value={info.value} onChange={e => { const n = [...content.factory.infoCards]; n[i] = { ...n[i], value: e.target.value }; setContent({ ...content, factory: { ...content.factory, infoCards: n } }); }} style={s()} /></div>
+            <button onClick={() => setContent({ ...content, factory: { ...content.factory, infoCards: content.factory.infoCards.filter((_, idx) => idx !== i) } })} style={{ padding: '8px 14px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>Delete</button>
+          </div>
+        </div>
+      ))}
+      <button onClick={() => setContent({ ...content, factory: { ...content.factory, infoCards: [...content.factory.infoCards, { icon: '', title: '', value: '' }] } })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Info Card</button>
     </div>
   );
 
