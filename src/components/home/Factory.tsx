@@ -55,7 +55,7 @@ const images: FactoryImage[] = [
     label: "Custom Colored HDPE Netting Production",
     objectPosition: "center center",
     span: "full",
-    aspectRatio: "1956 / 253",
+    aspectRatio: "1760 / 227",
   },
   {
     src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
