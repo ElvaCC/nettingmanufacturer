@@ -228,7 +228,6 @@ export default function Factory() {
         /* Full-width items span both columns */
         .factory-grid-full {
           grid-column: 1 / -1;
-          min-height: 180px;
         }
 
         /* Image inside cell */
