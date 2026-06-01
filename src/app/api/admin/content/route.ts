@@ -7,13 +7,10 @@ export async function GET() {
     const filePath = path.join(process.cwd(), 'src/data/content.json');
     const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
-    // Flatten for admin form
-    const flat = {
+    // Return raw data (features stays as array, stats stays as array)
+    const raw = {
       hero: data.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
-      about: data.about ? {
-        ...data.about,
-        features: Array.isArray(data.about.features) ? data.about.features.join(', ') : ''
-      } : { title: '', subtitle: '', description: '', features: '' },
+      about: data.about || { title: '', subtitle: '', description: '', features: [], stats: [] },
       contact: data.contact || { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
       footer: data.footer || { company: '', copyright: '' },
       factory: data.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
@@ -21,7 +18,7 @@ export async function GET() {
       blog: data.blog || [],
     };
 
-    return NextResponse.json(flat);
+    return NextResponse.json(raw);
   } catch (error) {
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }

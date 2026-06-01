@@ -94,7 +94,12 @@ export default function AdminPanel() {
       .then(data => {
         const sc: SiteContent = {
           hero: data.hero || defaultContent.hero,
-          about: data.about || defaultContent.about,
+          about: {
+            ...(data.about || defaultContent.about),
+            features: Array.isArray((data.about || {}).features)
+              ? (data.about.features as string[]).join(', ')
+              : ((data.about || defaultContent.about).features as string),
+          },
           contact: data.contact || defaultContent.contact,
           footer: data.footer || defaultContent.footer,
           factory: data.factory || defaultContent.factory,
