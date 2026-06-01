@@ -160,11 +160,7 @@ export default function Factory() {
         <div className="factory-info-grid">
           {[
             { title: "Factory Area", value: "20,000 m\u00B2", icon: "\uD83C\uDFED" },
-            { title: "Location", value: "Zhanjia Industrial Park, Jinan, China", icon: "\uD83D\uDCCD" },
-            { title: "Export Markets", value: "50+ Countries Worldwide", icon: "\uD83C\uDF0D" },
-            { title: "Certifications", value: "BSCI & NFPA-701 Certificate", icon: "\u2705" },
             { title: "Production Capacity", value: "Custom Orders Welcome", icon: "\u2699\uFE0F" },
-            { title: "Export Regions", value: "North America, Europe, Middle East, Asia, Africa", icon: "\uD83D\uDEA2" },
           ].map((info) => (
             <div key={info.title} className="factory-info-card">
               <span style={{ fontSize: 28 }}>{info.icon}</span>
@@ -309,7 +305,7 @@ export default function Factory() {
            ═══════════════════════════════════════════ */
         .factory-info-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 24px;
           margin-top: 40px;
         }
