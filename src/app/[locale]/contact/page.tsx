@@ -28,21 +28,21 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Phone */}
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
-                <div style={{ width: 48, height: 48, background: "#1e3a5f", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>📞</div>
-                <div>
-                  <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>Phone</div>
-                  <a href={`tel:${contact.phone.replace(/\s/g, "")}`} style={{ color: "#2563eb", textDecoration: "none", fontSize: 15 }}>{contact.phone}</a>
-                </div>
-              </div>
-
-              {/* WhatsApp */}
+              {/* WhatsApp & WeChat */}
               <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
                 <div style={{ width: 48, height: 48, background: "#25d366", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>💬</div>
                 <div>
                   <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WhatsApp</div>
                   <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ color: "#2563eb", textDecoration: "none", fontSize: 15 }}>{contact.whatsapp}</a>
+                </div>
+              </div>
+
+              {/* WeChat */}
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+                <div style={{ width: 48, height: 48, background: "#07c160", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>💬</div>
+                <div>
+                  <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WeChat</div>
+                  <span style={{ color: "#555", fontSize: 15 }}>{contact.wechat || "Netfactory01"}</span>
                 </div>
               </div>
 

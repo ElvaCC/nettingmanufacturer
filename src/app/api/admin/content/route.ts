@@ -11,7 +11,7 @@ export async function GET() {
       const result = {
         hero: ghData.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
         about: ghData.about || { title: '', subtitle: '', description: '', features: [], stats: [] },
-        contact: ghData.contact || { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
+        contact: ghData.contact || { email: '', whatsapp: '', wechat: '', address: '', workingHours: '' },
         footer: ghData.footer || { company: '', copyright: '' },
         factory: ghData.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
         products: ghData.products || [],
@@ -28,7 +28,7 @@ export async function GET() {
     const raw = {
       hero: data.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
       about: data.about || { title: '', subtitle: '', description: '', features: [], stats: [] },
-      contact: data.contact || { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
+      contact: data.contact || { email: '', whatsapp: '', wechat: '', address: '', workingHours: '' },
       footer: data.footer || { company: '', copyright: '' },
       factory: data.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
       products: data.products || [],

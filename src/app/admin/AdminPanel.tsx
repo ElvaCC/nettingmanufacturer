@@ -43,7 +43,7 @@ interface BlogPost {
 interface SiteContent {
   hero: { title: string; subtitle: string; cta1: string; cta2: string };
   about: { title: string; subtitle: string; description: string; features: string };
-  contact: { email: string; phone: string; whatsapp: string; address: string; workingHours: string };
+  contact: { email: string; whatsapp: string; wechat: string; address: string; workingHours: string };
   footer: { company: string; copyright: string };
   factory: { title: string; subtitle: string; description: string; highlights: FactoryHighlight[]; infoCards: FactoryInfoCard[] };
   factoryImages: FactoryImage[];
@@ -54,7 +54,7 @@ interface SiteContent {
 const defaultContent: SiteContent = {
   hero: { title: '', subtitle: '', cta1: 'Get Free Quote', cta2: 'View Products' },
   about: { title: '', subtitle: '', description: '', features: '' },
-  contact: { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
+  contact: { email: '', whatsapp: '', wechat: '', address: '', workingHours: '' },
   footer: { company: 'Jiacheng Netting', copyright: '' },
   factory: { title: '', subtitle: '', description: '', highlights: [], infoCards: [] },
   factoryImages: [],
@@ -338,8 +338,8 @@ export default function AdminPanel() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div><label style={lbl}>Email</label><input type="email" value={content.contact.email} onChange={e => upd('contact', 'email', e.target.value)} style={s()} /></div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            <div><label style={lbl}>Phone</label><input type="text" value={content.contact.phone} onChange={e => upd('contact', 'phone', e.target.value)} style={s()} /></div>
             <div><label style={lbl}>WhatsApp</label><input type="text" value={content.contact.whatsapp} onChange={e => upd('contact', 'whatsapp', e.target.value)} style={s()} /></div>
+            <div><label style={lbl}>WeChat</label><input type="text" value={content.contact.wechat || ''} onChange={e => upd('contact', 'wechat', e.target.value)} style={s()} /></div>
           </div>
           <div><label style={lbl}>Address</label><textarea value={content.contact.address} onChange={e => upd('contact', 'address', e.target.value)} rows={3} style={s({ resize: 'vertical' as const })} /></div>
           <div><label style={lbl}>Working Hours</label><input type="text" value={content.contact.workingHours} onChange={e => upd('contact', 'workingHours', e.target.value)} style={s()} /></div>

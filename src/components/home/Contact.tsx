@@ -76,11 +76,12 @@ export default function Contact() {
                 </div>
 
                 <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>📱</span>
+                  <span style={{ fontSize: 20, flexShrink: 0 }}>💬</span>
                   <div>
-                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Phone / WhatsApp</div>
-                    <div style={{ fontSize: 13, color: "#2563eb" }}>{contact.phone}</div>
-                    <div style={{ fontSize: 13, color: "#25D366" }}>WhatsApp: {contact.whatsapp}</div>
+                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>WhatsApp</div>
+                    <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ fontSize: 13, color: "#25D366", textDecoration: "none" }}>{contact.whatsapp}</a>
+                    <span style={{ margin: "0 8px", color: "#ccc" }}>|</span>
+                    <span style={{ fontSize: 13, color: "#07c160" }}>WeChat: {contact.wechat || "Netfactory01"}</span>
                   </div>
                 </div>
 

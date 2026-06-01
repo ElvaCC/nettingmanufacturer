@@ -50,8 +50,8 @@ export default function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>📍 {contact.address}</li>
               <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>📧 {contact.email}</li>
-              <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>📱 {contact.phone}</li>
-              <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>💬 WhatsApp: {contact.whatsapp}</li>
+              <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>📧 {contact.email}</li>
+              <li style={{ marginBottom: 10, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>💬 WhatsApp: {contact.whatsapp} <span style={{ margin: "0 6px", opacity: 0.4 }}>|</span> WeChat: {contact.wechat || "Netfactory01"}</li>
             </ul>
           </div>
         </div>

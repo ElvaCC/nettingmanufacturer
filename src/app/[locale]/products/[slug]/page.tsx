@@ -138,7 +138,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 ✉ Email Quote Request
               </a>
               <a
-                href="https://wa.me/8613800000000"
+                href="https://wa.me/8615628764579"
                 style={{ display: 'block', width: '100%', padding: '14px 0', background: '#25d366', color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', boxSizing: 'border-box' }}
               >
                 💬 WhatsApp
