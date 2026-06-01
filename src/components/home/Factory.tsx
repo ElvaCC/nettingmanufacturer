@@ -9,20 +9,20 @@ interface FactoryImage {
   objectPosition: string;
   /** "full" = spans all columns, "half" = takes 1 grid slot in 2-col row */
   span: "full" | "half";
-  /** Native aspect ratio so the container matches — prevents object-fit:cover from cropping */
-  aspectRatio: string;
 }
 
 /**
- * Layout — Striped Editorial Grid
+ * Layout — Striped Editorial Grid (uniform row heights)
  *
- *  Row 1: [  ① Factory Exterior Panorama — full width (3.48:1)  ]
- *  Row 2: [  ② Karl Mayer Machines  ] [  ③ Workshop Wide Angle   ]
- *  Row 3: [  ④ Colorful Net Production — full width (7.73:1)     ]
- *  Row 4: [  ⑤ Warehouse Stacked Rolls — full width (2.69:1)   ]
+ *  Row 1: [  ① Factory Exterior Panorama — full width      ]
+ *  Row 2: [  ② Karl Mayer Machines  ] [  ③ Workshop Wide  ]
+ *  Row 3: [  ④ Colorful Net Production — full width         ]
+ *  Row 4: [  ⑤ Warehouse Stacked Rolls — full width          ]
  *
+ *  All full-width strips: fixed 280px height
+ *  Half-width cells: same height as full-width (auto via grid)
  *  gap: 16px | border-radius: 8px | hover: scale(1.02)
- *  Ultra-wide images become "signature strips" at full width — zero cropping.
+ *  Wide images crop from right (object-position: left center)
  */
 const images: FactoryImage[] = [
   {
@@ -31,15 +31,13 @@ const images: FactoryImage[] = [
     label: "Factory Exterior — 20,000 m\u00B2 Manufacturing Base",
     objectPosition: "center center",
     span: "full",
-    aspectRatio: "1885 / 541",
   },
   {
     src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg",
-    alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20,000 square meter workshop",
+    alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20000 square meter workshop",
     label: "Karl Mayer Warp Knitting Lines",
     objectPosition: "center center",
     span: "half",
-    aspectRatio: "4 / 3",
   },
   {
     src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg",
@@ -47,7 +45,6 @@ const images: FactoryImage[] = [
     label: "Production Workshop",
     objectPosition: "center center",
     span: "half",
-    aspectRatio: "4 / 3",
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
@@ -55,7 +52,6 @@ const images: FactoryImage[] = [
     label: "Custom Colored HDPE Netting Production",
     objectPosition: "center center",
     span: "full",
-    aspectRatio: "2007 / 287",
   },
   {
     src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
@@ -63,7 +59,6 @@ const images: FactoryImage[] = [
     label: "Bulk Inventory — Ready for Global Export",
     objectPosition: "center center",
     span: "full",
-    aspectRatio: "2250 / 837",
   },
 ];
 
@@ -99,14 +94,13 @@ export default function Factory() {
         </p>
 
         {/* ═══════════════════════════════════════════
-           Photo Grid — Striped Layout
+           Photo Grid — Uniform Heights
            ═══════════════════════════════════════════ */}
         <div className="factory-grid">
           {images.map((item, i) => (
             <div
               key={i}
               className={`factory-grid-item${item.span === "full" ? " factory-grid-full" : ""}`}
-              style={{ aspectRatio: item.aspectRatio }}
               onClick={() => openLightbox(i)}
               role="button"
               tabIndex={0}
@@ -208,7 +202,7 @@ export default function Factory() {
       {/* Scoped Styles */}
       <style jsx>{`
         /* ═══════════════════════════════════════════
-           Photo Grid — Striped Layout
+           Photo Grid — Uniform Height Layout
            ═══════════════════════════════════════════ */
         .factory-grid {
           display: grid;
@@ -222,7 +216,7 @@ export default function Factory() {
           overflow: hidden;
           cursor: zoom-in;
           background: #e5e7eb;
-          min-height: 200px;
+          height: 300px;
         }
 
         /* Full-width items span both columns */
@@ -230,12 +224,13 @@ export default function Factory() {
           grid-column: 1 / -1;
         }
 
-        /* Image inside cell */
+        /* Image inside cell — cover + crop from right if too wide */
         .factory-grid-item img {
           display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: left center;
           transition: transform 0.4s ease;
         }
         .factory-grid-item:hover img {
@@ -432,6 +427,9 @@ export default function Factory() {
           .factory-grid-full {
             grid-column: 1 / -1;
           }
+          .factory-grid-item {
+            height: 240px;
+          }
           .factory-highlights-grid {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -450,7 +448,7 @@ export default function Factory() {
             grid-column: 1;
           }
           .factory-grid-item {
-            min-height: 160px;
+            height: 200px;
           }
           .factory-highlights-grid {
             grid-template-columns: 1fr;
