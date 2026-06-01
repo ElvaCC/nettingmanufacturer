@@ -1,173 +1,344 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-type ContentType = {
+interface FactoryImage {
+  src: string;
+  alt: string;
+  label: string;
+  span: 'full' | 'half';
+}
+
+interface Product {
+  id: string;
+  name: string;
+  nameZh: string;
+  description: string;
+  specs: string[];
+  applications: string[];
+  images: string[];
+  appImages: string[];
+}
+
+interface BlogPost {
+  id: number;
+  title: string;
+  date: string;
+  excerpt: string;
+  category: string;
+}
+
+interface SiteContent {
   hero: { title: string; subtitle: string; cta1: string; cta2: string };
   about: { title: string; subtitle: string; description: string; features: string };
   contact: { email: string; phone: string; whatsapp: string; address: string; workingHours: string };
   footer: { company: string; copyright: string };
+  factory: { title: string; subtitle: string; description: string };
+  factoryImages: FactoryImage[];
+  products: Product[];
+  blog: BlogPost[];
+}
+
+const defaultContent: SiteContent = {
+  hero: { title: '', subtitle: '', cta1: 'Get Free Quote', cta2: 'View Products' },
+  about: { title: '', subtitle: '', description: '', features: '' },
+  contact: { email: '', phone: '', whatsapp: '', address: '', workingHours: '' },
+  footer: { company: 'Jiacheng Netting', copyright: '' },
+  factory: { title: '', subtitle: '', description: '' },
+  factoryImages: [],
+  products: [],
+  blog: [],
 };
 
+const TABS = ['hero', 'about', 'factory', 'products', 'blog', 'contact', 'footer'] as const;
+type TabKey = typeof TABS[number];
+
+const TAB_LABELS: Record<TabKey, string> = {
+  hero: 'Home Hero',
+  about: 'About Us',
+  factory: 'Factory',
+  products: 'Products',
+  blog: 'Blog',
+  contact: 'Contact',
+  footer: 'Footer',
+};
+
+const baseInput: React.CSSProperties = {
+  width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: '10px',
+  fontSize: '14px', boxSizing: 'border-box', outline: 'none',
+};
+const s = (p?: React.CSSProperties): React.CSSProperties => p ? { ...baseInput, ...p } : baseInput;
+
+const card: React.CSSProperties = {
+  background: '#fff', borderRadius: '12px', padding: '24px',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.06)', marginBottom: '20px', border: '1px solid #f1f5f9',
+};
+
+const lbl: React.CSSProperties = { display: 'block', fontWeight: 600, marginBottom: '6px', color: '#334155', fontSize: '13px' };
+
 export default function AdminPanel() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
-  const [activeTab, setActiveTab] = useState('hero');
+  const [auth, setAuth] = useState(false);
+  const [pw, setPw] = useState('');
+  const [pwErr, setPwErr] = useState(false);
+  const [tab, setTab] = useState<TabKey>('hero');
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [editProd, setEditProd] = useState<number | null>(null);
+  const [content, setContent] = useState<SiteContent>(defaultContent);
 
-  const [content, setContent] = useState<ContentType>({
-    hero: {
-      title: 'Professional HDPE Plastic Netting Manufacturer Since 2005',
-      subtitle: 'Leading manufacturer of construction safety nets, agricultural nets, and specialty plastic netting solutions.',
-      cta1: 'Get Free Quote',
-      cta2: 'View Products'
-    },
-    about: {
-      title: 'About Jiacheng Netting',
-      subtitle: 'Your Trusted HDPE Netting Partner Since 2005',
-      description: 'Jiacheng Netting is a leading manufacturer of high-quality HDPE plastic netting products.',
-      features: 'BSCI Certified, NFPA-701 Certificate, 21+ Years Experience, 20,000m² Production, Export to 50+ Countries'
-    },
-    contact: {
-      email: 'sales@jiachengnetting.com',
-      phone: '+86 531 8888 8888',
-      whatsapp: '+86 138 0000 0000',
-      address: 'No. 88 Industrial Park Road, Jinan City, Shandong Province, China',
-      workingHours: 'Monday - Saturday: 8:00 AM - 6:00 PM (CST)'
-    },
-    footer: {
-      company: 'Jiacheng Netting',
-      copyright: '© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved.'
+  useEffect(() => {
+    if (!auth) return;
+    fetch('/api/admin/content')
+      .then(r => r.json())
+      .then(data => {
+        const sc: SiteContent = {
+          hero: data.hero || defaultContent.hero,
+          about: data.about || defaultContent.about,
+          contact: data.contact || defaultContent.contact,
+          footer: data.footer || defaultContent.footer,
+          factory: data.factory || defaultContent.factory,
+          factoryImages: [
+            { src: '/images/factory/jiacheng-factory-exterior-panorama.jpg', alt: 'Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Jinan Shandong China', label: 'Factory Exterior - 20,000m2 Manufacturing Base', span: 'full' },
+            { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets', label: 'Karl Mayer Warp Knitting Lines', span: 'half' },
+            { src: '/images/factory/jiacheng-workshop-wide-angle-production.jpg', alt: 'Wide angle view of Jiacheng Netting modern production workshop with warp knitting machines and skilled workers', label: 'Production Workshop', span: 'half' },
+            { src: '/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg', alt: 'Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green blue red black and white', label: 'Custom Colored HDPE Netting Production', span: 'full' },
+            { src: '/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg', alt: 'Large scale warehouse at Jiacheng Netting with finished HDPE netting rolls stacked on racks ready for export', label: 'Bulk Inventory - Ready for Global Export', span: 'full' },
+          ],
+          products: data.products || [],
+          blog: data.blog || [],
+        };
+        setContent(sc);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [auth]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await fetch('/api/admin/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          hero: content.hero,
+          about: content.about,
+          contact: content.contact,
+          footer: content.footer,
+          factory: content.factory,
+          products: content.products,
+          blog: content.blog,
+        }),
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
+      setTimeout(() => setSaving(false), 3000);
     }
-  });
-
-  const handleLogin = () => {
-    if (password === 'wode2020') {
-      setIsAuthenticated(true);
-      setError(false);
-    } else {
-      setError(true);
-    }
+    setSaving(false);
   };
 
-  const updateHero = (field: keyof ContentType['hero'], value: string) => {
-    setContent(prev => ({ ...prev, hero: { ...prev.hero, [field]: value } }));
-  };
+  const upd = (sec: string, field: string, val: any) =>
+    setContent(prev => ({ ...prev, [sec]: { ...(prev as any)[sec], [field]: val } }));
 
-  const updateAbout = (field: keyof ContentType['about'], value: string) => {
-    setContent(prev => ({ ...prev, about: { ...prev.about, [field]: value } }));
-  };
-
-  const updateContact = (field: keyof ContentType['contact'], value: string) => {
-    setContent(prev => ({ ...prev, contact: { ...prev.contact, [field]: value } }));
-  };
-
-  const updateFooter = (field: keyof ContentType['footer'], value: string) => {
-    setContent(prev => ({ ...prev, footer: { ...prev.footer, [field]: value } }));
-  };
-
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
-  };
-
-  if (!isAuthenticated) {
+  // LOGIN
+  if (!auth) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f5f7fa' }}>
-        <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px', textAlign: 'center' }}>
-          <h1 style={{ color: '#1e40af', marginBottom: '8px' }}>网站后台管理</h1>
-          <p style={{ color: '#6b7280', marginBottom: '24px' }}>请输入访问密码</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => { setPassword(e.target.value); setError(false); }}
-            onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
-            placeholder="请输入密码"
-            style={{ width: '100%', padding: '14px', border: `2px solid ${error ? '#ef4444' : '#e5e7eb'}`, borderRadius: '10px', fontSize: '16px', marginBottom: '16px', boxSizing: 'border-box' }}
-          />
-          {error && <p style={{ color: '#ef4444', fontSize: '14px', marginBottom: '16px' }}>密码错误，请重试</p>}
-          <button 
-            onClick={handleLogin} 
-            style={{ width: '100%', padding: '14px', backgroundColor: '#1e40af', color: 'white', border: 'none', borderRadius: '10px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}
-          >
-            登录
-          </button>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0f172a, #1e3a5f)' }}>
+        <div style={{ background: '#fff', padding: 48, borderRadius: 20, boxShadow: '0 20px 60px rgba(0,0,0,0.3)', width: 420, textAlign: 'center' }}>
+          <div style={{ width: 64, height: 64, borderRadius: 16, background: 'linear-gradient(135deg, #1e40af, #3b82f6)', margin: '0 auto 20px' }} />
+          <h1 style={{ color: '#1e3a5f', margin: '0 0 6px' }}>Admin Panel</h1>
+          <p style={{ color: '#94a3b8', marginBottom: 32, fontSize: 14 }}>Jiacheng Netting</p>
+          <input type="password" value={pw} onChange={e => { setPw(e.target.value); setPwErr(false); }} onKeyDown={e => e.key === 'Enter' && pw === 'wode2020' && setAuth(true)} placeholder="Password" style={s({ marginBottom: 16, borderColor: pwErr ? '#ef4444' : '#e2e8f0' })} />
+          {pwErr && <p style={{ color: '#ef4444', fontSize: 13, marginBottom: 16 }}>Wrong password</p>}
+          <button onClick={() => pw === 'wode2020' ? setAuth(true) : setPwErr(true)} style={s({ background: '#1e40af', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer', padding: 14 })}>Login</button>
         </div>
       </div>
     );
   }
 
-  const inputStyle = { width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', boxSizing: 'border-box' as const };
-  const textareaStyle = { ...inputStyle, fontFamily: 'monospace', resize: 'vertical' as const };
-  const labelStyle = { display: 'block' as const, fontWeight: '600' as const, marginBottom: '5px', color: '#374151' as const };
+  if (loading) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}><p>Loading...</p></div>;
+  }
 
-  return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
-      <header style={{ background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)', color: 'white', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '700' }}>网站后台管理</h1>
-          <p style={{ margin: '5px 0 0 0', opacity: 0.9, fontSize: '14px' }}>Jiacheng Netting</p>
+  // TAB RENDERERS
+  const HeroTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Home Hero</h2>
+      <div style={card}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div><label style={lbl}>Title</label><textarea value={content.hero.title} onChange={e => upd('hero', 'title', e.target.value)} rows={2} style={s({ resize: 'vertical' as const })} /></div>
+          <div><label style={lbl}>Subtitle</label><textarea value={content.hero.subtitle} onChange={e => upd('hero', 'subtitle', e.target.value)} rows={3} style={s({ resize: 'vertical' as const })} /></div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div><label style={lbl}>CTA Button 1</label><input type="text" value={content.hero.cta1} onChange={e => upd('hero', 'cta1', e.target.value)} style={s()} /></div>
+            <div><label style={lbl}>CTA Button 2</label><input type="text" value={content.hero.cta2} onChange={e => upd('hero', 'cta2', e.target.value)} style={s()} /></div>
+          </div>
         </div>
-        <button onClick={handleSave} style={{ padding: '12px 30px', fontSize: '16px', fontWeight: '600', border: 'none', borderRadius: '8px', cursor: 'pointer', backgroundColor: saved ? '#22c55e' : 'white', color: saved ? 'white' : '#1e40af' }}>
-          {saved ? '✓ 已保存' : '💾 保存更改'}
-        </button>
+      </div>
+    </div>
+  );
+
+  const AboutTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#1e3a5f' }}>About Us</h2>
+      <div style={card}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div><label style={lbl}>Title</label><input type="text" value={content.about.title} onChange={e => upd('about', 'title', e.target.value)} style={s()} /></div>
+            <div><label style={lbl}>Subtitle</label><input type="text" value={content.about.subtitle} onChange={e => upd('about', 'subtitle', e.target.value)} style={s()} /></div>
+          </div>
+          <div><label style={lbl}>Company Description</label><textarea value={content.about.description} onChange={e => upd('about', 'description', e.target.value)} rows={8} style={s({ resize: 'vertical' as const, lineHeight: 1.6 })} /></div>
+          <div><label style={lbl}>Features (comma-separated)</label><textarea value={content.about.features} onChange={e => upd('about', 'features', e.target.value)} rows={3} style={s({ resize: 'vertical' as const })} /></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const FactoryTab = (
+    <div style={{ maxWidth: 1000 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Factory</h2>
+      <div style={card}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div><label style={lbl}>Title</label><input type="text" value={content.factory.title} onChange={e => upd('factory', 'title', e.target.value)} style={s()} /></div>
+          <div><label style={lbl}>Subtitle</label><input type="text" value={content.factory.subtitle} onChange={e => upd('factory', 'subtitle', e.target.value)} style={s()} /></div>
+        </div>
+        <div style={{ marginTop: 16 }}><label style={lbl}>Description</label><textarea value={content.factory.description} onChange={e => upd('factory', 'description', e.target.value)} rows={4} style={s({ resize: 'vertical' as const })} /></div>
+      </div>
+
+      <h3 style={{ color: '#1e3a5f', marginTop: 28, marginBottom: 12 }}>Factory Images ({content.factoryImages.length})</h3>
+      {content.factoryImages.map((img, i) => (
+        <div key={i} style={card}>
+          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            <div onClick={() => window.open(img.src, '_blank')} style={{ width: 220, height: 150, borderRadius: 10, overflow: 'hidden', border: '1px solid #e2e8f0', cursor: 'pointer', flexShrink: 0, background: '#f1f5f9' }}>
+              <img src={img.src} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 300, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end' }}>
+                <div style={{ flex: 1 }}><label style={lbl}>Label</label><input type="text" value={img.label} onChange={e => { const n = [...content.factoryImages]; n[i] = { ...n[i], label: e.target.value }; setContent({ ...content, factoryImages: n }); }} style={s()} /></div>
+                <div><label style={lbl}>Layout</label><select value={img.span} onChange={e => { const n = [...content.factoryImages]; n[i] = { ...n[i], span: e.target.value as 'full' | 'half' }; setContent({ ...content, factoryImages: n }); }} style={s({ width: 90 })}><option value="full">Full</option><option value="half">Half</option></select></div>
+              </div>
+              <div><label style={lbl}>Alt Tag (SEO)</label><textarea value={img.alt} onChange={e => { const n = [...content.factoryImages]; n[i] = { ...n[i], alt: e.target.value }; setContent({ ...content, factoryImages: n }); }} rows={3} style={s({ resize: 'vertical' as const })} /></div>
+              <div><label style={lbl}>Image Path</label><input type="text" value={img.src} onChange={e => { const n = [...content.factoryImages]; n[i] = { ...n[i], src: e.target.value }; setContent({ ...content, factoryImages: n }); }} style={s()} /></div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button disabled={i === 0} onClick={() => { if (i > 0) { const n = [...content.factoryImages]; [n[i-1], n[i]] = [n[i], n[i-1]]; setContent({ ...content, factoryImages: n }); }}} style={{ padding: '6px 12px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: i === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>Up</button>
+                <button disabled={i === content.factoryImages.length - 1} onClick={() => { if (i < content.factoryImages.length - 1) { const n = [...content.factoryImages]; [n[i], n[i+1]] = [n[i+1], n[i]]; setContent({ ...content, factoryImages: n }); }}} style={{ padding: '6px 12px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: i === content.factoryImages.length - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>Down</button>
+                <button onClick={() => { setContent({ ...content, factoryImages: content.factoryImages.filter((_, idx) => idx !== i) }); }} style={{ padding: '6px 12px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      <button onClick={() => setContent({ ...content, factoryImages: [...content.factoryImages, { src: '/images/factory/new-image.jpg', alt: 'New factory image', label: 'New Image', span: 'full' }] })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Image</button>
+    </div>
+  );
+
+  const ProductsTab = (
+    <div style={{ maxWidth: 1000 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Products ({content.products.length})</h2>
+      {content.products.map((product, i) => (
+        <div key={product.id} style={card}>
+          <div onClick={() => setEditProd(editProd === i ? null : i)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
+            <div><span style={{ fontWeight: 600, color: '#1e3a5f' }}>{product.name}</span><span style={{ color: '#94a3b8', fontSize: 13, marginLeft: 12 }}>{product.nameZh} | {product.id}</span></div>
+            <span>{editProd === i ? '^' : 'v'}</span>
+          </div>
+          {editProd === i && (
+            <div style={{ marginTop: 20, borderTop: '1px solid #f1f5f9', paddingTop: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div><label style={lbl}>Name (EN)</label><input type="text" value={product.name} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], name: e.target.value }; setContent({ ...content, products: p }); }} style={s()} /></div>
+                <div><label style={lbl}>Name (ZH)</label><input type="text" value={product.nameZh} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], nameZh: e.target.value }; setContent({ ...content, products: p }); }} style={s()} /></div>
+              </div>
+              <div><label style={lbl}>Description</label><textarea value={product.description} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], description: e.target.value }; setContent({ ...content, products: p }); }} rows={4} style={s({ resize: 'vertical' as const })} /></div>
+              <div><label style={lbl}>Specs (one per line)</label><textarea value={product.specs.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], specs: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={5} style={s({ resize: 'vertical' as const })} /></div>
+              <div><label style={lbl}>Applications (one per line)</label><textarea value={product.applications.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], applications: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={4} style={s({ resize: 'vertical' as const })} /></div>
+              <div><label style={lbl}>Images (one path per line)</label><textarea value={product.images.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], images: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={3} style={s({ resize: 'vertical' as const })} /></div>
+              <button onClick={() => { setContent({ ...content, products: content.products.filter((_, idx) => idx !== i) }); setEditProd(null); }} style={{ padding: '8px 18px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626', alignSelf: 'flex-start' }}>Delete Product</button>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
+  const BlogTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Blog ({content.blog.length})</h2>
+      {content.blog.map((post, i) => (
+        <div key={post.id} style={card}>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
+            <span style={{ background: '#dbeafe', color: '#1e40af', padding: '2px 8px', borderRadius: 6, fontSize: 13 }}>#{i + 1}</span>
+            <span style={{ fontSize: 13, color: '#94a3b8' }}>{post.category} | {post.date}</span>
+          </div>
+          <input type="text" value={post.title} onChange={e => { const b = [...content.blog]; b[i] = { ...b[i], title: e.target.value }; setContent({ ...content, blog: b }); }} style={s({ fontWeight: 600, fontSize: 15, marginBottom: 12 })} />
+          <textarea value={post.excerpt} onChange={e => { const b = [...content.blog]; b[i] = { ...b[i], excerpt: e.target.value }; setContent({ ...content, blog: b }); }} rows={3} style={s({ resize: 'vertical' as const, marginBottom: 12 })} />
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div><label style={lbl}>Category</label><input type="text" value={post.category} onChange={e => { const b = [...content.blog]; b[i] = { ...b[i], category: e.target.value }; setContent({ ...content, blog: b }); }} style={s({ width: 120 })} /></div>
+            <div><label style={lbl}>Date</label><input type="date" value={post.date} onChange={e => { const b = [...content.blog]; b[i] = { ...b[i], date: e.target.value }; setContent({ ...content, blog: b }); }} style={s({ width: 160 })} /></div>
+            <button onClick={() => setContent({ ...content, blog: content.blog.filter((_, idx) => idx !== i) })} style={{ padding: '8px 16px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626', alignSelf: 'flex-end' }}>Delete</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const ContactTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Contact</h2>
+      <div style={card}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div><label style={lbl}>Email</label><input type="email" value={content.contact.email} onChange={e => upd('contact', 'email', e.target.value)} style={s()} /></div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div><label style={lbl}>Phone</label><input type="text" value={content.contact.phone} onChange={e => upd('contact', 'phone', e.target.value)} style={s()} /></div>
+            <div><label style={lbl}>WhatsApp</label><input type="text" value={content.contact.whatsapp} onChange={e => upd('contact', 'whatsapp', e.target.value)} style={s()} /></div>
+          </div>
+          <div><label style={lbl}>Address</label><textarea value={content.contact.address} onChange={e => upd('contact', 'address', e.target.value)} rows={3} style={s({ resize: 'vertical' as const })} /></div>
+          <div><label style={lbl}>Working Hours</label><input type="text" value={content.contact.workingHours} onChange={e => upd('contact', 'workingHours', e.target.value)} style={s()} /></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const FooterTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#1e3a5f' }}>Footer</h2>
+      <div style={card}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div><label style={lbl}>Company Name</label><input type="text" value={content.footer.company} onChange={e => upd('footer', 'company', e.target.value)} style={s()} /></div>
+          <div><label style={lbl}>Copyright</label><input type="text" value={content.footer.copyright} onChange={e => upd('footer', 'copyright', e.target.value)} style={s()} /></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const tabContent: Record<TabKey, JSX.Element> = {
+    hero: HeroTab,
+    about: AboutTab,
+    factory: FactoryTab,
+    products: ProductsTab,
+    blog: BlogTab,
+    contact: ContactTab,
+    footer: FooterTab,
+  };
+
+  // MAIN LAYOUT
+  return (
+    <div style={{ minHeight: '100vh', background: '#f8fafc', color: '#1e293b' }}>
+      <header style={{ background: 'linear-gradient(135deg, #0f172a, #1e3a5f)', color: '#fff', padding: '0 30px', height: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
+        <div style={{ fontWeight: 700, fontSize: 16 }}>ONLY NETTING Admin</div>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+          <a href="/en" target="_blank" rel="noreferrer" style={{ padding: '8px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', textDecoration: 'none', fontSize: 13, border: '1px solid rgba(255,255,255,0.2)' }}>View Site</a>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', fontSize: 14, fontWeight: 600, border: 'none', borderRadius: 8, cursor: saving ? 'wait' : 'pointer', background: saved ? '#22c55e' : '#3b82f6', color: '#fff' }}>{saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}</button>
+          <button onClick={() => { setAuth(false); setLoading(true); }} style={{ padding: '8px 14px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 13 }}>Logout</button>
+        </div>
       </header>
 
       <div style={{ display: 'flex' }}>
-        <aside style={{ width: '240px', backgroundColor: 'white', borderRight: '1px solid #e0e0e0', padding: '20px 0', minHeight: 'calc(100vh - 80px)' }}>
-          <button onClick={() => setActiveTab('hero')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'hero' ? '#eff6ff' : 'transparent', color: activeTab === 'hero' ? '#2563eb' : '#374151', fontWeight: activeTab === 'hero' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'hero' ? '4px solid #3b82f6' : '4px solid transparent' }}>🏠 首页 Hero</button>
-          <button onClick={() => setActiveTab('about')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'about' ? '#eff6ff' : 'transparent', color: activeTab === 'about' ? '#2563eb' : '#374151', fontWeight: activeTab === 'about' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'about' ? '4px solid #3b82f6' : '4px solid transparent' }}>📋 关于我们</button>
-          <button onClick={() => setActiveTab('contact')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'contact' ? '#eff6ff' : 'transparent', color: activeTab === 'contact' ? '#2563eb' : '#374151', fontWeight: activeTab === 'contact' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'contact' ? '4px solid #3b82f6' : '4px solid transparent' }}>📞 联系方式</button>
-          <button onClick={() => setActiveTab('footer')} style={{ display: 'block', width: '100%', padding: '16px 24px', textAlign: 'left', border: 'none', backgroundColor: activeTab === 'footer' ? '#eff6ff' : 'transparent', color: activeTab === 'footer' ? '#2563eb' : '#374151', fontWeight: activeTab === 'footer' ? '600' : '400', fontSize: '15px', cursor: 'pointer', borderLeft: activeTab === 'footer' ? '4px solid #3b82f6' : '4px solid transparent' }}>🔽 页脚 Footer</button>
+        <aside style={{ width: 200, background: '#fff', borderRight: '1px solid #e2e8f0', padding: '16px 0', minHeight: 'calc(100vh - 64px)', position: 'sticky', top: 64, flexShrink: 0 }}>
+          {TABS.map(t => (
+            <button key={t} onClick={() => setTab(t)} style={{ display: 'block', width: '100%', padding: '13px 20px', textAlign: 'left', border: 'none', background: tab === t ? '#eff6ff' : 'transparent', color: tab === t ? '#1e40af' : '#475569', fontWeight: tab === t ? 600 : 400, fontSize: 14, cursor: 'pointer', borderLeft: tab === t ? '3px solid #3b82f6' : '3px solid transparent' }}>{TAB_LABELS[t]}</button>
+          ))}
         </aside>
-
-        <main style={{ flex: 1, padding: '40px' }}>
-          {activeTab === 'hero' && (
-            <div style={{ maxWidth: '800px' }}>
-              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>首页 Hero 设置</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <div><label style={labelStyle}>主标题</label><textarea value={content.hero.title} onChange={(e) => updateHero('title', e.target.value)} rows={3} style={textareaStyle} /></div>
-                <div><label style={labelStyle}>副标题</label><textarea value={content.hero.subtitle} onChange={(e) => updateHero('subtitle', e.target.value)} rows={4} style={textareaStyle} /></div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                  <div><label style={labelStyle}>按钮 1 文字</label><input type="text" value={content.hero.cta1} onChange={(e) => updateHero('cta1', e.target.value)} style={inputStyle} /></div>
-                  <div><label style={labelStyle}>按钮 2 文字</label><input type="text" value={content.hero.cta2} onChange={(e) => updateHero('cta2', e.target.value)} style={inputStyle} /></div>
-                </div>
-              </div>
-            </div>
-          )}
-          {activeTab === 'about' && (
-            <div style={{ maxWidth: '800px' }}>
-              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>关于我们</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <div><label style={labelStyle}>标题</label><input type="text" value={content.about.title} onChange={(e) => updateAbout('title', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>副标题</label><input type="text" value={content.about.subtitle} onChange={(e) => updateAbout('subtitle', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>公司描述</label><textarea value={content.about.description} onChange={(e) => updateAbout('description', e.target.value)} rows={5} style={textareaStyle} /></div>
-                <div><label style={labelStyle}>特点列表</label><textarea value={content.about.features} onChange={(e) => updateAbout('features', e.target.value)} rows={3} style={textareaStyle} /></div>
-              </div>
-            </div>
-          )}
-          {activeTab === 'contact' && (
-            <div style={{ maxWidth: '800px' }}>
-              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>联系方式</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <div><label style={labelStyle}>邮箱</label><input type="text" value={content.contact.email} onChange={(e) => updateContact('email', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>电话</label><input type="text" value={content.contact.phone} onChange={(e) => updateContact('phone', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>WhatsApp</label><input type="text" value={content.contact.whatsapp} onChange={(e) => updateContact('whatsapp', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>地址</label><textarea value={content.contact.address} onChange={(e) => updateContact('address', e.target.value)} rows={3} style={textareaStyle} /></div>
-                <div><label style={labelStyle}>工作时间</label><input type="text" value={content.contact.workingHours} onChange={(e) => updateContact('workingHours', e.target.value)} style={inputStyle} /></div>
-              </div>
-            </div>
-          )}
-          {activeTab === 'footer' && (
-            <div style={{ maxWidth: '800px' }}>
-              <h2 style={{ marginTop: 0, color: '#1e40af', fontSize: '24px' }}>页脚设置</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <div><label style={labelStyle}>公司名称</label><input type="text" value={content.footer.company} onChange={(e) => updateFooter('company', e.target.value)} style={inputStyle} /></div>
-                <div><label style={labelStyle}>版权信息</label><input type="text" value={content.footer.copyright} onChange={(e) => updateFooter('copyright', e.target.value)} style={inputStyle} /></div>
-              </div>
-            </div>
-          )}
+        <main style={{ flex: 1, padding: '32px 40px' }}>
+          {tabContent[tab]}
         </main>
       </div>
     </div>
