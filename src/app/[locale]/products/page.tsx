@@ -1,8 +1,9 @@
-import Image from 'next/image';
-import contentData from '@/data/content.json';
+'use client';
+
+import { useContent } from '@/context/ContentContext';
 
 export default function ProductsPage() {
-  const { products } = contentData;
+  const { products } = useContent();
 
   return (
     <div style={{ background: "#f9fafb", minHeight: "100vh" }}>

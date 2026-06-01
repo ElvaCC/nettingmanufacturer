@@ -1,7 +1,9 @@
-import contentData from '@/data/content.json';
+'use client';
+
+import { useContent } from '@/context/ContentContext';
 
 export default function FactoryPage() {
-  const { factory } = contentData;
+  const { factory } = useContent();
 
   return (
     <div style={{ padding: "80px 24px", background: "#f9fafb", minHeight: "100vh" }}>

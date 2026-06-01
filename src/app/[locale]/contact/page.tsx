@@ -1,7 +1,9 @@
-import contentData from '@/data/content.json';
+'use client';
+
+import { useContent } from '@/context/ContentContext';
 
 export default function ContactPage() {
-  const { contact } = contentData;
+  const { contact } = useContent();
 
   return (
     <div style={{ padding: "80px 24px", background: "#fff", minHeight: "100vh" }}>

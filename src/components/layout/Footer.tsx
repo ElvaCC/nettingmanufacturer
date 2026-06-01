@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import contentData from '@/data/content.json';
+import { useContent } from "@/context/ContentContext";
 
 export default function Footer() {
   const params = useParams();
   const locale = (params?.locale as string) || "en";
   const getPath = (href: string) => `/${locale}${href}`;
-  const { footer, contact, products } = contentData;
+  const { footer, contact, products } = useContent();
   
   return (
     <footer style={{ background: "#1e3a5f", color: "#fff", padding: "60px 24px 30px" }}>

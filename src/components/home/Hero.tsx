@@ -1,13 +1,13 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import contentData from '@/data/content.json';
+import { useContent } from '@/context/ContentContext';
 
 export default function Hero() {
   const params = useParams();
   const locale = (params?.locale as string) || 'en';
   const getPath = (href: string) => `/${locale}${href}`;
-  const { hero } = contentData;
+  const { hero } = useContent();
 
   return (
     <section style={{ background: "#fff" }}>

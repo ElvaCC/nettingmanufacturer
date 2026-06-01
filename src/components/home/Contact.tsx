@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import contentData from '@/data/content.json';
+import { useContent } from "@/context/ContentContext";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const { contact } = contentData;
+  const { contact } = useContent();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -6,6 +6,7 @@ import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { getLocalizedMetadata } from "@/lib/seo/metadata";
 import { organizationSchema, generateWebsiteSchema } from "@/lib/seo/schema";
 import { Metadata } from "next";
+import { ContentProvider } from "@/context/ContentContext";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -47,9 +48,11 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-background">
         <NextIntlClientProvider messages={messages}>
-          <Header locale={locale} />
-          <main className="flex-1 pt-16">{children}</main>
-          <Footer />
+          <ContentProvider>
+            <Header locale={locale} />
+            <main className="flex-1 pt-16">{children}</main>
+            <Footer />
+          </ContentProvider>
         </NextIntlClientProvider>
       </body>
     </html>

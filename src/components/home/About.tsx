@@ -1,9 +1,9 @@
 'use client';
 
-import contentData from '@/data/content.json';
+import { useContent } from '@/context/ContentContext';
 
 export default function About() {
-  const { about } = contentData;
+  const { about } = useContent();
 
   // Split description by double newlines to create paragraphs
   const paragraphs = about.description.split('\n\n');
