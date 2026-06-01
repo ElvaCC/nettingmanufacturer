@@ -21,17 +21,14 @@ export default function Hero() {
           {hero.subtitle}
         </p>
 
-        {/* Factory Photo — WebP with srcSet + JPG fallback for SEO & PageSpeed */}
+        {/* Factory Photo — WebP with JPG fallback */}
         <picture>
           <source
             type="image/webp"
-            srcSet="/images/factory/640w-jiacheng-factory-hero.webp 640w, /images/factory/960w-jiacheng-factory-hero.webp 960w, /images/factory/1200w-jiacheng-factory-hero.webp 1200w, /images/factory/jiacheng-factory-hero.webp 1920w"
-            sizes="(max-width: 640px) 100vw, (max-width: 960px) 100vw, (max-width: 1200px) 100vw, 1200px"
+            srcSet="/images/factory/jiacheng-factory-hero.webp"
           />
           <img
             src="/images/factory/jiacheng-factory-hero.jpg"
-            srcSet="/images/factory/640w-jiacheng-factory-hero.jpg 640w, /images/factory/960w-jiacheng-factory-hero.jpg 960w, /images/factory/1200w-jiacheng-factory-hero.jpg 1200w, /images/factory/jiacheng-factory-hero.jpg 1920w"
-            sizes="(max-width: 640px) 100vw, (max-width: 960px) 100vw, (max-width: 1200px) 100vw, 1200px"
             alt="Exterior view of Shandong Jiacheng Chemical Fiber Products Co., Ltd. facility, a leading HDPE netting manufacturer in China, showing a shipping container truck being loaded with finished netting rolls ready for bulk export and direct factory supply"
             width={1920}
             height={1322}
