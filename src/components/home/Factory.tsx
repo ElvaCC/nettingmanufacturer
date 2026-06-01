@@ -51,11 +51,11 @@ const images: FactoryImage[] = [
   },
   {
     src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
-    alt: "Multiple warp knitting machines producing custom colored HDPE netting in red blue green yellow and white at Jiacheng Netting factory for construction safety and agricultural shade bulk orders",
+    alt: "Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green, blue, red, black, and white at Jiacheng Netting factory for construction debris netting, agricultural shade netting, and privacy screen bulk orders",
     label: "Custom Colored HDPE Netting Production",
     objectPosition: "center center",
     span: "full",
-    aspectRatio: "1760 / 227",
+    aspectRatio: "2007 / 287",
   },
   {
     src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
