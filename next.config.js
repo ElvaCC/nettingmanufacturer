@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.nettingmanufacturer.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**.nettingfactory.com',
+      },
     ],
   },
 };
