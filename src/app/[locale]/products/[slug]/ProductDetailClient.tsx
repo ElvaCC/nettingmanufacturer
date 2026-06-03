@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useContent } from '@/context/ContentContext';
 
 interface ProductDetailClientProps {
@@ -10,6 +11,14 @@ interface ProductDetailClientProps {
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
   const { products, contact } = useContent();
   const product = products.find((p) => p.id === slug);
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+  // Build unified image list: product images + optional appImages
+  const allImages: string[] = [
+    ...(product?.images || []),
+    ...((product as any)?.appImages?.slice(0, 2) || []),
+  ];
+  const currentSrc = allImages[currentImgIndex] || (product?.images?.[0] || '');
 
   if (!product) {
     return (
@@ -42,12 +51,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           {/* Left: Images */}
           <div>
             {/* Main image */}
-            {product.images && product.images.length > 0 ? (
+            {currentSrc ? (
               <div style={{ borderRadius: 16, overflow: 'hidden', background: '#fff', border: '1px solid #e5e7eb', marginBottom: 16 }}>
                 <img
-                  src={product.images[0]}
+                  src={currentSrc}
                   alt={product.name}
-                  style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block' }}
+                  style={{ width: '100%', height: 420, objectFit: 'cover', display: 'block', transition: 'opacity 0.2s' }}
                 />
               </div>
             ) : (
@@ -57,16 +66,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             )}
 
             {/* Thumbnail row */}
-            {product.images && product.images.length > 1 && (
+            {allImages.length > 1 && (
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                {product.images.slice(1).map((img, i) => (
-                  <div key={i} style={{ borderRadius: 8, overflow: 'hidden', border: '2px solid #e5e7eb' }}>
-                    <img src={img} alt={`${product.name} ${i + 2}`} style={{ width: 90, height: 70, objectFit: 'cover', display: 'block' }} />
-                  </div>
-                ))}
-                {(product as any).appImages && (product as any).appImages.slice(0, 2).map((img: string, i: number) => (
-                  <div key={`app-${i}`} style={{ borderRadius: 8, overflow: 'hidden', border: '2px solid #e5e7eb' }}>
-                    <img src={img} alt={`${product.name} application`} style={{ width: 90, height: 70, objectFit: 'cover', display: 'block' }} />
+                {allImages.map((img, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setCurrentImgIndex(i)}
+                    style={{
+                      borderRadius: 8,
+                      overflow: 'hidden',
+                      border: currentImgIndex === i ? '3px solid #2563eb' : '2px solid #e5e7eb',
+                      cursor: 'pointer',
+                      transition: 'border-color 0.15s, transform 0.15s',
+                      transform: currentImgIndex === i ? 'scale(1.05)' : 'scale(1)',
+                    }}
+                  >
+                    <img src={img} alt={`${product.name} ${i + 1}`} style={{ width: 90, height: 70, objectFit: 'cover', display: 'block' }} />
                   </div>
                 ))}
               </div>
