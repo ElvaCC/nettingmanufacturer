@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { getContentOverride } from '@/lib/jsonblob-store';
 
+// Force dynamic rendering - never cache this route
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // 1. Try GitHub API first (persistent store)
@@ -18,7 +21,13 @@ export async function GET() {
         blog: ghData.blog || [],
         _source: 'jsonblob',
       };
-      return NextResponse.json(result);
+      return NextResponse.json(result, {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
     }
 
     // 2. Fallback to static content.json (build-time data)

@@ -9,14 +9,14 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<typeof fallbackData>(fallbackData);
 
   const refresh = useCallback(() => {
-    fetch('/api/admin/content')
+    fetch('/api/admin/content?_t=' + Date.now(), { cache: 'no-store' })
       .then((res) => res.json())
       .then((json) => {
         if (json && typeof json === 'object' && !json.error) {
           setData(json);
         }
       })
-      .catch(() => {});
+      .catch((err) => console.warn('[ContentProvider] fetch failed:', err));
   }, []);
 
   // Initial fetch
