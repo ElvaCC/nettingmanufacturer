@@ -4,7 +4,7 @@
  * Data is stored in a remote JSON blob and accessed via REST API.
  */
 
-const BLOB_ID = '019e8239-ec5d-7163-91db-bc164afba1a8';
+const BLOB_ID = '019e8c82-3f48-7f19-9182-85eadc458025';
 const BLOB_URL = `https://jsonblob.com/api/jsonBlob/${BLOB_ID}`;
 
 export async function getContentOverride(): Promise<Record<string, any> | null> {
