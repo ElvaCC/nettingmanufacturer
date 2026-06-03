@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getContentOverride, setContentOverride } from '@/lib/vercel-blob-store';
+import { getContentOverride, setContentOverride } from '@/lib/github-store';
 
 export async function POST(request: NextRequest) {
   try {
     const patch = await request.json();
 
-    // 1. Load current full data (from Vercel Blob or local file)
+    // 1. Load current full data (from GitHub or local file)
     let existing: Record<string, any> = (await getContentOverride()) || {};
     if (!Object.keys(existing).length) {
       try {
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     if (patch.products) existing.products = patch.products;
     if (patch.blog) existing.blog = patch.blog;
 
-    // 3. Save to Vercel Blob (persistent, never expires)
+    // 3. Save to GitHub (persistent, never expires)
     const saved = await setContentOverride(existing);
 
     // 4. Also update local file (for development fallback)
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     } catch { /* Vercel read-only, ignore */ }
 
     if (!saved) {
-      return NextResponse.json({ success: false, message: 'Failed to save to Vercel Blob' }, { status: 500 });
+      return NextResponse.json({ success: false, message: 'Failed to save to GitHub' }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });

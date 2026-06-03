@@ -1,25 +1,25 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { getContentOverride } from '@/lib/vercel-blob-store';
+import { getContentOverride } from '@/lib/github-store';
 
 // Force dynamic rendering - never cache this route
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    // 1. Try Vercel Blob first (persistent, never expires)
-    const blobData = await getContentOverride();
-    if (blobData) {
+    // 1. Try GitHub first (persistent, public read)
+    const githubData = await getContentOverride();
+    if (githubData) {
       const result = {
-        hero: blobData.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
-        about: blobData.about || { title: '', subtitle: '', description: '', features: [], stats: [] },
-        contact: blobData.contact || { email: '', whatsapp: '', wechat: '', address: '' },
-        footer: blobData.footer || { company: '', copyright: '' },
-        factory: blobData.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
-        products: blobData.products || [],
-        blog: blobData.blog || [],
-        _source: 'vercel-blob',
+        hero: githubData.hero || { title: '', subtitle: '', cta1: '', cta2: '' },
+        about: githubData.about || { title: '', subtitle: '', description: '', features: [], stats: [] },
+        contact: githubData.contact || { email: '', whatsapp: '', wechat: '', address: '' },
+        footer: githubData.footer || { company: '', copyright: '' },
+        factory: githubData.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
+        products: githubData.products || [],
+        blog: githubData.blog || [],
+        _source: 'github',
       };
       return NextResponse.json(result, {
         headers: {
