@@ -1,227 +1,513 @@
 {
-    "hero": {
-        "title": "Professional HDPE Plastic Netting Manufacturer Since 2005",
-        "subtitle": "Leading manufacturer of construction safety nets, scaffolding nets, shade nets, shade sails, hail nets, olive nets, privacy nets, anti-bee/bird nets, and weed barrier fabric. Exporting to 50+ countries worldwide. 21+ Years Experience.",
-        "cta1": "Get Free Quote",
-        "cta2": "View Products"
-    },
-    "about": {
-        "title": "About Jiacheng Netting",
-        "subtitle": "Your Trusted Netting Supplier Since 2005",
-        "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional and leading manufacturer engaged in the production, research, development, and sales of high-performance warp knitting plastic nets since 2005. Our factory is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, covering an area of approximately 20,000 square meters and equipped with modern production equipment and a top-notch technical team.\n\nWe focus on the production of plastic nets, including construction safety nets, hail nets, shade nets, shade sails, olive nets, bird nets, privacy screens, weed barrier fabric, wind barrier nets, aquaculture nets, and other warp knitting products. We have advanced production processes and technologies that support customization of plastic nets in various specifications, colors, and processes.\n\nAs an enterprise driven by innovation, we have a high-quality research and development team that continuously develops and manufactures new products to meet the ever-changing demands of our customers. We place great emphasis on product quality and technological innovation and have obtained BSCI and NFPA 701 certifications to ensure the safety and stability of product quality and production environment.\n\nOur products have been exporting to North America, South America, Europe, the Middle East, Asia, Africa, and other countries, receiving high praise and recognition from customers. We will continue to improve product quality and service levels, providing customers with the highest quality products and services.",
-        "features": [
-            "BSCI Certified Factory",
-            "NFPA-701 Certificate",
-            "21+ Years Experience",
-            "20,000m² Production Facility",
-            "Export to 50+ Countries",
-            "OEM/ODM Available"
-        ],
-        "stats": [
-            {"number": "21+", "label": "Years Experience"},
-            {"number": "50+", "label": "Countries Served"},
-            {"number": "20000", "label": "m² Factory Area"},
-            {"number": "10", "label": "Product Lines"}
-        ]
-    },
-    "products": [
-        {
-            "id": "debris-net",
-            "name": "Safety Debris Netting",
-            "nameZh": "脚手架防护网",
-            "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
-            "specs": ["Material: 100% virgin HDPE", "Mesh: 1/8\", 1/16\" opening", "Fire-Retardant: NFPA 701 Method II", "Reinforced eyelet holes", "Will not unravel when cut", "Flexible in cold weather", "Color: Any color available"],
-            "applications": ["Scaffolding net & enclosure", "Contains debris, dust and job site materials", "Guardrail safety barrier", "Construction windscreen & jobsite protection", "Building wrap", "Floor-to-ceiling netting", "Shade cloth"],
-            "images": ["/products/debris-net/main-1.jpg", "/products/debris-net/main-2.jpg", "/products/debris-net/main-3.jpg"],
-            "appImages": ["/products/debris-net/apps/app-1.jpg", "/products/debris-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "square-net",
-            "name": "Construction Safety Debris Netting",
-            "nameZh": "建筑安全方格网",
-            "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Edges are hemmed & reinforced for easy installation. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
-            "specs": ["Material: 100% virgin HDPE", "Mesh: 1/4\" hole opening", "Fire-Retardant: NFPA 701 Method II", "Edges hemmed & reinforced", "Will not unravel when cut", "Flexible in cold weather", "Color: Any color available"],
-            "applications": ["Guardrail debris protection", "Scaffolding enclosure", "Construction building enclosure", "Industrial plant & refinery maintenance", "Demolition containment", "Safety fence, barrier net, snow fence"],
-            "images": ["/products/square-net/main-1.jpg", "/products/square-net/main-2.jpg", "/products/square-net/main-3.jpg"],
-            "appImages": []
-        },
-        {
-            "id": "mesh-tarp",
-            "name": "Mesh Tarp",
-            "nameZh": "网格盖土布",
-            "description": "1/16\" mesh hole openings, made of 100% virgin HDPE. Brass grommets spaced apart every 2\" on all edges. Double-stitch sides and all hems are re-enforced with polyester webbing. UV treated & protected. Fire-Retardant: Meets NFPA 701 Method 2. Will not unravel when cut. Stays flexible in cold weather.",
-            "specs": ["Material: 100% virgin HDPE", "Mesh: 1/16\" openings", "Brass grommets every 2\"", "Double-stitched, reinforced hems", "UV treated & protected", "Fire-Retardant: NFPA 701 Method 2", "Color: Any color available"],
-            "applications": ["Construction building enclosure", "Scaffold netting & enclosure", "Privacy screen, visual barrier, wind barrier", "Shade cloth", "Cover loads on dump trucks", "Plastering, stucco, EIFS, masonry"],
-            "images": ["/products/mesh-tarp/main-1.jpg", "/products/mesh-tarp/main-2.jpg", "/products/mesh-tarp/main-3.jpg"],
-            "appImages": ["/products/mesh-tarp/apps/app-1.jpg", "/products/mesh-tarp/apps/app-2.jpg"]
-        },
-        {
-            "id": "tape-shade-net",
-            "name": "Tape Shade Net",
-            "nameZh": "扁丝遮阳网",
-            "description": "Made of 100% virgin HDPE. 30%-95% shade rate. Water-proof. UV treated. Width: 1m-12m (any length available). Color: Customize any color. Packaging: 1 roll/bag or 1 sheet/bag.",
-            "specs": ["Material: 100% virgin HDPE", "Shade rate: 30%-95%", "Water-proof", "UV treated", "Width: 1m-12m, any length", "Color: Any color available", "Packaging: 1 roll/bag or 1 sheet/bag"],
-            "applications": ["Courtyard, swimming pool, patio shade", "Open garage, garden, tennis courts", "Vegetable garden plants, greenhouse", "Chicken coop, awning for pergola", "Window, carport, porch and privacy screen"],
-            "images": ["/products/tape-shade-net/main-1.jpg", "/products/tape-shade-net/main-2.png", "/products/tape-shade-net/main-3.png"],
-            "appImages": ["/products/tape-shade-net/apps/app-1.jpg", "/products/tape-shade-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "shade-sail",
-            "name": "Shade Sail",
-            "nameZh": "遮阳帆",
-            "description": "Made of 100% virgin HDPE. Treated with a UV-stabilizing compound to prevent shade sails from drying out, tearing, and fading, significantly extending the lifespan. All edges are constructed with heavy-duty double-layered reinforced stitched seams, preventing frayed edges and out of shape. Each corner ends with a durable D-ring for easy hanging. Blocks 95% of harmful UV.",
-            "specs": ["Material: 100% virgin HDPE", "UV-stabilizing compound treatment", "Double-layered reinforced stitched seams", "Durable D-ring corners", "Blocks 95% harmful UV", "Color: Any color available"],
-            "applications": ["Patio, pool, garden shade", "Playground, outdoor dining", "Parking area cover", "Commercial outdoor spaces"],
-            "images": ["/products/shade-sail/main-1.jpg", "/products/shade-sail/main-2.jpg", "/products/shade-sail/main-3.jpg"],
-            "appImages": []
-        },
-        {
-            "id": "anti-hail-net",
-            "name": "Anti Hail Net / Drape Net",
-            "nameZh": "防雹网/防冰雹布",
-            "description": "100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different mesh type options available.",
-            "specs": ["Material: 100% virgin HDPE", "Width: Max 12m", "Length: Any length available", "Weight: 45-70g GSM or custom", "UV treated & protected", "Color: Any color available", "Mesh type: Customizable"],
-            "applications": ["Comprehensive protection against hail for crops", "Fruit orchard protection", "Protection from birds & fruit bats"],
-            "images": ["/products/anti-hail-net/main-1.png", "/products/anti-hail-net/main-2.jpg", "/products/anti-hail-net/main-3.jpg"],
-            "appImages": ["/products/anti-hail-net/apps/app-1.jpg", "/products/anti-hail-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "privacy-screen",
-            "name": "Privacy Screen",
-            "nameZh": "隐私围挡网",
-            "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. 90% Visibility Blockage. Edges are finished with heavy duty bindings and stainless copper grommets, all stitching are reinforced. Any color is available.",
-            "specs": ["Material: 100% virgin HDPE", "Width: Max 12m", "Length: Any length", "90% Visibility blockage", "Heavy duty bindings, stainless copper grommets", "All stitching reinforced", "Color: Any color available"],
-            "applications": ["Block neighbor see through, protect personal privacy", "Separate street, road, construction site", "Block surrounding noise and street view", "Stops dogs from barking at neighbors"],
-            "images": ["/products/privacy-screen/main-1.jpg", "/products/privacy-screen/main-2.jpg", "/products/privacy-screen/main-3.jpg"],
-            "appImages": ["/products/privacy-screen/apps/app-1.jpg", "/products/privacy-screen/apps/app-2.jpg"]
-        },
-        {
-            "id": "olive-net",
-            "name": "Olive Net / Harvest Net",
-            "nameZh": "橄榄收获网",
-            "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different mesh type and GSM options available.",
-            "specs": ["Material: 100% virgin HDPE", "Width: Max 12m", "Length: Any length", "UV Treated", "Color: Any color available", "Mesh type, GSM and color: Customizable"],
-            "applications": ["Olive collection", "Walnut, hazelnut, chestnut harvesting", "Plum and other fruit collection"],
-            "images": ["/products/olive-net/main-1.jpg", "/products/olive-net/main-2.jpg", "/products/olive-net/main-3.jpg"],
-            "appImages": ["/products/olive-net/apps/app-1.jpg", "/products/olive-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "anti-bee-net",
-            "name": "Anti-Bee Net",
-            "nameZh": "防蜂隔离网",
-            "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows the light, moisture, and spraying to reach the plants. Impedes bees and other predators such as wasps. Restricts pollination.",
-            "specs": ["Material: 100% virgin HDPE", "Width: Max 12m", "Length: Any length", "UV-stabilized", "Weather, water, acid resistant", "Color: Any color available"],
-            "applications": ["Impedes bees and predators such as wasps", "Restrict pollination", "Greenhouse isolation", "Agricultural crop protection"],
-            "images": ["/products/anti-bee-net/main-1.jpg", "/products/anti-bee-net/main-2.jpg"],
-            "appImages": ["/products/anti-bee-net/apps/app-1.jpg", "/products/anti-bee-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "anti-bird-net",
-            "name": "Anti-Bird Net",
-            "nameZh": "防鸟网",
-            "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows light, moisture, and spraying to reach the plants.",
-            "specs": ["Material: 100% virgin HDPE", "Width: Max 12m", "Length: Any length", "UV-stabilized", "Weather, water, acid resistant", "Color: Any color available"],
-            "applications": ["Fruit orchard bird protection", "Crop protection from birds", "Pond and fish farm protection", "Building and structure protection"],
-            "images": ["/products/anti-bird-net/main-1.jpg", "/products/anti-bird-net/main-2.jpg"],
-            "appImages": ["/products/anti-bird-net/apps/app-1.jpg", "/products/anti-bird-net/apps/app-2.jpg"]
-        },
-        {
-            "id": "weed-barrier",
-            "name": "Weed Barrier Fabric",
-            "nameZh": "防草布",
-            "description": "Made of Heavy-Duty Professional Grade Polypropylene Material, chemical free, durable, sturdy and corrosion resistant. Keeps the soil healthy. Heavy duty weed blocker fabric is needle-punched to transmit water and air, preserving the soil moisture. Fabric allows air and water through, superior permeability to keep the soil nourished. Just water cleaning to be reusable.",
-            "specs": ["Material: Heavy-Duty Polypropylene", "Chemical free, durable, corrosion resistant", "Needle-punched for water & air transmission", "Superior permeability", "Reusable with water cleaning"],
-            "applications": ["Underlayer for artificial grass", "Vegetable patch, flower bed", "Ground cover, garden, driveways"],
-            "images": ["/products/weed-barrier/main-1.jpg", "/products/weed-barrier/main-2.jpg"],
-            "appImages": ["/products/weed-barrier/apps/app-1.jpg", "/products/weed-barrier/apps/app-2.jpg"]
-        }
+  "hero": {
+    "title": "Professional HDPE Plastic Netting Manufacturer Since 2005",
+    "subtitle": "Leading manufacturer of construction safety nets, scaffolding nets, shade nets, shade sails, hail nets, olive nets, privacy nets, anti-bee/bird nets, and weed barrier fabric. Exporting to 50+ countries worldwide. 21+ Years Experience.",
+    "cta1": "Get Free Quote",
+    "cta2": "View Products"
+  },
+  "about": {
+    "title": "About Jiacheng Netting",
+    "subtitle": "GitHub storage test - please remove",
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional and leading manufacturer engaged in the production, research, development, and sales of high-performance warp knitting plastic nets since 2005. Our factory is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, covering an area of approximately 20,000 square meters and equipped with modern production equipment and a top-notch technical team.\n\nWe focus on the production of plastic nets, including construction safety nets, hail nets, shade nets, shade sails, olive nets, bird nets, privacy screens, weed barrier fabric, wind barrier nets, aquaculture nets, and other warp knitting products. We have advanced production processes and technologies that support customization of plastic nets in various specifications, colors, and processes.\n\nAs an enterprise driven by innovation, we have a high-quality research and development team that continuously develops and manufactures new products to meet the ever-changing demands of our customers. We place great emphasis on product quality and technological innovation and have obtained BSCI and NFPA 701 certifications to ensure the safety and stability of product quality and production environment.\n\nOur products have been exporting to North America, South America, Europe, the Middle East, Asia, Africa, and other countries, receiving high praise and recognition from customers. We will continue to improve product quality and service levels, providing customers with the highest quality products and services.",
+    "features": [
+      "BSCI Certified Factory",
+      "NFPA-701 Certificate",
+      "21+ Years Experience",
+      "20,000m² Production Facility",
+      "Export to 50+ Countries",
+      "OEM/ODM Available"
     ],
-    "factory": {
-        "title": "Our Manufacturing Facility",
-        "subtitle": "State-of-the-Art Production Capability",
-        "description": "Our 20,000 square meter manufacturing facility is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production equipment and a top-notch technical team, we support customization of plastic nets in various specifications, colors, and processes.",
-        "info": {
-            "area": "20,000 m²",
-            "experience": "Since 2005",
-            "employees": "100+",
-            "exports": "50+ Countries"
-        },
-        "process": [
-            {"step": "01", "title": "Virgin HDPE", "desc": "Premium virgin HDPE raw material selection"},
-            {"step": "02", "title": "Drawing", "desc": "Extrusion and filament drawing process"},
-            {"step": "03", "title": "Threading the Needle", "desc": "Preparation for precision knitting"},
-            {"step": "04", "title": "Knitting", "desc": "High-speed warp knitting production"},
-            {"step": "05", "title": "Quality Testing", "desc": "Rigorous testing of each batch produced"},
-            {"step": "06", "title": "Rolling", "desc": "Professional rolling and winding"},
-            {"step": "07", "title": "Packaging", "desc": "Professional packaging for export standards"},
-            {"step": "08", "title": "Loading Container", "desc": "Global logistics coordination and delivery"}
-        ],
-        "highlights": [
-            {"icon": "⚙️", "title": "Advanced Warp Knitting Lines", "desc": "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting."},
-            {"icon": "🏭", "title": "20,000 m² Workshop", "desc": "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong."},
-            {"icon": "👷", "title": "Skilled QC Team", "desc": "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch."},
-            {"icon": "✅", "title": "BSCI & NFPA-701 Certified", "desc": "Audited social compliance and fire-retardant certification for construction and public safety projects."},
-            {"icon": "📦", "title": "OEM / ODM Available", "desc": "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs."},
-            {"icon": "🌍", "title": "Export to 50+ Countries", "desc": "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents."}
-        ],
-        "infoCards": [
-            {"icon": "🏭", "title": "Factory Area", "value": "20,000 m²"},
-            {"icon": "⚙️", "title": "Production Capacity", "value": "Custom Orders Welcome"}
-        ]
-    },
-    "contact": {
-        "email": "Netfactory01@factory-jc.com",
-        "whatsapp": "+86-15628764579",
-        "wechat": "Netfactory01",
-        "address": "Zhanjia Industrial Park, Zhenglu Town, Shanghe County, Jinan City, Shandong Province, China",
-        "workingHours": "Monday - Saturday: 8:00 AM - 6:00 PM (CST)"
-    },
-    "footer": {
-        "company": "Jiacheng Netting",
-        "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved."
-    },
-    "blog": [
-        {
-            "id": 1,
-            "title": "How to Choose the Right Construction Safety Netting",
-            "date": "2024-03-15",
-            "excerpt": "A comprehensive guide to selecting the best debris netting for your construction project...",
-            "category": "Guide"
-        },
-        {
-            "id": 2,
-            "title": "HDPE vs PP: Which Material is Better for Netting?",
-            "date": "2024-03-10",
-            "excerpt": "Comparing two popular materials used in plastic netting production...",
-            "category": "Technology"
-        },
-        {
-            "id": 3,
-            "title": "Understanding NFPA 701 Fire-Retardant Net Standards",
-            "date": "2024-03-05",
-            "excerpt": "Everything you need to know about NFPA 701 Method II fire-retardant netting regulations...",
-            "category": "Compliance"
-        },
-        {
-            "id": 4,
-            "title": "Top 5 Applications for Shade Nets in Agriculture",
-            "date": "2024-02-28",
-            "excerpt": "Discover how shade netting can improve your crop yield...",
-            "category": "Agriculture"
-        },
-        {
-            "id": 5,
-            "title": "Export Guide: Shipping Netting Products Overseas",
-            "date": "2024-02-20",
-            "excerpt": "Tips for international buyers importing netting from China...",
-            "category": "Logistics"
-        },
-        {
-            "id": 6,
-            "title": "New Product Launch: Ultra-Violet Resistant Olive Net",
-            "date": "2024-02-15",
-            "excerpt": "Introducing our latest innovation in olive harvesting technology...",
-            "category": "Product"
-        }
+    "stats": [
+      {
+        "number": "21+",
+        "label": "Years Experience"
+      },
+      {
+        "number": "50+",
+        "label": "Countries Served"
+      },
+      {
+        "number": "20000",
+        "label": "m² Factory Area"
+      },
+      {
+        "number": "10",
+        "label": "Product Lines"
+      }
     ]
+  },
+  "products": [
+    {
+      "id": "debris-net",
+      "name": "Safety Debris Netting",
+      "nameZh": "脚手架防护网",
+      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Mesh: 1/8\", 1/16\" opening",
+        "Fire-Retardant: NFPA 701 Method II",
+        "Reinforced eyelet holes",
+        "Will not unravel when cut",
+        "Flexible in cold weather",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Scaffolding net & enclosure",
+        "Contains debris, dust and job site materials",
+        "Guardrail safety barrier",
+        "Construction windscreen & jobsite protection",
+        "Building wrap",
+        "Floor-to-ceiling netting",
+        "Shade cloth"
+      ],
+      "images": [
+        "/products/debris-net/main-1.jpg",
+        "/products/debris-net/main-2.jpg",
+        "/products/debris-net/main-3.jpg"
+      ],
+      "appImages": [
+        "/products/debris-net/apps/app-1.jpg",
+        "/products/debris-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "square-net",
+      "name": "Construction Safety Debris Netting",
+      "nameZh": "建筑安全方格网",
+      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Edges are hemmed & reinforced for easy installation. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Mesh: 1/4\" hole opening",
+        "Fire-Retardant: NFPA 701 Method II",
+        "Edges hemmed & reinforced",
+        "Will not unravel when cut",
+        "Flexible in cold weather",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Guardrail debris protection",
+        "Scaffolding enclosure",
+        "Construction building enclosure",
+        "Industrial plant & refinery maintenance",
+        "Demolition containment",
+        "Safety fence, barrier net, snow fence"
+      ],
+      "images": [
+        "/products/square-net/main-1.jpg",
+        "/products/square-net/main-2.jpg",
+        "/products/square-net/main-3.jpg"
+      ],
+      "appImages": []
+    },
+    {
+      "id": "mesh-tarp",
+      "name": "Mesh Tarp",
+      "nameZh": "网格盖土布",
+      "description": "1/16\" mesh hole openings, made of 100% virgin HDPE. Brass grommets spaced apart every 2\" on all edges. Double-stitch sides and all hems are re-enforced with polyester webbing. UV treated & protected. Fire-Retardant: Meets NFPA 701 Method 2. Will not unravel when cut. Stays flexible in cold weather.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Mesh: 1/16\" openings",
+        "Brass grommets every 2\"",
+        "Double-stitched, reinforced hems",
+        "UV treated & protected",
+        "Fire-Retardant: NFPA 701 Method 2",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Construction building enclosure",
+        "Scaffold netting & enclosure",
+        "Privacy screen, visual barrier, wind barrier",
+        "Shade cloth",
+        "Cover loads on dump trucks",
+        "Plastering, stucco, EIFS, masonry"
+      ],
+      "images": [
+        "/products/mesh-tarp/main-1.jpg",
+        "/products/mesh-tarp/main-2.jpg",
+        "/products/mesh-tarp/main-3.jpg"
+      ],
+      "appImages": [
+        "/products/mesh-tarp/apps/app-1.jpg",
+        "/products/mesh-tarp/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "tape-shade-net",
+      "name": "Tape Shade Net",
+      "nameZh": "扁丝遮阳网",
+      "description": "Made of 100% virgin HDPE. 30%-95% shade rate. Water-proof. UV treated. Width: 1m-12m (any length available). Color: Customize any color. Packaging: 1 roll/bag or 1 sheet/bag.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Shade rate: 30%-95%",
+        "Water-proof",
+        "UV treated",
+        "Width: 1m-12m, any length",
+        "Color: Any color available",
+        "Packaging: 1 roll/bag or 1 sheet/bag"
+      ],
+      "applications": [
+        "Courtyard, swimming pool, patio shade",
+        "Open garage, garden, tennis courts",
+        "Vegetable garden plants, greenhouse",
+        "Chicken coop, awning for pergola",
+        "Window, carport, porch and privacy screen"
+      ],
+      "images": [
+        "/products/tape-shade-net/main-1.jpg",
+        "/products/tape-shade-net/main-2.png",
+        "/products/tape-shade-net/main-3.png"
+      ],
+      "appImages": [
+        "/products/tape-shade-net/apps/app-1.jpg",
+        "/products/tape-shade-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "shade-sail",
+      "name": "Shade Sail",
+      "nameZh": "遮阳帆",
+      "description": "Made of 100% virgin HDPE. Treated with a UV-stabilizing compound to prevent shade sails from drying out, tearing, and fading, significantly extending the lifespan. All edges are constructed with heavy-duty double-layered reinforced stitched seams, preventing frayed edges and out of shape. Each corner ends with a durable D-ring for easy hanging. Blocks 95% of harmful UV.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "UV-stabilizing compound treatment",
+        "Double-layered reinforced stitched seams",
+        "Durable D-ring corners",
+        "Blocks 95% harmful UV",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Patio, pool, garden shade",
+        "Playground, outdoor dining",
+        "Parking area cover",
+        "Commercial outdoor spaces"
+      ],
+      "images": [
+        "/products/shade-sail/main-1.jpg",
+        "/products/shade-sail/main-2.jpg",
+        "/products/shade-sail/main-3.jpg"
+      ],
+      "appImages": []
+    },
+    {
+      "id": "anti-hail-net",
+      "name": "Anti Hail Net / Drape Net",
+      "nameZh": "防雹网/防冰雹布",
+      "description": "100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different mesh type options available.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Width: Max 12m",
+        "Length: Any length available",
+        "Weight: 45-70g GSM or custom",
+        "UV treated & protected",
+        "Color: Any color available",
+        "Mesh type: Customizable"
+      ],
+      "applications": [
+        "Comprehensive protection against hail for crops",
+        "Fruit orchard protection",
+        "Protection from birds & fruit bats"
+      ],
+      "images": [
+        "/products/anti-hail-net/main-1.png",
+        "/products/anti-hail-net/main-2.jpg",
+        "/products/anti-hail-net/main-3.jpg"
+      ],
+      "appImages": [
+        "/products/anti-hail-net/apps/app-1.jpg",
+        "/products/anti-hail-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "privacy-screen",
+      "name": "Privacy Screen",
+      "nameZh": "隐私围挡网",
+      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. 90% Visibility Blockage. Edges are finished with heavy duty bindings and stainless copper grommets, all stitching are reinforced. Any color is available.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Width: Max 12m",
+        "Length: Any length",
+        "90% Visibility blockage",
+        "Heavy duty bindings, stainless copper grommets",
+        "All stitching reinforced",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Block neighbor see through, protect personal privacy",
+        "Separate street, road, construction site",
+        "Block surrounding noise and street view",
+        "Stops dogs from barking at neighbors"
+      ],
+      "images": [
+        "/products/privacy-screen/main-1.jpg",
+        "/products/privacy-screen/main-2.jpg",
+        "/products/privacy-screen/main-3.jpg"
+      ],
+      "appImages": [
+        "/products/privacy-screen/apps/app-1.jpg",
+        "/products/privacy-screen/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "olive-net",
+      "name": "Olive Net / Harvest Net",
+      "nameZh": "橄榄收获网",
+      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different mesh type and GSM options available.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Width: Max 12m",
+        "Length: Any length",
+        "UV Treated",
+        "Color: Any color available",
+        "Mesh type, GSM and color: Customizable"
+      ],
+      "applications": [
+        "Olive collection",
+        "Walnut, hazelnut, chestnut harvesting",
+        "Plum and other fruit collection"
+      ],
+      "images": [
+        "/products/olive-net/main-1.jpg",
+        "/products/olive-net/main-2.jpg",
+        "/products/olive-net/main-3.jpg"
+      ],
+      "appImages": [
+        "/products/olive-net/apps/app-1.jpg",
+        "/products/olive-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "anti-bee-net",
+      "name": "Anti-Bee Net",
+      "nameZh": "防蜂隔离网",
+      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows the light, moisture, and spraying to reach the plants. Impedes bees and other predators such as wasps. Restricts pollination.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Width: Max 12m",
+        "Length: Any length",
+        "UV-stabilized",
+        "Weather, water, acid resistant",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Impedes bees and predators such as wasps",
+        "Restrict pollination",
+        "Greenhouse isolation",
+        "Agricultural crop protection"
+      ],
+      "images": [
+        "/products/anti-bee-net/main-1.jpg",
+        "/products/anti-bee-net/main-2.jpg"
+      ],
+      "appImages": [
+        "/products/anti-bee-net/apps/app-1.jpg",
+        "/products/anti-bee-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "anti-bird-net",
+      "name": "Anti-Bird Net",
+      "nameZh": "防鸟网",
+      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows light, moisture, and spraying to reach the plants.",
+      "specs": [
+        "Material: 100% virgin HDPE",
+        "Width: Max 12m",
+        "Length: Any length",
+        "UV-stabilized",
+        "Weather, water, acid resistant",
+        "Color: Any color available"
+      ],
+      "applications": [
+        "Fruit orchard bird protection",
+        "Crop protection from birds",
+        "Pond and fish farm protection",
+        "Building and structure protection"
+      ],
+      "images": [
+        "/products/anti-bird-net/main-1.jpg",
+        "/products/anti-bird-net/main-2.jpg"
+      ],
+      "appImages": [
+        "/products/anti-bird-net/apps/app-1.jpg",
+        "/products/anti-bird-net/apps/app-2.jpg"
+      ]
+    },
+    {
+      "id": "weed-barrier",
+      "name": "Weed Barrier Fabric",
+      "nameZh": "防草布",
+      "description": "Made of Heavy-Duty Professional Grade Polypropylene Material, chemical free, durable, sturdy and corrosion resistant. Keeps the soil healthy. Heavy duty weed blocker fabric is needle-punched to transmit water and air, preserving the soil moisture. Fabric allows air and water through, superior permeability to keep the soil nourished. Just water cleaning to be reusable.",
+      "specs": [
+        "Material: Heavy-Duty Polypropylene",
+        "Chemical free, durable, corrosion resistant",
+        "Needle-punched for water & air transmission",
+        "Superior permeability",
+        "Reusable with water cleaning"
+      ],
+      "applications": [
+        "Underlayer for artificial grass",
+        "Vegetable patch, flower bed",
+        "Ground cover, garden, driveways"
+      ],
+      "images": [
+        "/products/weed-barrier/main-1.jpg",
+        "/products/weed-barrier/main-2.jpg"
+      ],
+      "appImages": [
+        "/products/weed-barrier/apps/app-1.jpg",
+        "/products/weed-barrier/apps/app-2.jpg"
+      ]
+    }
+  ],
+  "factory": {
+    "title": "Our Manufacturing Facility",
+    "subtitle": "State-of-the-Art Production Capability",
+    "description": "Our 20,000 square meter manufacturing facility is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production equipment and a top-notch technical team, we support customization of plastic nets in various specifications, colors, and processes.",
+    "info": {
+      "area": "20,000 m²",
+      "experience": "Since 2005",
+      "employees": "100+",
+      "exports": "50+ Countries"
+    },
+    "process": [
+      {
+        "step": "01",
+        "title": "Virgin HDPE",
+        "desc": "Premium virgin HDPE raw material selection"
+      },
+      {
+        "step": "02",
+        "title": "Drawing",
+        "desc": "Extrusion and filament drawing process"
+      },
+      {
+        "step": "03",
+        "title": "Threading the Needle",
+        "desc": "Preparation for precision knitting"
+      },
+      {
+        "step": "04",
+        "title": "Knitting",
+        "desc": "High-speed warp knitting production"
+      },
+      {
+        "step": "05",
+        "title": "Quality Testing",
+        "desc": "Rigorous testing of each batch produced"
+      },
+      {
+        "step": "06",
+        "title": "Rolling",
+        "desc": "Professional rolling and winding"
+      },
+      {
+        "step": "07",
+        "title": "Packaging",
+        "desc": "Professional packaging for export standards"
+      },
+      {
+        "step": "08",
+        "title": "Loading Container",
+        "desc": "Global logistics coordination and delivery"
+      }
+    ],
+    "highlights": [
+      {
+        "icon": "⚙️",
+        "title": "Advanced Warp Knitting Lines",
+        "desc": "Multiple Karl Mayer & Liba warp knitting machines with 60+ needles per inch for high-strength HDPE netting."
+      },
+      {
+        "icon": "🏭",
+        "title": "20,000 m² Workshop",
+        "desc": "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong."
+      },
+      {
+        "icon": "👷",
+        "title": "Skilled QC Team",
+        "desc": "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch."
+      },
+      {
+        "icon": "✅",
+        "title": "BSCI & NFPA-701 Certified",
+        "desc": "Audited social compliance and fire-retardant certification for construction and public safety projects."
+      },
+      {
+        "icon": "📦",
+        "title": "OEM / ODM Available",
+        "desc": "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs."
+      },
+      {
+        "icon": "🌍",
+        "title": "Export to 50+ Countries",
+        "desc": "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents."
+      }
+    ],
+    "infoCards": [
+      {
+        "icon": "🏭",
+        "title": "Factory Area",
+        "value": "20,000 m²"
+      },
+      {
+        "icon": "⚙️",
+        "title": "Production Capacity",
+        "value": "Custom Orders Welcome"
+      }
+    ]
+  },
+  "contact": {
+    "email": "Netfactory01@factory-jc.com",
+    "whatsapp": "+86-15628764579",
+    "wechat": "Netfactory01",
+    "address": "Zhanjia Industrial Park, Zhenglu Town, Shanghe County, Jinan City, Shandong Province, China",
+    "workingHours": "Monday - Saturday: 8:00 AM - 6:00 PM (CST)"
+  },
+  "footer": {
+    "company": "Jiacheng Netting",
+    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved."
+  },
+  "blog": [
+    {
+      "id": 1,
+      "title": "How to Choose the Right Construction Safety Netting",
+      "date": "2024-03-15",
+      "excerpt": "A comprehensive guide to selecting the best debris netting for your construction project...",
+      "category": "Guide"
+    },
+    {
+      "id": 2,
+      "title": "HDPE vs PP: Which Material is Better for Netting?",
+      "date": "2024-03-10",
+      "excerpt": "Comparing two popular materials used in plastic netting production...",
+      "category": "Technology"
+    },
+    {
+      "id": 3,
+      "title": "Understanding NFPA 701 Fire-Retardant Net Standards",
+      "date": "2024-03-05",
+      "excerpt": "Everything you need to know about NFPA 701 Method II fire-retardant netting regulations...",
+      "category": "Compliance"
+    },
+    {
+      "id": 4,
+      "title": "Top 5 Applications for Shade Nets in Agriculture",
+      "date": "2024-02-28",
+      "excerpt": "Discover how shade netting can improve your crop yield...",
+      "category": "Agriculture"
+    },
+    {
+      "id": 5,
+      "title": "Export Guide: Shipping Netting Products Overseas",
+      "date": "2024-02-20",
+      "excerpt": "Tips for international buyers importing netting from China...",
+      "category": "Logistics"
+    },
+    {
+      "id": 6,
+      "title": "New Product Launch: Ultra-Violet Resistant Olive Net",
+      "date": "2024-02-15",
+      "excerpt": "Introducing our latest innovation in olive harvesting technology...",
+      "category": "Product"
+    }
+  ]
 }
