@@ -1,6 +1,7 @@
 'use client';
 
 import { useContent } from '@/context/ContentContext';
+import { WHATSAPP_QR, WECHAT_QR } from '@/data/qr-codes';
 
 export default function ContactPage() {
   const { contact } = useContent();
@@ -41,7 +42,7 @@ export default function ContactPage() {
                     <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WhatsApp</div>
                     <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ color: "#2563eb", textDecoration: "none", fontSize: 15 }}>{contact.whatsapp}</a>
                     <div style={{ marginTop: 12 }}>
-                      <img src="/images/whatsapp-qr.jpg" alt="WhatsApp QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
+                      <img src={WHATSAPP_QR} alt="WhatsApp QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
                       <div style={{ fontSize: 12, color: "#999", marginTop: 4 }}>Scan to chat</div>
                     </div>
                   </div>
@@ -58,7 +59,7 @@ export default function ContactPage() {
                     <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WeChat</div>
                     <span style={{ color: "#555", fontSize: 15 }}>{contact.wechat || "Netfactory01"}</span>
                     <div style={{ marginTop: 12 }}>
-                      <img src="/images/wechat-qr.jpg" alt="WeChat QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
+                      <img src={WECHAT_QR} alt="WeChat QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
                       <div style={{ fontSize: 12, color: "#999", marginTop: 4 }}>Scan to add</div>
                     </div>
                   </div>

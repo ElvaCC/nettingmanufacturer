@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useContent } from "@/context/ContentContext";
+import { WHATSAPP_QR, WECHAT_QR } from "@/data/qr-codes";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
@@ -92,7 +93,7 @@ export default function Contact() {
                       <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>WhatsApp</div>
                       <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ fontSize: 13, color: "#25D366", textDecoration: "none" }}>{contact.whatsapp}</a>
                       <div style={{ marginTop: 8 }}>
-                        <img src="/images/whatsapp-qr.jpg" alt="WhatsApp QR Code" style={{ width: 100, height: 100, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
+                        <img src={WHATSAPP_QR} alt="WhatsApp QR Code" style={{ width: 100, height: 100, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
                         <div style={{ fontSize: 11, color: "#999", marginTop: 4 }}>Scan to chat</div>
                       </div>
                     </div>
@@ -109,7 +110,7 @@ export default function Contact() {
                       <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>WeChat</div>
                       <span style={{ fontSize: 13, color: "#07c160" }}>{contact.wechat || "Netfactory01"}</span>
                       <div style={{ marginTop: 8 }}>
-                        <img src="/images/wechat-qr.jpg" alt="WeChat QR Code" style={{ width: 100, height: 100, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
+                        <img src={WECHAT_QR} alt="WeChat QR Code" style={{ width: 100, height: 100, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
                         <div style={{ fontSize: 11, color: "#999", marginTop: 4 }}>Scan to add</div>
                       </div>
                     </div>
