@@ -452,6 +452,15 @@
     "company": "Jiacheng Netting",
     "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved."
   },
+  "business": {
+    "moq": "1,000 sqm (negotiable for trial orders)",
+    "packaging": "Rolls packed in woven bags, or pallet packing upon request",
+    "leadTime": "15-20 working days after deposit confirmed",
+    "fobPort": "Qingdao, China",
+    "sample": "Free samples available (freight collect)",
+    "payment": "T/T, L/C, Western Union",
+    "customization": "Custom size, color, GSM, mesh density, logo printing, private label"
+  },
   "blog": [
     {
       "id": 1,
