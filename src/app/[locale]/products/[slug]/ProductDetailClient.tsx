@@ -44,7 +44,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const getPath = (href: string) => `/${locale}${href}`;
   const email = contact?.email || 'Netfactory01@factory-jc.com';
   const whatsapp = contact?.whatsapp || '8615628764579';
-  const business = (contact as any)?.business || (window as any).__business || null;
+  const business = (contact as any)?.business || null;
 
   // Quick spec badges extracted from specs array
   const quickSpecs = (product.specs || []).slice(0, 4).map((s: string) => {
