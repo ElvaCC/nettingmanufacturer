@@ -35,6 +35,11 @@ export async function POST(request: NextRequest) {
     if (patch.factory) existing.factory = { ...existing.factory, ...patch.factory };
     if (patch.products) existing.products = patch.products;
     if (patch.blog) existing.blog = patch.blog;
+    if (patch.applications) existing.applications = patch.applications;
+    if (patch.ctaSection) existing.ctaSection = { ...existing.ctaSection, ...patch.ctaSection };
+    if (patch.featuresSection) existing.featuresSection = { ...existing.featuresSection, ...patch.featuresSection };
+    if (patch.contactPage) existing.contactPage = { ...existing.contactPage, ...patch.contactPage };
+    if (patch.business) existing.business = { ...existing.business, ...patch.business };
 
     // 3. Save to GitHub (persistent, never expires)
     const saved = await setContentOverride(existing);

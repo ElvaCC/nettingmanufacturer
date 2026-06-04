@@ -19,6 +19,11 @@ export async function GET() {
         factory: githubData.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
         products: githubData.products || [],
         blog: githubData.blog || [],
+        applications: githubData.applications || [],
+        ctaSection: githubData.ctaSection || {},
+        featuresSection: githubData.featuresSection || {},
+        contactPage: githubData.contactPage || {},
+        business: githubData.business || {},
         _source: 'github',
       };
       return NextResponse.json(result, {
@@ -42,6 +47,11 @@ export async function GET() {
       factory: data.factory || { title: '', subtitle: '', description: '', info: {}, process: [] },
       products: data.products || [],
       blog: data.blog || [],
+      applications: data.applications || [],
+      ctaSection: data.ctaSection || {},
+      featuresSection: data.featuresSection || {},
+      contactPage: data.contactPage || {},
+      business: data.business || {},
       _source: 'file',
     };
 
