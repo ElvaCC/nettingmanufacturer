@@ -23,9 +23,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
   // Sticky inquiry bar appears after scrolling past hero
   useEffect(() => {
-    const handleScroll = () => setShowStickyBar(window.scrollY > 600);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      if (typeof window === 'undefined') return;
+      setShowStickyBar(window.scrollY > 600);
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
   if (!product) {

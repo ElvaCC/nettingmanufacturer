@@ -33,6 +33,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
   const getPath = (href: string) => `/${locale}${href}`;
 
   const handleLang = (code: string) => {
+    if (typeof window === 'undefined') return;
     const path = window.location.pathname.replace(/^\/(en|es|ru|ar)/, "");
     router.push(code === "en" ? path || "/" : `/${code}${path}`);
     setIsLangOpen(false);

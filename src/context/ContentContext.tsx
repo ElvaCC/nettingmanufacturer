@@ -19,14 +19,16 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       .catch((err) => console.warn('[ContentProvider] fetch failed:', err));
   }, []);
 
-  // Initial fetch
+  // Initial fetch + listen for admin save events
   useEffect(() => {
     refresh();
 
-    // Listen for admin save events
     const handler = () => refresh();
-    window.addEventListener('content-updated', handler);
-    return () => window.removeEventListener('content-updated', handler);
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('content-updated', handler);
+      return () => window.removeEventListener('content-updated', handler);
+    }
   }, [refresh]);
 
   return (
