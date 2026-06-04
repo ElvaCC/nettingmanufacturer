@@ -18,7 +18,7 @@ export default function Products() {
         {/* Products Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {products.slice(0, 9).map((product) => (
-            <a key={product.id} href={getPath(`/products#${product.id}`)} style={{ textDecoration: "none", display: "block", background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #e5e7eb", transition: "box-shadow 0.3s", cursor: "pointer" }}>
+            <a key={product.id} href={getPath(`/products/${product.id}`)} style={{ textDecoration: "none", display: "block", background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #e5e7eb", transition: "box-shadow 0.3s", cursor: "pointer" }}>
               {/* Product Image */}
               <div style={{ height: 180, background: "#f0f4f8", overflow: "hidden", borderBottom: "3px solid #1e3a5f" }}>
                 {product.images && product.images.length > 0 ? (

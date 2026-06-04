@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import { useContent } from '@/context/ContentContext';
 
 // Product category definitions for anchor navigation
@@ -12,6 +13,8 @@ const CATEGORIES = [
 ];
 
 export default function ProductsPage() {
+  const params = useParams();
+  const locale = (params?.locale as string) || 'en';
   const { products, contact } = useContent();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
@@ -141,7 +144,7 @@ export default function ProductsPage() {
               {/* Product Cards Grid */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
                 {catProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} email={email} getSpecBadges={getSpecBadges} />
+                  <ProductCard key={product.id} product={product} email={email} locale={locale} getSpecBadges={getSpecBadges} />
                 ))}
               </div>
             </div>
@@ -166,17 +169,18 @@ export default function ProductsPage() {
   );
 }
 
-// ─── Individual Product Card ─────────────────────────────────────────────
-function ProductCard({ product, email, getSpecBadges }: {
+// ─── Individual Product Card ─────────────────────────────────────────
+function ProductCard({ product, email, getSpecBadges, locale }: {
   product: any;
   email: string;
   getSpecBadges: (specs: string[]) => string[];
+  locale: string;
 }) {
   const badges = getSpecBadges(product.specs || []);
+  const detailHref = `/${locale}/products/${product.id}`;
 
   return (
-    <a
-      href={`/products/${product.id}`}
+    <div
       style={{
         textDecoration: 'none',
         display: 'block',
@@ -197,33 +201,35 @@ function ProductCard({ product, email, getSpecBadges }: {
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
       }}
     >
-      {/* Product Image */}
-      <div style={{ position: 'relative', height: 220, background: '#f0f4f8', overflow: 'hidden' }}>
-        {product.images && product.images.length > 0 ? (
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s' }}
-          />
-        ) : (
-          <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 14 }}>{product.name}</div>
-        )}
-        {/* Spec badges overlay */}
-        {badges.length > 0 && (
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '8px 10px', background: 'linear-gradient(transparent, rgba(0,0,0,0.6))', display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-            {badges.map((badge, idx) => (
-              <span key={idx} style={{ fontSize: 11, background: 'rgba(255,255,255,0.9)', color: '#1e3a5f', padding: '2px 8px', borderRadius: 4, fontWeight: 600, backdropFilter: 'blur(4px)' }}>
-                {badge}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
+      {/* Product Image — links to detail page */}
+      <a href={detailHref} style={{ display: 'block', textDecoration: 'none' }}>
+        <div style={{ position: 'relative', height: 220, background: '#f0f4f8', overflow: 'hidden' }}>
+          {product.images && product.images.length > 0 ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s' }}
+            />
+          ) : (
+            <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 14 }}>{product.name}</div>
+          )}
+          {/* Spec badges overlay */}
+          {badges.length > 0 && (
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '8px 10px', background: 'linear-gradient(transparent, rgba(0,0,0,0.6))', display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+              {badges.map((badge, idx) => (
+                <span key={idx} style={{ fontSize: 11, background: 'rgba(255,255,255,0.9)', color: '#1e3a5f', padding: '2px 8px', borderRadius: 4, fontWeight: 600, backdropFilter: 'blur(4px)' }}>
+                  {badge}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </a>
 
       {/* Product Info */}
       <div style={{ padding: 20 }}>
         <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, lineHeight: 1.3 }}>{product.name}</h3>
-        <p style={{ fontSize: 13, lineHeight: 1.7, color: '#666', marginBottom: 16, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+        <p style={{ fontSize: 13, lineHeight: 1.7, color: '#666', marginBottom: 16, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }}>
           {product.description || ''}
         </p>
 
@@ -242,19 +248,30 @@ function ProductCard({ product, email, getSpecBadges }: {
           </ul>
         )}
 
-        {/* Actions */}
+        {/* Action Buttons */}
         <div style={{ display: 'flex', gap: 8, paddingTop: 12, borderTop: '1px solid #f3f4f6' }}>
-          <span style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0', background: '#2563eb', color: '#fff', borderRadius: 6, fontSize: 13, fontWeight: 600 }}>
+          <a
+            href={detailHref}
+            style={{
+              flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              padding: '8px 0', background: '#2563eb', color: '#fff',
+              borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none'
+            }}
+          >
             View Details
-          </span>
-          <span
-            onClick={e => e.preventDefault()}
-            style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 0', background: '#f0f4ff', color: '#2563eb', borderRadius: 6, fontSize: 13, fontWeight: 600 }}
+          </a>
+          <a
+            href={`mailto:${email}?subject=Quote Request: ${product.name}`}
+            style={{
+              flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              padding: '8px 0', background: '#f0f4ff', color: '#2563eb',
+              borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none'
+            }}
           >
             Get Quote
-          </span>
+          </a>
         </div>
       </div>
-    </a>
+    </div>
   );
 }
