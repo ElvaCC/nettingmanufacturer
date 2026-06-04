@@ -6,7 +6,7 @@ import { useContent } from "@/context/ContentContext";
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const { contact } = useContent();
+  const { contact, contactPage } = useContent();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,12 +37,16 @@ export default function Contact() {
     }
   };
 
+  const pageTitle = (contactPage as any)?.title || "Contact Us";
+  const pageSubtitle = (contactPage as any)?.subtitle || "Get in touch for inquiries and custom orders";
+  const exportMarkets = (contactPage as any)?.exportMarkets || "North America, South America, Europe, Middle East, Asia, Africa";
+
   return (
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Contact Us</h2>
-        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>Get in touch for inquiries and custom orders</p>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>{pageTitle}</h2>
+        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>{pageSubtitle}</p>
 
         {/* Contact Layout */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 48 }}>
@@ -116,7 +120,7 @@ export default function Contact() {
               {/* Export Info */}
               <div style={{ marginTop: 24, padding: 16, background: "#f0f9ff", borderRadius: 8, borderLeft: "4px solid #2563eb" }}>
                 <div style={{ fontSize: 13, color: "#0369a1", lineHeight: 1.6 }}>
-                  <strong>Export Markets:</strong> North America, South America, Europe, Middle East, Asia, Africa
+                  <strong>Export Markets:</strong> {exportMarkets}
                 </div>
               </div>
             </div>

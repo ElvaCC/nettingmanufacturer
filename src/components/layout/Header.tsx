@@ -3,25 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-
-const navItems = [
-  { label: "Home", href: "/", hasDropdown: false },
-  { label: "Products", href: "/products", hasDropdown: true, dropdown: [
-    { label: "Safety Debris Netting", href: "/products/debris-net" },
-    { label: "Construction Safety Net", href: "/products/square-net" },
-    { label: "Mesh Tarp", href: "/products/mesh-tarp" },
-    { label: "Tape Shade Net", href: "/products/tape-shade-net" },
-    { label: "Shade Sail", href: "/products/shade-sail" },
-    { label: "Anti Hail Net", href: "/products/anti-hail-net" },
-    { label: "Privacy Screen", href: "/products/privacy-screen" },
-    { label: "Olive Net", href: "/products/olive-net" },
-    { label: "Anti-Bee Net", href: "/products/anti-bee-net" },
-    { label: "Anti-Bird Net", href: "/products/anti-bird-net" },
-    { label: "Weed Barrier Fabric", href: "/products/weed-barrier" },
-  ]},
-  { label: "Factory", href: "/factory", hasDropdown: false },
-  { label: "Contact Us", href: "/contact", hasDropdown: false },
-];
+import { useContent } from "@/context/ContentContext";
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -38,6 +20,15 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
   const router = useRouter();
   const locale = localeProp || (params.locale as string) || "en";
   const currentLang = languages.find(l => l.code === locale) || languages[0];
+  const { products } = useContent();
+
+  // Dynamic product dropdown from content data
+  const navItems = [
+    { label: "Home", href: "/", hasDropdown: false, dropdown: [] as any[] },
+    { label: "Products", href: "/products", hasDropdown: true, dropdown: products.map(p => ({ label: p.name, href: `/products/${p.id}` })) },
+    { label: "Factory", href: "/factory", hasDropdown: false, dropdown: [] as any[] },
+    { label: "Contact Us", href: "/contact", hasDropdown: false, dropdown: [] as any[] },
+  ];
 
   const getPath = (href: string) => `/${locale}${href}`;
 

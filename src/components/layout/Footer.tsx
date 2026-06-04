@@ -19,9 +19,9 @@ export default function Footer() {
           <div>
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>{footer.company} <span style={{ color: "#fbbf24" }}>NETTING</span></div>
             <p style={{ fontSize: 13, lineHeight: 1.8, color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
-              Professional manufacturer of HDPE plastic netting since 2005.
+              {footer.tagline || "Professional manufacturer of HDPE plastic netting since 2005."}
             </p>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>✓ BSCI Certified • ✓ NFPA-701 Certificate • 21+ Years Experience</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{footer.certifications || "✓ BSCI Certified • ✓ NFPA-701 Certificate • 21+ Years Experience"}</div>
           </div>
 
           {/* Products */}

@@ -448,9 +448,40 @@
     "address": "Zhanjia Industrial Park, Zhenglu Town, Shanghe County, Jinan City, Shandong Province, China",
     "workingHours": ""
   },
+  "ctaSection": {
+    "title": "CONTACT US",
+    "subtitle": "We'd like to work with you",
+    "formTitle": "Send us a message",
+    "tagline": "Professional manufacturer of HDPE plastic netting since 2005"
+  },
+  "featuresSection": {
+    "title": "Your Trusted HDPE Netting Manufacturer",
+    "description": "Established in 2005, Jiacheng Netting is a leading manufacturer of HDPE industrial netting solutions. We specialize in the following products:",
+    "customDescription": "We can customize various knotless plastic netting according to your requirements. Our core value is \"Quality First\", which has earned us satisfied customers worldwide across multiple industries. 60% of our products are exported to the United States, with the proportion still rising; 40% are sold in Europe, Middle East, and Africa.",
+    "image": "/images/factory/jiacheng-factory-hero.jpg",
+    "stats": [
+      { "number": "21+", "label": "Years Experience" },
+      { "number": "50+", "label": "Countries Served" },
+      { "number": "1000+", "label": "Projects Completed" },
+      { "number": "98%", "label": "Client Satisfaction" }
+    ]
+  },
+  "applications": [
+    { "name": "Construction Safety", "items": ["Guardrail debris protection", "Scaffolding enclosure", "Building windscreen", "Safety fence / barrier net"] },
+    { "name": "Agriculture", "items": ["Olive harvesting", "Anti hail protection", "Bird/bee protection", "Weed barrier control"] },
+    { "name": "Shade Solutions", "items": ["Courtyard shade", "Swimming pool cover", "Greenhouse shading", "Carport canopy"] },
+    { "name": "Privacy Screen", "items": ["Residential privacy", "Construction site barrier", "Industrial partition", "Fence screening"] }
+  ],
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch for inquiries and custom orders",
+    "exportMarkets": "North America, South America, Europe, Middle East, Asia, Africa"
+  },
   "footer": {
     "company": "Jiacheng Netting",
-    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved."
+    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. All Rights Reserved.",
+    "tagline": "Professional manufacturer of HDPE plastic netting since 2005.",
+    "certifications": "✓ BSCI Certified • ✓ NFPA-701 Certificate • 21+ Years Experience"
   },
   "business": {
     "moq": "1,000 sqm (negotiable for trial orders)",
