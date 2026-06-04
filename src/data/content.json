@@ -445,7 +445,7 @@
     "email": "Netfactory01@factory-jc.com",
     "whatsapp": "+86-15628764579",
     "wechat": "+86-15628764579",
-    "address": "Zhanjia Industrial Park, Zhenglu Town, Shanghe County, Jinan City, Shandong Province, China",
+    "address": "Zhanjia Industrial Park, Zhenglu Town, Shanghe County, Jinan City, Shandong Province, China .",
     "workingHours": ""
   },
   "ctaSection": {
@@ -460,17 +460,61 @@
     "customDescription": "We can customize various knotless plastic netting according to your requirements. Our core value is \"Quality First\", which has earned us satisfied customers worldwide across multiple industries. 60% of our products are exported to the United States, with the proportion still rising; 40% are sold in Europe, Middle East, and Africa.",
     "image": "/images/factory/jiacheng-factory-hero.jpg",
     "stats": [
-      { "number": "21+", "label": "Years Experience" },
-      { "number": "50+", "label": "Countries Served" },
-      { "number": "1000+", "label": "Projects Completed" },
-      { "number": "98%", "label": "Client Satisfaction" }
+      {
+        "number": "21+",
+        "label": "Years Experience"
+      },
+      {
+        "number": "50+",
+        "label": "Countries Served"
+      },
+      {
+        "number": "1000+",
+        "label": "Projects Completed"
+      },
+      {
+        "number": "98%",
+        "label": "Client Satisfaction"
+      }
     ]
   },
   "applications": [
-    { "name": "Construction Safety", "items": ["Guardrail debris protection", "Scaffolding enclosure", "Building windscreen", "Safety fence / barrier net"] },
-    { "name": "Agriculture", "items": ["Olive harvesting", "Anti hail protection", "Bird/bee protection", "Weed barrier control"] },
-    { "name": "Shade Solutions", "items": ["Courtyard shade", "Swimming pool cover", "Greenhouse shading", "Carport canopy"] },
-    { "name": "Privacy Screen", "items": ["Residential privacy", "Construction site barrier", "Industrial partition", "Fence screening"] }
+    {
+      "name": "Construction Safety",
+      "items": [
+        "Guardrail debris protection",
+        "Scaffolding enclosure",
+        "Building windscreen",
+        "Safety fence / barrier net"
+      ]
+    },
+    {
+      "name": "Agriculture",
+      "items": [
+        "Olive harvesting",
+        "Anti hail protection",
+        "Bird/bee protection",
+        "Weed barrier control"
+      ]
+    },
+    {
+      "name": "Shade Solutions",
+      "items": [
+        "Courtyard shade",
+        "Swimming pool cover",
+        "Greenhouse shading",
+        "Carport canopy"
+      ]
+    },
+    {
+      "name": "Privacy Screen",
+      "items": [
+        "Residential privacy",
+        "Construction site barrier",
+        "Industrial partition",
+        "Fence screening"
+      ]
+    }
   ],
   "contactPage": {
     "title": "Contact Us",
