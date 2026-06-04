@@ -67,18 +67,10 @@ export default function Contact() {
               {/* Contact Details */}
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>📍</span>
-                  <div>
-                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Factory Address</div>
-                    <div style={{ fontSize: 13, color: "#666" }}>{contact.address}</div>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <span style={{ fontSize: 20, flexShrink: 0 }}>📧</span>
                   <div>
                     <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Email</div>
-                    <div style={{ fontSize: 13, color: "#2563eb" }}>{contact.email}</div>
+                    <a href={`mailto:${contact.email}`} style={{ fontSize: 13, color: "#2563eb", textDecoration: "none" }}>{contact.email}</a>
                   </div>
                 </div>
 
@@ -118,13 +110,20 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Export Info */}
-              <div style={{ marginTop: 24, padding: 16, background: "#f0f9ff", borderRadius: 8, borderLeft: "4px solid #2563eb" }}>
-                <div style={{ fontSize: 13, color: "#0369a1", lineHeight: 1.6 }}>
-                  <strong>Export Markets:</strong> {exportMarkets}
-                </div>
+                {/* Factory Address - moved to bottom, with location link */}
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Zhanjia+Industrial+Park,+Zhenglu+Town,+Shanghe+County,+Jinan+City,+Shandong+Province,+China"
+                  target="_blank"
+                  rel="noopener"
+                  style={{ display: "flex", gap: 14, alignItems: "flex-start", textDecoration: "none", color: "inherit" }}
+                >
+                  <span style={{ fontSize: 20, flexShrink: 0 }}>📍</span>
+                  <div>
+                    <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Factory Address</div>
+                    <div style={{ fontSize: 13, color: "#666" }}>{contact.address}</div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>

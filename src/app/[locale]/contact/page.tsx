@@ -69,13 +69,18 @@ export default function ContactPage() {
               </div>
 
               {/* Address */}
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Zhanjia+Industrial+Park,+Zhenglu+Town,+Shanghe+County,+Jinan+City,+Shandong+Province,+China"
+                target="_blank"
+                rel="noopener"
+                style={{ display: "flex", alignItems: "flex-start", gap: 16, textDecoration: "none", color: "inherit" }}
+              >
                 <div style={{ width: 48, height: 48, background: "#1e3a5f", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>📍</div>
                 <div>
                   <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>Address</div>
                   <div style={{ color: "#555", fontSize: 15, lineHeight: 1.6 }}>{contact.address}</div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
