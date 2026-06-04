@@ -85,7 +85,7 @@ export default function Factory() {
   const infoCards = factory?.infoCards?.length ? factory.infoCards : defaultInfoCards;
 
   useEffect(() => {
-    if (lightbox === null) return;
+    if (typeof window === 'undefined' || lightbox === null) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightbox(null);
       if (e.key === "ArrowRight") setLightbox((i) => ((i ?? 0) + 1) % images.length);
