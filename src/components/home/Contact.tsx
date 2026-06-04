@@ -113,7 +113,7 @@ export default function Contact() {
 
                 {/* Factory Address - moved to bottom, with location link */}
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Zhanjia+Industrial+Park,+Zhenglu+Town,+Shanghe+County,+Jinan+City,+Shandong+Province,+China"
+                  href="https://www.google.com/maps/search/?api=1&query=37.22,117.22+Zhenglu+Town+Shanghe+Jinan+Shandong"
                   target="_blank"
                   rel="noopener"
                   style={{ display: "flex", gap: 14, alignItems: "flex-start", textDecoration: "none", color: "inherit" }}
