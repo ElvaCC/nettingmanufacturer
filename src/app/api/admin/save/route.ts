@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
     if (patch.contact) existing.contact = { ...existing.contact, ...patch.contact };
     if (patch.footer) existing.footer = { ...existing.footer, ...patch.footer };
     if (patch.factory) existing.factory = { ...existing.factory, ...patch.factory };
+    if (patch.factoryImages) existing.factoryImages = patch.factoryImages;
     if (patch.products) existing.products = patch.products;
     if (patch.blog) existing.blog = patch.blog;
     if (patch.applications) existing.applications = patch.applications;

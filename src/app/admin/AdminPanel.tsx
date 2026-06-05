@@ -80,6 +80,7 @@ export default function AdminPanel() {
   const [tab, setTab] = useState<TabKey>('hero');
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [editProd, setEditProd] = useState<number | null>(null);
   const [content, setContent] = useState<SiteContent>(defaultContent);
@@ -127,8 +128,9 @@ export default function AdminPanel() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveError(null);
     try {
-      await fetch('/api/admin/save', {
+      const res = await fetch('/api/admin/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -137,6 +139,7 @@ export default function AdminPanel() {
           contact: content.contact,
           footer: content.footer,
           factory: content.factory,
+          factoryImages: content.factoryImages,
           products: content.products,
           blog: content.blog,
           business: content.business,
@@ -146,11 +149,17 @@ export default function AdminPanel() {
           contactPage: content.contactPage,
         }),
       });
+      const data = await res.json();
+      if (!data.success) {
+        setSaveError(data.message || 'Save failed');
+        setSaving(false);
+        return;
+      }
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
       window.dispatchEvent(new Event('content-updated'));
-    } catch {
-      setTimeout(() => setSaving(false), 3000);
+    } catch (err) {
+      setSaveError('Network error - changes not saved to server');
     }
     setSaving(false);
   };
@@ -536,7 +545,8 @@ export default function AdminPanel() {
         <div style={{ fontWeight: 700, fontSize: 16 }}>ONLY NETTING Admin</div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <a href="/en" target="_blank" rel="noreferrer" style={{ padding: '8px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', textDecoration: 'none', fontSize: 13, border: '1px solid rgba(255,255,255,0.2)' }}>View Site</a>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', fontSize: 14, fontWeight: 600, border: 'none', borderRadius: 8, cursor: saving ? 'wait' : 'pointer', background: saved ? '#22c55e' : '#3b82f6', color: '#fff' }}>{saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}</button>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '8px 22px', fontSize: 14, fontWeight: 600, border: 'none', borderRadius: 8, cursor: saving ? 'wait' : 'pointer', background: saved ? '#22c55e' : saveError ? '#ef4444' : '#3b82f6', color: '#fff' }}>{saving ? 'Saving...' : saved ? 'Saved!' : saveError ? 'Error' : 'Save Changes'}</button>
+          {saveError && <span style={{ fontSize: 11, color: '#fca5a5', maxWidth: 250, lineHeight: 1.3 }}>{saveError}</span>}
           <button onClick={() => { setAuth(false); setLoading(true); }} style={{ padding: '8px 14px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 13 }}>Logout</button>
         </div>
       </header>
