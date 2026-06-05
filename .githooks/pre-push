@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Git pre-push hook — 防止旧版 content.json 覆盖远程数据
+# 每次 push 前自动从 GitHub 拉取最新版 content.json
+#
+
+echo ""
+echo "🔒 [pre-push] 正在同步 content.json（从 GitHub 远程仓库）..."
+
+# 获取当前 content.json 的 git 状态（是否被本地修改）
+CHANGED=$(git status --porcelain -- src/data/content.json 2>/dev/null)
+
+if [ -n "$CHANGED" ]; then
+  echo "⚠️  检测到本地 content.json 有未提交的修改！"
+  echo "   执行: git checkout HEAD -- src/data/content.json"
+  echo "   然后重新 staging……"
+fi
+
+# 从远程拉取最新的 content.json（如果文件未跟踪，直接从远程 cat-file 取）
+if git ls-files --error-unmatch src/data/content.json >/dev/null 2>&1; then
+  echo "   content.json 仍被 git 跟踪，正在恢复为远程最新版本..."
+  git fetch origin main --quiet 2>/dev/null
+  git checkout origin/main -- src/data/content.json 2>/dev/null && \
+    echo "   ✅ content.json 已同步为远程最新版本" || \
+    echo "   ⚠️  无法从远程检出 content.json（文件可能已被 git rm）"
+else
+  echo "   ✅ content.json 已取消 git 跟踪，不会在 push 中被覆盖"
+fi
+
+echo ""
+exit 0
