@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useContent } from '@/context/ContentContext';
 
@@ -21,17 +22,21 @@ export default function Products() {
             <a key={product.id} href={getPath(`/products/${product.id}`)} style={{ textDecoration: "none", display: "block", background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #e5e7eb", transition: "box-shadow 0.3s", cursor: "pointer" }}>
               {/* Product Image */}
               <div style={{ height: 180, background: "#f0f4f8", overflow: "hidden", borderBottom: "3px solid #1e3a5f" }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%', background: '#f8fafc' }}>
                 {product.images && product.images.length > 0 ? (
-                  <img
+                  <Image
                     src={product.images[0]}
-                    alt={product.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    alt={`${product.name} - Home Product Showcase | Jiacheng Netting Manufacturer`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    style={{ objectFit: 'contain', display: 'block' }}
                   />
                 ) : (
                   <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <span style={{ fontSize: 14, fontWeight: 600, opacity: 0.5, color: "#1e3a5f" }}>{product.name}</span>
                   </div>
                 )}
+                </div>
               </div>
               {/* Product Info */}
               <div style={{ padding: 20 }}>

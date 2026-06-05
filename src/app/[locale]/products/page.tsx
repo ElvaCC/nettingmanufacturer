@@ -208,7 +208,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
           {product.images && product.images.length > 0 ? (
             <Image
               src={product.images[0]}
-              alt={`${product.name} - HDPE Netting Manufacturer | Jiacheng Factory Direct`}
+              alt={`${product.name} - Product Thumbnail | Jiacheng Netting Manufacturer`}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: 'contain', display: 'block', transition: 'transform 0.4s' }}

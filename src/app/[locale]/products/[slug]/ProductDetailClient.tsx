@@ -48,9 +48,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     return [spec, 'Yes'];
   };
 
-  // SEO Alt text helper
+  // SEO Alt text helper — deep combination for Google
   const altText = (context: string) =>
-    `${product.name} - ${context} - Jiacheng Netting HDPE Manufacturer Factory Photo`;
+    `${product.name} - ${context} | Jiacheng Netting Manufacturer`;
 
   // Scroll to contact form
   const scrollToContact = () => {
@@ -141,7 +141,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   >
                     <Image
                       src={img}
-                      alt={`${product.name} thumbnail ${i + 1} - Jiacheng HDPE Netting Factory`}
+                      alt={altText(`Thumbnail ${i + 1}`)}
                       width={90}
                       height={68}
                       style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
@@ -438,7 +438,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                     <div style={{ position: 'relative', height: 160, background: '#f8fafc' }}>
                       <Image
                         src={p.images[0]}
-                        alt={`${p.name} - Jiacheng Netting HDPE Manufacturer`}
+                        alt={`${p.name} - Related Product | Jiacheng Netting Manufacturer`}
                         fill
                         sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
                         style={{ objectFit: 'contain', display: 'block' }}
