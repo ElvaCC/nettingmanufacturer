@@ -294,8 +294,70 @@ export default function AdminPanel() {
               <div><label style={lbl}>Description</label><textarea value={product.description} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], description: e.target.value }; setContent({ ...content, products: p }); }} rows={4} style={s({ resize: 'vertical' as const })} /></div>
               <div><label style={lbl}>Specs (one per line)</label><textarea value={product.specs.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], specs: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={5} style={s({ resize: 'vertical' as const })} /></div>
               <div><label style={lbl}>Applications (one per line)</label><textarea value={product.applications.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], applications: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={4} style={s({ resize: 'vertical' as const })} /></div>
-              <div><label style={lbl}>Images (one path per line)</label><textarea value={product.images.join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], images: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={3} style={s({ resize: 'vertical' as const })} /></div>
-              <div><label style={lbl}>App Images (one path per line)</label><textarea value={(product.appImages || []).join('\n')} onChange={e => { const p = [...content.products]; p[i] = { ...p[i], appImages: e.target.value.split('\n').filter(Boolean) }; setContent({ ...content, products: p }); }} rows={2} style={s({ resize: 'vertical' as const })} /></div>
+              <div>
+                <label style={lbl}>Images ({product.images.length})</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {product.images.map((imgUrl, imgIdx) => (
+                    <div key={imgIdx} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <input type="text" value={imgUrl} onChange={e => {
+                        const p = [...content.products];
+                        const ni = [...p[i].images];
+                        ni[imgIdx] = e.target.value;
+                        p[i] = { ...p[i], images: ni };
+                        setContent({ ...content, products: p });
+                      }} style={{ ...s(), flex: 1 }} />
+                      <button disabled={imgIdx === 0} onClick={() => {
+                        if (imgIdx > 0) { const p = [...content.products]; const n = [...p[i].images]; [n[imgIdx - 1], n[imgIdx]] = [n[imgIdx], n[imgIdx - 1]]; p[i] = { ...p[i], images: n }; setContent({ ...content, products: p }); }
+                      }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                      <button disabled={imgIdx === product.images.length - 1} onClick={() => {
+                        if (imgIdx < product.images.length - 1) { const p = [...content.products]; const n = [...p[i].images]; [n[imgIdx], n[imgIdx + 1]] = [n[imgIdx + 1], n[imgIdx]]; p[i] = { ...p[i], images: n }; setContent({ ...content, products: p }); }
+                      }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === product.images.length - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                      <button onClick={() => {
+                        const p = [...content.products];
+                        p[i] = { ...p[i], images: p[i].images.filter((_, idx) => idx !== imgIdx) };
+                        setContent({ ...content, products: p });
+                      }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                    </div>
+                  ))}
+                  <button onClick={() => {
+                    const p = [...content.products];
+                    p[i] = { ...p[i], images: [...p[i].images, ''] };
+                    setContent({ ...content, products: p });
+                  }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Image</button>
+                </div>
+              </div>
+              <div>
+                <label style={lbl}>App Images ({product.appImages?.length || 0})</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {(product.appImages || []).map((imgUrl, imgIdx) => (
+                    <div key={imgIdx} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <input type="text" value={imgUrl} onChange={e => {
+                        const p = [...content.products];
+                        const ni = [...(p[i].appImages || [])];
+                        ni[imgIdx] = e.target.value;
+                        p[i] = { ...p[i], appImages: ni };
+                        setContent({ ...content, products: p });
+                      }} style={{ ...s(), flex: 1 }} />
+                      <button disabled={imgIdx === 0} onClick={() => {
+                        if (imgIdx > 0) { const p = [...content.products]; const n = [...(p[i].appImages || [])]; [n[imgIdx - 1], n[imgIdx]] = [n[imgIdx], n[imgIdx - 1]]; p[i] = { ...p[i], appImages: n }; setContent({ ...content, products: p }); }
+                      }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                      <button disabled={imgIdx === (product.appImages?.length || 0) - 1} onClick={() => {
+                        if (imgIdx < (product.appImages?.length || 0) - 1) { const p = [...content.products]; const n = [...(p[i].appImages || [])]; [n[imgIdx], n[imgIdx + 1]] = [n[imgIdx + 1], n[imgIdx]]; p[i] = { ...p[i], appImages: n }; setContent({ ...content, products: p }); }
+                      }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === (product.appImages?.length || 0) - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                      <button onClick={() => {
+                        const p = [...content.products];
+                        p[i] = { ...p[i], appImages: (p[i].appImages || []).filter((_, idx) => idx !== imgIdx) };
+                        setContent({ ...content, products: p });
+                      }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                    </div>
+                  ))}
+                  <button onClick={() => {
+                    const p = [...content.products];
+                    p[i] = { ...p[i], appImages: [...(p[i].appImages || []), ''] };
+                    setContent({ ...content, products: p });
+                  }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add App Image</button>
+                </div>
+              </div>
               <button onClick={() => { setContent({ ...content, products: content.products.filter((_, idx) => idx !== i) }); setEditProd(null); }} style={{ padding: '8px 18px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626', alignSelf: 'flex-start' }}>Delete Product</button>
             </div>
           )}
