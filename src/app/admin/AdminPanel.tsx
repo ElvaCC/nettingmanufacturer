@@ -369,6 +369,11 @@ export default function AdminPanel() {
           )}
         </div>
       ))}
+      <button onClick={() => {
+        const id = 'new-product-' + Date.now();
+        setContent({ ...content, products: [...content.products, { id, name: 'New Product', nameZh: '新产品', description: '', specs: [], applications: [], images: [], appImages: [] }] });
+        setEditProd(content.products.length);
+      }} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Product</button>
     </div>
   );
 
