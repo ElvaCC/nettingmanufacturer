@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useContent } from '@/context/ContentContext';
 
@@ -205,10 +206,12 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
       <a href={detailHref} style={{ display: 'block', textDecoration: 'none' }}>
         <div style={{ position: 'relative', height: 220, background: '#f0f4f8', overflow: 'hidden' }}>
           {product.images && product.images.length > 0 ? (
-            <img
+            <Image
               src={product.images[0]}
-              alt={product.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.4s' }}
+              alt={`${product.name} - HDPE Netting Manufacturer | Jiacheng Factory Direct`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'contain', display: 'block', transition: 'transform 0.4s' }}
             />
           ) : (
             <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 14 }}>{product.name}</div>

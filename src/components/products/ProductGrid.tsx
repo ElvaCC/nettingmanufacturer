@@ -194,12 +194,12 @@ export default function ProductGrid({ locale }: { locale: string }) {
                   viewMode === "list" ? "flex flex-col md:flex-row" : ""
                 }`}
               >
-                <div className={`relative h-48 ${viewMode === "list" ? "md:w-1/3" : ""}`}>
+                <div className={`relative h-48 bg-gray-50 ${viewMode === "list" ? "md:w-1/3" : ""}`}>
                   <Image
                     src={product.image}
-                    alt={`${product.name} - ${product.keyword}`}
+                    alt={`${product.name} - HDPE Netting Manufacturer | Jiacheng Factory Direct`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   />
                   {product.inStock && (

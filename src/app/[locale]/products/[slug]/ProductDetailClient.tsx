@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 
 interface ProductDetailClientProps {
@@ -12,7 +13,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const { products, contact } = useContent();
   const product = products.find((p) => p.id === slug);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [showStickyBar, setShowStickyBar] = useState(false);
 
   // Unified image list: product images first, then application images
   const allImages: string[] = [
@@ -20,18 +20,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     ...((product as any)?.appImages?.slice(0, 3) || []),
   ];
   const currentSrc = allImages[currentImgIndex] || '';
-
-  // Sticky inquiry bar appears after scrolling past hero
-  useEffect(() => {
-    const handleScroll = () => {
-      if (typeof window === 'undefined') return;
-      setShowStickyBar(window.scrollY > 600);
-    };
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
 
   if (!product) {
     return (
@@ -44,7 +32,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const getPath = (href: string) => `/${locale}${href}`;
   const email = contact?.email || 'Netfactory01@factory-jc.com';
   const whatsapp = contact?.whatsapp || '8615628764579';
-  const business = (contact as any)?.business || null;
 
   // Quick spec badges extracted from specs array
   const quickSpecs = (product.specs || []).slice(0, 6).map((s: string) => {
@@ -102,16 +89,17 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {/* Main Product Image */}
             {currentSrc ? (
               <div style={{
-                borderRadius: 16, overflow: 'hidden', background: '#f9fafb',
-                border: '1px solid #e5e7eb', marginBottom: 16,
+                position: 'relative', borderRadius: 16, overflow: 'hidden',
+                background: '#f9fafb', border: '1px solid #e5e7eb',
+                marginBottom: 16, height: 'clamp(280px, 40vw, 480px)',
               }}>
-                <img
+                <Image
                   src={currentSrc}
                   alt={altText(currentImgIndex < (product?.images || []).length ? 'Product Photo' : 'Application Scenario')}
-                  style={{
-                    width: '100%', height: 'clamp(280px, 40vw, 480px)', objectFit: 'contain',
-                    display: 'block', background: '#f9fafb',
-                  }}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 700px"
+                  priority={currentImgIndex === 0}
+                  style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
                 />
                 {/* Image counter badge */}
                 <div style={{
@@ -151,10 +139,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       opacity: currentImgIndex === i ? 1 : 0.7,
                     }}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${product.name} thumbnail ${i + 1} - Jiacheng HDPE Netting Factory`}
-                      style={{ width: 90, height: 68, objectFit: 'cover', display: 'block' }}
+                      width={90}
+                      height={68}
+                      style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
                     />
                   </div>
                 ))}
@@ -244,11 +234,13 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
                   {(product as any).appImages.map((img: string, idx: number) => (
-                    <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-                      <img
+                    <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', height: 160 }}>
+                      <Image
                         src={img}
                         alt={altText(`Application Scene ${idx + 1}`)}
-                        style={{ width: '100%', height: 160, objectFit: 'cover', display: 'block' }}
+                        fill
+                        sizes="(max-width: 600px) 100vw, 200px"
+                        style={{ objectFit: 'contain', display: 'block', background: '#f8fafc' }}
                       />
                     </div>
                   ))}
@@ -263,8 +255,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 {[
-                  { icon: '📦', label: 'MOQ', value: '1,000 sqm (negotiable)' },
-                  { icon: '🏋️', label: 'Packing', value: 'Rolls in woven bags / pallet packing' },
+                  { icon: '🏋️', label: 'Packing', value: 'Rolls or Sheet in PE bag' },
                   { icon: '⏱️', label: 'Lead Time', value: '15-20 working days' },
                   { icon: '🚢', label: 'FOB Port', value: 'Qingdao, China' },
                   { icon: '💳', label: 'Payment', value: 'T/T, L/C, Western Union' },
@@ -284,28 +275,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               </div>
             </div>
 
-            {/* ── Why Choose Us ── */}
-            <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', borderRadius: 16, padding: 32, color: '#fff', marginBottom: 24 }}>
-              <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 24 }}>Why Choose Jiacheng Netting</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                {[
-                  { icon: '🏭', title: '20,000m\u00B2 Factory', desc: 'Direct from manufacturer, no middleman markup' },
-                  { icon: '⚙️', title: 'Advanced Equipment', desc: '65+ warp knitting machines, Karl Mayer technology' },
-                  { icon: '✅', title: 'BSCI & NFPA-701', desc: 'Internationally audited, fire-retardant certified' },
-                  { icon: '🌍', title: '50+ Countries', desc: 'Trusted by importers and contractors worldwide' },
-                  { icon: '🎨', title: 'Full Customization', desc: 'Any size, color, GSM, mesh density, logo printing' },
-                  { icon: '📦', title: 'Free Samples', desc: 'Free product samples available, freight collect' },
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                    <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
-                    <div>
-                      <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 4 }}>{item.title}</div>
-                      <div style={{ fontSize: 13, opacity: 0.7, lineHeight: 1.5 }}>{item.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* ─── RIGHT COLUMN: Sticky Sidebar ─── */}
@@ -440,125 +409,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           </div>
         </div>
 
-        {/* ===== Inline Contact / Inquiry Form Section (scroll target) ===== */}
-        <div id="contact-form-section" style={{ marginTop: 64, scrollMarginTop: 80 }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)',
-            borderRadius: 20, padding: '48px 40px', color: '#fff',
-          }}>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <h2 style={{ fontSize: 28, fontWeight: 800, marginBottom: 8 }}>Request a Free Quote</h2>
-              <p style={{ fontSize: 16, opacity: 0.7 }}>
-                Interested in <strong style={{ color: '#fbbf24' }}>{product.name}</strong>? Send us your requirements and get a factory-direct price within 2 hours.
-              </p>
-            </div>
-
-            <div style={{
-              maxWidth: 700, margin: '0 auto',
-              background: '#fff', borderRadius: 16, padding: 36, color: '#333',
-            }}>
-              <form
-                style={{ display: 'flex', flexDirection: 'column', gap: 18 }}
-                action={`mailto:${email}?subject=Quote Request: ${encodeURIComponent(product.name)}&body=${encodeURIComponent(`Product: ${product.name}\n\nPlease fill in your requirements:\n`)}`}
-                method="POST"
-                encType="text/plain"
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                      Your Name *
-                    </label>
-                    <input
-                      type="text" name="name" required placeholder="John Smith"
-                      style={{
-                        width: '100%', padding: '12px 16px',
-                        border: '1px solid #d1d5db', borderRadius: 8,
-                        fontSize: 15, boxSizing: 'border-box',
-                        outline: 'none', transition: 'border-color 0.15s',
-                      }}
-                      onFocus={e => { (e.target as HTMLInputElement).style.borderColor = '#2563eb'; }}
-                      onBlur={e => { (e.target as HTMLInputElement).style.borderColor = '#d1d5db'; }}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                      Email *
-                    </label>
-                    <input
-                      type="email" name="email" required placeholder="your@company.com"
-                      style={{
-                        width: '100%', padding: '12px 16px',
-                        border: '1px solid #d1d5db', borderRadius: 8,
-                        fontSize: 15, boxSizing: 'border-box',
-                        outline: 'none', transition: 'border-color 0.15s',
-                      }}
-                      onFocus={e => { (e.target as HTMLInputElement).style.borderColor = '#2563eb'; }}
-                      onBlur={e => { (e.target as HTMLInputElement).style.borderColor = '#d1d5db'; }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                    Company Name
-                  </label>
-                  <input
-                    type="text" name="company" placeholder="Your Company"
-                    style={{
-                      width: '100%', padding: '12px 16px',
-                      border: '1px solid #d1d5db', borderRadius: 8,
-                      fontSize: 15, boxSizing: 'border-box',
-                      outline: 'none', transition: 'border-color 0.15s',
-                    }}
-                    onFocus={e => { (e.target as HTMLInputElement).style.borderColor = '#2563eb'; }}
-                    onBlur={e => { (e.target as HTMLInputElement).style.borderColor = '#d1d5db'; }}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#374151', marginBottom: 6 }}>
-                    Message *
-                  </label>
-                  <textarea
-                    name="message" required rows={4}
-                    placeholder={`Hi, I'm interested in ${product.name}. Please provide your requirements: size, quantity, color, destination port...`}
-                    style={{
-                      width: '100%', padding: '12px 16px',
-                      border: '1px solid #d1d5db', borderRadius: 8,
-                      fontSize: 15, boxSizing: 'border-box', resize: 'vertical',
-                      outline: 'none', transition: 'border-color 0.15s',
-                    }}
-                    onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor = '#2563eb'; }}
-                    onBlur={e => { (e.target as HTMLTextAreaElement).style.borderColor = '#d1d5db'; }}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  style={{
-                    width: '100%', padding: '16px 0',
-                    background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-                    color: '#fff', border: 'none', borderRadius: 10,
-                    fontSize: 16, fontWeight: 700, cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)',
-                    transition: 'transform 0.15s, box-shadow 0.15s',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)';
-                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.4)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
-                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 14px rgba(37, 99, 235, 0.3)';
-                  }}
-                >
-                  Send Inquiry &rarr;
-                </button>
-                <p style={{ textAlign: 'center', fontSize: 12, color: '#9ca3af', margin: 0 }}>
-                  We reply within 2 hours during business days. Your information is kept confidential.
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-
         {/* ===== RELATED PRODUCTS ===== */}
         <div style={{ marginTop: 64 }}>
           <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 24 }}>You May Also Like</h2>
@@ -585,11 +435,15 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   }}
                 >
                   {p.images && p.images[0] ? (
-                    <img
-                      src={p.images[0]}
-                      alt={`${p.name} - Jiacheng Netting HDPE Manufacturer`}
-                      style={{ width: '100%', height: 160, objectFit: 'cover', display: 'block' }}
-                    />
+                    <div style={{ position: 'relative', height: 160, background: '#f8fafc' }}>
+                      <Image
+                        src={p.images[0]}
+                        alt={`${p.name} - Jiacheng Netting HDPE Manufacturer`}
+                        fill
+                        sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
+                        style={{ objectFit: 'contain', display: 'block' }}
+                      />
+                    </div>
                   ) : (
                     <div style={{ height: 160, background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 13 }}>
                       No image
@@ -605,43 +459,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               ))}
           </div>
         </div>
-      </div>
-
-      {/* ===== STICKY BOTTOM INQUIRY BAR ===== */}
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 999,
-        background: '#fff', borderTop: '1px solid #e5e7eb',
-        padding: '12px 24px',
-        boxShadow: '0 -4px 20px rgba(0,0,0,0.08)',
-        transform: showStickyBar ? 'translateY(0)' : 'translateY(100%)',
-        transition: 'transform 0.3s ease',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
-      }}>
-        <span style={{ fontSize: 14, color: '#555', fontWeight: 500 }}>
-          Interested in <strong style={{ color: '#1e3a5f' }}>{product.name}</strong>?
-        </span>
-        <a
-          href={`mailto:${email}?subject=Quote Request: ${encodeURIComponent(product.name)}`}
-          style={{
-            display: 'inline-block', padding: '10px 24px',
-            background: '#2563eb', color: '#fff', textDecoration: 'none',
-            borderRadius: 8, fontWeight: 700, fontSize: 14,
-          }}
-        >
-          Get Free Quote
-        </a>
-        <a
-          href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}.`)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-block', padding: '10px 24px',
-            background: '#25d366', color: '#fff', textDecoration: 'none',
-            borderRadius: 8, fontWeight: 700, fontSize: 14,
-          }}
-        >
-          WhatsApp
-        </a>
       </div>
 
       {/* ===== RESPONSIVE CSS (injected via style tag) ===== */}
