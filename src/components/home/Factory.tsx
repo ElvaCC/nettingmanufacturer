@@ -25,47 +25,27 @@ interface FactoryImage {
  *  gap: 16px | border-radius: 8px | hover: scale(1.02)
  *  Wide images crop from right (object-position: left center)
  */
-const images: FactoryImage[] = [
-  {
-    src: "/images/factory/jiacheng-factory-exterior-panorama.jpg",
-    alt: "Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China showing factory buildings and packaged net rolls ready for bulk export",
-    label: "Factory Exterior — 20,000 m\u00B2 Manufacturing Base",
-    objectPosition: "center center",
-    span: "full",
-  },
-  {
-    src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg",
-    alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20000 square meter workshop",
-    label: "Karl Mayer Warp Knitting Lines",
-    objectPosition: "center center",
-    span: "half",
-  },
-  {
-    src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg",
-    alt: "Wide angle view of Jiacheng Netting modern production workshop showing multiple warp knitting machines and skilled workers for custom HDPE netting",
-    label: "Production Workshop",
-    objectPosition: "center center",
-    span: "half",
-  },
-  {
-    src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
-    alt: "Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green, blue, red, black, and white at Jiacheng Netting factory for construction debris netting, agricultural shade netting, and privacy screen bulk orders",
-    label: "Custom Colored HDPE Netting Production",
-    objectPosition: "center center",
-    span: "full",
-  },
-  {
-    src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
-    alt: "Large scale warehouse at Jiacheng Netting with thousands of finished HDPE netting rolls stacked on racks ready for container shipment and wholesale export",
-    label: "Bulk Inventory — Ready for Global Export",
-    objectPosition: "center center",
-    span: "full",
-  },
-];
 
 export default function Factory() {
-  const { factory } = useContent();
+  const { factory, factoryImages: contentFactoryImages } = useContent();
   const [lightbox, setLightbox] = useState<number | null>(null);
+
+  // Use ContentProvider images, fallback to hardcoded defaults
+  const images: FactoryImage[] = (contentFactoryImages && contentFactoryImages.length > 0)
+    ? contentFactoryImages.map((img: any) => ({
+        src: img.src,
+        alt: img.alt,
+        label: img.label,
+        objectPosition: "center center" as const,
+        span: img.span as "full" | "half",
+      }))
+    : [
+        { src: "/images/factory/jiacheng-factory-exterior-panorama.jpg", alt: "Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China showing factory buildings and packaged net rolls ready for bulk export", label: "Factory Exterior — 20,000 m² Manufacturing Base", objectPosition: "center center", span: "full" },
+        { src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg", alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20000 square meter workshop", label: "Karl Mayer Warp Knitting Lines", objectPosition: "center center", span: "half" },
+        { src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg", alt: "Wide angle view of Jiacheng Netting modern production workshop showing multiple warp knitting machines and skilled workers for custom HDPE netting", label: "Production Workshop", objectPosition: "center center", span: "half" },
+        { src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg", alt: "Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green, blue, red, black, and white at Jiacheng Netting factory for construction debris netting, agricultural shade netting, and privacy screen bulk orders", label: "Custom Colored HDPE Netting Production", objectPosition: "center center", span: "full" },
+        { src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg", alt: "Large scale warehouse at Jiacheng Netting with thousands of finished HDPE netting rolls stacked on racks ready for container shipment and wholesale export", label: "Bulk Inventory — Ready for Global Export", objectPosition: "center center", span: "full" },
+      ];
 
   // Fallback data (used before content loads or if API fails)
   const defaultHighlights = [
