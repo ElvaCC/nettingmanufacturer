@@ -9,10 +9,20 @@ interface ProductDetailClientProps {
   locale: string;
 }
 
+const COLOR_SWATCHES = [
+  { name: 'Green', hex: '#16a34a' },
+  { name: 'Blue', hex: '#2563eb' },
+  { name: 'Black', hex: '#1f2937' },
+  { name: 'White', hex: '#f9fafb' },
+  { name: 'Red', hex: '#dc2626' },
+  { name: 'Orange', hex: '#ea580c' },
+];
+
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
   const { products, contact } = useContent();
   const product = products.find((p) => p.id === slug);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const [selectedColor, setSelectedColor] = useState(0);
 
   if (!product) {
     return (
@@ -40,20 +50,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     return [spec, 'Yes'];
   };
 
-  // SEO Alt helper — section-aware deep combination
   const altText = (context: string) =>
     `${product.name} - ${context} | Jiacheng Netting Manufacturer`;
 
-  // Scroll to contact form
-  const scrollToContact = () => {
-    if (typeof window !== 'undefined') {
-      document.getElementById('contact-form-section')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <>
-      {/* SECTION 1: HERO VISUAL ZONE — Left 2/3 Gallery + Right 1/3 CTA */}
+      {/* SECTION 1: HERO VISUAL ZONE */}
       <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '24px 24px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
@@ -65,18 +67,18 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
       </section>
 
-      {/* ─── Main 3-col grid: left 2/3 gallery + right 1/3 sidebar ─── */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '28px 24px 40px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 32, alignItems: 'start' }} className="product-hero-grid">
+      {/* ─── MAIN CONTENT ─── */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 24px 48px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 40, alignItems: 'start' }} className="product-hero-grid">
 
           {/* ─── LEFT: GALLERY ─── */}
           <div>
-            {/* Main Image */}
+            {/* Main Image — fixed 4:3 aspect ratio */}
             {currentSrc ? (
               <div style={{
                 position: 'relative', borderRadius: 16, overflow: 'hidden',
                 background: '#f9fafb', border: '1px solid #e5e7eb',
-                marginBottom: 14, height: 'clamp(320px, 42vw, 520px)',
+                marginBottom: 16, aspectRatio: '4/3',
               }}>
                 <Image
                   src={currentSrc}
@@ -97,35 +99,36 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               </div>
             ) : (
               <div style={{
-                borderRadius: 16, height: 'clamp(320px, 42vw, 520px)',
+                borderRadius: 16, aspectRatio: '4/3',
                 background: '#f3f4f6', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', color: '#aaa', marginBottom: 14, fontSize: 15,
+                justifyContent: 'center', color: '#aaa', fontSize: 15, marginBottom: 16,
               }}>
                 No Image Available
               </div>
             )}
 
-            {/* Thumbnails */}
+            {/* Thumbnails — larger at w-20 h-20 */}
             {allImages.length > 1 && (
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 28 }}>
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 36 }}>
                 {allImages.map((img, i) => (
                   <div
                     key={i}
                     onClick={() => setCurrentImgIndex(i)}
                     style={{
-                      borderRadius: 10, overflow: 'hidden', cursor: 'pointer',
+                      borderRadius: 12, overflow: 'hidden', cursor: 'pointer',
+                      width: 80, height: 80, flexShrink: 0,
                       border: currentImgIndex === i ? '2px solid #2563eb' : '2px solid #e5e7eb',
                       transition: 'border-color 0.2s, transform 0.2s, box-shadow 0.2s',
                       transform: currentImgIndex === i ? 'scale(1.05)' : 'scale(1)',
-                      boxShadow: currentImgIndex === i ? '0 0 0 2px #bfdbfe' : 'none',
-                      opacity: currentImgIndex === i ? 1 : 0.7,
+                      boxShadow: currentImgIndex === i ? '0 0 0 3px #bfdbfe' : 'none',
+                      opacity: currentImgIndex === i ? 1 : 0.75,
                     }}
                   >
                     <Image
                       src={img}
                       alt={altText(`Thumbnail ${i + 1}`)}
-                      width={90}
-                      height={68}
+                      width={80}
+                      height={80}
                       style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
                     />
                   </div>
@@ -134,7 +137,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             )}
 
             {/* ── Product Description ── */}
-            <div style={{ background: '#fff', borderRadius: 16, padding: 28, border: '1px solid #e5e7eb', marginBottom: 24 }}>
+            <div className="detail-section-card" style={{ marginBottom: 28 }}>
               <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Product Description</h2>
               <p style={{ fontSize: 15, lineHeight: 1.9, color: '#555', margin: 0, whiteSpace: 'pre-line' }}>
                 {product.description}
@@ -143,7 +146,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
             {/* ── Specifications Table ── */}
             {product.specs && product.specs.length > 0 && (
-              <div style={{ background: '#fff', borderRadius: 16, padding: 28, border: '1px solid #e5e7eb', marginBottom: 24 }}>
+              <div className="detail-section-card" style={{ marginBottom: 28 }}>
                 <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Detailed Specifications</h2>
                 <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #e5e7eb' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
@@ -173,38 +176,65 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             )}
           </div>
 
-          {/* ─── RIGHT: COMMERCIAL CONVERSION SIDEBAR ─── */}
+          {/* ─── RIGHT: CLEAN CONVERSION SIDEBAR ─── */}
           <div style={{ position: 'sticky', top: 80 }}>
-            <div style={{ marginBottom: 20 }}>
-              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5, marginBottom: 14 }}>
+            <div style={{ marginBottom: 24 }}>
+              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 16, fontWeight: 500 }}>
                 Professional HDPE netting direct from China BSCI certified factory. Custom sizes &amp; colors available.
               </p>
 
-              {/* Quick Spec Tags */}
+              {/* Spec Highlight Tags */}
               {(product.specs || []).slice(0, 6).length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 20 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
                   {(product.specs || []).slice(0, 6).map((spec: string, idx: number) => {
                     const val = spec.includes(':') ? spec.split(':').slice(1).join(':').trim() : spec;
                     const shortVal = val.length > 28 ? val.slice(0, 28) + '...' : val;
                     return (
                       <div key={idx} style={{
-                        fontSize: 12, fontWeight: 600, padding: '8px 12px', borderRadius: 8,
+                        fontSize: 13, fontWeight: 600, padding: '10px 14px', borderRadius: 8,
                         background: idx % 2 === 0 ? '#eef2ff' : '#f0fdf4',
                         color: idx % 2 === 0 ? '#3730a3' : '#166534',
                         border: `1px solid ${idx % 2 === 0 ? '#c7d2fe' : '#bbf7d0'}`,
-                        display: 'flex', alignItems: 'center', gap: 6,
+                        display: 'flex', alignItems: 'center', gap: 8,
                       }}>
-                        <span style={{ fontSize: 14 }}>&#10003;</span>
+                        <span style={{ fontSize: 14, flexShrink: 0 }}>&#10003;</span>
                         {shortVal}
                       </div>
                     );
                   })}
                 </div>
               )}
+
+              {/* Color Swatches */}
+              <div style={{ marginBottom: 24 }}>
+                <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 10 }}>Available Colors:</p>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  {COLOR_SWATCHES.map((c, i) => (
+                    <button
+                      key={c.name}
+                      onClick={() => setSelectedColor(i)}
+                      title={c.name}
+                      style={{
+                        width: 32, height: 32, borderRadius: '50%', border: 'none',
+                        background: c.hex,
+                        cursor: 'pointer', flexShrink: 0,
+                        outline: selectedColor === i ? `3px solid #2563eb` : 'none',
+                        outlineOffset: 2,
+                        boxShadow: selectedColor === i ? `0 0 0 1px #fff, 0 0 0 4px #2563eb` : '0 1px 3px rgba(0,0,0,0.2)',
+                        transition: 'outline 0.15s, box-shadow 0.15s, transform 0.15s',
+                        transform: selectedColor === i ? 'scale(1.12)' : 'scale(1)',
+                      }}
+                      onMouseEnter={e => { if (selectedColor !== i) (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)'; }}
+                      onMouseLeave={e => { if (selectedColor !== i) (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}
+                    />
+                  ))}
+                </div>
+                <p style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{COLOR_SWATCHES[selectedColor].name} — In Stock</p>
+              </div>
             </div>
 
-            {/* CTA Card */}
-            <div style={{ background: '#1e3a5f', borderRadius: 16, padding: 28, color: '#fff', marginBottom: 20 }}>
+            {/* CTA Card — Clean: only 3 buttons */}
+            <div style={{ background: '#1e3a5f', borderRadius: 16, padding: 28, color: '#fff' }}>
               <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Get Factory Price</h3>
               <p style={{ fontSize: 13, opacity: 0.75, marginBottom: 20, lineHeight: 1.6 }}>
                 Custom sizes, colors, certifications &amp; OEM/ODM available. Reply within 2 hours.
@@ -241,152 +271,109 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.15)'; }}>
                 &#128196; Download Catalog
               </a>
-              <div style={{ marginTop: 18, paddingTop: 14, borderTop: '1px solid rgba(255,255,255,0.15)', fontSize: 13, opacity: 0.8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}><span>&#9993;</span> {email}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}><span>&#128222;</span> WhatsApp: {whatsapp}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}><span>&#127981;</span> BSCI Certified</div>
-              </div>
             </div>
-
-            {/* Compact Specs */}
-            {product.specs && product.specs.length > 0 && (
-              <div style={{ background: '#fff', borderRadius: 16, padding: 24, border: '1px solid #e5e7eb', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                <h2 style={{ fontSize: 17, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Quick Specs</h2>
-                <div style={{ border: '1px solid #f0f2f5', borderRadius: 10, overflow: 'hidden' }}>
-                  {product.specs.slice(0, 6).map((spec: string, idx: number) => {
-                    const [label, value] = parseSpec(spec);
-                    return (
-                      <div key={idx} style={{
-                        display: 'flex', justifyContent: 'space-between',
-                        padding: '10px 14px',
-                        background: idx % 2 === 0 ? '#fff' : '#fafbfc',
-                        borderBottom: idx < Math.min(product.specs.length, 6) - 1 ? '1px solid #f0f2f5' : 'none',
-                        fontSize: 13,
-                      }}>
-                        <span style={{ color: '#888', fontWeight: 500 }}>{label}</span>
-                        <span style={{ color: '#333', fontWeight: 600, textAlign: 'right', maxWidth: '55%' }}>{value || 'Yes'}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
-        {/* SECTION 2: MANUFACTURING CAPACITY ZONE */}
+        {/* ════════════════════════════════════════════
+            SECTION 2: MANUFACTURING CAPACITY ZONE
+            ════════════════════════════════════════════ */}
         {productionImages.length > 0 && (
-          <div style={{ background: '#f8fafc', borderRadius: 16, padding: '40px 36px', marginTop: 40 }}>
-            <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
-              Advanced Manufacturing Capacity
-            </h2>
-            <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 32, maxWidth: 600, margin: '0 auto 32px' }}>
-              State-of-the-art warp knitting production lines and rigorous quality control at every stage
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="manufacturing-grid">
-              {productionImages.map((img: string, idx: number) => (
-                <div
-                  key={idx}
-                  style={{
+          <div className="detail-section-gap">
+            <div style={{ background: '#f8fafc', borderRadius: 16, padding: '48px 40px' }}>
+              <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
+                Advanced Manufacturing Capacity
+              </h2>
+              <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 36, maxWidth: 600, margin: '0 auto 36px' }}>
+                State-of-the-art warp knitting production lines and rigorous quality control at every stage
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="manufacturing-grid">
+                {productionImages.map((img: string, idx: number) => (
+                  <div key={idx} style={{
                     position: 'relative', borderRadius: 12, overflow: 'hidden',
-                    height: 260, background: '#fff', border: '1px solid #e5e7eb',
-                    transition: 'transform 0.35s, box-shadow 0.35s',
-                    cursor: 'zoom-in',
+                    aspectRatio: '4/3', background: '#fff', border: '1px solid #e5e7eb',
+                    transition: 'transform 0.35s, box-shadow 0.35s', cursor: 'zoom-in',
                   }}
-                  className="manufacturing-card"
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.12)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
-                >
-                  <Image
-                    src={img}
-                    alt={altText(`Production Process ${idx + 1} - Manufacturing Workshop`)}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 380px"
-                    style={{ objectFit: 'contain', display: 'block', background: '#fff' }}
-                  />
-                </div>
-              ))}
+                    className="manufacturing-card"
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.12)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+                    <Image src={img} alt={altText(`Production Process ${idx + 1} - Manufacturing Workshop`)} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 380px" style={{ objectFit: 'contain', display: 'block', background: '#fff' }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
 
-        {/* SECTION 3: PACKAGING AND SHIPPING ZONE */}
+        {/* ════════════════════════════════════════════
+            SECTION 3: PACKAGING AND SHIPPING ZONE
+            ════════════════════════════════════════════ */}
         {packagingImages.length > 0 && (
-          <div style={{ padding: '40px 0', marginTop: 16 }}>
-            <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
-              Strict Packaging &amp; Container Loading
-            </h2>
-            <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 32, maxWidth: 600, margin: '0 auto 32px' }}>
-              Professional packaging and timely container shipment ensure your order arrives in perfect condition
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }} className="packaging-grid">
-              {packagingImages.map((img: string, idx: number) => (
-                <div
-                  key={idx}
-                  style={{
+          <div className="detail-section-gap">
+            <div style={{ padding: '48px 0' }}>
+              <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
+                Strict Packaging &amp; Container Loading
+              </h2>
+              <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 36, maxWidth: 600, margin: '0 auto 36px' }}>
+                Professional packaging and timely container shipment ensure your order arrives in perfect condition
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }} className="packaging-grid">
+                {packagingImages.map((img: string, idx: number) => (
+                  <div key={idx} style={{
                     position: 'relative', borderRadius: 14, overflow: 'hidden',
-                    height: 300, background: '#fff', border: '1px solid #e5e7eb',
-                    transition: 'transform 0.35s, box-shadow 0.35s',
-                    cursor: 'zoom-in',
+                    aspectRatio: '16/9', background: '#fff', border: '1px solid #e5e7eb',
+                    transition: 'transform 0.35s, box-shadow 0.35s', cursor: 'zoom-in',
                   }}
-                  className="packaging-card"
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.015)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.1)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
-                >
-                  <Image
-                    src={img}
-                    alt={altText(`Packaging & Shipping ${idx + 1} - Container Loading`)}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    style={{ objectFit: 'contain', display: 'block', background: '#fff' }}
-                  />
-                </div>
-              ))}
+                    className="packaging-card"
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.015)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.1)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+                    <Image src={img} alt={altText(`Packaging & Shipping ${idx + 1} - Container Loading`)} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'contain', display: 'block', background: '#fff' }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
 
         {/* ── Application Scenarios ── */}
         {product.applications && product.applications.length > 0 && (
-          <div style={{ background: '#fff', borderRadius: 16, padding: 32, border: '1px solid #e5e7eb', marginTop: 24 }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Scenarios</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              {product.applications.map((app: string, idx: number) => (
-                <div key={idx} style={{
-                  display: 'flex', alignItems: 'center', gap: 10, fontSize: 14,
-                  color: '#555', padding: '12px 16px', background: '#f8fafc',
-                  borderRadius: 10, border: '1px solid #f0f2f5',
-                }}>
-                  <span style={{ color: '#10b981', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>&#10003;</span>
-                  <span>{app}</span>
-                </div>
-              ))}
+          <div className="detail-section-gap">
+            <div className="detail-section-card">
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Scenarios</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                {product.applications.map((app: string, idx: number) => (
+                  <div key={idx} style={{
+                    display: 'flex', alignItems: 'center', gap: 10, fontSize: 14,
+                    color: '#555', padding: '12px 16px', background: '#f8fafc',
+                    borderRadius: 10, border: '1px solid #f0f2f5',
+                  }}>
+                    <span style={{ color: '#10b981', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>&#10003;</span>
+                    <span>{app}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
 
         {/* ── Application Gallery ── */}
         {(product as any)?.appImages && (product as any).appImages.length > 0 && (
-          <div style={{ background: '#fff', borderRadius: 16, padding: 32, border: '1px solid #e5e7eb', marginTop: 24 }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Gallery</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-              {(product as any).appImages.map((img: string, idx: number) => (
-                <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', height: 160 }}>
-                  <Image
-                    src={img}
-                    alt={altText(`Application Scene ${idx + 1}`)}
-                    fill
-                    sizes="(max-width: 600px) 100vw, 200px"
-                    style={{ objectFit: 'contain', display: 'block', background: '#f8fafc' }}
-                  />
-                </div>
-              ))}
+          <div className="detail-section-gap">
+            <div className="detail-section-card">
+              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Gallery</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
+                {(product as any).appImages.map((img: string, idx: number) => (
+                  <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', aspectRatio: '4/3' }}>
+                    <Image src={img} alt={altText(`Application Scene ${idx + 1}`)} fill sizes="(max-width: 600px) 100vw, 200px" style={{ objectFit: 'contain', display: 'block', background: '#f8fafc' }} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
 
         {/* ── Related Products ── */}
-        <div style={{ marginTop: 48 }}>
+        <div className="detail-section-gap">
           <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1e3a5f', marginBottom: 24 }}>You May Also Like</h2>
           <div className="related-products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
             {products
@@ -401,17 +388,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
                   {p.images && p.images[0] ? (
-                    <div style={{ position: 'relative', height: 160, background: '#f8fafc' }}>
-                      <Image
-                        src={p.images[0]}
-                        alt={`${p.name} - Related Product | Jiacheng Netting Manufacturer`}
-                        fill
-                        sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
-                        style={{ objectFit: 'contain', display: 'block' }}
-                      />
+                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f8fafc' }}>
+                      <Image src={p.images[0]} alt={`${p.name} - Related Product | Jiacheng Netting Manufacturer`} fill sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw" style={{ objectFit: 'contain', display: 'block' }} />
                     </div>
                   ) : (
-                    <div style={{ height: 160, background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 13 }}>No image</div>
+                    <div style={{ aspectRatio: '4/3', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 13 }}>No image</div>
                   )}
                   <div style={{ padding: '14px 16px' }}>
                     <p style={{ fontSize: 14, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{p.name}</p>
@@ -425,9 +406,15 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
       {/* ===== RESPONSIVE CSS ===== */}
       <style dangerouslySetInnerHTML={{ __html: `
+        .detail-section-card {
+          background: #fff; border-radius: 16px; padding: 28px 32px;
+          border: 1px solid #e5e7eb;
+        }
+        .detail-section-gap { margin-top: 48px; }
         @media (max-width: 768px) {
           .manufacturing-grid { grid-template-columns: 1fr !important; }
           .packaging-grid { grid-template-columns: 1fr !important; }
+          .detail-section-gap { margin-top: 32px; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
           .manufacturing-grid { grid-template-columns: repeat(2, 1fr) !important; }
