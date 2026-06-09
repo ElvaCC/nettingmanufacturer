@@ -20,12 +20,23 @@ const EXPORT_COUNTRIES = [
 ];
 
 const DEFAULT_FAQ = [
+  // ── Technical FAQs ──
   { q: 'What is HDPE debris netting?', a: 'HDPE debris netting is a lightweight, high-strength knitted mesh made from 100% virgin HDPE. It is used on construction sites to contain falling debris, dust, and tools while allowing airflow and light penetration.' },
   { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for 3-5 years of outdoor exposure depending on climate conditions. We use premium UV additives that meet NFPA 701 fire-retardant standards.' },
   { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we recommend 80-120 GSM density. Heavier GSM (120+) is ideal for high-wind areas and demolition sites requiring maximum durability.' },
+  { q: 'What mesh size blocks debris?', a: 'Common mesh sizes range from 1/16" (fine) to 1/4" (standard). For most construction scaffolding, 1/8" opening provides optimal debris containment while allowing airflow.' },
+  { q: 'What is the difference between knitted and woven netting?', a: 'Knitted netting is more flexible, lightweight, and resistant to unraveling when cut. Woven netting is heavier and more rigid. Our HDPE debris nets are knitted for superior flexibility and job-site durability.' },
+  { q: 'Is HDPE netting recyclable?', a: 'Yes, 100% virgin HDPE netting is fully recyclable. Our production waste is collected, reground, and reused in secondary applications. We recommend checking local recycling guidelines.' },
+  { q: 'What temperature range can HDPE netting withstand?', a: 'HDPE netting remains flexible from -40\u00B0C to +80\u00B0C. It does not become brittle in cold weather, making it suitable for winter construction projects in cold climates.' },
+  { q: 'Does the netting meet fire safety standards?', a: 'Yes, our debris netting is tested and certified to NFPA 701 Method II (USA) and can be produced to meet local fire codes such as AS/NZS 1530 or BS 5867 upon request.' },
+  // ── Business FAQs ──
   { q: 'What is the MOQ?', a: 'Standard MOQ is 500 sqm per specification. For trial orders and new product testing, we can negotiate smaller quantities. Contact us for flexible starting options.' },
   { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer full OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. MOQ for OEM packaging is 1000 sqm.' },
   { q: 'Can you provide free samples?', a: 'Yes, we provide free samples of any product. Samples are available in A4 size or small cut pieces. Freight is collect (you pay shipping). Sample lead time: 3-5 working days.' },
+  { q: 'How long does shipping take?', a: 'Production lead time is 15-20 working days after deposit confirmation. Ocean freight from Qingdao port takes approximately 15-30 days depending on destination.' },
+  { q: 'What payment methods do you accept?', a: 'We accept T/T (bank transfer), L/C (letter of credit), Western Union, and other mutually agreed payment methods. Deposit: 30%, balance before shipment.' },
+  { q: 'Do you offer after-sales support?', a: 'Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.' },
+  { q: 'What if the product does not meet specifications?', a: 'We conduct 100% batch inspection before shipment. If any defect is found, we replace the affected quantity at our cost. Quality is guaranteed.' },
 ];
 
 const DELIVERY_DEMO = [
@@ -292,9 +303,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Product Description</h2>
+            {/* AI Overviews / Featured Snippet pure-fact definition */}
+            <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #2563eb', fontSize: 14, lineHeight: 1.7, color: '#1e3a5f' }}>
+              <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#2563eb' }}>Quick Definition</strong>
+              {product.name} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'} with certifications including NFPA 701 and BSCI.
+            </div>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
-              {product.description?.slice(0, 250)}
+              {product.description}
             </p>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Material &amp; UV Protection</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
@@ -558,6 +574,41 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           </div>
         </div>
       </div>
+
+      {/* ===== Product Schema + BreadcrumbList JSON-LD ===== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://nettingmanufacturer.com/${locale}` },
+                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://nettingmanufacturer.com/${locale}/products` },
+                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://nettingmanufacturer.com/${locale}/products/${slug}` },
+                ],
+              },
+              {
+                '@type': 'Product',
+                'name': product.name,
+                'description': product.description?.slice(0, 200),
+                'brand': { '@type': 'Brand', 'name': 'Jiacheng Netting' },
+                'manufacturer': { '@type': 'Organization', 'name': 'Shandong Jiacheng Chemical Fiber Products Co., Ltd.' },
+                'category': (product as any).category || 'Industrial Netting',
+                'offers': {
+                  '@type': 'Offer',
+                  'priceCurrency': 'USD',
+                  'availability': 'https://schema.org/InStock',
+                  'price': '0',
+                  'priceSpecification': { '@type': 'UnitPriceSpecification', 'unitText': 'sqm' },
+                },
+              },
+            ],
+          }),
+        }}
+      />
 
       {/* ===== RESPONSIVE CSS ===== */}
       <style dangerouslySetInnerHTML={{ __html: `
