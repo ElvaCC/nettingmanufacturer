@@ -54,20 +54,20 @@ export default function StickyInquiryBar({ email, whatsapp, productName }: Stick
         boxShadow: '0 -2px 12px rgba(0,0,0,0.1)',
       }}>
         <a href={`mailto:${email}?subject=${quoteSubject}`} style={{
-          flex: 1, padding: '12px 0', background: '#2563eb', color: '#fff',
-          textDecoration: 'none', textAlign: 'center', fontSize: 12, fontWeight: 700,
-        }}>Request Quote</a>
+          flex: 1, padding: '14px 4px', background: '#2563eb', color: '#fff',
+          textDecoration: 'none', textAlign: 'center', fontSize: 11, fontWeight: 700, letterSpacing: 0.3,
+        }}>Request<br/>Quote</a>
         <a href={`mailto:${email}?subject=${sampleSubject}`} style={{
-          flex: 1, padding: '12px 0', background: '#f59e0b', color: '#fff',
-          textDecoration: 'none', textAlign: 'center', fontSize: 12, fontWeight: 700,
-        }}>Free Sample</a>
+          flex: 1, padding: '14px 4px', background: '#f59e0b', color: '#fff',
+          textDecoration: 'none', textAlign: 'center', fontSize: 11, fontWeight: 700, letterSpacing: 0.3,
+        }}>Free<br/>Sample</a>
         <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${waText}`} target="_blank" rel="noopener noreferrer" style={{
-          flex: 1, padding: '12px 0', background: '#25d366', color: '#fff',
-          textDecoration: 'none', textAlign: 'center', fontSize: 12, fontWeight: 700,
+          flex: 1, padding: '14px 4px', background: '#25d366', color: '#fff',
+          textDecoration: 'none', textAlign: 'center', fontSize: 11, fontWeight: 700, letterSpacing: 0.3,
         }}>WhatsApp</a>
         <a href={`mailto:${email}?subject=${quoteSubject}`} style={{
-          flex: 1, padding: '12px 0', background: '#6b7280', color: '#fff',
-          textDecoration: 'none', textAlign: 'center', fontSize: 12, fontWeight: 700,
+          flex: 1, padding: '14px 4px', background: '#6b7280', color: '#fff',
+          textDecoration: 'none', textAlign: 'center', fontSize: 11, fontWeight: 700, letterSpacing: 0.3,
         }}>&#9993; Email</a>
       </div>
 

@@ -311,9 +311,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       const [label, value, options] = parseSpec(spec);
                       return (
                         <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
-                          <td style={{ padding: '11px 18px', color: '#6b7280', fontWeight: 500, width: '30%' }}>{label}</td>
-                          <td style={{ padding: '11px 18px', color: '#1e3a5f', fontWeight: 600, width: '35%' }}>{value}</td>
-                          <td style={{ padding: '11px 18px', color: '#6b7280', fontSize: 12 }}>{options}</td>
+                          <td style={{ padding: '12px 18px', color: '#6b7280', fontWeight: 500, width: '28%', verticalAlign: 'top' }}>{label}</td>
+                          <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '36%', verticalAlign: 'top' }}>{value}</td>
+                          <td style={{ padding: '12px 18px', color: '#6b7280', fontSize: 13, verticalAlign: 'top' }}>{options}</td>
                         </tr>
                       );
                     })}
