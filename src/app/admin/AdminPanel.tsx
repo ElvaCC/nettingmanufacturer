@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 interface FactoryImage { src: string; alt: string; label: string; span: 'full' | 'half'; }
 interface FactoryHighlight { icon: string; title: string; desc: string; }
 interface FactoryInfoCard { icon: string; title: string; value: string; }
-interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; }
+interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; }
 interface BlogPost { id: number; title: string; date: string; excerpt: string; category: string; }
 interface AppCategory { name: string; items: string[]; }
 interface Stat { number: string; label: string; }
@@ -416,7 +416,7 @@ export default function AdminPanel() {
       ))}
       <button onClick={() => {
         const id = 'new-product-' + Date.now();
-        setContent({ ...content, products: [...content.products, { id, name: 'New Product', nameZh: '新产品', description: '', specs: [], applications: [], images: [], appImages: [], productionImages: [], packagingImages: [] }] });
+        setContent({ ...content, products: [...content.products, { id, name: 'New Product', nameZh: '新产品', description: '', specs: [], applications: [], images: [], appImages: [], productionImages: [], packagingImages: [], detailImages: [], exportMarkets: [], projectCases: [], packagingOptions: [], deliveryRecords: [], faq: [], catalogUrl: '/files/product-catalog.pdf' }] });
         setEditProd(content.products.length);
       }} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Product</button>
     </div>

@@ -1,28 +1,44 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
+import StickyInquiryBar from '@/components/layout/StickyInquiryBar';
 
 interface ProductDetailClientProps {
   slug: string;
   locale: string;
 }
 
-const COLOR_SWATCHES = [
-  { name: 'Green', hex: '#16a34a' },
-  { name: 'Blue', hex: '#2563eb' },
-  { name: 'Black', hex: '#1f2937' },
-  { name: 'White', hex: '#f9fafb' },
-  { name: 'Red', hex: '#dc2626' },
-  { name: 'Orange', hex: '#ea580c' },
+const EXPORT_COUNTRIES = [
+  { name: 'Saudi Arabia', flag: '\uD83C\uDDF8\uD83C\uDDE6' },
+  { name: 'UAE',          flag: '\uD83C\uDDE6\uD83C\uDDEA' },
+  { name: 'Qatar',        flag: '\uD83C\uDDF6\uD83C\uDDE6' },
+  { name: 'Kuwait',       flag: '\uD83C\uDDF0\uD83C\uDDFC' },
+  { name: 'Spain',        flag: '\uD83C\uDDEA\uD83C\uDDF8' },
+  { name: 'Italy',        flag: '\uD83C\uDDEE\uD83C\uDDF9' },
+];
+
+const DEFAULT_FAQ = [
+  { q: 'What is HDPE debris netting?', a: 'HDPE debris netting is a lightweight, high-strength knitted mesh made from 100% virgin HDPE. It is used on construction sites to contain falling debris, dust, and tools while allowing airflow and light penetration.' },
+  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for 3-5 years of outdoor exposure depending on climate conditions. We use premium UV additives that meet NFPA 701 fire-retardant standards.' },
+  { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we recommend 80-120 GSM density. Heavier GSM (120+) is ideal for high-wind areas and demolition sites requiring maximum durability.' },
+  { q: 'What is the MOQ?', a: 'Standard MOQ is 500 sqm per specification. For trial orders and new product testing, we can negotiate smaller quantities. Contact us for flexible starting options.' },
+  { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer full OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. MOQ for OEM packaging is 1000 sqm.' },
+  { q: 'Can you provide free samples?', a: 'Yes, we provide free samples of any product. Samples are available in A4 size or small cut pieces. Freight is collect (you pay shipping). Sample lead time: 3-5 working days.' },
+];
+
+const DELIVERY_DEMO = [
+  { product: 'Shade Net',         month: 'May',    dest: 'UAE',         img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop' },
+  { product: 'Debris Netting',    month: 'April',  dest: 'Saudi Arabia',img: 'https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop' },
+  { product: 'Olive Net',         month: 'March',  dest: 'Spain',       img: 'https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop' },
+  { product: 'Privacy Screen',    month: 'Feb',    dest: 'Kuwait',      img: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop' },
 ];
 
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
   const { products, contact } = useContent();
-  const product = products.find((p) => p.id === slug);
+  const product = products.find((p: any) => p.id === slug);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(0);
 
   if (!product) {
     return (
@@ -35,269 +51,402 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const getPath = (href: string) => `/${locale}${href}`;
   const email = contact?.email || 'Netfactory01@factory-jc.com';
   const whatsapp = contact?.whatsapp || '8615628764579';
+  const sinceYear = 2005;
+  const yearsExp = new Date().getFullYear() - sinceYear;
 
-  // === Data helpers ===
   const allImages = product.images || [];
   const currentSrc = allImages[currentImgIndex] || '';
-  const productionImages = (product as any).productionImages || [];
-  const packagingImages = (product as any).packagingImages || [];
+  const detailImages = (product as any).detailImages || [];
+  const deliveryRecords = (product as any).deliveryRecords || [];
+  const packagingOpts = (product as any).packagingOptions || [];
+  const projectCases = (product as any).projectCases || [];
 
-  const parseSpec = (spec: string): [string, string] => {
-    if (spec.includes(':')) {
-      const idx = spec.indexOf(':');
-      return [spec.slice(0, idx).trim(), spec.slice(idx + 1).trim()];
+  const parseSpec = (spec: string): [string, string, string] => {
+    // Format: "Parameter: Value" or "Parameter: Value | Options"
+    const parts = spec.split('|').map(s => s.trim());
+    const first = parts[0] || '';
+    const options = parts[1] || '';
+    const idx = first.indexOf(':');
+    if (idx > 0) {
+      return [first.slice(0, idx).trim(), first.slice(idx + 1).trim(), options || '-'];
     }
-    return [spec, 'Yes'];
+    return [first, 'Yes', options || '-'];
   };
 
-  const altText = (context: string) =>
-    `${product.name} - ${context} | Jiacheng Netting Manufacturer`;
+  const altText = (ctx: string) =>
+    `${product.name} - ${ctx}`;
+
+  const quoteSubject = encodeURIComponent(`Quote Request: ${product.name}`);
+  const sampleSubject = encodeURIComponent(`Free Sample Request: ${product.name}`);
 
   return (
     <>
-      {/* SECTION 1: HERO VISUAL ZONE */}
-      <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '24px 24px 0' }}>
+      <StickyInquiryBar email={email} whatsapp={whatsapp} productName={product.name} />
+
+      {/* ===== HERO BANNER ===== */}
+      <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '20px 24px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
-            <span>Jiacheng Netting</span>
-            <span style={{ opacity: 0.4 }}>|</span>
-            <span>BSCI &amp; NFPA-701 Certified</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
+            <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>BSCI &amp; NFPA-701 Certified</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(22px, 3.5vw, 32px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15 }}>{product.name}</h1>
+          <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15 }}>{product.name}</h1>
         </div>
       </section>
 
-      {/* ─── MAIN CONTENT ─── */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 24px 48px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 40, alignItems: 'start' }} className="product-hero-grid">
+      {/* ===== MAIN GRID: LEFT (Gallery + Detail Images) + RIGHT (Specs + CTA) ===== */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '28px 24px 48px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 36, alignItems: 'start' }} className="product-hero-grid">
 
-          {/* ─── LEFT: GALLERY ─── */}
+          {/* ─── LEFT COLUMN ─── */}
           <div>
-            {/* Main Image — fixed 4:3 aspect ratio */}
-            {currentSrc ? (
-              <div style={{
-                position: 'relative', borderRadius: 16, overflow: 'hidden',
-                background: '#f9fafb', border: '1px solid #e5e7eb',
-                marginBottom: 16, aspectRatio: '4/3',
-              }}>
-                <Image
-                  src={currentSrc}
-                  alt={altText('Close-up Product Photo')}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 66vw"
-                  priority
-                  style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
-                />
-                <div style={{
-                  position: 'absolute', top: 12, right: 12,
-                  background: 'rgba(0,0,0,0.6)', color: '#fff',
-                  padding: '4px 10px', borderRadius: 6, fontSize: 11,
-                  backdropFilter: 'blur(4px)',
-                }}>
-                  {currentImgIndex + 1} / {allImages.length}
-                </div>
-              </div>
-            ) : (
-              <div style={{
-                borderRadius: 16, aspectRatio: '4/3',
-                background: '#f3f4f6', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', color: '#aaa', fontSize: 15, marginBottom: 16,
-              }}>
-                No Image Available
-              </div>
-            )}
-
-            {/* Thumbnails — larger at w-20 h-20 */}
-            {allImages.length > 1 && (
-              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 36 }}>
-                {allImages.map((img, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setCurrentImgIndex(i)}
-                    style={{
-                      borderRadius: 12, overflow: 'hidden', cursor: 'pointer',
-                      width: 80, height: 80, flexShrink: 0,
-                      border: currentImgIndex === i ? '2px solid #2563eb' : '2px solid #e5e7eb',
-                      transition: 'border-color 0.2s, transform 0.2s, box-shadow 0.2s',
-                      transform: currentImgIndex === i ? 'scale(1.05)' : 'scale(1)',
-                      boxShadow: currentImgIndex === i ? '0 0 0 3px #bfdbfe' : 'none',
-                      opacity: currentImgIndex === i ? 1 : 0.75,
-                    }}
-                  >
-                    <Image
-                      src={img}
-                      alt={altText(`Thumbnail ${i + 1}`)}
-                      width={80}
-                      height={80}
-                      style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }}
-                    />
+            {/* MODULE 1: Product Gallery */}
+            {currentSrc && (
+              <>
+                <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', background: '#f9fafb', border: '1px solid #e5e7eb', marginBottom: 14, aspectRatio: '4/3' }}>
+                  <Image src={currentSrc} alt={altText('main product photo')} fill sizes="(max-width: 900px) 100vw, 66vw" priority style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
+                  <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(0,0,0,0.55)', color: '#fff', padding: '3px 9px', borderRadius: 5, fontSize: 11 }}>
+                    {currentImgIndex + 1} / {allImages.length}
                   </div>
-                ))}
-              </div>
+                </div>
+                {allImages.length > 1 && (
+                  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 32 }}>
+                    {allImages.map((img: string, i: number) => (
+                      <div key={i} onClick={() => setCurrentImgIndex(i)} style={{
+                        borderRadius: 10, overflow: 'hidden', cursor: 'pointer', width: 76, height: 76, flexShrink: 0,
+                        border: currentImgIndex === i ? '2px solid #2563eb' : '2px solid #e5e7eb',
+                        transition: 'border-color 0.2s, transform 0.2s',
+                        transform: currentImgIndex === i ? 'scale(1.05)' : 'scale(1)',
+                        boxShadow: currentImgIndex === i ? '0 0 0 3px #bfdbfe' : 'none',
+                        opacity: currentImgIndex === i ? 1 : 0.7,
+                      }}>
+                        <Image src={img} alt={altText(`thumbnail ${i + 1}`)} width={76} height={76} style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
 
-            {/* ── Product Description ── */}
-            <div className="detail-section-card" style={{ marginBottom: 28 }}>
-              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Product Description</h2>
-              <p style={{ fontSize: 15, lineHeight: 1.9, color: '#555', margin: 0, whiteSpace: 'pre-line' }}>
-                {product.description}
-              </p>
-            </div>
-
-            {/* ── Specifications Table ── */}
-            {product.specs && product.specs.length > 0 && (
-              <div className="detail-section-card" style={{ marginBottom: 28 }}>
-                <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Detailed Specifications</h2>
-                <div style={{ overflowX: 'auto', borderRadius: 12, border: '1px solid #e5e7eb' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
-                    <thead>
-                      <tr style={{ background: '#1e3a5f', color: '#fff' }}>
-                        <th style={{ padding: '14px 20px', textAlign: 'left', fontWeight: 600, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5 }}>Parameter</th>
-                        <th style={{ padding: '14px 20px', textAlign: 'left', fontWeight: 600, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5 }}>Details</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {product.specs.map((spec: string, idx: number) => {
-                        const [label, value] = parseSpec(spec);
-                        return (
-                          <tr key={idx} style={{
-                            background: idx % 2 === 0 ? '#fff' : '#f8fafc',
-                            borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none',
-                          }}>
-                            <td style={{ padding: '14px 20px', color: '#6b7280', fontWeight: 500, width: '35%' }}>{label}</td>
-                            <td style={{ padding: '14px 20px', color: '#1e3a5f', fontWeight: 600 }}>{value || 'Yes'}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+            {/* MODULE 2: Product Detail Images (micro mesh / edge close-ups) */}
+            {detailImages.length > 0 && (
+              <div className="section-gap">
+                <div style={{ background: '#fff', borderRadius: 14, padding: '24px 28px', border: '1px solid #e5e7eb' }}>
+                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Product Detail Close-ups</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
+                    {detailImages.map((img: string, i: number) => (
+                      <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                        <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* ─── RIGHT: CLEAN CONVERSION SIDEBAR ─── */}
-          <div style={{ position: 'sticky', top: 80 }}>
-            <div style={{ marginBottom: 24 }}>
-              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 16, fontWeight: 500 }}>
-                Professional HDPE netting direct from China BSCI certified factory. Custom sizes &amp; colors available.
-              </p>
+          {/* ─── RIGHT COLUMN: Key Specs + CTA (sticky) ─── */}
+          <div style={{ position: 'sticky', top: 90 }}>
+            {/* MODULE 3: Key Specifications & CTA */}
+            <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 16, fontWeight: 500 }}>
+              Professional HDPE netting direct from China BSCI certified factory. Custom sizes &amp; colors available.
+            </p>
 
-              {/* Spec Highlight Tags */}
-              {(product.specs || []).slice(0, 6).length > 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
-                  {(product.specs || []).slice(0, 6).map((spec: string, idx: number) => {
-                    const val = spec.includes(':') ? spec.split(':').slice(1).join(':').trim() : spec;
-                    const shortVal = val.length > 28 ? val.slice(0, 28) + '...' : val;
-                    return (
-                      <div key={idx} style={{
-                        fontSize: 13, fontWeight: 600, padding: '10px 14px', borderRadius: 8,
-                        background: idx % 2 === 0 ? '#eef2ff' : '#f0fdf4',
-                        color: idx % 2 === 0 ? '#3730a3' : '#166534',
-                        border: `1px solid ${idx % 2 === 0 ? '#c7d2fe' : '#bbf7d0'}`,
-                        display: 'flex', alignItems: 'center', gap: 8,
-                      }}>
-                        <span style={{ fontSize: 14, flexShrink: 0 }}>&#10003;</span>
-                        {shortVal}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Color Swatches */}
-              <div style={{ marginBottom: 24 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 10 }}>Available Colors:</p>
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  {COLOR_SWATCHES.map((c, i) => (
-                    <button
-                      key={c.name}
-                      onClick={() => setSelectedColor(i)}
-                      title={c.name}
-                      style={{
-                        width: 32, height: 32, borderRadius: '50%', border: 'none',
-                        background: c.hex,
-                        cursor: 'pointer', flexShrink: 0,
-                        outline: selectedColor === i ? `3px solid #2563eb` : 'none',
-                        outlineOffset: 2,
-                        boxShadow: selectedColor === i ? `0 0 0 1px #fff, 0 0 0 4px #2563eb` : '0 1px 3px rgba(0,0,0,0.2)',
-                        transition: 'outline 0.15s, box-shadow 0.15s, transform 0.15s',
-                        transform: selectedColor === i ? 'scale(1.12)' : 'scale(1)',
-                      }}
-                      onMouseEnter={e => { if (selectedColor !== i) (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)'; }}
-                      onMouseLeave={e => { if (selectedColor !== i) (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}
-                    />
-                  ))}
-                </div>
-                <p style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{COLOR_SWATCHES[selectedColor].name} — In Stock</p>
+            {/* Key Spec Tags */}
+            {(product.specs || []).slice(0, 6).length > 0 && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 20, fontSize: 13 }}>
+                {(product.specs || []).slice(0, 6).map((spec: string, i: number) => {
+                  const val = spec.includes(':') ? spec.split(':').slice(1).join(':').trim() : spec;
+                  return (
+                    <div key={i} style={{
+                      padding: '9px 14px', borderRadius: 8, fontWeight: 600,
+                      background: i % 2 === 0 ? '#eef2ff' : '#f0fdf4',
+                      color: i % 2 === 0 ? '#3730a3' : '#166534',
+                      border: `1px solid ${i % 2 === 0 ? '#c7d2fe' : '#bbf7d0'}`,
+                      display: 'flex', alignItems: 'center', gap: 8,
+                    }}>
+                      <span style={{ flexShrink: 0 }}>&#10003;</span>
+                      {val.length > 40 ? val.slice(0, 40) + '...' : val}
+                    </div>
+                  );
+                })}
               </div>
-            </div>
+            )}
 
-            {/* CTA Card — Clean: only 3 buttons */}
-            <div style={{ background: '#1e3a5f', borderRadius: 16, padding: 28, color: '#fff' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Get Factory Price</h3>
-              <p style={{ fontSize: 13, opacity: 0.75, marginBottom: 20, lineHeight: 1.6 }}>
-                Custom sizes, colors, certifications &amp; OEM/ODM available. Reply within 2 hours.
+            {/* CTA Card with dual buttons */}
+            <div style={{ background: '#1e3a5f', borderRadius: 14, padding: 24, color: '#fff' }}>
+              <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 6 }}>Get Factory Price</h3>
+              <p style={{ fontSize: 12, opacity: 0.75, marginBottom: 6, lineHeight: 1.5 }}>
+                OEM/ODM &amp; custom specifications available. Reply within 2 hours.
               </p>
-              <a href={`mailto:${email}?subject=Quote Request: ${encodeURIComponent(product.name)}`} style={{
-                display: 'block', width: '100%', padding: '14px 0',
-                background: '#2563eb', color: '#fff', textDecoration: 'none',
-                borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center',
-                boxSizing: 'border-box', marginBottom: 10, transition: 'background 0.15s',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1d4ed8'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#2563eb'; }}>
-                &#9993; Email Quote Request
-              </a>
+              <p style={{ fontSize: 11, opacity: 0.5, marginBottom: 14, fontStyle: 'italic' }}>
+                Need to check quality before ordering? Request a Free Sample.
+              </p>
+              {/* Dual buttons: Request Quote + Request Free Sample */}
+              <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
+                <a href={`mailto:${email}?subject=${quoteSubject}`} style={{
+                  flex: 1, padding: '12px 0', background: '#2563eb', color: '#fff',
+                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13,
+                  textAlign: 'center', transition: 'background 0.15s',
+                }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1d4ed8'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#2563eb'; }}>
+                  &#9993; Request Quote
+                </a>
+                <a href={`mailto:${email}?subject=${sampleSubject}`} style={{
+                  flex: 1, padding: '12px 0', background: '#f59e0b', color: '#fff',
+                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13,
+                  textAlign: 'center', transition: 'background 0.15s',
+                }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
+                    Request Free Sample
+                </a>
+              </div>
               <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}. Could you send me a quote?`)}`}
                 target="_blank" rel="noopener noreferrer" style={{
-                  display: 'block', width: '100%', padding: '14px 0',
-                  background: '#25d366', color: '#fff', textDecoration: 'none',
-                  borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center',
-                  boxSizing: 'border-box', marginBottom: 10, transition: 'background 0.15s',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1fb855'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#25d366'; }}>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff" /></svg> WhatsApp Us</span>
-              </a>
-              <a href="/files/product-catalog.pdf" download style={{
-                display: 'block', width: '100%', padding: '12px 0',
-                background: 'rgba(255,255,255,0.15)', color: '#fff',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 600,
-                fontSize: 14, textAlign: 'center', boxSizing: 'border-box',
-                transition: 'background 0.15s',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.25)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.15)'; }}>
-                &#128196; Download Catalog
-              </a>
+                  display: 'block', width: '100%', padding: '11px 0', background: '#25d366',
+                  color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700,
+                  fontSize: 13, textAlign: 'center', marginBottom: 8,
+                }}>WhatsApp Us</a>
+              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
+                display: 'block', width: '100%', padding: '10px 0',
+                background: 'rgba(255,255,255,0.12)', color: '#fff',
+                textDecoration: 'none', borderRadius: 8, fontWeight: 600, fontSize: 13, textAlign: 'center',
+              }}>&#128196; Download Product Catalog</a>
             </div>
           </div>
         </div>
 
         {/* ════════════════════════════════════════════
-            SECTION 2: MANUFACTURING CAPACITY ZONE
+            MODULE 4: Why Choose Jiacheng
             ════════════════════════════════════════════ */}
-        {productionImages.length > 0 && (
-          <div className="detail-section-gap">
-            <div style={{ background: '#f8fafc', borderRadius: 16, padding: '48px 40px' }}>
-              <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
-                Advanced Manufacturing Capacity
-              </h2>
-              <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 36, maxWidth: 600, margin: '0 auto 36px' }}>
-                State-of-the-art warp knitting production lines and rigorous quality control at every stage
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="manufacturing-grid">
-                {productionImages.map((img: string, idx: number) => (
-                  <div key={idx} style={{
-                    position: 'relative', borderRadius: 12, overflow: 'hidden',
-                    aspectRatio: '4/3', background: '#fff', border: '1px solid #e5e7eb',
-                    transition: 'transform 0.35s, box-shadow 0.35s', cursor: 'zoom-in',
-                  }}
-                    className="manufacturing-card"
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.12)'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
-                    <Image src={img} alt={altText(`Production Process ${idx + 1} - Manufacturing Workshop`)} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 380px" style={{ objectFit: 'contain', display: 'block', background: '#fff' }} />
+        <div className="section-gap">
+          <div style={{ background: '#f8fafc', borderRadius: 14, padding: '36px 32px' }}>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1e3a5f', marginBottom: 20, textAlign: 'center' }}>
+              Why Choose Jiacheng
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
+              {[
+                { icon: '\u2699\uFE0F', title: `${yearsExp}+ Years Experience`, desc: 'Founded in 2005, we have been manufacturing HDPE netting for over 18 years with continuous innovation.' },
+                { icon: '\u2705', title: 'BSCI & NFPA-701 Certified', desc: 'All products meet international safety standards. Third-party audited social compliance and fire-retardant certified.' },
+                { icon: '\uD83C\uDFED', title: '20,000 m\u00B2 Factory', desc: 'State-of-the-art production facility with 65+ warp knitting machines. Massive capacity for bulk orders.' },
+                { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
+                { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
+                { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+                  <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
+                  <div>
+                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
+                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 5: Export Markets (Country Tags)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Export Markets</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 16, lineHeight: 1.5 }}>
+              We have established supply partnerships with importers and distributors across the following markets:
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              {EXPORT_COUNTRIES.map((c) => (
+                <div key={c.name} style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  padding: '10px 18px', background: '#f8fafc',
+                  borderRadius: 24, border: '1px solid #e5e7eb',
+                  fontSize: 14, fontWeight: 600, color: '#1e3a5f',
+                }}>
+                  <span style={{ fontSize: 20 }}>{c.flag}</span>
+                  <span>{c.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 6: Structured Product Description (h3 subheadings)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Product Description</h2>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
+              {product.description?.slice(0, 250)}
+            </p>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Material &amp; UV Protection</h3>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
+              Manufactured from 100% virgin high-density polyethylene (HDPE) with UV-stabilizing compound treatment. All products meet NFPA 701 fire-retardant standards. UV protection rating: 3-5 years outdoor exposure depending on climate conditions. Material resists degradation from sunlight, moisture, and temperature variations.
+            </p>
+            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Customization Options</h3>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
+              Available in custom colors (Pantone match), mesh sizes, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Minimum customization order: 1,000 sqm. Contact our sales team for specifications and lead time.
+            </p>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 7: Detailed Specifications Table (3 columns)
+            ════════════════════════════════════════════ */}
+        {product.specs && product.specs.length > 0 && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Detailed Specifications</h2>
+              <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                  <thead>
+                    <tr style={{ background: '#1e3a5f', color: '#fff' }}>
+                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Parameter</th>
+                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Value</th>
+                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Options</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {product.specs.map((spec: string, idx: number) => {
+                      const [label, value, options] = parseSpec(spec);
+                      return (
+                        <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
+                          <td style={{ padding: '11px 18px', color: '#6b7280', fontWeight: 500, width: '30%' }}>{label}</td>
+                          <td style={{ padding: '11px 18px', color: '#1e3a5f', fontWeight: 600, width: '35%' }}>{value}</td>
+                          <td style={{ padding: '11px 18px', color: '#6b7280', fontSize: 12 }}>{options}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            MODULE 8: Download Center
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#f8fafc', borderRadius: 14, padding: '32px', textAlign: 'center', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>Download Product Catalog</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 20, maxWidth: 500, margin: '0 auto 20px' }}>
+              Get our full product catalog with detailed specifications, packaging options, and pricing guidelines.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
+                padding: '12px 32px', background: '#1e3a5f', color: '#fff',
+                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
+              }}>&#128196; Download PDF Catalog</a>
+              <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
+                padding: '12px 32px', background: '#2563eb', color: '#fff',
+                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
+              }}>&#9993; Request by Email</a>
+            </div>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 9: Applications & Project Cases
+            ════════════════════════════════════════════ */}
+        {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
+              {product.applications && product.applications.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 0 }}>
+                  {product.applications.map((app: string, i: number) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
+                      <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
+                      <span>{app}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {projectCases.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+                  {projectCases.map((c: any, i: number) => (
+                    <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                      {c.image && (
+                        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#f9fafb' }}>
+                          <Image src={c.image} alt={altText(`project case ${i + 1}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        </div>
+                      )}
+                      <div style={{ padding: '12px 14px' }}>
+                        <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{c.title || ''}</p>
+                        {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            MODULE 10: Packaging Options
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+              We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }} className="pkg-grid">
+              {[
+                { label: 'Roll Packing', desc: 'Each roll wrapped in woven polypropylene bag. Standard for bulk orders. Labeling: product spec sticker.' },
+                { label: 'Pallet Packing', desc: 'Rolls stacked on wooden pallets, stretch-wrapped for container loading. Suitable for large volume shipments.' },
+                { label: 'Sheet / Flat Pack', desc: 'Folded sheets packed in polybags or cartons. Ideal for retail distribution and smaller quantities.' },
+                { label: 'OEM Custom Packaging', desc: 'Private label packaging with your brand logo, barcode, and product information. MOQ: 1,000 sqm.' },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  padding: '14px 16px', background: '#f8fafc', borderRadius: 10,
+                  border: '1px solid #e5e7eb',
+                }}>
+                  <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{item.label}</div>
+                  <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                </div>
+              ))}
+            </div>
+            {(packagingOpts.length > 0) && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginTop: 14 }} className="pkg-grid">
+                {packagingOpts.map((opt: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                    {opt.image && (
+                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                        <Image src={opt.image} alt={altText(`packaging option ${i + 1}`)} fill sizes="(max-width: 768px) 50vw, 25vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                      </div>
+                    )}
+                    <div style={{ padding: '10px 14px' }}>
+                      <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{opt.label || ''}</p>
+                      {opt.desc && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{opt.desc}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 11: Latest Deliveries (static cards, no animation)
+            ════════════════════════════════════════════ */}
+        {(deliveryRecords.length > 0) && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+                {(deliveryRecords.length > 0 ? deliveryRecords : DELIVERY_DEMO).slice(0, 6).map((d: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                      <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                    </div>
+                    <div style={{ padding: '10px 14px' }}>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>
+                        Latest Delivery: {d.month} - {d.product} to {d.dest}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -306,82 +455,41 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         )}
 
         {/* ════════════════════════════════════════════
-            SECTION 3: PACKAGING AND SHIPPING ZONE
+            MODULE 12: Technical & Business FAQ (collapsible)
             ════════════════════════════════════════════ */}
-        {packagingImages.length > 0 && (
-          <div className="detail-section-gap">
-            <div style={{ padding: '48px 0' }}>
-              <h2 style={{ fontSize: 26, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, textAlign: 'center' }}>
-                Strict Packaging &amp; Container Loading
-              </h2>
-              <p style={{ fontSize: 15, color: '#6b7280', textAlign: 'center', marginBottom: 36, maxWidth: 600, margin: '0 auto 36px' }}>
-                Professional packaging and timely container shipment ensure your order arrives in perfect condition
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24 }} className="packaging-grid">
-                {packagingImages.map((img: string, idx: number) => (
-                  <div key={idx} style={{
-                    position: 'relative', borderRadius: 14, overflow: 'hidden',
-                    aspectRatio: '16/9', background: '#fff', border: '1px solid #e5e7eb',
-                    transition: 'transform 0.35s, box-shadow 0.35s', cursor: 'zoom-in',
-                  }}
-                    className="packaging-card"
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.015)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(0,0,0,0.1)'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
-                    <Image src={img} alt={altText(`Packaging & Shipping ${idx + 1} - Container Loading`)} fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'contain', display: 'block', background: '#fff' }} />
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
+            {(product as any).faq && (product as any).faq.length > 0 ? (
+              (product as any).faq.map((item: any, i: number) => (
+                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                </details>
+              ))
+            ) : (
+              DEFAULT_FAQ.map((item, i) => (
+                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                </details>
+              ))
+            )}
           </div>
-        )}
+        </div>
 
-        {/* ── Application Scenarios ── */}
-        {product.applications && product.applications.length > 0 && (
-          <div className="detail-section-gap">
-            <div className="detail-section-card">
-              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Scenarios</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                {product.applications.map((app: string, idx: number) => (
-                  <div key={idx} style={{
-                    display: 'flex', alignItems: 'center', gap: 10, fontSize: 14,
-                    color: '#555', padding: '12px 16px', background: '#f8fafc',
-                    borderRadius: 10, border: '1px solid #f0f2f5',
-                  }}>
-                    <span style={{ color: '#10b981', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>&#10003;</span>
-                    <span>{app}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Application Gallery ── */}
-        {(product as any)?.appImages && (product as any).appImages.length > 0 && (
-          <div className="detail-section-gap">
-            <div className="detail-section-card">
-              <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Application Gallery</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 16 }}>
-                {(product as any).appImages.map((img: string, idx: number) => (
-                  <div key={idx} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', aspectRatio: '4/3' }}>
-                    <Image src={img} alt={altText(`Application Scene ${idx + 1}`)} fill sizes="(max-width: 600px) 100vw, 200px" style={{ objectFit: 'contain', display: 'block', background: '#f8fafc' }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Related Products ── */}
-        <div className="detail-section-gap">
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1e3a5f', marginBottom: 24 }}>You May Also Like</h2>
-          <div className="related-products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+        {/* ════════════════════════════════════════════
+            MODULE 13: Related Products
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Related Products</h2>
+          <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
             {products
               .filter((p: any) => p.id !== slug)
               .slice(0, 4)
               .map((p: any) => (
                 <a key={p.id} href={getPath(`/products/${p.id}`)} style={{
-                  background: '#fff', borderRadius: 12, overflow: 'hidden',
+                  background: '#fff', borderRadius: 10, overflow: 'hidden',
                   border: '1px solid #e5e7eb', textDecoration: 'none', display: 'block',
                   transition: 'box-shadow 0.2s, transform 0.2s',
                 }}
@@ -389,14 +497,13 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}>
                   {p.images && p.images[0] ? (
                     <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f8fafc' }}>
-                      <Image src={p.images[0]} alt={`${p.name} - Related Product | Jiacheng Netting Manufacturer`} fill sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw" style={{ objectFit: 'contain', display: 'block' }} />
+                      <Image src={p.images[0]} alt={`${p.name} - related product`} fill sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw" style={{ objectFit: 'contain', display: 'block' }} />
                     </div>
                   ) : (
-                    <div style={{ aspectRatio: '4/3', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 13 }}>No image</div>
+                    <div style={{ aspectRatio: '4/3', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 12 }}>No image</div>
                   )}
-                  <div style={{ padding: '14px 16px' }}>
+                  <div style={{ padding: '12px 14px' }}>
                     <p style={{ fontSize: 14, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{p.name}</p>
-                    <p style={{ fontSize: 12, color: '#888', margin: '4px 0 0', lineHeight: 1.4 }}>{p.description?.slice(0, 60)}...</p>
                   </div>
                 </a>
               ))}
@@ -406,28 +513,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
       {/* ===== RESPONSIVE CSS ===== */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .detail-section-card {
-          background: #fff; border-radius: 16px; padding: 28px 32px;
-          border: 1px solid #e5e7eb;
-        }
-        .detail-section-gap { margin-top: 48px; }
+        .section-gap { margin-top: 40px; }
         @media (max-width: 768px) {
-          .manufacturing-grid { grid-template-columns: 1fr !important; }
-          .packaging-grid { grid-template-columns: 1fr !important; }
-          .detail-section-gap { margin-top: 32px; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .manufacturing-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .section-gap { margin-top: 28px; }
+          .why-grid { grid-template-columns: 1fr !important; }
+          .pkg-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 900px) {
           .product-hero-grid { grid-template-columns: 1fr !important; }
           .product-hero-grid > div:last-child { position: static !important; order: -1; }
-          .related-products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
-        @media (max-width: 600px) {
-          .related-products-grid { grid-template-columns: 1fr !important; }
-        }
-        html { scroll-behavior: smooth; }
+        @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr !important; } }
+        @media (min-width: 769px) and (max-width: 1024px) { .why-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+        body { padding-bottom: 60px; }
+        details summary::-webkit-details-marker { color: #2563eb; }
+        details[open] summary { color: #1e3a5f; }
       `}} />
     </>
   );
