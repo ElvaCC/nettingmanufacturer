@@ -432,12 +432,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         {/* ════════════════════════════════════════════
             MODULE 11: Latest Deliveries (static cards, no animation)
             ════════════════════════════════════════════ */}
-        {(deliveryRecords.length > 0) && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
-                {(deliveryRecords.length > 0 ? deliveryRecords : DELIVERY_DEMO).slice(0, 6).map((d: any, i: number) => (
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+              {(deliveryRecords.length > 0 ? deliveryRecords : DELIVERY_DEMO).slice(0, 6).map((d: any, i: number) => (
                   <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
                     <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
                       <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
@@ -452,7 +451,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               </div>
             </div>
           </div>
-        )}
 
         {/* ════════════════════════════════════════════
             MODULE 12: Technical & Business FAQ (collapsible)
