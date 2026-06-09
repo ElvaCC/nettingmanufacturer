@@ -139,6 +139,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       </div>
                     ))}
                   </div>
+                  {/* Hardcoded machinery weaving image slot */}
+                  <div style={{ marginTop: 14 }}>
+                    <div style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '16/9', background: '#e5e7eb', border: '1px solid #d1d5db', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+                      <span style={{ fontSize: 13, fontWeight: 600 }}>Advanced Weaving Machinery</span>
+                      <span style={{ fontSize: 11 }}>Add production workshop photo</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -231,13 +239,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
                 { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
                 { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
+                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: 'Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.', qcImg: true },
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
-                  <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
-                  <div>
-                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
-                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
+                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                    </div>
                   </div>
+                  {(item as any).qcImg && (
+                    <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', aspectRatio: '1/1', background: '#e5e7eb', border: '1px solid #d1d5db', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 6, marginTop: 4 }}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg>
+                      <span style={{ fontSize: 11, fontWeight: 600 }}>QC Inspection Photo</span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -393,19 +410,26 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
               We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }} className="pkg-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="pkg-grid">
               {[
-                { label: 'Roll Packing', desc: 'Each roll wrapped in woven polypropylene bag. Standard for bulk orders. Labeling: product spec sticker.' },
-                { label: 'Pallet Packing', desc: 'Rolls stacked on wooden pallets, stretch-wrapped for container loading. Suitable for large volume shipments.' },
-                { label: 'Sheet / Flat Pack', desc: 'Folded sheets packed in polybags or cartons. Ideal for retail distribution and smaller quantities.' },
-                { label: 'OEM Custom Packaging', desc: 'Private label packaging with your brand logo, barcode, and product information. MOQ: 1,000 sqm.' },
+                { icon: '\uD83D\uDCE6', label: 'Standard Roll Packing', desc: 'Each roll wrapped in woven polypropylene bag with product spec sticker. Standard for bulk export orders.' },
+                { icon: '\uD83C\uDFF7\uFE0F', label: 'OEM Custom Labeling & Color Cards', desc: 'Private label branding, custom color cards, barcode stickers, and polybag printing. MOQ: 1,000 sqm.' },
+                { icon: '\uD83E\uDDF1', label: 'Fumigation-Free Pallet Packing', desc: 'Rolls stacked on pallets, stretch-wrapped for container loading. IPPC-certified heat-treated pallets.' },
               ].map((item, i) => (
                 <div key={i} style={{
-                  padding: '14px 16px', background: '#f8fafc', borderRadius: 10,
-                  border: '1px solid #e5e7eb',
-                }}>
-                  <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{item.label}</div>
-                  <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                  borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb',
+                  background: '#fff', transition: 'box-shadow 0.2s',
+                }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+                  <div style={{ position: 'relative', aspectRatio: '4/3', background: '#e5e7eb', borderBottom: '1px solid #e5e7eb', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
+                    <span style={{ fontSize: 36 }}>{item.icon}</span>
+                    <span style={{ fontSize: 11, fontWeight: 600 }}>Click to add photo</span>
+                  </div>
+                  <div style={{ padding: '14px 16px' }}>
+                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{item.label}</div>
+                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -430,27 +454,53 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
 
         {/* ════════════════════════════════════════════
-            MODULE 11: Latest Deliveries (static cards, no animation)
+            MODULE 11: Latest Deliveries & Container Loading (static cards, no animation)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
-              {(deliveryRecords.length > 0 ? deliveryRecords : DELIVERY_DEMO).slice(0, 6).map((d: any, i: number) => (
-                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                      <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                    </div>
-                    <div style={{ padding: '10px 14px' }}>
-                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>
-                        Latest Delivery: {d.month} - {d.product} to {d.dest}
-                      </p>
-                    </div>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
+              {(deliveryRecords.length > 0 ? deliveryRecords : [
+                { month: 'April', product: 'Safety Debris Netting', dest: 'Saudi Arabia', img: '' },
+                { month: 'March', product: 'Construction Debris Netting', dest: 'UAE, Dubai', img: '' },
+                { month: 'February', product: 'Olive Net / Harvest Net', dest: 'Spain', img: '' },
+              ]).slice(0, 3).map((d: any, i: number) => (
+                <div key={i} style={{
+                  borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb',
+                  background: '#fff', transition: 'box-shadow 0.2s',
+                }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
+                  {/* Month/Destination tag */}
+                  <div style={{
+                    position: 'absolute', top: 10, left: 10, zIndex: 2,
+                    background: '#1e3a5f', color: '#fff', padding: '4px 10px',
+                    borderRadius: 6, fontSize: 11, fontWeight: 600,
+                  }}>
+                    Latest: {d.month} &rarr; {d.dest}
                   </div>
-                ))}
-              </div>
+                  {/* Image or placeholder */}
+                  {d.img ? (
+                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                      <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                    </div>
+                  ) : (
+                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#e5e7eb', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
+                      <span style={{ fontSize: 12, fontWeight: 600 }}>{d.month} - {d.product}</span>
+                      <span style={{ fontSize: 11 }}>to {d.dest}</span>
+                    </div>
+                  )}
+                  <div style={{ padding: '12px 16px' }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>
+                      {d.month} Delivery: {d.product} to {d.dest}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+        </div>
 
         {/* ════════════════════════════════════════════
             MODULE 12: Technical & Business FAQ (collapsible)
