@@ -353,148 +353,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         )}
 
         {/* ════════════════════════════════════════════
-            MODULE 8: Download Center
-            ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#f8fafc', borderRadius: 14, padding: '32px', textAlign: 'center', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>Download Product Catalog</h2>
-            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 20, maxWidth: 500, margin: '0 auto 20px' }}>
-              Get our full product catalog with detailed specifications, packaging options, and pricing guidelines.
-            </p>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
-                padding: '12px 32px', background: '#1e3a5f', color: '#fff',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
-              }}>&#128196; Download PDF Catalog</a>
-              <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
-                padding: '12px 32px', background: '#2563eb', color: '#fff',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
-              }}>&#9993; Request by Email</a>
-            </div>
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════
-            MODULE 9: Applications & Project Cases
-            ════════════════════════════════════════════ */}
-        {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
-              {product.applications && product.applications.length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 0 }}>
-                  {product.applications.map((app: string, i: number) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
-                      <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
-                      <span>{app}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {projectCases.length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
-                  {projectCases.map((c: any, i: number) => (
-                    <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-                      {c.image && (
-                        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#f9fafb' }}>
-                          <Image src={c.image} alt={altText(`project case ${i + 1}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                        </div>
-                      )}
-                      <div style={{ padding: '12px 14px' }}>
-                        <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{c.title || ''}</p>
-                        {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* ════════════════════════════════════════════
-            MODULE 10: Packaging Options (defensive: hidden when no image data)
-            ════════════════════════════════════════════ */}
-        {packagingOpts.length >= 1 && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
-              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
-                We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="pkg-grid">
-                {packagingOpts.slice(0, 6).map((opt: any, i: number) => (
-                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
-                    {opt.image ? (
-                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                        <Image src={opt.image} alt={altText(`packaging ${i + 1} - ${opt.label || ''}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                      </div>
-                    ) : null}
-                    <div style={{ padding: '14px 16px' }}>
-                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{opt.label || ''}</div>
-                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{opt.desc || ''}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ════════════════════════════════════════════
-            MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no image data)
-            ════════════════════════════════════════════ */}
-        {deliveryRecords.length >= 1 && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
-                {deliveryRecords.slice(0, 6).map((d: any, i: number) => (
-                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
-                    {d.img ? (
-                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                        <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 2, background: '#1e3a5f', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
-                          {d.month} &rarr; {d.dest}
-                        </div>
-                        <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                      </div>
-                    ) : null}
-                    <div style={{ padding: '12px 16px' }}>
-                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{d.month} Delivery: {d.product} to {d.dest}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ════════════════════════════════════════════
-            MODULE 12: Technical & Business FAQ (collapsible)
-            ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
-            {(product as any).faq && (product as any).faq.length > 0 ? (
-              (product as any).faq.map((item: any, i: number) => (
-                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
-                </details>
-              ))
-            ) : (
-              DEFAULT_FAQ.map((item, i) => (
-                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
-                </details>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════
-            MODULE: How To Choose The Right Netting (Decision Matrix)
+            
+MODULE: How To Choose The Right Netting (Decision Matrix)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
@@ -532,7 +392,154 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
 
         {/* ════════════════════════════════════════════
-            MODULE 13: Related Products
+            
+MODULE 9: Applications & Project Cases
+            ════════════════════════════════════════════ */}
+        {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
+              {product.applications && product.applications.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 0 }}>
+                  {product.applications.map((app: string, i: number) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
+                      <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
+                      <span>{app}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {projectCases.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+                  {projectCases.map((c: any, i: number) => (
+                    <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                      {c.image && (
+                        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#f9fafb' }}>
+                          <Image src={c.image} alt={altText(`project case ${i + 1}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        </div>
+                      )}
+                      <div style={{ padding: '12px 14px' }}>
+                        <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{c.title || ''}</p>
+                        {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 10: Packaging Options (defensive: hidden when no image data)
+            ════════════════════════════════════════════ */}
+        {packagingOpts.length >= 1 && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
+              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+                We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="pkg-grid">
+                {packagingOpts.slice(0, 6).map((opt: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
+                    {opt.image ? (
+                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                        <Image src={opt.image} alt={altText(`packaging ${i + 1} - ${opt.label || ''}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                      </div>
+                    ) : null}
+                    <div style={{ padding: '14px 16px' }}>
+                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{opt.label || ''}</div>
+                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{opt.desc || ''}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no image data)
+            ════════════════════════════════════════════ */}
+        {deliveryRecords.length >= 1 && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
+                {deliveryRecords.slice(0, 6).map((d: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
+                    {d.img ? (
+                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                        <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 2, background: '#1e3a5f', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+                          {d.month} &rarr; {d.dest}
+                        </div>
+                        <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                      </div>
+                    ) : null}
+                    <div style={{ padding: '12px 16px' }}>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{d.month} Delivery: {d.product} to {d.dest}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 8: Download Center (moved below Deliveries)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#f8fafc', borderRadius: 14, padding: '32px', textAlign: 'center', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>Download Product Catalog</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 20, maxWidth: 500, margin: '0 auto 20px' }}>
+              Get our full product catalog with detailed specifications, packaging options, and pricing guidelines.
+            </p>
+            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
+                padding: '12px 32px', background: '#1e3a5f', color: '#fff',
+                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
+              }}>&#128196; Download PDF Catalog</a>
+              <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
+                padding: '12px 32px', background: '#2563eb', color: '#fff',
+                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
+              }}>&#9993; Request by Email</a>
+            </div>
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 12: Technical & Business FAQ (collapsible)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
+            {(product as any).faq && (product as any).faq.length > 0 ? (
+              (product as any).faq.map((item: any, i: number) => (
+                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                </details>
+              ))
+            ) : (
+              DEFAULT_FAQ.map((item, i) => (
+                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                </details>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 13: Related Products
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Related Products</h2>
