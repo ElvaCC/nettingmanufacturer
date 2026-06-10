@@ -376,12 +376,15 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
                 <tbody>
                   {[
                     { weight: '50-70 GSM', apps: 'Dust control, light debris containment, temporary fencing', features: 'Lightweight, economical, easy to handle' },
-                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, meets NFPA 701' },
+                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, meets NFPA 701', popular: true },
                     { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV寿命, reinforced edges' },
                   ].map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
+                    <tr key={i} style={{ background: row.popular ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
                       <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '22%' }}>{row.weight}</td>
-                      <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>{row.apps}</td>
+                      <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>
+                        {row.apps}
+                        {row.popular && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>Most Popular</span>}
+                      </td>
                       <td style={{ padding: '12px 18px', color: '#555' }}>{row.features}</td>
                     </tr>
                   ))}
@@ -490,26 +493,74 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
         )}
 
         {/* ════════════════════════════════════════════
-            
-MODULE 8: Download Center (moved below Deliveries)
+            MODULE 8: Conversion Banner + Download Center
             ════════════════════════════════════════════ */}
         <div className="section-gap">
-          <div style={{ background: '#f8fafc', borderRadius: 14, padding: '32px', textAlign: 'center', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>Download Product Catalog</h2>
-            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 20, maxWidth: 500, margin: '0 auto 20px' }}>
-              Get our full product catalog with detailed specifications, packaging options, and pricing guidelines.
-            </p>
-            <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
-                padding: '12px 32px', background: '#1e3a5f', color: '#fff',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
-              }}>&#128196; Download PDF Catalog</a>
-              <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
-                padding: '12px 32px', background: '#2563eb', color: '#fff',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14,
-              }}>&#9993; Request by Email</a>
-            </div>
-          </div>
+          {(() => {
+            const [formEmail, setFormEmail] = useState('');
+            const [formMsg, setFormMsg] = useState('');
+            const [formSent, setFormSent] = useState(false);
+            return (
+              <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', borderRadius: 14, padding: '36px', color: '#fff' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center' }} className="conversion-grid">
+                  {/* Left: Copy + CTAs */}
+                  <div>
+                    <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>Ready to Start Your Project?</h2>
+                    <p style={{ fontSize: 14, opacity: 0.8, lineHeight: 1.6, marginBottom: 20 }}>
+                      Get factory-direct pricing within 2 hours. Fill in your email and requirements below, or download our full product catalog.
+                    </p>
+                    {/* Inline quick form */}
+                    {!formSent ? (
+                      <div>
+                        <div style={{ display: 'flex', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
+                          <input
+                            type="email"
+                            placeholder="Your business email *"
+                            value={formEmail}
+                            onChange={e => setFormEmail(e.target.value)}
+                            style={{ flex: 1, minWidth: 200, padding: '12px 16px', borderRadius: 8, border: 'none', fontSize: 13, outline: 'none', color: '#333' }}
+                          />
+                          <button
+                            onClick={() => {
+                              if (formEmail && formMsg) {
+                                window.open(`mailto:${email}?subject=Quote Request: ${encodeURIComponent(product.name)}&body=${encodeURIComponent('Email: ' + formEmail + '\n\nMessage: ' + formMsg)}`);
+                                setFormSent(true);
+                                setTimeout(() => setFormSent(false), 5000);
+                              }
+                            }}
+                            style={{ padding: '12px 24px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                          >{formSent ? '✓ Sent!' : 'Send Inquiry'}</button>
+                        </div>
+                        <textarea
+                          placeholder="Tell us your requirements (quantity, specifications, destination)..."
+                          value={formMsg}
+                          onChange={e => setFormMsg(e.target.value)}
+                          rows={2}
+                          style={{ width: '100%', padding: '12px 16px', borderRadius: 8, border: 'none', fontSize: 13, outline: 'none', color: '#333', resize: 'vertical', boxSizing: 'border-box', marginBottom: 14 }}
+                        />
+                        <p style={{ fontSize: 11, opacity: 0.5, margin: 0 }}>We typically respond within 2 hours during business hours.</p>
+                      </div>
+                    ) : (
+                      <p style={{ fontSize: 14, color: '#4ade80', fontWeight: 600 }}>Thank you. Our technical sales team will review your specifications and contact you shortly.</p>
+                    )}
+                  </div>
+                  {/* Right: download buttons */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    <p style={{ fontSize: 13, opacity: 0.7, margin: 0, fontWeight: 600 }}>Or download for offline review:</p>
+                    <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
+                      display: 'block', padding: '14px 0', background: 'rgba(255,255,255,0.15)', color: '#fff',
+                      textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                    }}>&#128196; Download Product Catalog (PDF)</a>
+                    <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
+                      display: 'block', padding: '14px 0', background: '#2563eb', color: '#fff',
+                      textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
+                    }}>&#9993; Request Catalog by Email</a>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         {/* ════════════════════════════════════════════
@@ -655,6 +706,7 @@ MODULE 13: Related Products
         }
         @media (max-width: 900px) {
           .product-hero-grid { grid-template-columns: 1fr !important; }
+          .conversion-grid { grid-template-columns: 1fr !important; }
           .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr !important; } }
