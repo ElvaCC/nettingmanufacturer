@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import StickyInquiryBar from '@/components/layout/StickyInquiryBar';
+import InquiryModal from '@/components/forms/InquiryModal';
 
 interface ProductDetailClientProps {
   slug: string;
@@ -71,6 +72,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const deliveryRecords = (product as any).deliveryRecords || [];
   const packagingOpts = (product as any).packagingOptions || [];
   const projectCases = (product as any).projectCases || [];
+  const faqItems = (product as any).faq || [];
 
   const parseSpec = (spec: string): [string, string, string] => {
     // Format: "Parameter: Value" or "Parameter: Value | Options"
@@ -84,8 +86,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     return [first, 'Yes', options || '-'];
   };
 
-  const altText = (ctx: string) =>
-    `${product.name} - ${ctx}`;
+  const altText = (ctx: string) => {
+    const material = product.specs?.find((s: string) => s.toLowerCase().includes('material'))?.split(':')?.[1]?.trim() || 'HDPE';
+    const usage = product.applications?.[0] || 'industrial netting';
+    return `${product.name} - ${ctx} - ${material} ${usage}`;
+  };
 
   const quoteSubject = encodeURIComponent(`Quote Request: ${product.name}`);
   const sampleSubject = encodeURIComponent(`Free Sample Request: ${product.name}`);
@@ -200,24 +205,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               <p style={{ fontSize: 11, opacity: 0.5, marginBottom: 14, fontStyle: 'italic' }}>
                 Need to check quality before ordering? Request a Free Sample.
               </p>
-              {/* Dual buttons: Request Quote + Request Free Sample */}
+              {/* Dual buttons: Request Quote + Request Free Sample (modal primary, mailto: fallback) */}
               <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-                <a href={`mailto:${email}?subject=${quoteSubject}`} style={{
-                  flex: 1, padding: '12px 0', background: '#2563eb', color: '#fff',
-                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13,
-                  textAlign: 'center', transition: 'background 0.15s',
-                }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1d4ed8'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#2563eb'; }}>
-                  &#9993; Request Quote
-                </a>
-                <a href={`mailto:${email}?subject=${sampleSubject}`} style={{
-                  flex: 1, padding: '12px 0', background: '#f59e0b', color: '#fff',
-                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13,
-                  textAlign: 'center', transition: 'background 0.15s',
-                }} onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
+                <InquiryModal locale={locale} productName={product.name} trigger={
+                  <div style={{ flex: 1, padding: '12px 0', background: '#2563eb', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 13, textAlign: 'center', transition: 'background 0.15s', cursor: 'pointer' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1d4ed8'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#2563eb'; }}>
+                    &#9993; Request Quote
+                  </div>
+                } />
+                <InquiryModal locale={locale} productName={product.name} trigger={
+                  <div style={{ flex: 1, padding: '12px 0', background: '#f59e0b', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 13, textAlign: 'center', transition: 'background 0.15s', cursor: 'pointer' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
                     Request Free Sample
-                </a>
+                  </div>
+                } />
               </div>
               <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}. Could you send me a quote?`)}`}
                 target="_blank" rel="noopener noreferrer" style={{
@@ -244,7 +247,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
               {[
-                { icon: '\u2699\uFE0F', title: `${yearsExp}+ Years Experience`, desc: 'Founded in 2005, we have been manufacturing HDPE netting for over 18 years with continuous innovation.' },
+                { icon: '\u2699\uFE0F', title: `${yearsExp}+ Years Experience`, desc: `Since 2005, we have been manufacturing HDPE netting for over ${yearsExp} years with continuous innovation.` },
                 { icon: '\u2705', title: 'BSCI & NFPA-701 Certified', desc: 'All products meet international safety standards. Third-party audited social compliance and fire-retardant certified.' },
                 { icon: '\uD83C\uDFED', title: '20,000 m\u00B2 Factory', desc: 'State-of-the-art production facility with 65+ warp knitting machines. Massive capacity for bulk orders.' },
                 { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
@@ -418,105 +421,61 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         )}
 
         {/* ════════════════════════════════════════════
-            MODULE 10: Packaging Options
+            MODULE 10: Packaging Options (defensive: hidden when no image data)
             ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
-            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
-              We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="pkg-grid">
-              {[
-                { icon: '\uD83D\uDCE6', label: 'Standard Roll Packing', desc: 'Each roll wrapped in woven polypropylene bag with product spec sticker. Standard for bulk export orders.' },
-                { icon: '\uD83C\uDFF7\uFE0F', label: 'OEM Custom Labeling & Color Cards', desc: 'Private label branding, custom color cards, barcode stickers, and polybag printing. MOQ: 1,000 sqm.' },
-                { icon: '\uD83E\uDDF1', label: 'Fumigation-Free Pallet Packing', desc: 'Rolls stacked on pallets, stretch-wrapped for container loading. IPPC-certified heat-treated pallets.' },
-              ].map((item, i) => (
-                <div key={i} style={{
-                  borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb',
-                  background: '#fff', transition: 'box-shadow 0.2s',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
-                  <div style={{ position: 'relative', aspectRatio: '4/3', background: '#e5e7eb', borderBottom: '1px solid #e5e7eb', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
-                    <span style={{ fontSize: 36 }}>{item.icon}</span>
-                    <span style={{ fontSize: 11, fontWeight: 600 }}>Click to add photo</span>
-                  </div>
-                  <div style={{ padding: '14px 16px' }}>
-                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{item.label}</div>
-                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {(packagingOpts.length > 0) && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginTop: 14 }} className="pkg-grid">
-                {packagingOpts.map((opt: any, i: number) => (
-                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-                    {opt.image && (
+        {packagingOpts.length >= 1 && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
+              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+                We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="pkg-grid">
+                {packagingOpts.slice(0, 6).map((opt: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
+                    {opt.image ? (
                       <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                        <Image src={opt.image} alt={altText(`packaging option ${i + 1}`)} fill sizes="(max-width: 768px) 50vw, 25vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        <Image src={opt.image} alt={altText(`packaging ${i + 1} - ${opt.label || ''}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
                       </div>
-                    )}
-                    <div style={{ padding: '10px 14px' }}>
-                      <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{opt.label || ''}</p>
-                      {opt.desc && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{opt.desc}</p>}
+                    ) : null}
+                    <div style={{ padding: '14px 16px' }}>
+                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{opt.label || ''}</div>
+                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{opt.desc || ''}</div>
                     </div>
                   </div>
                 ))}
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════
-            MODULE 11: Latest Deliveries & Container Loading (static cards, no animation)
-            ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
-              {(deliveryRecords.length > 0 ? deliveryRecords : [
-                { month: 'April', product: 'Safety Debris Netting', dest: 'Saudi Arabia', img: '' },
-                { month: 'March', product: 'Construction Debris Netting', dest: 'UAE, Dubai', img: '' },
-                { month: 'February', product: 'Olive Net / Harvest Net', dest: 'Spain', img: '' },
-              ]).slice(0, 3).map((d: any, i: number) => (
-                <div key={i} style={{
-                  borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb',
-                  background: '#fff', transition: 'box-shadow 0.2s',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.08)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}>
-                  {/* Month/Destination tag */}
-                  <div style={{
-                    position: 'absolute', top: 10, left: 10, zIndex: 2,
-                    background: '#1e3a5f', color: '#fff', padding: '4px 10px',
-                    borderRadius: 6, fontSize: 11, fontWeight: 600,
-                  }}>
-                    Latest: {d.month} &rarr; {d.dest}
-                  </div>
-                  {/* Image or placeholder */}
-                  {d.img ? (
-                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                      <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                    </div>
-                  ) : (
-                    <div style={{ position: 'relative', aspectRatio: '4/3', background: '#e5e7eb', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
-                      <span style={{ fontSize: 12, fontWeight: 600 }}>{d.month} - {d.product}</span>
-                      <span style={{ fontSize: 11 }}>to {d.dest}</span>
-                    </div>
-                  )}
-                  <div style={{ padding: '12px 16px' }}>
-                    <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>
-                      {d.month} Delivery: {d.product} to {d.dest}
-                    </p>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
-        </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no image data)
+            ════════════════════════════════════════════ */}
+        {deliveryRecords.length >= 1 && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
+                {deliveryRecords.slice(0, 6).map((d: any, i: number) => (
+                  <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
+                    {d.img ? (
+                      <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                        <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 2, background: '#1e3a5f', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+                          {d.month} &rarr; {d.dest}
+                        </div>
+                        <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                      </div>
+                    ) : null}
+                    <div style={{ padding: '12px 16px' }}>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{d.month} Delivery: {d.product} to {d.dest}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ════════════════════════════════════════════
             MODULE 12: Technical & Business FAQ (collapsible)
@@ -539,6 +498,44 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 </details>
               ))
             )}
+          </div>
+        </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE: How To Choose The Right Netting (Decision Matrix)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>
+              How To Choose The Right {product.name.includes('Netting') ? 'Netting' : 'Product'}
+            </h2>
+            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+              Select the appropriate density and configuration based on your specific application requirements:
+            </p>
+            <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                <thead>
+                  <tr style={{ background: '#1e3a5f', color: '#fff' }}>
+                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Weight / Density</th>
+                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Recommended Applications</th>
+                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Key Features</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { weight: '50-70 GSM', apps: 'Dust control, light debris containment, temporary fencing', features: 'Lightweight, economical, easy to handle' },
+                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, meets NFPA 701' },
+                    { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV寿命, reinforced edges' },
+                  ].map((row, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
+                      <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '22%' }}>{row.weight}</td>
+                      <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>{row.apps}</td>
+                      <td style={{ padding: '12px 18px', color: '#555' }}>{row.features}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -573,9 +570,20 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               ))}
           </div>
         </div>
+
+        {/* Internal cross-links */}
+        <div style={{ padding: '0', marginTop: 8, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
+          Explore more industrial netting solutions:&nbsp;
+          {products.slice(0, 5).filter((p: any) => p.id !== slug).slice(0, 3).map((p: any, i: number) => (
+            <span key={p.id}>
+              {i > 0 && <span>&nbsp;•&nbsp;</span>}
+              <a href={getPath(`/products/${p.id}`)} style={{ color: '#2563eb', textDecoration: 'underline' }}>{p.name}</a>
+            </span>
+          ))}.
+        </div>
       </div>
 
-      {/* ===== Product Schema + BreadcrumbList JSON-LD ===== */}
+      {/* ===== Product Schema + BreadcrumbList + FAQPage + ItemList JSON-LD ===== */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -585,9 +593,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               {
                 '@type': 'BreadcrumbList',
                 'itemListElement': [
-                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://nettingmanufacturer.com/${locale}` },
-                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://nettingmanufacturer.com/${locale}/products` },
-                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://nettingmanufacturer.com/${locale}/products/${slug}` },
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://nettingmanufacturer.vercel.app/${locale}` },
+                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://nettingmanufacturer.vercel.app/${locale}/products` },
+                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://nettingmanufacturer.vercel.app/${locale}/products/${slug}` },
                 ],
               },
               {
@@ -599,11 +607,39 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 'category': (product as any).category || 'Industrial Netting',
                 'offers': {
                   '@type': 'Offer',
-                  'priceCurrency': 'USD',
                   'availability': 'https://schema.org/InStock',
-                  'price': '0',
-                  'priceSpecification': { '@type': 'UnitPriceSpecification', 'unitText': 'sqm' },
+                  'priceSpecification': {
+                    '@type': 'PriceSpecification',
+                    'description': 'Contact us for factory direct pricing. Price depends on quantity, specifications, and destination.',
+                  },
                 },
+              },
+              {
+                '@type': 'FAQPage',
+                'mainEntity': (faqItems.length > 0 ? faqItems : DEFAULT_FAQ).map((item: any) => ({
+                  '@type': 'Question',
+                  'name': item.q,
+                  'acceptedAnswer': { '@type': 'Answer', 'text': item.a },
+                })),
+              },
+              {
+                '@type': 'ItemList',
+                'name': 'Related Products',
+                'url': `https://nettingmanufacturer.vercel.app/${locale}/products/${slug}`,
+                'itemListOrder': 'http://schema.org/ItemListOrderDescending',
+                'numberOfItems': Math.min(products.filter((p: any) => p.id !== slug).length, 4),
+                'itemListElement': products
+                  .filter((p: any) => p.id !== slug)
+                  .slice(0, 4)
+                  .map((p: any, idx: number) => ({
+                    '@type': 'ListItem',
+                    'position': idx + 1,
+                    'item': {
+                      '@type': 'Product',
+                      'name': p.name,
+                      'url': `https://nettingmanufacturer.vercel.app/${locale}/products/${p.id}`,
+                    },
+                  })),
               },
             ],
           }),
@@ -620,7 +656,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         }
         @media (max-width: 900px) {
           .product-hero-grid { grid-template-columns: 1fr !important; }
-          .product-hero-grid > div:last-child { position: static !important; order: -1; }
           .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr !important; } }
