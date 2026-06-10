@@ -79,9 +79,6 @@
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
       ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
       "packagingOptions": [
         {
           "label": "Standard Roll Packing",
@@ -118,9 +115,7 @@
           "destination": "UAE, Dubai",
           "img": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=450&fit=crop"
         }
-      ],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "square-net",
@@ -158,14 +153,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "mesh-tarp",
@@ -206,14 +194,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "tape-shade-net",
@@ -253,14 +234,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "shade-sail",
@@ -295,14 +269,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "anti-hail-net",
@@ -340,14 +307,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "privacy-screen",
@@ -386,14 +346,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "olive-net",
@@ -430,14 +383,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "anti-bee-net",
@@ -474,14 +420,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "anti-bird-net",
@@ -518,14 +457,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     },
     {
       "id": "weed-barrier",
@@ -560,14 +492,7 @@
       "packagingImages": [
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
-      "detailImages": [],
-      "exportMarkets": [],
-      "projectCases": [],
-      "packagingOptions": [],
-      "deliveryRecords": [],
-      "faq": [],
-      "catalogUrl": "/files/product-catalog.pdf"
+      ]
     }
   ],
   "factory": {
