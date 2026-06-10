@@ -253,22 +253,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
                 { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
                 { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
-                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: 'Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.', qcImg: true },
+                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: 'Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.' },
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb', flexDirection: 'column' }}>
-                  <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
-                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
-                    </div>
+                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+                  <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
+                  <div>
+                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
+                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
                   </div>
-                  {(item as any).qcImg && (
-                    <div style={{ position: 'relative', borderRadius: 8, overflow: 'hidden', aspectRatio: '1/1', background: '#e5e7eb', border: '1px solid #d1d5db', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 6, marginTop: 4 }}>
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" /></svg>
-                      <span style={{ fontSize: 11, fontWeight: 600 }}>QC Inspection Photo</span>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
