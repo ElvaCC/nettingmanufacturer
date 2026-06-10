@@ -253,13 +253,18 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
                 { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
                 { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
-                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: 'Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.' },
+                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: `Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.` },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                   <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
                   <div>
                     <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
-                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{item.desc}</div>
+                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
+                      {item.desc}
+                      {item.title === 'Strict Quality Control' && (
+                        <>&nbsp;<a href="#latest-shipments" style={{ color: '#2563eb', textDecoration: 'underline', whiteSpace: 'nowrap', fontWeight: 600, fontSize: 12 }}>&#8609; View our latest shipment tracks below</a></>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -468,7 +473,7 @@ MODULE 10: Packaging Options (defensive: hidden when no image data)
 MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no image data)
             ════════════════════════════════════════════ */}
         {deliveryRecords.length >= 1 && (
-          <div className="section-gap">
+          <div className="section-gap" id="latest-shipments">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
