@@ -64,7 +64,9 @@
       "images": [
         "/products/debris-net/main-1.jpg",
         "/products/debris-net/main-2.jpg",
-        "/products/debris-net/main-3.jpg"
+        "/products/debris-net/main-3.jpg",
+        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop"
       ],
       "appImages": [
         "/products/debris-net/apps/app-1.jpg",
