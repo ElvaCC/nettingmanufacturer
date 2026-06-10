@@ -408,7 +408,7 @@ MODULE 9: Applications & Project Cases
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
               {product.applications && product.applications.length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 0 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
                   {product.applications.map((app: string, i: number) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
                       <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
@@ -417,6 +417,19 @@ MODULE 9: Applications & Project Cases
                   ))}
                 </div>
               )}
+              {/* 2x2 Project Photo Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                {[
+                  { src: 'https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=375&fit=crop', alt: 'Green HDPE debris netting enclosure installed on commercial building scaffolding for construction safety' },
+                  { src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=375&fit=crop', alt: 'Blue construction safety netting tightly stretched on high-rise building scaffold facade' },
+                  { src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=375&fit=crop', alt: 'Heavy duty debris netting installed on multi-story construction site for fall protection' },
+                  { src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=375&fit=crop', alt: 'HDPE scaffolding net wrapping around building structure for debris containment and worker safety' },
+                ].map((img, i) => (
+                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
+                    <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+                  </div>
+                ))}
+              </div>
               {projectCases.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
                   {projectCases.map((c: any, i: number) => (

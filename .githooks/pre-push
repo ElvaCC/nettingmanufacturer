@@ -7,8 +7,15 @@
 echo ""
 echo "🔒 [pre-push] 正在同步 content.json（从 GitHub 远程仓库）..."
 
-# 获取当前 content.json 的 git 状态（是否被本地修改）
+# 获取当前 content.json 的 git 状态（是否被本地修改或已暂存）
 CHANGED=$(git status --porcelain -- src/data/content.json 2>/dev/null)
+STAGED=$(git diff --cached --name-only -- src/data/content.json 2>/dev/null)
+
+if [ -n "$STAGED" ]; then
+  echo "   📝 content.json 有已暂存的修改，正在提交中，跳过同步..."
+  echo ""
+  exit 0
+fi
 
 if [ -n "$CHANGED" ]; then
   echo "⚠️  检测到本地 content.json 有未提交的修改！"

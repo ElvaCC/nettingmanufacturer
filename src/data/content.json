@@ -84,17 +84,17 @@
       "packagingOptions": [
         {
           "label": "Standard Roll Packing",
-          "desc": "Each roll wrapped in woven polypropylene bag with PP strapping. Product spec sticker on each roll. Standard for bulk export orders.",
+          "desc": "Each roll wrapped in woven polypropylene bag with PP strapping. Product spec sticker on each roll.",
           "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=450&fit=crop"
         },
         {
           "label": "Fumigation-Free Pallet Packing",
-          "desc": "Rolls stacked on heat-treated wooden pallets, stretch-wrapped with corner protectors. IPPC-certified for international shipping.",
+          "desc": "Rolls stacked on heat-treated wooden pallets, stretch-wrapped with corner protectors. IPPC-certified.",
           "image": "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=600&h=450&fit=crop"
         },
         {
           "label": "OEM Custom Labeling & Color Cards",
-          "desc": "Private label branding with your logo, barcode stickers, color cards, and polybag printing. Custom labeling from 1,000 sqm.",
+          "desc": "Private label branding with your logo, barcode stickers, color cards, and polybag printing. MOQ: 1,000 sqm.",
           "image": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&h=450&fit=crop"
         }
       ],
