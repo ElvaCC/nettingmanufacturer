@@ -202,9 +202,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               <p style={{ fontSize: 12, opacity: 0.75, marginBottom: 6, lineHeight: 1.5 }}>
                 OEM/ODM &amp; custom specifications available. Reply within 2 hours.
               </p>
-              <p style={{ fontSize: 11, opacity: 0.5, marginBottom: 14, fontStyle: 'italic' }}>
-                Need to check quality before ordering? Request a Free Sample.
-              </p>
+              <div style={{ marginBottom: 14 }}><a href="#conversion-banner" style={{ display: "block", width: "100%", padding: "12px 0", background: "#f59e0b", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: "center", marginBottom: 6 }}>&#128230; Request Free Sample</a><p style={{ fontSize: 10, opacity: 0.6, margin: 0, lineHeight: 1.4, textAlign: "center" }}>Standard A4-sized swatches are free. Courier cost is refundable upon first official container order.</p></div>
               {/* Dual buttons: Request Quote + Request Free Sample (modal primary, mailto: fallback) */}
               <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
                 <InquiryModal locale={locale} productName={product.name} trigger={
@@ -262,7 +260,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                     <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
                       {item.desc}
                       {item.title === 'Strict Quality Control' && (
-                        <>&nbsp;<a href="#latest-shipments" style={{ color: '#2563eb', textDecoration: 'underline', whiteSpace: 'nowrap', fontWeight: 600, fontSize: 12 }}>&#8609; View our latest shipment tracks below</a></>
+                        <>&nbsp;<a href="#recent-shipments" style={{ color: '#2563eb', textDecoration: 'underline', whiteSpace: 'nowrap', fontWeight: 600, fontSize: 12 }}>&#8609; View our latest shipment tracks below</a></>
                       )}
                     </div>
                   </div>
@@ -273,13 +271,38 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
 
         {/* ════════════════════════════════════════════
-            MODULE 5: Export Markets (Country Tags)
+            MODULE 5: Who We Work With
+            ============================================ -->
+        <div className="section-gap">
+          <div style={{ background: "#fff", borderRadius: 14, padding: "28px 32px", border: "1px solid #e5e7eb" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 14 }}>Who We Work With</h2>
+            <p style={{ fontSize: 13, color: "#555", lineHeight: 1.6, marginBottom: 14 }}>
+              Our products are widely used and trusted by industry professionals across multiple sectors:
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              {[
+                "Construction Contractors",
+                "Building Material Importers",
+                "Wholesalers & Distributors",
+                "Government & Infrastructure Projects",
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#555", padding: "10px 16px", background: "#f8fafc", borderRadius: 8, border: "1px solid #e5e7eb" }}>
+                  <span style={{ color: "#10b981", fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
+                  <span style={{ fontWeight: 600, color: "#1e3a5f" }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================
+            MODULE 6: Export Markets (Country Tags)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Export Markets</h2>
             <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 16, lineHeight: 1.5 }}>
-              We have established supply partnerships with importers and distributors across the following markets:
+              Main Export Markets: Middle East (Saudi Arabia, UAE, Qatar), Europe (Spain, Italy), North America. Typical Buyers: Importers, Wholesalers, Construction Contractors, Agricultural Suppliers.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               {EXPORT_COUNTRIES.map((c) => (
@@ -298,6 +321,33 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
 
         {/* ════════════════════════════════════════════
+            MODULE 6: Product Quick Facts (Key-Value Table)
+            ============================================ -->
+        <div className="section-gap">
+          <div style={{ background: "#fff", borderRadius: 14, padding: "24px 28px", border: "1px solid #e5e7eb" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 14 }}>Product Quick Facts</h2>
+            <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #e5e7eb" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                <tbody>
+                  {[
+                    ["Product", "Premium Safety Debris Netting"],
+                    ["Material", "100% Virgin HDPE with 3%-5% CIBA UV Stabilizers"],
+                    ["GSM Range", "50gsm - 120gsm (Customizable)"],
+                    ["Compliance", "Engineered to meet OSHA & ANSI A10.11 Scaffolding Standards"],
+                    ["Main Markets", "Middle East, Europe, North America (Selected Projects)"],
+                  ].map((row, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < 4 ? "1px solid #f0f2f5" : "none" }}>
+                      <td style={{ padding: "10px 18px", color: "#1e3a5f", fontWeight: 600, width: "30%" }}>{row[0]}</td>
+                      <td style={{ padding: "10px 18px", color: "#555" }}>{row[1]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================
             MODULE 6: Structured Product Description (h3 subheadings)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
@@ -393,9 +443,12 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
                       <td style={{ padding: '12px 18px', color: '#555' }}>{row.features}</td>
                     </tr>
                   ))}
-                </tbody>
-              </table>
+              </tbody>
+            </table>
             </div>
+            <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #2563eb' }}>
+              <strong>Which GSM should I choose?</strong> 50gsm is for light duty temporary enclosure; 80gsm-100gsm is the industrial standard for scaffolding safety; 120gsm is designed for high wind areas and heavy demolition.
+            </p>
           </div>
         </div>
 
@@ -486,7 +539,7 @@ MODULE 10: Packaging Options (defensive: hidden when no image data)
 MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no image data)
             ════════════════════════════════════════════ */}
         {deliveryRecords.length >= 1 && (
-          <div className="section-gap" id="latest-shipments">
+          <div className="section-gap" id="recent-shipments">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
@@ -513,7 +566,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
         {/* ════════════════════════════════════════════
             MODULE 8: Conversion Banner + Download Center
             ════════════════════════════════════════════ */}
-        <div className="section-gap">
+        <div className="section-gap" id="conversion-banner">
           {(() => {
             const [formEmail, setFormEmail] = useState('');
             const [formMsg, setFormMsg] = useState('');
@@ -569,7 +622,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
                       display: 'block', padding: '14px 0', background: 'rgba(255,255,255,0.15)', color: '#fff',
                       textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
                       border: '1px solid rgba(255,255,255,0.2)',
-                    }}>&#128196; Download Product Catalog (PDF)</a>
+                    }}>&#128196; Download Product Catalog (PDF)</a><p style={{ fontSize: 11, opacity: 0.6, margin: "8px 0 0", lineHeight: 1.5 }}>&#10003; Full Product Range &nbsp;|&nbsp; &#10003; Technical Specifications &nbsp;|&nbsp; &#10003; Container Loading Capacity &nbsp;|&nbsp; &#10003; OEM Service Guide</p>
                     <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
                       display: 'block', padding: '14px 0', background: '#2563eb', color: '#fff',
                       textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
@@ -588,6 +641,7 @@ MODULE 12: Technical & Business FAQ (collapsible)
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
+            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
             {(product as any).faq && (product as any).faq.length > 0 ? (
               (product as any).faq.map((item: any, i: number) => (
                 <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
@@ -597,10 +651,13 @@ MODULE 12: Technical & Business FAQ (collapsible)
               ))
             ) : (
               DEFAULT_FAQ.map((item, i) => (
-                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
-                </details>
+                <span key={i}>
+                  {i === 8 && <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>}
+                  <details style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                  </details>
+                </span>
               ))
             )}
           </div>
