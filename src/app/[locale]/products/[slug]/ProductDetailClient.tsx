@@ -92,9 +92,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     return `${product.name} - ${ctx} - ${material} ${usage}`;
   };
 
-  const quoteSubject = encodeURIComponent(`Quote Request: ${product.name}`);
-  const sampleSubject = encodeURIComponent(`Free Sample Request: ${product.name}`);
-
   return (
     <>
       <StickyInquiryBar email={email} whatsapp={whatsapp} productName={product.name} />
@@ -196,30 +193,19 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               </div>
             )}
 
-            {/* CTA Card with dual buttons */}
+            {/* CTA Card with single CTA button */}
             <div style={{ background: '#1e3a5f', borderRadius: 14, padding: 24, color: '#fff' }}>
-              <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 6 }}>Get Factory Price</h3>
-              <p style={{ fontSize: 12, opacity: 0.75, marginBottom: 6, lineHeight: 1.5 }}>
-                OEM/ODM &amp; custom specifications available. Reply within 2 hours.
+              <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 12 }}>Get Factory Price</h3>
+              <InquiryModal locale={locale} productName={product.name} trigger={
+                <div style={{ width: '100%', padding: '14px 0', background: '#f59e0b', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 8, transition: 'background 0.15s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
+                  Request Quote or Free Sample
+                </div>
+              } />
+              <p style={{ fontSize: 10, opacity: 0.6, margin: '0 0 14px', lineHeight: 1.4, textAlign: 'center' }}>
+                Standard A4-sized swatches are free. Courier cost is refundable upon first official container order.
               </p>
-              <div style={{ marginBottom: 14 }}><a href="#conversion-banner" style={{ display: "block", width: "100%", padding: "12px 0", background: "#f59e0b", color: "#fff", textDecoration: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: "center", marginBottom: 6 }}>&#128230; Request Free Sample</a><p style={{ fontSize: 10, opacity: 0.6, margin: 0, lineHeight: 1.4, textAlign: "center" }}>Standard A4-sized swatches are free. Courier cost is refundable upon first official container order.</p></div>
-              {/* Dual buttons: Request Quote + Request Free Sample (modal primary, mailto: fallback) */}
-              <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-                <InquiryModal locale={locale} productName={product.name} trigger={
-                  <div style={{ flex: 1, padding: '12px 0', background: '#2563eb', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 13, textAlign: 'center', transition: 'background 0.15s', cursor: 'pointer' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1d4ed8'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#2563eb'; }}>
-                    &#9993; Request Quote
-                  </div>
-                } />
-                <InquiryModal locale={locale} productName={product.name} trigger={
-                  <div style={{ flex: 1, padding: '12px 0', background: '#f59e0b', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 13, textAlign: 'center', transition: 'background 0.15s', cursor: 'pointer' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
-                    Request Free Sample
-                  </div>
-                } />
-              </div>
               <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}. Could you send me a quote?`)}`}
                 target="_blank" rel="noopener noreferrer" style={{
                   display: 'block', width: '100%', padding: '11px 0', background: '#25d366',
