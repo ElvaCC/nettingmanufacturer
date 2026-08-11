@@ -45,9 +45,10 @@ export async function setContentOverride(data: Record<string, any>): Promise<boo
     return false;
   }
 
-  try {
-    // 1. Get current file SHA (required for update)
-    if (!cachedSha) {
+  // Fetch the CURRENT file SHA directly from GitHub every time (never trust cache),
+  // otherwise saves fail with 409 conflict after git pushes change the file.
+  async function fetchCurrentSha(): Promise<string | null> {
+    try {
       const shaRes = await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/contents/${CONTENT_PATH}?ref=${BRANCH}`,
         {
@@ -60,21 +61,30 @@ export async function setContentOverride(data: Record<string, any>): Promise<boo
       );
       if (shaRes.ok) {
         const shaData = await shaRes.json();
-        cachedSha = shaData.sha;
+        return shaData.sha as string;
       }
+      return null;
+    } catch (err) {
+      console.error('[GitHubStore] fetchCurrentSha failed:', err);
+      return null;
     }
+  }
+
+  try {
+    // 1. Get current file SHA (required for update) — always fresh
+    const currentSha = await fetchCurrentSha();
 
     const body: Record<string, any> = {
       message: `update: admin content update ${new Date().toISOString().split('T')[0]}`,
       content: Buffer.from(JSON.stringify(data, null, 2)).toString('base64'),
       branch: BRANCH,
     };
-    if (cachedSha) {
-      body.sha = cachedSha;
+    if (currentSha) {
+      body.sha = currentSha;
     }
 
-    // 2. Update file via GitHub API
-    const res = await fetch(
+    // 2. Update file via GitHub API (retry once on 409 conflict with a fresh SHA)
+    let res = await fetch(
       `https://api.github.com/repos/${GITHUB_REPO}/contents/${CONTENT_PATH}`,
       {
         method: 'PUT',
@@ -87,13 +97,33 @@ export async function setContentOverride(data: Record<string, any>): Promise<boo
       }
     );
 
+    if (res.status === 409 && body.sha) {
+      // SHA went stale mid-request (someone else pushed) — refetch and retry once
+      const freshSha = await fetchCurrentSha();
+      if (freshSha) {
+        body.sha = freshSha;
+        res = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}/contents/${CONTENT_PATH}`,
+          {
+            method: 'PUT',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }
+        );
+      }
+    }
+
     if (!res.ok) {
       const errBody = await res.text();
       console.error('[GitHubStore] Failed to update content:', res.status, errBody);
       return false;
     }
 
-    // 3. Update cache with new SHA
+    // 3. Update cache
     const result = await res.json();
     cachedSha = result.content?.sha;
     cachedData = data;
