@@ -1,18 +1,18 @@
 {
   "hero": {
-    "title": "Professional Netting Manufacturer Since 2005",
+    "title": "Professional Netting Manufacturer Since 1997",
     "subtitle": "Leading manufacturer of construction safety nets, scaffolding nets, shade nets, shade sails, hail nets, olive nets, privacy nets, anti-bee/bird nets, and weed barrier fabric. Exporting to 50+ countries worldwide. 21+ Years Experience.",
     "cta1": "Get Free Quote",
     "cta2": "View Products"
   },
   "about": {
     "title": "About Jiacheng Netting",
-    "subtitle": "Your Trusted Netting Supplier Since 2005",
+    "subtitle": "Your Trusted Netting Supplier Since 1997",
     "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional and leading manufacturer engaged in the production, research, development, and sales of high-performance warp knitting plastic nets since 2005. Our factory is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, covering an area of approximately 20,000 square meters and equipped with modern production equipment and a top-notch technical team.\n\nWe focus on the production of plastic nets, including construction safety nets, hail nets, shade nets, shade sails, olive nets, bird nets, privacy screens, weed barrier fabric, wind barrier nets, aquaculture nets, and other warp knitting products. We have advanced production processes and technologies that support customization of plastic nets in various specifications, colors, and processes.\n\nAs an enterprise driven by innovation, we have a high-quality research and development team that continuously develops and manufactures new products to meet the ever-changing demands of our customers. We place great emphasis on product quality and technological innovation and have obtained BSCI and NFPA 701 certifications to ensure the safety and stability of product quality and production environment.\n\nOur products have been exporting to North America, South America, Europe, the Middle East, Asia, Africa, and other countries, receiving high praise and recognition from customers. We will continue to improve product quality and service levels, providing customers with the highest quality products and services.",
     "features": [
       "BSCI Certified Factory",
       "NFPA-701 Certificate",
-      "21+ Years Experience",
+      "20+ Years Experience",
       "20",
       "000m² Production Facility",
       "Export to 50+ Countries",
@@ -718,5 +718,36 @@
       "category": "Product"
     }
   ],
-  "factoryImages": []
+  "factoryImages": [
+    {
+      "src": "/images/factory/jiacheng-factory-exterior-panorama.jpg",
+      "alt": "Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Jinan Shandong China",
+      "label": "Factory Exterior - 20,000m2 Manufacturing Base",
+      "span": "full"
+    },
+    {
+      "src": "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg",
+      "alt": "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets",
+      "label": "Karl Mayer Warp Knitting Lines",
+      "span": "half"
+    },
+    {
+      "src": "/images/factory/jiacheng-workshop-wide-angle-production.jpg",
+      "alt": "Wide angle view of Jiacheng Netting modern production workshop with warp knitting machines and skilled workers",
+      "label": "Production Workshop",
+      "span": "half"
+    },
+    {
+      "src": "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg",
+      "alt": "Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green blue red black and white",
+      "label": "Custom Colored HDPE Netting Production",
+      "span": "full"
+    },
+    {
+      "src": "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg",
+      "alt": "Large scale warehouse at Jiacheng Netting with finished HDPE netting rolls stacked on racks ready for export",
+      "label": "Bulk Inventory - Ready for Global Export",
+      "span": "full"
+    }
+  ]
 }
