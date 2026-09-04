@@ -21,6 +21,33 @@ export default function Hero() {
           {hero.subtitle}
         </p>
 
+        {/* Key Highlights — Exporting to 50+ Countries | 21+ Years Experience */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "0 auto 48px",
+            padding: "18px 32px",
+            borderTop: "1px solid #e5e7eb",
+            borderBottom: "1px solid #e5e7eb",
+            maxWidth: 760,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 19,
+              fontWeight: 800,
+              color: "#1e3a5f",
+              letterSpacing: "0.4px",
+              textAlign: "center",
+              lineHeight: 1.5,
+            }}
+          >
+            {hero.highlight || "Exporting to 50+ Countries | 21+ Years of Manufacturing Experience"}
+          </span>
+        </div>
+
         {/* Factory Photo — WebP with JPG fallback */}
         <picture>
           <source
