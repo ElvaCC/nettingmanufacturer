@@ -1,6 +1,7 @@
 import { locales, isRtlLocale, type Locale } from "@/app/i18n";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import FloatingContact from "@/components/layout/FloatingContact";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { getLocalizedMetadata } from "@/lib/seo/metadata";
@@ -52,6 +53,7 @@ export default async function LocaleLayout({
             <Header locale={locale} />
             <main className="flex-1 pt-16">{children}</main>
             <Footer />
+            <FloatingContact />
           </ContentProvider>
         </NextIntlClientProvider>
       </body>

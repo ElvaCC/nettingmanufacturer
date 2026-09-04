@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     if (patch.business) existing.business = { ...existing.business, ...patch.business };
 
     // 3. Save to GitHub (persistent, never expires)
-    const saved = await setContentOverride(existing);
+    const result = await setContentOverride(existing);
 
     // 4. Also update local file (for development fallback)
     try {
@@ -51,8 +51,12 @@ export async function POST(request: NextRequest) {
       fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), 'utf-8');
     } catch { /* Vercel read-only, ignore */ }
 
-    if (!saved) {
-      return NextResponse.json({ success: false, message: 'Failed to save to GitHub' }, { status: 500 });
+    if (!result.ok) {
+      console.error('[AdminSave] GitHub save failed:', result.error);
+      return NextResponse.json(
+        { success: false, message: 'Failed to save to GitHub', detail: result.error || 'unknown error' },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ success: true });

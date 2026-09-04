@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
-import StickyInquiryBar from '@/components/layout/StickyInquiryBar';
 import InquiryModal from '@/components/forms/InquiryModal';
 
 interface ProductDetailClientProps {
@@ -94,8 +93,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
   return (
     <>
-      <StickyInquiryBar email={email} whatsapp={whatsapp} productName={product.name} />
-
       {/* ===== HERO BANNER ===== */}
       <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '20px 24px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>

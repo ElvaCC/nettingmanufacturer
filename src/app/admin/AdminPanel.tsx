@@ -81,9 +81,29 @@ export default function AdminPanel() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [health, setHealth] = useState<{ mode: string; ok?: boolean; message?: string; checking?: boolean }>({ mode: 'loading' });
   const [loading, setLoading] = useState(true);
   const [editProd, setEditProd] = useState<number | null>(null);
   const [content, setContent] = useState<SiteContent>(defaultContent);
+
+  useEffect(() => {
+    if (!auth) return;
+    fetch('/api/admin/health')
+      .then(r => r.json())
+      .then(d => setHealth({ mode: d.mode }))
+      .catch(() => setHealth({ mode: 'unknown' }));
+  }, [auth]);
+
+  const testConnection = async () => {
+    setHealth(h => ({ ...h, checking: true }));
+    try {
+      const res = await fetch('/api/admin/health', { method: 'POST' });
+      const d = await res.json();
+      setHealth({ mode: d.mode || health.mode, ok: d.ok, message: d.message });
+    } catch {
+      setHealth(h => ({ ...h, checking: false, ok: false, message: '检查失败，请稍后重试' }));
+    }
+  };
 
   useEffect(() => {
     if (!auth) return;
@@ -151,7 +171,7 @@ export default function AdminPanel() {
       });
       const data = await res.json();
       if (!data.success) {
-        setSaveError(data.message || 'Save failed');
+        setSaveError(data.detail || data.message || 'Save failed');
         setSaving(false);
         return;
       }
@@ -586,6 +606,28 @@ export default function AdminPanel() {
           <button onClick={() => { setAuth(false); setLoading(true); }} style={{ padding: '8px 14px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, color: '#fff', cursor: 'pointer', fontSize: 13 }}>Logout</button>
         </div>
       </header>
+
+      {/* GitHub 凭据健康状态条 */}
+      <div style={{
+        padding: '10px 30px', fontSize: 13, display: 'flex', alignItems: 'center', gap: 12,
+        background: health.ok === false ? '#fef2f2' : health.ok === true ? '#f0fdf4' : '#fffbeb',
+        borderBottom: `1px solid ${health.ok === false ? '#fecaca' : health.ok === true ? '#bbf7d0' : '#fde68a'}`,
+        color: health.ok === false ? '#991b1b' : health.ok === true ? '#166534' : '#92400e',
+      }}>
+        <span style={{ fontWeight: 600 }}>
+          {health.ok === false ? '❌ ' : health.ok === true ? '✅ ' : health.mode === 'loading' ? '⏳ ' : '⚠️ '}
+          {health.mode === 'loading' ? '检查中…'
+            : health.mode === 'none' ? '未配置 GitHub 凭据 — 保存会失败'
+            : health.mode === 'github-app' ? 'GitHub App 认证（永不过期）'
+            : 'Token 认证（有有效期，到期需更换）'}
+        </span>
+        {health.message && <span style={{ flex: 1, lineHeight: 1.4 }}>{health.message}</span>}
+        <button
+          onClick={testConnection}
+          disabled={health.checking}
+          style={{ padding: '5px 14px', border: '1px solid currentColor', borderRadius: 6, background: 'transparent', color: 'inherit', cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap' }}
+        >{health.checking ? 'Testing…' : 'Test Connection'}</button>
+      </div>
 
       <div style={{ display: 'flex' }}>
         <aside style={{ width: 200, background: '#fff', borderRight: '1px solid #e2e8f0', padding: '16px 0', minHeight: 'calc(100vh - 64px)', position: 'sticky', top: 64, flexShrink: 0, overflowY: 'auto' }}>

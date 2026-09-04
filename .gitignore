@@ -29,9 +29,7 @@ yarn-error.log*
 .vercel
 
 # Admin-managed content (changes managed via admin panel, not git)
-/src/data/content.json
 
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
-src/data/content.json
