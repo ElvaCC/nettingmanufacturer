@@ -1,38 +1,72 @@
 #!/bin/sh
 #
-# Git pre-push hook — 防止旧版 content.json 覆盖远程数据
-# 每次 push 前自动从 GitHub 拉取最新版 content.json
+# Git pre-push hook — 保护 content.json，阻止不安全的 push
+#
+# 职责：
+#   1. 防止本地已清理的 content.json 被远端旧版覆盖（禁止自动 checkout 覆盖）
+#   2. 检查本地与远端的提交关系，远端领先/分叉/无法确认时阻止 push
+#   3. 检查未提交的 content.json 修改，存在时停止并提示人工处理
+#
+# 本钩子只服务于 main 分支的 push。
 #
 
 echo ""
-echo "🔒 [pre-push] 正在同步 content.json（从 GitHub 远程仓库）..."
+echo "🔒 [pre-push] 检查 content.json 与远端提交关系..."
 
-# 获取当前 content.json 的 git 状态（是否被本地修改或已暂存）
+# 1. 先拉取远端最新状态，确保 origin/main 反映真实远端（失败即阻止 push）
+if ! git fetch origin main --quiet 2>/dev/null; then
+  echo "❌ [pre-push] 无法连接远端仓库（git fetch 失败）。"
+  echo "   为避免基于过期状态误判，已阻止本次 push。"
+  echo ""
+  exit 1
+fi
+
+# 2. 检查 content.json 是否存在未提交的暂存或未暂存修改
 CHANGED=$(git status --porcelain -- src/data/content.json 2>/dev/null)
-STAGED=$(git diff --cached --name-only -- src/data/content.json 2>/dev/null)
+if [ -n "$CHANGED" ]; then
+  echo "❌ [pre-push] 检测到 src/data/content.json 存在未提交的修改："
+  echo "$CHANGED"
+  echo "   请先处理（提交或放弃这些修改），再重新 push。"
+  echo "   本钩子不会自动 checkout / reset / stash / 覆盖该文件。"
+  echo ""
+  exit 1
+fi
 
-if [ -n "$STAGED" ]; then
-  echo "   📝 content.json 有已暂存的修改，正在提交中，跳过同步..."
+# 3. 检查本地 HEAD 与 origin/main 的提交关系
+BEHIND=$(git rev-list --count HEAD..origin/main 2>/dev/null)
+AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null)
+
+# 若任一侧无法取得提交关系（rev-list 失败），按"无法确认"处理，阻止 push
+if [ -z "$BEHIND" ] || [ -z "$AHEAD" ]; then
+  echo "❌ [pre-push] 无法确认本地与远端的提交关系，已阻止本次 push。"
+  echo ""
+  exit 1
+fi
+
+# 远端领先（本地落后）→ 阻止 push
+if [ "$BEHIND" != "0" ]; then
+  echo "❌ [pre-push] 远端 main 领先本地 $BEHIND 个提交（本地落后或已分叉）。"
+  echo "   请先人工确认并同步，禁止直接 push 覆盖远端内容。"
+  echo ""
+  exit 1
+fi
+
+# 双方相同（无新提交可 push）→ 无需同步，放行（通常不会触发）
+if [ "$AHEAD" = "0" ]; then
+  echo "   ✅ 本地与远端一致，无新提交，无需处理 content.json。"
   echo ""
   exit 0
 fi
 
-if [ -n "$CHANGED" ]; then
-  echo "⚠️  检测到本地 content.json 有未提交的修改！"
-  echo "   执行: git checkout HEAD -- src/data/content.json"
-  echo "   然后重新 staging……"
+# 4. 本地领先：检查本次待推送范围（origin/main..HEAD）是否修改了 content.json
+CHANGED_IN_RANGE=$(git rev-list origin/main..HEAD -- src/data/content.json 2>/dev/null)
+if [ -n "$CHANGED_IN_RANGE" ]; then
+  echo "   📝 本次待推送提交已修改 content.json，保留本地版本，放行 push。"
+  echo ""
+  exit 0
 fi
 
-# 从远程拉取最新的 content.json（如果文件未跟踪，直接从远程 cat-file 取）
-if git ls-files --error-unmatch src/data/content.json >/dev/null 2>&1; then
-  echo "   content.json 仍被 git 跟踪，正在恢复为远程最新版本..."
-  git fetch origin main --quiet 2>/dev/null
-  git checkout origin/main -- src/data/content.json 2>/dev/null && \
-    echo "   ✅ content.json 已同步为远程最新版本" || \
-    echo "   ⚠️  无法从远程检出 content.json（文件可能已被 git rm）"
-else
-  echo "   ✅ content.json 已取消 git 跟踪，不会在 push 中被覆盖"
-fi
-
+# 本地领先但本次未改 content.json：无需同步，放行
+echo "   ✅ 本次提交未修改 content.json，无需处理，放行 push。"
 echo ""
 exit 0
