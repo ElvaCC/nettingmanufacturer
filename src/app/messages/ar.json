@@ -1,7 +1,7 @@
 {
   "common": {
     "brand": "Jiacheng Netting",
-    "tagline": "حلول شبكات HDPE الفاخرة منذ 2005",
+    "tagline": "حلول شبكات HDPE الفاخرة",
     "getQuote": "احصل على عرض سعر",
     "learnMore": "اعرف المزيد",
     "contactUs": "اتصل بنا",
@@ -42,7 +42,7 @@
       },
       "manufacturing": {
         "title": "مصنع 20,000 م²",
-        "description": "تأسست في 2005، منشأتنا الحديثة تمتد على 20,000 متر مربع بأحدث خطوط الإنتاج."
+        "description": "منشأتنا الحديثة تمتد على 20,000 متر مربع بأحدث خطوط الإنتاج."
       },
       "customization": {
         "title": "حلول مخصصة",
@@ -56,7 +56,7 @@
   },
   "about": {
     "title": "عن Jiacheng Netting",
-    "description": "تأسست في 2005، Shandong Jiacheng Chemical Fiber Products Co., Ltd. هي شركة متخصصة في تصنيع شبكات HDPE بخبرة تزيد عن 20 عاماً. مصنعنا البالغ 20,000 م² يصدّر إلى أمريكا الشمالية والجنوبية وأوروبا والشرق الأوسط وآسيا وأفريقيا."
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. هي شركة متخصصة في تصنيع شبكات HDPE بخبرة تزيد عن 20 عاماً. مصنعنا البالغ 20,000 م² يصدّر إلى أمريكا الشمالية والجنوبية وأوروبا والشرق الأوسط وآسيا وأفريقيا."
   },
   "contact": {
     "title": "تواصل معنا",
@@ -72,7 +72,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. جميع الحقوق محفوظة.",
+    "copyright": "© 2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. جميع الحقوق محفوظة.",
     "privacy": "سياسة الخصوصية",
     "terms": "شروط الخدمة"
   }

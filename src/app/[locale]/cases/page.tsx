@@ -1,45 +1,14 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { getLocalizedMetadata } from "@/lib/seo/metadata";
+import { Locale } from "@/app/i18n";
 
-const cases = [
-  {
-    id: 1,
-    title: "Dubai Metro Construction Project",
-    client: "Al Futtaim Group",
-    location: "Dubai, UAE",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=500&fit=crop",
-    description: "Supplied 50,000 sqm of HDPE construction mesh for scaffolding safety and debris containment.",
-  },
-  {
-    id: 2,
-    title: "Spanish Olive Farm",
-    client: "Cortijero S.L.",
-    location: "Andalusia, Spain",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&h=500&fit=crop",
-    description: "Provided custom olive collection nets covering 200 hectares of farmland.",
-  },
-  {
-    id: 3,
-    title: "German Greenhouse Complex",
-    client: "GrünTech GmbH",
-    location: "Bavaria, Germany",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&h=500&fit=crop",
-    description: "Installed UV-resistant shade nets for 50,000 sqm of greenhouse facilities.",
-  },
-  {
-    id: 4,
-    title: "Brazilian Mining Site",
-    client: "Vale S.A.",
-    location: "Minas Gerais, Brazil",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&h=500&fit=crop",
-    description: "Dust containment system with 100,000 sqm of fine mesh netting.",
-  },
-];
+// NOTE: Project cases are pending real client information.
+// Previously hardcoded cases referenced real third-party companies (e.g. Al Futtaim,
+// Vale S.A.) without verification — removed to avoid false attribution. Replace with
+// verified client projects before publishing.
+const cases: any[] = [];
 
 export async function generateMetadata({
   params,
@@ -47,7 +16,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const base = getLocalizedMetadata(locale as Locale, "/cases");
   return {
+    ...base,
     title: "Project Cases | Netting Manufacturer",
     description: "Explore our successful projects across the globe, serving diverse industries with HDPE netting solutions.",
   };
@@ -80,6 +51,14 @@ export default async function CasesPage({
       {/* Cases Grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
+          {cases.length === 0 && (
+            <div className="text-center py-16 text-text-secondary">
+              <p className="text-lg">Verified project cases will be published here soon.</p>
+              <p className="mt-2 text-sm opacity-70">
+                For reference projects, please contact our sales team directly.
+              </p>
+            </div>
+          )}
           <div className="grid md:grid-cols-2 gap-8">
             {cases.map((caseItem) => (
               <div

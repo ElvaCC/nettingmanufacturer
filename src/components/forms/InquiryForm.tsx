@@ -3,32 +3,46 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
+// Keep in sync with content.json product names (or pass from caller).
 const productOptions = [
-  "Dust Cover Nets",
-  "Shade Nets",
-  "Hail Protection Nets",
-  "Olive Collection Nets",
-  "Bird Protection Nets",
-  "Construction Safety Mesh",
+  "Safety Debris Netting",
+  "Scaffolding Net",
+  "Shade Net",
+  "Tape Shade Net",
+  "Shade Sail",
+  "Anti-Hail Net",
+  "Privacy Screen",
+  "Olive Net",
+  "Anti-Bee Net",
+  "Anti-Bird Net",
+  "Weed Barrier",
   "Other",
 ];
 
 const quantityUnits = ["sqm", "pcs", "kg", "tons"];
 
-export default function InquiryForm({ locale }: { locale: string }) {
+export default function InquiryForm({
+  locale,
+  productName,
+}: {
+  locale: string;
+  productName?: string;
+}) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     email: "",
     phone: "",
     country: "",
-    product: "",
+    product: productName && productOptions.includes(productName) ? productName : "",
     quantity: "",
     unit: "sqm",
     message: "",
+    website: "", // honeypot, must remain empty
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState("");
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -46,11 +60,11 @@ export default function InquiryForm({ locale }: { locale: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError("");
     if (!validate()) return;
 
     setStatus("loading");
-    
-    // Submit to API
+
     try {
       const res = await fetch("/api/inquiry", {
         method: "POST",
@@ -63,10 +77,12 @@ export default function InquiryForm({ locale }: { locale: string }) {
           country: formData.country,
           product: formData.product,
           message: `${formData.quantity} ${formData.unit} - ${formData.message}`,
+          website: formData.website,
         }),
       });
-      const data = await res.json();
-      if (data.success) {
+
+      const data = await res.json().catch(() => null);
+      if (res.ok && data && data.success) {
         setStatus("success");
         setFormData({
           name: "",
@@ -74,20 +90,29 @@ export default function InquiryForm({ locale }: { locale: string }) {
           email: "",
           phone: "",
           country: "",
-          product: "",
+          product: productName && productOptions.includes(productName) ? productName : "",
           quantity: "",
           unit: "sqm",
           message: "",
+          website: "",
         });
       } else {
         setStatus("error");
+        setServerError(
+          data && data.error
+            ? data.error
+            : "Something went wrong. Please try again or contact us by email."
+        );
       }
     } catch {
       setStatus("error");
+      setServerError("Network error. Please try again or contact us by email.");
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -117,39 +142,16 @@ export default function InquiryForm({ locale }: { locale: string }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate aria-label="Product inquiry form">
-      {/* HowTo Schema for form completion */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            "name": "How to Request a Quote for HDPE Netting Products",
-            "description": "Complete the form below to request a custom quote for HDPE netting products from our factory.",
-            "step": [
-              {
-                "@type": "HowToStep",
-                "name": "Fill in your contact information",
-                "text": "Enter your name, company name, email, and phone number."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Select product and quantity",
-                "text": "Choose the HDPE netting product type and specify your required quantity."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Describe your requirements",
-                "text": "Provide details about specifications, delivery timeline, and any special requirements."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Submit your inquiry",
-                "text": "Click the submit button to send your inquiry to our sales team."
-              }
-            ]
-          })
-        }}
+      {/* Honeypot field (hidden from humans, catches bots) */}
+      <input
+        type="text"
+        name="website"
+        value={formData.website}
+        onChange={handleChange}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }}
       />
 
       {/* Contact Information */}
@@ -171,7 +173,7 @@ export default function InquiryForm({ locale }: { locale: string }) {
           />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
         </div>
-        
+
         <div>
           <label htmlFor="company" className="block text-sm font-medium text-text-primary mb-1">
             Company Name
@@ -206,7 +208,7 @@ export default function InquiryForm({ locale }: { locale: string }) {
           />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
-        
+
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-1">
             Phone Number
@@ -279,7 +281,7 @@ export default function InquiryForm({ locale }: { locale: string }) {
           />
           {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
         </div>
-        
+
         <div>
           <label htmlFor="unit" className="block text-sm font-medium text-text-primary mb-1">
             Unit
@@ -317,9 +319,9 @@ export default function InquiryForm({ locale }: { locale: string }) {
       </div>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 p-4 bg-red-50 text-red-700 rounded-lg" role="alert">
-          <AlertCircle size={20} aria-hidden="true" />
-          <p>Something went wrong. Please try again.</p>
+        <div className="flex items-start gap-2 p-4 bg-red-50 text-red-700 rounded-lg" role="alert">
+          <AlertCircle size={20} className="shrink-0 mt-0.5" aria-hidden="true" />
+          <p>{serverError}</p>
         </div>
       )}
 

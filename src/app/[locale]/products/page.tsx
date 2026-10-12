@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useContent } from '@/context/ContentContext';
+import InquiryModal from '@/components/forms/InquiryModal';
 
 // Product category definitions for anchor navigation
 const CATEGORIES = [
@@ -157,9 +158,11 @@ export default function ProductsPage() {
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12 }}>Can&apos;t find what you need?</h2>
           <p style={{ opacity: 0.85, marginBottom: 28, fontSize: 15 }}>We offer OEM/ODM customization. Tell us your requirements and we&apos;ll make it.</p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href={`mailto:${email}`} style={{ display: 'inline-block', padding: '14px 36px', background: '#fff', color: '#1e3a5f', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 16 }}>
-              Contact Us for Custom Order
-            </a>
+            <InquiryModal locale={locale} productName="" trigger={
+              <span style={{ display: 'inline-block', padding: '14px 36px', background: '#fff', color: '#1e3a5f', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 16, cursor: 'pointer' }}>
+                Contact Us for Custom Order
+              </span>
+            } />
             <a href="/files/product-catalog.pdf" download style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 36px', background: 'transparent', color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 16, border: '1.5px solid rgba(255,255,255,0.4)' }}>
               📄 Download Catalog
             </a>
@@ -263,16 +266,18 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
           >
             View Details
           </a>
-          <a
-            href={`mailto:${email}?subject=Quote Request: ${product.name}`}
-            style={{
-              flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              padding: '8px 0', background: '#f0f4ff', color: '#2563eb',
-              borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none'
-            }}
-          >
-            Get Quote
-          </a>
+          <InquiryModal locale={locale} productName={product.name} trigger={
+            <span
+              style={{
+                flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                padding: '8px 0', background: '#f0f4ff', color: '#2563eb',
+                borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              Get Quote
+            </span>
+          } />
         </div>
       </div>
     </div>

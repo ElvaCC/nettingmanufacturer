@@ -19,9 +19,9 @@ export default function Footer() {
           <div>
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>{footer.company} <span style={{ color: "#fbbf24" }}>NETTING</span></div>
             <p style={{ fontSize: 13, lineHeight: 1.8, color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
-              {footer.tagline || "Professional manufacturer of HDPE plastic netting since 2005."}
+              {footer.tagline || "Professional manufacturer of HDPE plastic netting."}
             </p>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{footer.certifications || "✓ BSCI Certified • ✓ NFPA-701 Certificate • 21+ Years Experience"}</div>
+            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{footer.certifications || "HDPE warp knitted netting manufacturer"}</div>
           </div>
 
           {/* Products */}
@@ -61,9 +61,12 @@ export default function Footer() {
           <p style={{ margin: 0, fontSize: 13, color: "rgba(255,255,255,0.5)" }}>
             {footer.copyright}
           </p>
-          <div style={{ display: "flex", gap: 16, fontSize: 13 }}>
+          <div style={{ display: "flex", gap: 16, fontSize: 13, flexWrap: "wrap" }}>
             <Link href={getPath("/")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Home</Link>
             <Link href={getPath("/products")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Products</Link>
+            <Link href={getPath("/applications")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Applications</Link>
+            <Link href={getPath("/solutions")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Solutions</Link>
+            <Link href={getPath("/about")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>About</Link>
             <Link href={getPath("/factory")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Factory</Link>
             <Link href={getPath("/contact")} style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>Contact</Link>
           </div>

@@ -44,7 +44,7 @@ export default function Hero() {
               lineHeight: 1.5,
             }}
           >
-            {hero.highlight || "Exporting to 50+ Countries | 21+ Years of Manufacturing Experience"}
+            {hero.highlight || "Factory-Direct HDPE Warp Knitted Netting for Construction, Agriculture & Shade"}
           </span>
         </div>
 

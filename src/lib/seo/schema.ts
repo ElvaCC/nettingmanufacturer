@@ -7,8 +7,7 @@ export const organizationSchema = {
   "alternateName": "Jiacheng Netting",
   "url": "https://www.nettingmanufacturer.com",
   "logo": "https://www.nettingmanufacturer.com/logo.png",
-  "description": "Professional manufacturer of HDPE warp knitting plastic nets since 2005. Construction safety nets, shade nets, hail nets, olive nets, bird nets, privacy screens, and more.",
-  "foundingDate": "2005",
+  "description": "Professional manufacturer of HDPE warp knitting plastic nets. Construction safety nets, shade nets, hail nets, olive nets, bird nets, privacy screens, and more.",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
     "minValue": 100,
@@ -24,7 +23,6 @@ export const organizationSchema = {
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+86-531-8888-8888",
     "email": "Netfactory01@factory-jc.com",
     "contactType": "sales",
     "availableLanguage": ["English", "Spanish", "Russian", "Arabic", "Chinese"]
@@ -75,7 +73,7 @@ export const generateWebsiteSchema = () => ({
   "@type": "WebSite",
   "name": "Jiacheng Netting - HDPE Netting Manufacturer",
   "url": "https://www.nettingmanufacturer.com",
-  "description": "Professional manufacturer of HDPE warp knitting plastic nets since 2005. Construction safety nets, shade nets, hail nets, olive nets, bird nets, and more.",
+  "description": "Professional manufacturer of HDPE warp knitting plastic nets. Construction safety nets, shade nets, hail nets, olive nets, bird nets, and more.",
   "publisher": {
     "@type": "Organization",
     "name": "Shandong Jiacheng Chemical Fiber Products Co., Ltd.",

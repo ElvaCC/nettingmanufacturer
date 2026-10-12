@@ -3,10 +3,10 @@ import { locales, type Locale } from "@/app/i18n";
 
 const defaultMetadata = {
   title: {
-    default: "Jiacheng Netting | Professional HDPE Netting Manufacturer Since 2005",
+    default: "Jiacheng Netting | Professional HDPE Netting Manufacturer",
     template: "%s | Jiacheng Netting",
   },
-  description: "Professional manufacturer of HDPE warp knitting plastic nets since 2005. Construction safety nets, shade nets, hail nets, olive nets, bird nets, privacy screens. BSCI & NFPA-701 certified. Factory direct, export to 50+ countries.",
+  description: "Factory-direct manufacturer of HDPE warp knitted plastic nets. Construction safety nets, debris nets, scaffolding nets, shade nets, hail nets, olive nets, bird nets and privacy screens for bulk export.",
   keywords: [
     "HDPE netting manufacturer",
     "construction safety net",
@@ -29,8 +29,8 @@ const defaultMetadata = {
     locale: "en_US",
     url: "https://www.nettingmanufacturer.com",
     siteName: "Jiacheng Netting",
-    title: "Jiacheng Netting | Professional HDPE Netting Manufacturer Since 2005",
-    description: "Professional manufacturer of HDPE netting since 2005. BSCI & NFPA-701 certified. Export to 50+ countries.",
+    title: "Jiacheng Netting | Professional HDPE Netting Manufacturer",
+    description: "Factory-direct manufacturer of HDPE netting for construction, agriculture and shade applications.",
     images: [
       {
         url: "/og-image.jpg",
@@ -42,8 +42,8 @@ const defaultMetadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jiacheng Netting | Professional HDPE Netting Manufacturer Since 2005",
-    description: "Professional manufacturer of HDPE netting since 2005. BSCI & NFPA-701 certified. Export to 50+ countries.",
+    title: "Jiacheng Netting | Professional HDPE Netting Manufacturer",
+    description: "Factory-direct manufacturer of HDPE netting for construction, agriculture and shade applications.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -54,20 +54,20 @@ const defaultMetadata = {
 
 const localizedMetadata: Record<Locale, { title: string; description: string }> = {
   en: {
-    title: "Professional HDPE Netting Manufacturer Since 2005",
-    description: "Jiacheng Netting manufactures HDPE construction safety nets, shade nets, hail nets, olive nets, bird nets, privacy screens, and more. BSCI & NFPA-701 certified, export to 50+ countries. Factory direct pricing.",
+    title: "Professional HDPE Netting Manufacturer",
+    description: "Jiacheng Netting manufactures HDPE construction safety nets, debris nets, shade nets, hail nets, olive nets, bird nets, privacy screens and more. Factory-direct pricing for bulk export.",
   },
   es: {
-    title: "Fabricante Profesional de Mallas HDPE Desde 2005",
-    description: "Jiacheng Netting fabrica mallas HDPE de seguridad para construcción, redes de sombra, redes contra granizo, redes de aceitunas, redes antipájaros y más. Certificado BSCI y NFPA-701, exportación a más de 50 países.",
+    title: "Fabricante Profesional de Mallas HDPE",
+    description: "Jiacheng Netting fabrica mallas HDPE de seguridad para construcción, redes de escombros, redes de sombra, redes contra granizo, redes de aceitunas, redes antipájaros y más. Precios directos de fábrica.",
   },
   ru: {
-    title: "Профессиональный Производитель HDPE Сеток с 2005 Года",
-    description: "Jiacheng Netting производит HDPE строительные защитные сетки, теневые сетки, сети от града, сети для маслин, сетки от птиц и другое. Сертификаты BSCI и NFPA-701, экспорт в более чем 50 стран.",
+    title: "Профессиональный Производитель HDPE Сеток",
+    description: "Jiacheng Netting производит HDPE строительные защитные сетки, сетки от мусора, теневые сетки, сети от града, сети для маслин, сетки от птиц и другое. Прямые заводские цены.",
   },
   ar: {
-    title: "مصنّع شبكات HDPE المحترف منذ 2005",
-    description: "شركة Jiacheng Netting تصنع شبكات HDPE للبناء وشبكات الظل وشبكات الحماية من البرد وشبكات الزيتون وشبكات الطيور والمزيد. حاصلة على شهادات BSCI و NFPA-701، تصدير إلى أكثر من 50 دولة.",
+    title: "مصنّع شبكات HDPE المحترف",
+    description: "شركة Jiacheng Netting تصنع شبكات HDPE للبناء وشبكات الحطام وشبكات الظل وشبكات الحماية من البرد وشبكات الزيتون وشبكات الطيور والمزيد. أسعار المصنع المباشرة للتصدير بالجملة.",
   },
 };
 

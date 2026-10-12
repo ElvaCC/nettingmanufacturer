@@ -1,7 +1,7 @@
 {
   "common": {
     "brand": "Jiacheng Netting",
-    "tagline": "Премиальные решения из HDPE сеток с 2005 года",
+    "tagline": "Премиальные решения из HDPE сеток",
     "getQuote": "Получить расчёт",
     "learnMore": "Подробнее",
     "contactUs": "Связаться с нами",
@@ -42,7 +42,7 @@
       },
       "manufacturing": {
         "title": "Фабрика 20 000 м²",
-        "description": "Основана в 2005 году, современное производство площадью 20 000 кв.м с передовым оборудованием."
+        "description": "Современное производство площадью 20 000 кв.м с передовым оборудованием."
       },
       "customization": {
         "title": "Индивидуальные решения",
@@ -56,7 +56,7 @@
   },
   "about": {
     "title": "О Jiacheng Netting",
-    "description": "Основана в 2005 году, Shandong Jiacheng Chemical Fiber Products Co., Ltd. — профессиональный производитель HDPE сеток с более чем 20-летним опытом. Наша фабрика 20 000 м² экспортирует продукцию в Северную и Южную Америку, Европу, Ближний Восток, Азию и Африку."
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — профессиональный производитель HDPE сеток с более чем 20-летним опытом. Наша фабрика 20 000 м² экспортирует продукцию в Северную и Южную Америку, Европу, Ближний Восток, Азию и Африку."
   },
   "contact": {
     "title": "Свяжитесь с нами",
@@ -72,7 +72,7 @@
     }
   },
   "footer": {
-    "copyright": "© 2005-2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. Все права защищены.",
+    "copyright": "© 2026 Shandong Jiacheng Chemical Fiber Products Co., Ltd. Все права защищены.",
     "privacy": "Политика конфиденциальности",
     "terms": "Условия использования"
   }

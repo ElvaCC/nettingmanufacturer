@@ -50,7 +50,7 @@ export default function InquiryModal({ locale, productName, trigger }: InquiryMo
             <p style={{ fontSize: 11, color: '#9ca3af', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Inquiry for: {productName}
             </p>
-            <InquiryForm locale={locale} />
+            <InquiryForm locale={locale} productName={productName} />
           </div>
         </div>
       )}

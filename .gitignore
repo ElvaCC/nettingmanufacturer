@@ -21,8 +21,15 @@ coverage/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+debug.log
+
+# Accidental junk files (empty files created by shell redirect mistakes)
+cd
+git
 
 # Local env files
+.env
+.env.local
 .env*.local
 
 # Vercel

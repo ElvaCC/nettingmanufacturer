@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import ProductDetailClient from './ProductDetailClient';
 import type { Metadata } from 'next';
 import contentData from '@/data/content.json';
+import { getLocalizedMetadata } from '@/lib/seo/metadata';
+import type { Locale } from '@/app/i18n';
 
 export const revalidate = 60;
 
@@ -21,19 +23,22 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const product = contentData.products.find((p) => p.id === slug);
   if (!product) return {};
 
-  const title = `${product.name} | Jiacheng Netting Manufacturer`;
-  const description = product.description?.slice(0, 160) || `Professional ${product.name} from Jiacheng Netting - BSCI & NFPA-701 certified HDPE netting factory.`;
+  const description = product.description?.slice(0, 160) || `Professional ${product.name} from Jiacheng Netting - HDPE netting manufacturer.`;
   const images = product.images?.map((img: string) => `https://www.nettingmanufacturer.com${img}`) || [];
 
+  const base = getLocalizedMetadata(locale as Locale, `/products/${slug}`);
+
   return {
-    title,
+    ...base,
+    title: product.name,
     description,
     openGraph: {
-      title,
+      ...base.openGraph,
+      title: `${product.name} | Jiacheng Netting`,
       description,
       type: 'website',
       images: images.length > 0 ? [images[0]] : [],

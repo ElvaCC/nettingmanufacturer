@@ -40,7 +40,7 @@ export default function Features({ locale }: { locale: string }) {
                 Netting Manufacturer Co., Ltd
               </h2>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Established in 2005, Netting Manufacturer Co., Ltd is a leading manufacturer of HDPE industrial netting solutions. We specialize in the following products:
+                Netting Manufacturer Co., Ltd is a leading manufacturer of HDPE industrial netting solutions. We specialize in the following products:
               </p>
               <div className="grid grid-cols-2 gap-2 mb-6">
                 {products.map((product) => (

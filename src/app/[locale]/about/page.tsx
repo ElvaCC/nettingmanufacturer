@@ -14,7 +14,7 @@ const certifications = [
   { name: "BSCI", desc: "Business Social Compliance Initiative" },
   { name: "NFPA-701", desc: "Fire-Retardant Standard Method II" },
   { name: "OEM/ODM", desc: "Custom Manufacturing Service" },
-  { name: "21+ Years", desc: "Industry Experience Since 2005" },
+  { name: "21+ Years", desc: "Industry Experience" },
 ];
 
 export async function generateMetadata({
@@ -23,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return getLocalizedMetadata(locale as any);
+  return getLocalizedMetadata(locale as any, "/about");
 }
 
 export default async function AboutPage({
@@ -58,7 +58,7 @@ export default async function AboutPage({
               <h2 className="text-3xl font-bold text-text-primary mb-6">Our Story</h2>
               <div className="space-y-4 text-text-secondary">
                 <p>
-                  Founded in 2005, SHANDONG JIACHENG CHEMICAL FIBER PRODUCTS CO., LTD has grown from a small family workshop 
+                  SHANDONG JIACHENG CHEMICAL FIBER PRODUCTS CO., LTD has grown from a small family workshop 
                   to one of the leading HDPE netting manufacturers in China.
                 </p>
                 <p>

@@ -10,40 +10,24 @@ interface ProductDetailClientProps {
   locale: string;
 }
 
-const EXPORT_COUNTRIES = [
-  { name: 'Saudi Arabia', flag: '\uD83C\uDDF8\uD83C\uDDE6' },
-  { name: 'UAE',          flag: '\uD83C\uDDE6\uD83C\uDDEA' },
-  { name: 'Qatar',        flag: '\uD83C\uDDF6\uD83C\uDDE6' },
-  { name: 'Kuwait',       flag: '\uD83C\uDDF0\uD83C\uDDFC' },
-  { name: 'Spain',        flag: '\uD83C\uDDEA\uD83C\uDDF8' },
-  { name: 'Italy',        flag: '\uD83C\uDDEE\uD83C\uDDF9' },
-];
-
 const DEFAULT_FAQ = [
   // ── Technical FAQs ──
   { q: 'What is HDPE debris netting?', a: 'HDPE debris netting is a lightweight, high-strength knitted mesh made from 100% virgin HDPE. It is used on construction sites to contain falling debris, dust, and tools while allowing airflow and light penetration.' },
-  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for 3-5 years of outdoor exposure depending on climate conditions. We use premium UV additives that meet NFPA 701 fire-retardant standards.' },
-  { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we recommend 80-120 GSM density. Heavier GSM (120+) is ideal for high-wind areas and demolition sites requiring maximum durability.' },
+  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for extended outdoor service. Actual lifespan depends on climate, exposure, and mesh density — please contact us with your application and we will recommend the right UV treatment.' },
+  { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we typically recommend 80-120 GSM density. Heavier GSM is ideal for high-wind areas and demolition sites requiring maximum durability.' },
   { q: 'What mesh size blocks debris?', a: 'Common mesh sizes range from 1/16" (fine) to 1/4" (standard). For most construction scaffolding, 1/8" opening provides optimal debris containment while allowing airflow.' },
   { q: 'What is the difference between knitted and woven netting?', a: 'Knitted netting is more flexible, lightweight, and resistant to unraveling when cut. Woven netting is heavier and more rigid. Our HDPE debris nets are knitted for superior flexibility and job-site durability.' },
-  { q: 'Is HDPE netting recyclable?', a: 'Yes, 100% virgin HDPE netting is fully recyclable. Our production waste is collected, reground, and reused in secondary applications. We recommend checking local recycling guidelines.' },
-  { q: 'What temperature range can HDPE netting withstand?', a: 'HDPE netting remains flexible from -40\u00B0C to +80\u00B0C. It does not become brittle in cold weather, making it suitable for winter construction projects in cold climates.' },
-  { q: 'Does the netting meet fire safety standards?', a: 'Yes, our debris netting is tested and certified to NFPA 701 Method II (USA) and can be produced to meet local fire codes such as AS/NZS 1530 or BS 5867 upon request.' },
+  { q: 'Is HDPE netting recyclable?', a: 'Yes, 100% virgin HDPE netting is fully recyclable. We recommend checking local recycling guidelines for disposal.' },
+  { q: 'What temperature range can HDPE netting withstand?', a: 'HDPE netting remains flexible across a wide temperature range and does not become brittle in cold weather, making it suitable for winter construction projects in cold climates.' },
+  { q: 'Does the netting meet fire safety standards?', a: 'Fire-retardant options are available. Please contact us with your project\u2019s fire code requirements and we will confirm the applicable standard and certification for your market.' },
   // ── Business FAQs ──
-  { q: 'What is the MOQ?', a: 'Standard MOQ is 500 sqm per specification. For trial orders and new product testing, we can negotiate smaller quantities. Contact us for flexible starting options.' },
-  { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer full OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. MOQ for OEM packaging is 1000 sqm.' },
-  { q: 'Can you provide free samples?', a: 'Yes, we provide free samples of any product. Samples are available in A4 size or small cut pieces. Freight is collect (you pay shipping). Sample lead time: 3-5 working days.' },
-  { q: 'How long does shipping take?', a: 'Production lead time is 15-20 working days after deposit confirmation. Ocean freight from Qingdao port takes approximately 15-30 days depending on destination.' },
-  { q: 'What payment methods do you accept?', a: 'We accept T/T (bank transfer), L/C (letter of credit), Western Union, and other mutually agreed payment methods. Deposit: 30%, balance before shipment.' },
+  { q: 'What is the MOQ?', a: 'MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.' },
+  { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.' },
+  { q: 'Can you provide samples?', a: 'Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.' },
+  { q: 'How long does shipping take?', a: 'Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.' },
+  { q: 'What payment methods do you accept?', a: 'We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.' },
   { q: 'Do you offer after-sales support?', a: 'Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.' },
-  { q: 'What if the product does not meet specifications?', a: 'We conduct 100% batch inspection before shipment. If any defect is found, we replace the affected quantity at our cost. Quality is guaranteed.' },
-];
-
-const DELIVERY_DEMO = [
-  { product: 'Shade Net',         month: 'May',    dest: 'UAE',         img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop' },
-  { product: 'Debris Netting',    month: 'April',  dest: 'Saudi Arabia',img: 'https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop' },
-  { product: 'Olive Net',         month: 'March',  dest: 'Spain',       img: 'https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop' },
-  { product: 'Privacy Screen',    month: 'Feb',    dest: 'Kuwait',      img: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop' },
+  { q: 'What if the product does not meet specifications?', a: 'We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.' },
 ];
 
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
@@ -62,8 +46,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const getPath = (href: string) => `/${locale}${href}`;
   const email = contact?.email || 'Netfactory01@factory-jc.com';
   const whatsapp = contact?.whatsapp || '8615628764579';
-  const sinceYear = 2005;
-  const yearsExp = new Date().getFullYear() - sinceYear;
+  // NOTE: founding year pending verification. Once confirmed, restore a
+  // "+N Years Experience" badge by computing (current year - founding year).
 
   const allImages = product.images || [];
   const currentSrc = allImages[currentImgIndex] || '';
@@ -97,7 +81,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
       <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '20px 24px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
-            <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>BSCI &amp; NFPA-701 Certified</span>
+            <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>HDPE Netting Manufacturer</span>
           </div>
           <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15 }}>{product.name}</h1>
         </div>
@@ -149,14 +133,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       </div>
                     ))}
                   </div>
-                  {/* Hardcoded machinery weaving image slot */}
-                  <div style={{ marginTop: 14 }}>
-                    <div style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '16/9', background: '#e5e7eb', border: '1px solid #d1d5db', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', gap: 8 }}>
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
-                      <span style={{ fontSize: 13, fontWeight: 600 }}>Advanced Weaving Machinery</span>
-                      <span style={{ fontSize: 11 }}>Add production workshop photo</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             )}
@@ -166,7 +142,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           <div style={{ position: 'sticky', top: 90 }}>
             {/* MODULE 3: Key Specifications & CTA */}
             <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 16, fontWeight: 500 }}>
-              Professional HDPE netting direct from China BSCI certified factory. Custom sizes &amp; colors available.
+              Professional HDPE netting direct from our China factory. Custom sizes &amp; colors available.
             </p>
 
             {/* Key Spec Tags */}
@@ -228,13 +204,13 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
               {[
-                { icon: '\u2699\uFE0F', title: `${yearsExp}+ Years Experience`, desc: `Since 2005, we have been manufacturing HDPE netting for over ${yearsExp} years with continuous innovation.` },
-                { icon: '\u2705', title: 'BSCI & NFPA-701 Certified', desc: 'All products meet international safety standards. Third-party audited social compliance and fire-retardant certified.' },
-                { icon: '\uD83C\uDFED', title: '20,000 m\u00B2 Factory', desc: 'State-of-the-art production facility with 65+ warp knitting machines. Massive capacity for bulk orders.' },
-                { icon: '\uD83C\uDF0D', title: 'Export to 50+ Countries', desc: 'Trusted by contractors and distributors across Middle East, Europe, Americas, and Africa.' },
+                { icon: '\u2699\uFE0F', title: 'Experienced Manufacturer', desc: 'Long-standing HDPE netting manufacturing experience and continuous innovation.' },
+                { icon: '\u2705', title: 'Quality-Focused Factory', desc: 'Products engineered to international safety standards. Contact us for available certifications.' },
+                { icon: '\uD83C\uDFED', title: 'Modern Factory', desc: 'State-of-the-art warp knitting production facility with bulk capacity for large orders.' },
+                { icon: '\uD83C\uDF0D', title: 'Global Export', desc: 'Trusted by contractors and distributors across the Middle East, Europe, Americas, and Africa.' },
                 { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
                 { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
-                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: `Every batch undergoes tensile strength, UV-aging, and flame-retardant testing before shipment.` },
+                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: `Every batch is inspected for tensile strength, UV aging, and flame retardancy before shipment.` },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                   <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
@@ -242,63 +218,18 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                     <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
                     <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
                       {item.desc}
-                      {item.title === 'Strict Quality Control' && (
-                        <>&nbsp;<a href="#recent-shipments" style={{ color: '#2563eb', textDecoration: 'underline', whiteSpace: 'nowrap', fontWeight: 600, fontSize: 12 }}>&#8609; View our latest shipment tracks below</a></>
-                      )}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* ════════════════════════════════════════════
-            MODULE 5: Who We Work With
-            ============================================ -->
-        <div className="section-gap">
-          <div style={{ background: "#fff", borderRadius: 14, padding: "28px 32px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 14 }}>Who We Work With</h2>
-            <p style={{ fontSize: 13, color: "#555", lineHeight: 1.6, marginBottom: 14 }}>
-              Our products are widely used and trusted by industry professionals across multiple sectors:
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-              {[
-                "Construction Contractors",
-                "Building Material Importers",
-                "Wholesalers & Distributors",
-                "Government & Infrastructure Projects",
-              ].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#555", padding: "10px 16px", background: "#f8fafc", borderRadius: 8, border: "1px solid #e5e7eb" }}>
-                  <span style={{ color: "#10b981", fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
-                  <span style={{ fontWeight: 600, color: "#1e3a5f" }}>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================
-            MODULE 6: Export Markets (Country Tags)
-            ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Export Markets</h2>
-            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 16, lineHeight: 1.5 }}>
-              Main Export Markets: Middle East (Saudi Arabia, UAE, Qatar), Europe (Spain, Italy), North America. Typical Buyers: Importers, Wholesalers, Construction Contractors, Agricultural Suppliers.
-            </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              {EXPORT_COUNTRIES.map((c) => (
-                <div key={c.name} style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '10px 18px', background: '#f8fafc',
-                  borderRadius: 24, border: '1px solid #e5e7eb',
-                  fontSize: 14, fontWeight: 600, color: '#1e3a5f',
-                }}>
-                  <span style={{ fontSize: 20 }}>{c.flag}</span>
-                  <span>{c.name}</span>
-                </div>
-              ))}
+            <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #e5e7eb' }}>
+              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
+                <strong style={{ color: '#1e3a5f' }}>Who we work with:</strong>&nbsp; Construction contractors, building material importers, wholesalers &amp; distributors, and government &amp; infrastructure projects.
+              </p>
+              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: '8px 0 0' }}>
+                <strong style={{ color: '#1e3a5f' }}>Export markets:</strong>&nbsp; Middle East, Europe, and North America. Contact us to confirm delivery to your region.
+              </p>
             </div>
           </div>
         </div>
@@ -313,11 +244,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                 <tbody>
                   {[
-                    ["Product", "Premium Safety Debris Netting"],
-                    ["Material", "100% Virgin HDPE with 3%-5% CIBA UV Stabilizers"],
-                    ["GSM Range", "50gsm - 120gsm (Customizable)"],
-                    ["Compliance", "Engineered to meet OSHA & ANSI A10.11 Scaffolding Standards"],
-                    ["Main Markets", "Middle East, Europe, North America (Selected Projects)"],
+                    ["Product", product.name],
+                    ["Material", product.specs?.find((s: string) => s.toLowerCase().includes('material'))?.split(':')?.[1]?.trim() || '100% Virgin HDPE'],
+                    ["Applications", product.applications?.[0] || 'Industrial netting'],
+                    ["Customization", 'Custom colors, mesh size, width and GSM available'],
+                    ["Export Regions", 'Middle East, Europe, North America — contact us to confirm your market'],
                   ].map((row, i) => (
                     <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < 4 ? "1px solid #f0f2f5" : "none" }}>
                       <td style={{ padding: "10px 18px", color: "#1e3a5f", fontWeight: 600, width: "30%" }}>{row[0]}</td>
@@ -339,7 +270,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {/* AI Overviews / Featured Snippet pure-fact definition */}
             <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #2563eb', fontSize: 14, lineHeight: 1.7, color: '#1e3a5f' }}>
               <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#2563eb' }}>Quick Definition</strong>
-              {product.name} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'} with certifications including NFPA 701 and BSCI.
+              {product.name} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
             </div>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
@@ -347,11 +278,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </p>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Material &amp; UV Protection</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
-              Manufactured from 100% virgin high-density polyethylene (HDPE) with UV-stabilizing compound treatment. All products meet NFPA 701 fire-retardant standards. UV protection rating: 3-5 years outdoor exposure depending on climate conditions. Material resists degradation from sunlight, moisture, and temperature variations.
+              Manufactured from 100% virgin high-density polyethylene (HDPE) with UV-stabilizing compound treatment for extended outdoor service. Fire-retardant options are available on request. Actual UV lifespan depends on climate and exposure. Material resists degradation from sunlight, moisture, and temperature variations.
             </p>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Customization Options</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
-              Available in custom colors (Pantone match), mesh sizes, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Minimum customization order: 1,000 sqm. Contact our sales team for specifications and lead time.
+              Available in custom colors (Pantone match), mesh sizes, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
             </p>
           </div>
         </div>
@@ -414,8 +345,8 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
                 <tbody>
                   {[
                     { weight: '50-70 GSM', apps: 'Dust control, light debris containment, temporary fencing', features: 'Lightweight, economical, easy to handle' },
-                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, meets NFPA 701', popular: true },
-                    { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV寿命, reinforced edges' },
+                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, fire-retardant option available', popular: true },
+                    { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV lifespan, reinforced edges' },
                   ].map((row, i) => (
                     <tr key={i} style={{ background: row.popular ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
                       <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '22%' }}>{row.weight}</td>
@@ -453,19 +384,6 @@ MODULE 9: Applications & Project Cases
                   ))}
                 </div>
               )}
-              {/* 2x2 Project Photo Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                {[
-                  { src: 'https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=375&fit=crop', alt: 'Green HDPE debris netting enclosure installed on commercial building scaffolding for construction safety' },
-                  { src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=375&fit=crop', alt: 'Blue construction safety netting tightly stretched on high-rise building scaffold facade' },
-                  { src: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=375&fit=crop', alt: 'Heavy duty debris netting installed on multi-story construction site for fall protection' },
-                  { src: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=375&fit=crop', alt: 'HDPE scaffolding net wrapping around building structure for debris containment and worker safety' },
-                ].map((img, i) => (
-                  <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb', position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                    <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
-                  </div>
-                ))}
-              </div>
               {projectCases.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
                   {projectCases.map((c: any, i: number) => (
@@ -550,71 +468,36 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
             MODULE 8: Conversion Banner + Download Center
             ════════════════════════════════════════════ */}
         <div className="section-gap" id="conversion-banner">
-          {(() => {
-            const [formEmail, setFormEmail] = useState('');
-            const [formMsg, setFormMsg] = useState('');
-            const [formSent, setFormSent] = useState(false);
-            return (
-              <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', borderRadius: 14, padding: '36px', color: '#fff' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center' }} className="conversion-grid">
-                  {/* Left: Copy + CTAs */}
-                  <div>
-                    <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>Ready to Start Your Project?</h2>
-                    <p style={{ fontSize: 14, opacity: 0.8, lineHeight: 1.6, marginBottom: 20 }}>
-                      Get factory-direct pricing within 2 hours. Fill in your email and requirements below, or download our full product catalog.
-                    </p>
-                    {/* Inline quick form */}
-                    {!formSent ? (
-                      <div>
-                        <div style={{ display: 'flex', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
-                          <input
-                            type="email"
-                            placeholder="Your business email *"
-                            value={formEmail}
-                            onChange={e => setFormEmail(e.target.value)}
-                            style={{ flex: 1, minWidth: 200, padding: '12px 16px', borderRadius: 8, border: 'none', fontSize: 13, outline: 'none', color: '#333' }}
-                          />
-                          <button
-                            onClick={() => {
-                              if (formEmail && formMsg) {
-                                window.open(`mailto:${email}?subject=Quote Request: ${encodeURIComponent(product.name)}&body=${encodeURIComponent('Email: ' + formEmail + '\n\nMessage: ' + formMsg)}`);
-                                setFormSent(true);
-                                setTimeout(() => setFormSent(false), 5000);
-                              }
-                            }}
-                            style={{ padding: '12px 24px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 13, cursor: 'pointer', whiteSpace: 'nowrap' }}
-                          >{formSent ? '✓ Sent!' : 'Send Inquiry'}</button>
-                        </div>
-                        <textarea
-                          placeholder="Tell us your requirements (quantity, specifications, destination)..."
-                          value={formMsg}
-                          onChange={e => setFormMsg(e.target.value)}
-                          rows={2}
-                          style={{ width: '100%', padding: '12px 16px', borderRadius: 8, border: 'none', fontSize: 13, outline: 'none', color: '#333', resize: 'vertical', boxSizing: 'border-box', marginBottom: 14 }}
-                        />
-                        <p style={{ fontSize: 11, opacity: 0.5, margin: 0 }}>We typically respond within 2 hours during business hours.</p>
-                      </div>
-                    ) : (
-                      <p style={{ fontSize: 14, color: '#4ade80', fontWeight: 600 }}>Thank you. Our technical sales team will review your specifications and contact you shortly.</p>
-                    )}
-                  </div>
-                  {/* Right: download buttons */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    <p style={{ fontSize: 13, opacity: 0.7, margin: 0, fontWeight: 600 }}>Or download for offline review:</p>
-                    <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
-                      display: 'block', padding: '14px 0', background: 'rgba(255,255,255,0.15)', color: '#fff',
-                      textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                    }}>&#128196; Download Product Catalog (PDF)</a><p style={{ fontSize: 11, opacity: 0.6, margin: "8px 0 0", lineHeight: 1.5 }}>&#10003; Full Product Range &nbsp;|&nbsp; &#10003; Technical Specifications &nbsp;|&nbsp; &#10003; Container Loading Capacity &nbsp;|&nbsp; &#10003; OEM Service Guide</p>
-                    <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
-                      display: 'block', padding: '14px 0', background: '#2563eb', color: '#fff',
-                      textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
-                    }}>&#9993; Request Catalog by Email</a>
-                  </div>
-                </div>
+          <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', borderRadius: 14, padding: '36px', color: '#fff' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center' }} className="conversion-grid">
+              {/* Left: Copy + CTA */}
+              <div>
+                <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>Ready to Start Your Project?</h2>
+                <p style={{ fontSize: 14, opacity: 0.8, lineHeight: 1.6, marginBottom: 20 }}>
+                  Get factory-direct pricing within 2 hours. Send us your requirements and we will reply with a tailored quote.
+                </p>
+                <InquiryModal locale={locale} productName={product.name} trigger={
+                  <button
+                    style={{ padding: '14px 28px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
+                  >Send Inquiry →</button>
+                } />
+                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>We typically respond within 2 hours during business hours.</p>
               </div>
-            );
-          })()}
+              {/* Right: download buttons */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <p style={{ fontSize: 13, opacity: 0.7, margin: 0, fontWeight: 600 }}>Or download for offline review:</p>
+                <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
+                  display: 'block', padding: '14px 0', background: 'rgba(255,255,255,0.15)', color: '#fff',
+                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                }}>&#128196; Download Product Catalog (PDF)</a><p style={{ fontSize: 11, opacity: 0.6, margin: "8px 0 0", lineHeight: 1.5 }}>&#10003; Full Product Range &nbsp;|&nbsp; &#10003; Technical Specifications &nbsp;|&nbsp; &#10003; Container Loading Capacity &nbsp;|&nbsp; &#10003; OEM Service Guide</p>
+                <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
+                  display: 'block', padding: '14px 0', background: '#2563eb', color: '#fff',
+                  textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
+                }}>&#9993; Request Catalog by Email</a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* ════════════════════════════════════════════
@@ -625,24 +508,19 @@ MODULE 12: Technical & Business FAQ (collapsible)
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
             <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
-            {(product as any).faq && (product as any).faq.length > 0 ? (
-              (product as any).faq.map((item: any, i: number) => (
-                <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                  <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                  <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
-                </details>
-              ))
-            ) : (
-              DEFAULT_FAQ.map((item, i) => (
-                <span key={i}>
-                  {i === 8 && <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>}
-                  <details style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
-                  </details>
-                </span>
-              ))
-            )}
+            {((product as any).faq && (product as any).faq.length > 0 ? (product as any).faq : DEFAULT_FAQ.slice(0, 8)).map((item: any, i: number) => (
+              <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+              </details>
+            ))}
+            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
+            {DEFAULT_FAQ.slice(8).map((item, i) => (
+              <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+              </details>
+            ))}
           </div>
         </div>
 
@@ -689,6 +567,12 @@ MODULE 13: Related Products
             </span>
           ))}.
         </div>
+        {/* Cross-link to Applications page (locale-aware) */}
+        <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
+          <a href={getPath('/applications')} style={{ color: '#2563eb', textDecoration: 'underline', fontWeight: 600 }}>
+            {locale === 'es' ? 'Explore las aplicaciones de redes' : locale === 'ru' ? 'Ознакомьтесь с областями применения' : locale === 'ar' ? 'استكشف تطبيقات الشباك' : 'Explore Netting Applications'}
+          </a>
+        </div>
       </div>
 
       {/* ===== Product Schema + BreadcrumbList + FAQPage + ItemList JSON-LD ===== */}
@@ -701,9 +585,9 @@ MODULE 13: Related Products
               {
                 '@type': 'BreadcrumbList',
                 'itemListElement': [
-                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://nettingmanufacturer.vercel.app/${locale}` },
-                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://nettingmanufacturer.vercel.app/${locale}/products` },
-                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://nettingmanufacturer.vercel.app/${locale}/products/${slug}` },
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://www.nettingmanufacturer.com/${locale}` },
+                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://www.nettingmanufacturer.com/${locale}/products` },
+                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://www.nettingmanufacturer.com/${locale}/products/${slug}` },
                 ],
               },
               {
@@ -724,7 +608,7 @@ MODULE 13: Related Products
               },
               {
                 '@type': 'FAQPage',
-                'mainEntity': (faqItems.length > 0 ? faqItems : DEFAULT_FAQ).map((item: any) => ({
+                'mainEntity': (faqItems.length > 0 ? [...faqItems, ...DEFAULT_FAQ.slice(8)] : DEFAULT_FAQ).map((item: any) => ({
                   '@type': 'Question',
                   'name': item.q,
                   'acceptedAnswer': { '@type': 'Answer', 'text': item.a },
@@ -733,7 +617,7 @@ MODULE 13: Related Products
               {
                 '@type': 'ItemList',
                 'name': 'Related Products',
-                'url': `https://nettingmanufacturer.vercel.app/${locale}/products/${slug}`,
+                'url': `https://www.nettingmanufacturer.com/${locale}/products/${slug}`,
                 'itemListOrder': 'http://schema.org/ItemListOrderDescending',
                 'numberOfItems': Math.min(products.filter((p: any) => p.id !== slug).length, 4),
                 'itemListElement': products
@@ -745,7 +629,7 @@ MODULE 13: Related Products
                     'item': {
                       '@type': 'Product',
                       'name': p.name,
-                      'url': `https://nettingmanufacturer.vercel.app/${locale}/products/${p.id}`,
+                      'url': `https://www.nettingmanufacturer.com/${locale}/products/${p.id}`,
                     },
                   })),
               },
