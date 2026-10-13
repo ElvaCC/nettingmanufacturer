@@ -85,7 +85,7 @@ export default async function SolutionsPage({
   return (
     <div style={{ padding: "80px 24px", background: "#fff", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>
           HDPE Netting Solutions by Application
         </h1>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 56, maxWidth: 760, margin: "0 auto 56px", lineHeight: 1.7 }}>
@@ -111,7 +111,7 @@ export default async function SolutionsPage({
             >
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
                 <span style={{ fontSize: 28 }}>{sol.icon}</span>
-                <h2 style={{ fontSize: 22, fontWeight: 700, color: "#1e3a5f", margin: 0 }}>{sol.title}</h2>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: "#0B4C8E", margin: 0 }}>{sol.title}</h2>
               </div>
               <p style={{ fontSize: 15, lineHeight: 1.7, color: "#555", marginBottom: 16 }}>{sol.intro}</p>
 
@@ -133,7 +133,7 @@ export default async function SolutionsPage({
                       background: "#fff",
                       border: "1px solid #e5e7eb",
                       borderRadius: 8,
-                      color: "#2563eb",
+                      color: "#0B4C8E",
                       textDecoration: "none",
                       fontSize: 13,
                       fontWeight: 600,

@@ -14,7 +14,7 @@ export default function Hero() {
       {/* Text + Image in 1200px container, matching site width */}
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px" }}>
         {/* Title + Subtitle */}
-        <h1 style={{ fontSize: 38, fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.5px", color: "#1e3a5f", marginBottom: 12, textAlign: "center" }}>
+        <h1 style={{ fontSize: 38, fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.5px", color: "#0B4C8E", marginBottom: 12, textAlign: "center" }}>
           {hero.title}
         </h1>
         <p style={{ fontSize: 17, maxWidth: 720, margin: "0 auto 32px", lineHeight: 1.65, color: "#64748b", textAlign: "center" }}>
@@ -38,7 +38,7 @@ export default function Hero() {
             style={{
               fontSize: 19,
               fontWeight: 800,
-              color: "#1e3a5f",
+              color: "#0B4C8E",
               letterSpacing: "0.4px",
               textAlign: "center",
               lineHeight: 1.5,

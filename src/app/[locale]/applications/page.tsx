@@ -28,7 +28,7 @@ export default function ApplicationsPage() {
   return (
     <div style={{ padding: "80px 24px", background: "#fff", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>
           Applications
         </h1>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48, maxWidth: 600, margin: "0 auto 48px" }}>
@@ -40,7 +40,7 @@ export default function ApplicationsPage() {
             const related = getRelatedProducts(app.name);
             return (
               <div key={i} style={{ background: "#f9fafb", borderRadius: 16, padding: 32, border: "1px solid #e5e7eb" }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, color: "#1e3a5f", marginBottom: 16 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: "#0B4C8E", marginBottom: 16 }}>
                   {app.name || `Category ${i + 1}`}
                 </h2>
                 {(app.items && app.items.length > 0) ? (
@@ -76,7 +76,7 @@ export default function ApplicationsPage() {
                             background: "#fff",
                             border: "1px solid #e5e7eb",
                             borderRadius: 8,
-                            color: "#2563eb",
+                            color: "#0B4C8E",
                             textDecoration: "none",
                             fontSize: 13,
                             fontWeight: 600,

@@ -93,9 +93,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
       {/* Breadcrumb */}
       <div style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', padding: '12px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#888' }}>
-          <a href={`/${locale}/`} style={{ color: '#2563eb', textDecoration: 'none' }}>Home</a>
+          <a href={`/${locale}/`} style={{ color: '#0B4C8E', textDecoration: 'none' }}>Home</a>
           <span style={{ color: '#ccc' }}>/</span>
-          <a href={`/${locale}/products`} style={{ color: '#2563eb', textDecoration: 'none' }}>Products</a>
+          <a href={`/${locale}/products`} style={{ color: '#0B4C8E', textDecoration: 'none' }}>Products</a>
           <span style={{ color: '#ccc' }}>/</span>
           <span style={{ color: '#333', fontWeight: 500 }}>{product.name}</span>
         </div>

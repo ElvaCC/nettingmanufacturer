@@ -85,7 +85,7 @@ export default function Factory() {
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section Header */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>
           Our Factory
         </h2>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>
@@ -273,7 +273,7 @@ export default function Factory() {
         }
         .factory-highlight-title {
           font-weight: 700;
-          color: #1e3a5f;
+          color: #0B4C8E;
           font-size: 15px;
           margin-bottom: 4px;
         }
@@ -308,7 +308,7 @@ export default function Factory() {
         }
         .factory-info-value {
           font-weight: 600;
-          color: #1e3a5f;
+          color: #0B4C8E;
           font-size: 14px;
         }
 

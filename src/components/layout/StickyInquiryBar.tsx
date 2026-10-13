@@ -22,7 +22,7 @@ export default function StickyInquiryBar({ email, whatsapp, productName, locale 
         <InquiryModal locale={locale} productName={productName} trigger={
           <span title="Request Quote" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-            width: 120, height: 40, background: '#2563eb', color: '#fff',
+            width: 120, height: 40, background: '#0B4C8E', color: '#fff',
             fontSize: 12, fontWeight: 600, cursor: 'pointer',
             borderRadius: '6px 0 0 6px', writingMode: 'vertical-rl' as any, letterSpacing: 1,
           }}>&#9993; QUOTE</span>
@@ -62,7 +62,7 @@ export default function StickyInquiryBar({ email, whatsapp, productName, locale 
       }}>
         <InquiryModal locale={locale} productName={productName} trigger={
           <span style={{
-            flex: 1, padding: '14px 4px', background: '#2563eb', color: '#fff',
+            flex: 1, padding: '14px 4px', background: '#0B4C8E', color: '#fff',
             textAlign: 'center', fontSize: 11, fontWeight: 700, letterSpacing: 0.3, cursor: 'pointer',
           }}>Request<br/>Quote</span>
         } />

@@ -47,8 +47,8 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
         
         {/* Logo */}
         <Link href={getPath("/")} style={{ display: "flex", alignItems: "center", textDecoration: "none", fontWeight: 700, fontSize: 18, flexShrink: 0 }}>
-          <span style={{ color: "#1e3a5f" }}>JIACHENG</span>
-          <span style={{ color: "#2563eb", marginLeft: 4 }}>NETTING</span>
+          <span style={{ color: "#0B4C8E" }}>JIACHENG</span>
+          <span style={{ color: "#0B4C8E", marginLeft: 4 }}>NETTING</span>
         </Link>
 
         {/* Navigation - 横向排列 */}

@@ -41,7 +41,7 @@ export default function ProductsPage() {
   return (
     <div style={{ background: '#f9fafb', minHeight: '100vh' }}>
       {/* Hero Header */}
-      <div style={{ background: '#1e3a5f', color: '#fff', padding: '64px 24px 48px' }}>
+      <div style={{ background: '#0B4C8E', color: '#fff', padding: '64px 24px 48px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
           <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 12 }}>Our Products</h1>
           <p style={{ fontSize: 16, opacity: 0.85, maxWidth: 700, margin: '0 auto', lineHeight: 1.7 }}>
@@ -89,12 +89,12 @@ export default function ProductsPage() {
             style={{
               padding: '14px 20px',
               border: 'none',
-              borderBottom: activeCategory === null ? '3px solid #2563eb' : '3px solid transparent',
+              borderBottom: activeCategory === null ? '3px solid #0B4C8E' : '3px solid transparent',
               background: 'transparent',
               cursor: 'pointer',
               fontSize: 14,
               fontWeight: activeCategory === null ? 700 : 500,
-              color: activeCategory === null ? '#2563eb' : '#666',
+              color: activeCategory === null ? '#0B4C8E' : '#666',
               whiteSpace: 'nowrap',
               transition: 'all 0.2s',
             }}
@@ -108,12 +108,12 @@ export default function ProductsPage() {
               style={{
                 padding: '14px 20px',
                 border: 'none',
-                borderBottom: activeCategory === cat.id ? '3px solid #2563eb' : '3px solid transparent',
+                borderBottom: activeCategory === cat.id ? '3px solid #0B4C8E' : '3px solid transparent',
                 background: 'transparent',
                 cursor: 'pointer',
                 fontSize: 14,
                 fontWeight: activeCategory === cat.id ? 700 : 500,
-                color: activeCategory === cat.id ? '#2563eb' : '#666',
+                color: activeCategory === cat.id ? '#0B4C8E' : '#666',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.2s',
               }}
@@ -138,7 +138,7 @@ export default function ProductsPage() {
               {/* Category Title */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
                 <span style={{ fontSize: 28 }}>{cat.emoji}</span>
-                <h2 style={{ fontSize: 24, fontWeight: 700, color: '#1e3a5f', margin: 0 }}>{cat.label}</h2>
+                <h2 style={{ fontSize: 24, fontWeight: 700, color: '#0B4C8E', margin: 0 }}>{cat.label}</h2>
                 <div style={{ flex: 1, height: 1, background: '#e5e7eb' }} />
                 <span style={{ fontSize: 13, color: '#aaa' }}>{catProducts.length} product{catProducts.length > 1 ? 's' : ''}</span>
               </div>
@@ -154,12 +154,12 @@ export default function ProductsPage() {
         })}
 
         {/* CTA */}
-        <div style={{ marginTop: 16, padding: 48, background: '#1e3a5f', borderRadius: 16, textAlign: 'center', color: '#fff' }}>
+        <div style={{ marginTop: 16, padding: 48, background: '#0B4C8E', borderRadius: 16, textAlign: 'center', color: '#fff' }}>
           <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12 }}>Can&apos;t find what you need?</h2>
           <p style={{ opacity: 0.85, marginBottom: 28, fontSize: 15 }}>We offer OEM/ODM customization. Tell us your requirements and we&apos;ll make it.</p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <InquiryModal locale={locale} productName="" trigger={
-              <span style={{ display: 'inline-block', padding: '14px 36px', background: '#fff', color: '#1e3a5f', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 16, cursor: 'pointer' }}>
+              <span style={{ display: 'inline-block', padding: '14px 36px', background: '#fff', color: '#0B4C8E', textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 16, cursor: 'pointer' }}>
                 Contact Us for Custom Order
               </span>
             } />
@@ -223,7 +223,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
           {badges.length > 0 && (
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '8px 10px', background: 'linear-gradient(transparent, rgba(0,0,0,0.6))', display: 'flex', flexWrap: 'wrap', gap: 4 }}>
               {badges.map((badge, idx) => (
-                <span key={idx} style={{ fontSize: 11, background: 'rgba(255,255,255,0.9)', color: '#1e3a5f', padding: '2px 8px', borderRadius: 4, fontWeight: 600, backdropFilter: 'blur(4px)' }}>
+                <span key={idx} style={{ fontSize: 11, background: 'rgba(255,255,255,0.9)', color: '#0B4C8E', padding: '2px 8px', borderRadius: 4, fontWeight: 600, backdropFilter: 'blur(4px)' }}>
                   {badge}
                 </span>
               ))}
@@ -234,7 +234,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
 
       {/* Product Info */}
       <div style={{ padding: 20 }}>
-        <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1e3a5f', marginBottom: 8, lineHeight: 1.3 }}>{product.name}</h3>
+        <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0B4C8E', marginBottom: 8, lineHeight: 1.3 }}>{product.name}</h3>
         <p style={{ fontSize: 13, lineHeight: 1.7, color: '#666', marginBottom: 16, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }}>
           {product.description || ''}
         </p>
@@ -244,7 +244,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', fontSize: 12, color: '#555', lineHeight: 1.9, marginBottom: 16 }}>
             {product.specs.slice(0, 3).map((spec: string, idx: number) => (
               <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-                <span style={{ color: '#2563eb', fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✓</span>
+                <span style={{ color: '#0B4C8E', fontWeight: 700, flexShrink: 0, marginTop: 1 }}>✓</span>
                 <span>{spec}</span>
               </li>
             ))}
@@ -260,7 +260,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
             href={detailHref}
             style={{
               flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              padding: '8px 0', background: '#2563eb', color: '#fff',
+              padding: '8px 0', background: '#0B4C8E', color: '#fff',
               borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none'
             }}
           >
@@ -270,7 +270,7 @@ function ProductCard({ product, email, getSpecBadges, locale }: {
             <span
               style={{
                 flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                padding: '8px 0', background: '#f0f4ff', color: '#2563eb',
+                padding: '8px 0', background: '#f0f4ff', color: '#0B4C8E',
                 borderRadius: 6, fontSize: 13, fontWeight: 600, textDecoration: 'none',
                 cursor: 'pointer'
               }}

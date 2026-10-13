@@ -48,7 +48,7 @@ export default function Contact() {
     <section style={{ padding: "80px 24px", background: "#f9fafb" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>{pageTitle}</h2>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>{pageTitle}</h2>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>{pageSubtitle}</p>
 
         {/* Contact Layout */}
@@ -56,11 +56,11 @@ export default function Contact() {
           {/* Left - Contact Info */}
           <div>
             <div style={{ background: "#fff", borderRadius: 12, padding: 36, border: "1px solid #e5e7eb" }}>
-              <h3 style={{ fontSize: 22, fontWeight: 600, color: "#1e3a5f", marginBottom: 28 }}>Get In Touch</h3>
+              <h3 style={{ fontSize: 22, fontWeight: 600, color: "#0B4C8E", marginBottom: 28 }}>Get In Touch</h3>
 
               {/* Company Name */}
               <div style={{ marginBottom: 24 }}>
-                <div style={{ fontWeight: 600, color: "#1e3a5f", fontSize: 16, marginBottom: 4 }}>Jiacheng Netting</div>
+                <div style={{ fontWeight: 600, color: "#0B4C8E", fontSize: 16, marginBottom: 4 }}>Jiacheng Netting</div>
                 <div style={{ fontSize: 13, color: "#888" }}>Shandong Jiacheng Chemical Fiber Products Co., Ltd.</div>
               </div>
 
@@ -70,7 +70,7 @@ export default function Contact() {
                   <span style={{ fontSize: 20, flexShrink: 0 }}>📧</span>
                   <div>
                     <div style={{ fontWeight: 500, color: "#333", fontSize: 14, marginBottom: 2 }}>Email</div>
-                    <a href={`mailto:${contact.email}`} style={{ fontSize: 13, color: "#2563eb", textDecoration: "none" }}>{contact.email}</a>
+                    <a href={`mailto:${contact.email}`} style={{ fontSize: 13, color: "#0B4C8E", textDecoration: "none" }}>{contact.email}</a>
                   </div>
                 </div>
 
@@ -130,7 +130,7 @@ export default function Contact() {
 
           {/* Right - Contact Form */}
           <div style={{ background: "#fff", borderRadius: 12, padding: 36, border: "1px solid #e5e7eb" }}>
-            <h3 style={{ fontSize: 22, fontWeight: 600, color: "#1e3a5f", marginBottom: 24 }}>Send Inquiry</h3>
+            <h3 style={{ fontSize: 22, fontWeight: 600, color: "#0B4C8E", marginBottom: 24 }}>Send Inquiry</h3>
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
@@ -173,7 +173,7 @@ export default function Contact() {
               </div>
 
               <button type="submit" disabled={status === "sending"}
-                style={{ padding: "14px 32px", background: status === "sending" ? "#93c5fd" : "#2563eb", color: "#fff", border: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, cursor: status === "sending" ? "not-allowed" : "pointer", alignSelf: "flex-start" }}
+                style={{ padding: "14px 32px", background: status === "sending" ? "#93c5fd" : "#0B4C8E", color: "#fff", border: "none", borderRadius: 8, fontWeight: 600, fontSize: 16, cursor: status === "sending" ? "not-allowed" : "pointer", alignSelf: "flex-start" }}
               >
                 {status === "sending" ? "Sending..." : status === "success" ? "✓ Sent Successfully!" : status === "error" ? "✕ Failed, Try Again" : "Send Message →"}
               </button>

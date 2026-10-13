@@ -11,7 +11,7 @@ export default function Footer() {
   const { footer, contact, products } = useContent();
   
   return (
-    <footer style={{ background: "#1e3a5f", color: "#fff", padding: "60px 24px 30px" }}>
+    <footer style={{ background: "#0B4C8E", color: "#fff", padding: "60px 24px 30px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Footer Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32, marginBottom: 40 }}>

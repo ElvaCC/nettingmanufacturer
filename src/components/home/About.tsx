@@ -12,7 +12,7 @@ export default function About() {
     <section style={{ padding: "80px 24px", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>
           {about.title}
         </h2>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48, maxWidth: 700, margin: "0 auto 48px" }}>
@@ -21,7 +21,7 @@ export default function About() {
 
         {/* Company Profile - Full Width */}
         <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <h3 style={{ fontSize: 24, fontWeight: 600, color: "#1e3a5f", marginBottom: 24, textAlign: "center" }}>
+          <h3 style={{ fontSize: 24, fontWeight: 600, color: "#0B4C8E", marginBottom: 24, textAlign: "center" }}>
             Company Profile
           </h3>
 
@@ -43,7 +43,7 @@ export default function About() {
                   background: "#f3f4f6",
                   borderRadius: 8,
                   fontWeight: 600,
-                  color: "#1e3a5f",
+                  color: "#0B4C8E",
                   fontSize: 14,
                 }}
               >

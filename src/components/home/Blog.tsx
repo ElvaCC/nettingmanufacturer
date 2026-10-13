@@ -9,7 +9,7 @@ export default function Blog() {
     <section style={{ padding: "80px 24px", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Title */}
-        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Latest News & Updates</h2>
+        <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>Latest News & Updates</h2>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>Stay updated with our latest products and industry insights</p>
 
         {/* Blog Grid */}
@@ -23,8 +23,8 @@ export default function Blog() {
                 </div>
                 {/* Content */}
                 <div style={{ padding: 24 }}>
-                  <div style={{ fontSize: 12, color: "#2563eb", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>{post.category}</div>
-                  <h3 style={{ fontSize: 16, fontWeight: 600, color: "#1e3a5f", lineHeight: 1.5, minHeight: 48 }}>{post.title}</h3>
+                  <div style={{ fontSize: 12, color: "#0B4C8E", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>{post.category}</div>
+                  <h3 style={{ fontSize: 16, fontWeight: 600, color: "#0B4C8E", lineHeight: 1.5, minHeight: 48 }}>{post.title}</h3>
                   {post.excerpt && <p style={{ fontSize: 13, color: "#666", lineHeight: 1.6, marginTop: 8, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" as const, overflow: "hidden" }}>{post.excerpt}</p>}
                   <time style={{ display: "block", marginTop: 16, fontSize: 13, color: "#999" }}>{post.date}</time>
                 </div>

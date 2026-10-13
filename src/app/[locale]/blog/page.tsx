@@ -8,7 +8,7 @@ export default function BlogPage() {
   return (
     <div style={{ padding: "80px 24px", background: "#f9fafb", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>
+        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>
           Blog & News
         </h1>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48, maxWidth: 600, margin: "0 auto 48px" }}>
@@ -33,7 +33,7 @@ export default function BlogPage() {
                   <span style={{ background: "#dbeafe", color: "#1e40af", padding: "2px 8px", borderRadius: 6, fontSize: 12, fontWeight: 600 }}>{post.category || "News"}</span>
                   <span style={{ fontSize: 12, color: "#94a3b8" }}>{post.date || ""}</span>
                 </div>
-                <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 8, lineHeight: 1.3 }}>{post.title}</h2>
+                <h2 style={{ fontSize: 18, fontWeight: 700, color: "#0B4C8E", marginBottom: 8, lineHeight: 1.3 }}>{post.title}</h2>
                 <p style={{ fontSize: 14, color: "#666", lineHeight: 1.7, margin: 0 }}>{post.excerpt}</p>
               </div>
             </div>

@@ -10,20 +10,25 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#1E3A5F",
-          light: "#2563EB",
+          DEFAULT: "#0B4C8E",
+          light: "#0B4C8E",
+          dark: "#083C72",
         },
         accent: {
           DEFAULT: "#F59E0B",
           hover: "#D97706",
         },
+        cta: {
+          DEFAULT: "#0E7A45",
+          hover: "#0A5F36",
+        },
         background: {
           DEFAULT: "#FFFFFF",
-          secondary: "#F8FAFC",
+          secondary: "#F5F7FA",
           dark: "#0F172A",
         },
         text: {
-          primary: "#1F2937",
+          primary: "#373738",
           secondary: "#6B7280",
         },
       },

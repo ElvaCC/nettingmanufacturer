@@ -190,10 +190,10 @@ export default function AdminPanel() {
   // LOGIN
   if (!auth) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0f172a, #1e3a5f)' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0f172a, #0B4C8E)' }}>
         <div style={{ background: '#fff', padding: 48, borderRadius: 20, boxShadow: '0 20px 60px rgba(0,0,0,0.3)', width: 420, textAlign: 'center' }}>
           <div style={{ width: 64, height: 64, borderRadius: 16, background: 'linear-gradient(135deg, #1e40af, #3b82f6)', margin: '0 auto 20px' }} />
-          <h1 style={{ color: '#1e3a5f', margin: '0 0 6px' }}>Admin Panel</h1>
+          <h1 style={{ color: '#0B4C8E', margin: '0 0 6px' }}>Admin Panel</h1>
           <p style={{ color: '#94a3b8', marginBottom: 32, fontSize: 14 }}>Jiacheng Netting</p>
           <input type="password" value={pw} onChange={e => { setPw(e.target.value); setPwErr(false); }} onKeyDown={e => e.key === 'Enter' && pw === 'wode2020' && setAuth(true)} placeholder="Password" style={s({ marginBottom: 16, borderColor: pwErr ? '#ef4444' : '#e2e8f0' })} />
           {pwErr && <p style={{ color: '#ef4444', fontSize: 13, marginBottom: 16 }}>Wrong password</p>}
@@ -211,7 +211,7 @@ export default function AdminPanel() {
 
   const HeroTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Home Hero</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Home Hero</h2>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div><label style={lbl}>Title</label><textarea value={content.hero.title} onChange={e => upd('hero', 'title', e.target.value)} rows={2} style={s({ resize: 'vertical' as const })} /></div>
@@ -227,7 +227,7 @@ export default function AdminPanel() {
 
   const AboutTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>About Us</h2>
+      <h2 style={{ color: '#0B4C8E' }}>About Us</h2>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -243,7 +243,7 @@ export default function AdminPanel() {
 
   const FactoryTab = (
     <div style={{ maxWidth: 1000 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Factory</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Factory</h2>
       <div style={card}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
           <div><label style={lbl}>Title</label><input type="text" value={content.factory.title} onChange={e => upd('factory', 'title', e.target.value)} style={s()} /></div>
@@ -252,7 +252,7 @@ export default function AdminPanel() {
         <div style={{ marginTop: 16 }}><label style={lbl}>Description</label><textarea value={content.factory.description} onChange={e => upd('factory', 'description', e.target.value)} rows={4} style={s({ resize: 'vertical' as const })} /></div>
       </div>
 
-      <h3 style={{ color: '#1e3a5f', marginTop: 28, marginBottom: 12 }}>Factory Images ({content.factoryImages.length})</h3>
+      <h3 style={{ color: '#0B4C8E', marginTop: 28, marginBottom: 12 }}>Factory Images ({content.factoryImages.length})</h3>
       {content.factoryImages.map((img, i) => (
         <div key={i} style={card}>
           <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
@@ -277,7 +277,7 @@ export default function AdminPanel() {
       ))}
       <button onClick={() => setContent({ ...content, factoryImages: [...content.factoryImages, { src: '/images/factory/new-image.jpg', alt: 'New factory image', label: 'New Image', span: 'full' }] })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Image</button>
 
-      <h3 style={{ color: '#1e3a5f', marginTop: 32, marginBottom: 12 }}>Factory Highlights ({content.factory.highlights.length})</h3>
+      <h3 style={{ color: '#0B4C8E', marginTop: 32, marginBottom: 12 }}>Factory Highlights ({content.factory.highlights.length})</h3>
       {content.factory.highlights.map((h, i) => (
         <div key={i} style={card}>
           <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr 80px', gap: 12, alignItems: 'end' }}>
@@ -290,7 +290,7 @@ export default function AdminPanel() {
       ))}
       <button onClick={() => setContent({ ...content, factory: { ...content.factory, highlights: [...content.factory.highlights, { icon: '', title: '', desc: '' }] } })} style={{ padding: '12px 24px', border: '2px dashed #94a3b8', borderRadius: 12, background: 'transparent', cursor: 'pointer', fontSize: 14, color: '#64748b', width: '100%', marginTop: 8 }}>+ Add Highlight</button>
 
-      <h3 style={{ color: '#1e3a5f', marginTop: 32, marginBottom: 12 }}>Factory Info Cards ({content.factory.infoCards.length})</h3>
+      <h3 style={{ color: '#0B4C8E', marginTop: 32, marginBottom: 12 }}>Factory Info Cards ({content.factory.infoCards.length})</h3>
       {content.factory.infoCards.map((info, i) => (
         <div key={i} style={card}>
           <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 1fr 80px', gap: 12, alignItems: 'end' }}>
@@ -307,11 +307,11 @@ export default function AdminPanel() {
 
   const ProductsTab = (
     <div style={{ maxWidth: 1000 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Products ({content.products.length})</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Products ({content.products.length})</h2>
       {content.products.map((product, i) => (
         <div key={product.id} style={card}>
           <div onClick={() => setEditProd(editProd === i ? null : i)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
-            <div><span style={{ fontWeight: 600, color: '#1e3a5f' }}>{product.name}</span><span style={{ color: '#94a3b8', fontSize: 13, marginLeft: 12 }}>{product.nameZh} | {product.id}</span></div>
+            <div><span style={{ fontWeight: 600, color: '#0B4C8E' }}>{product.name}</span><span style={{ color: '#94a3b8', fontSize: 13, marginLeft: 12 }}>{product.nameZh} | {product.id}</span></div>
             <span>{editProd === i ? '^' : 'v'}</span>
           </div>
           {editProd === i && (
@@ -444,7 +444,7 @@ export default function AdminPanel() {
 
   const BlogTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Blog ({content.blog.length})</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Blog ({content.blog.length})</h2>
       {content.blog.map((post, i) => (
         <div key={post.id} style={card}>
           <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
@@ -466,7 +466,7 @@ export default function AdminPanel() {
 
   const ApplicationsTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Application Categories ({content.applications.length})</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Application Categories ({content.applications.length})</h2>
       <p style={{ color: '#64748b', fontSize: 13, marginBottom: 20 }}>These categories are displayed on the homepage Applications section.</p>
       {(content.applications || []).map((app, i) => (
         <div key={i} style={card}>
@@ -483,7 +483,7 @@ export default function AdminPanel() {
 
   const CTATab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>CTA Section</h2>
+      <h2 style={{ color: '#0B4C8E' }}>CTA Section</h2>
       <p style={{ color: '#64748b', fontSize: 13, marginBottom: 20 }}>The call-to-action section shown on product detail pages and contact area.</p>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -498,7 +498,7 @@ export default function AdminPanel() {
 
   const FeaturesTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Features Section</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Features Section</h2>
       <p style={{ color: '#64748b', fontSize: 13, marginBottom: 20 }}>Company features and statistics displayed on the homepage.</p>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -509,7 +509,7 @@ export default function AdminPanel() {
         </div>
       </div>
 
-      <h3 style={{ color: '#1e3a5f', marginTop: 28, marginBottom: 12 }}>Statistics ({content.featuresSection.stats.length})</h3>
+      <h3 style={{ color: '#0B4C8E', marginTop: 28, marginBottom: 12 }}>Statistics ({content.featuresSection.stats.length})</h3>
       {(content.featuresSection.stats || []).map((stat, i) => (
         <div key={i} style={card}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 80px', gap: 12, alignItems: 'end' }}>
@@ -525,7 +525,7 @@ export default function AdminPanel() {
 
   const BusinessTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Business / Trade Info</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Business / Trade Info</h2>
       <p style={{ color: '#64748b', fontSize: 13, marginBottom: 20 }}>Packaging, shipping, payment, and customization options shown on product detail pages.</p>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -543,7 +543,7 @@ export default function AdminPanel() {
 
   const ContactTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Contact Information</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Contact Information</h2>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div><label style={lbl}>Email</label><input type="email" value={content.contact.email} onChange={e => upd('contact', 'email', e.target.value)} style={s()} /></div>
@@ -555,7 +555,7 @@ export default function AdminPanel() {
         </div>
       </div>
 
-      <h3 style={{ color: '#1e3a5f', marginTop: 28, marginBottom: 12 }}>Contact Page Settings</h3>
+      <h3 style={{ color: '#0B4C8E', marginTop: 28, marginBottom: 12 }}>Contact Page Settings</h3>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div><label style={lbl}>Page Title</label><input type="text" value={content.contactPage.title} onChange={e => upd('contactPage', 'title', e.target.value)} style={s()} /></div>
@@ -568,7 +568,7 @@ export default function AdminPanel() {
 
   const FooterTab = (
     <div style={{ maxWidth: 800 }}>
-      <h2 style={{ color: '#1e3a5f' }}>Footer</h2>
+      <h2 style={{ color: '#0B4C8E' }}>Footer</h2>
       <div style={card}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div><label style={lbl}>Company Name</label><input type="text" value={content.footer.company} onChange={e => upd('footer', 'company', e.target.value)} style={s()} /></div>
@@ -597,7 +597,7 @@ export default function AdminPanel() {
   // MAIN LAYOUT
   return (
     <div style={{ minHeight: '100vh', background: '#f8fafc', color: '#1e293b' }}>
-      <header style={{ background: 'linear-gradient(135deg, #0f172a, #1e3a5f)', color: '#fff', padding: '0 30px', height: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
+      <header style={{ background: 'linear-gradient(135deg, #0f172a, #0B4C8E)', color: '#fff', padding: '0 30px', height: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ fontWeight: 700, fontSize: 16 }}>ONLY NETTING Admin</div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <a href="/en" target="_blank" rel="noreferrer" style={{ padding: '8px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff', textDecoration: 'none', fontSize: 13, border: '1px solid rgba(255,255,255,0.2)' }}>View Site</a>

@@ -29,7 +29,7 @@ export default function FloatingContact() {
         .floating-contact a, .floating-contact .fc-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: #fff; border-radius: 10px 0 0 10px; box-shadow: -2px 2px 8px rgba(0,0,0,0.12); text-decoration: none; cursor: pointer; border: 1px solid #e5e7eb; transition: transform 0.2s, box-shadow 0.2s; position: relative; padding: 0; }
         .floating-contact a:hover, .floating-contact .fc-btn:hover { transform: translateX(-4px); box-shadow: -3px 3px 12px rgba(0,0,0,0.18); }
         .floating-contact svg { width: 22px; height: 22px; display: block; }
-        .fc-collapse-btn { background: #1e3a5f !important; color: #fff; }
+        .fc-collapse-btn { background: #0B4C8E !important; color: #fff; }
         .fc-wechat-popup { position: fixed; right: 60px; top: 40%; transform: translateY(-50%); background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 999; max-width: 220px; }
         .fc-wechat-popup img { width: 180px; height: 180px; border-radius: 8px; border: 1px solid #e5e7eb; }
         .fc-wechat-popup-close { position: absolute; top: 8px; right: 8px; background: none; border: none; font-size: 20px; cursor: pointer; color: #666; }

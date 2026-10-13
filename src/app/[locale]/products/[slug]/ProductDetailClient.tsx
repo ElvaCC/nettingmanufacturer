@@ -79,7 +79,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   return (
     <>
       {/* ===== HERO BANNER ===== */}
-      <section style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', color: '#fff', padding: '20px 24px 0' }}>
+      <section style={{ background: 'linear-gradient(135deg, #0B4C8E 0%, #0f2440 100%)', color: '#fff', padding: '20px 24px 0' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
             <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>HDPE Netting Manufacturer</span>
@@ -108,7 +108,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                     {allImages.map((img: string, i: number) => (
                       <div key={i} onClick={() => setCurrentImgIndex(i)} style={{
                         borderRadius: 10, overflow: 'hidden', cursor: 'pointer', width: 76, height: 76, flexShrink: 0,
-                        border: currentImgIndex === i ? '2px solid #2563eb' : '2px solid #e5e7eb',
+                        border: currentImgIndex === i ? '2px solid #0B4C8E' : '2px solid #e5e7eb',
                         transition: 'border-color 0.2s, transform 0.2s',
                         transform: currentImgIndex === i ? 'scale(1.05)' : 'scale(1)',
                         boxShadow: currentImgIndex === i ? '0 0 0 3px #bfdbfe' : 'none',
@@ -126,7 +126,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {detailImages.length > 0 && (
               <div className="section-gap">
                 <div style={{ background: '#fff', borderRadius: 14, padding: '24px 28px', border: '1px solid #e5e7eb' }}>
-                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Product Detail Close-ups</h2>
+                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Product Detail Close-ups</h2>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
                     {detailImages.map((img: string, i: number) => (
                       <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
@@ -168,12 +168,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             )}
 
             {/* CTA Card with single CTA button */}
-            <div style={{ background: '#1e3a5f', borderRadius: 14, padding: 24, color: '#fff' }}>
+            <div style={{ background: '#0B4C8E', borderRadius: 14, padding: 24, color: '#fff' }}>
               <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 12 }}>Get Factory Price</h3>
               <InquiryModal locale={locale} productName={product.name} trigger={
-                <div style={{ width: '100%', padding: '14px 0', background: '#f59e0b', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 8, transition: 'background 0.15s' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#d97706'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#f59e0b'; }}>
+                <div style={{ width: '100%', padding: '14px 0', background: '#0E7A45', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 8, transition: 'background 0.15s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#0A5F36'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0E7A45'; }}>
                   Request Quote or Free Sample
                 </div>
               } />
@@ -200,7 +200,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#f8fafc', borderRadius: 14, padding: '36px 32px' }}>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1e3a5f', marginBottom: 20, textAlign: 'center' }}>
+            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0B4C8E', marginBottom: 20, textAlign: 'center' }}>
               Why Choose Jiacheng
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
@@ -216,7 +216,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                   <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
                   <div>
-                    <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
+                    <div style={{ fontWeight: 700, color: '#0B4C8E', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
                     <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
                       {item.desc}
                     </div>
@@ -226,10 +226,10 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </div>
             <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #e5e7eb' }}>
               <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
-                <strong style={{ color: '#1e3a5f' }}>Who we work with:</strong>&nbsp; Construction contractors, building material importers, wholesalers &amp; distributors, and government &amp; infrastructure projects.
+                <strong style={{ color: '#0B4C8E' }}>Who we work with:</strong>&nbsp; Construction contractors, building material importers, wholesalers &amp; distributors, and government &amp; infrastructure projects.
               </p>
               <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: '8px 0 0' }}>
-                <strong style={{ color: '#1e3a5f' }}>Export markets:</strong>&nbsp; Middle East, Europe, and North America. Contact us to confirm delivery to your region.
+                <strong style={{ color: '#0B4C8E' }}>Export markets:</strong>&nbsp; Middle East, Europe, and North America. Contact us to confirm delivery to your region.
               </p>
             </div>
           </div>
@@ -240,7 +240,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             ============================================ -->
         <div className="section-gap">
           <div style={{ background: "#fff", borderRadius: 14, padding: "24px 28px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e3a5f", marginBottom: 14 }}>Product Quick Facts</h2>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#0B4C8E", marginBottom: 14 }}>Product Quick Facts</h2>
             <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #e5e7eb" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                 <tbody>
@@ -252,7 +252,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                     ["Export Regions", 'Middle East, Europe, North America — contact us to confirm your market'],
                   ].map((row, i) => (
                     <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < 4 ? "1px solid #f0f2f5" : "none" }}>
-                      <td style={{ padding: "10px 18px", color: "#1e3a5f", fontWeight: 600, width: "30%" }}>{row[0]}</td>
+                      <td style={{ padding: "10px 18px", color: "#0B4C8E", fontWeight: 600, width: "30%" }}>{row[0]}</td>
                       <td style={{ padding: "10px 18px", color: "#555" }}>{row[1]}</td>
                     </tr>
                   ))}
@@ -267,10 +267,10 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Product Description</h2>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Product Description</h2>
             {/* AI Overviews / Featured Snippet pure-fact definition */}
-            <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #2563eb', fontSize: 14, lineHeight: 1.7, color: '#1e3a5f' }}>
-              <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#2563eb' }}>Quick Definition</strong>
+            <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #0B4C8E', fontSize: 14, lineHeight: 1.7, color: '#0B4C8E' }}>
+              <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#0B4C8E' }}>Quick Definition</strong>
               {product.name} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
             </div>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
@@ -294,11 +294,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         {product.specs && product.specs.length > 0 && (
           <div className="section-gap">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Detailed Specifications</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Detailed Specifications</h2>
               <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                   <thead>
-                    <tr style={{ background: '#1e3a5f', color: '#fff' }}>
+                    <tr style={{ background: '#0B4C8E', color: '#fff' }}>
                       <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Parameter</th>
                       <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Value</th>
                       <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Options</th>
@@ -310,7 +310,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       return (
                         <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
                           <td style={{ padding: '12px 18px', color: '#6b7280', fontWeight: 500, width: '28%', verticalAlign: 'top' }}>{label}</td>
-                          <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '36%', verticalAlign: 'top' }}>{value}</td>
+                          <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '36%', verticalAlign: 'top' }}>{value}</td>
                           <td style={{ padding: '12px 18px', color: '#6b7280', fontSize: 13, verticalAlign: 'top' }}>{options}</td>
                         </tr>
                       );
@@ -328,7 +328,7 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 8 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
               How To Choose The Right {product.name.includes('Netting') ? 'Netting' : 'Product'}
             </h2>
             <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
@@ -337,7 +337,7 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
             <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
-                  <tr style={{ background: '#1e3a5f', color: '#fff' }}>
+                  <tr style={{ background: '#0B4C8E', color: '#fff' }}>
                     <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Weight / Density</th>
                     <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Recommended Applications</th>
                     <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Key Features</th>
@@ -350,7 +350,7 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
                     { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV lifespan, reinforced edges' },
                   ].map((row, i) => (
                     <tr key={i} style={{ background: row.popular ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
-                      <td style={{ padding: '12px 18px', color: '#1e3a5f', fontWeight: 600, width: '22%' }}>{row.weight}</td>
+                      <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '22%' }}>{row.weight}</td>
                       <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>
                         {row.apps}
                         {row.popular && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>Most Popular</span>}
@@ -361,7 +361,7 @@ MODULE: How To Choose The Right Netting (Decision Matrix)
               </tbody>
             </table>
             </div>
-            <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #2563eb' }}>
+            <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
               <strong>Which GSM should I choose?</strong> 50gsm is for light duty temporary enclosure; 80gsm-100gsm is the industrial standard for scaffolding safety; 120gsm is designed for high wind areas and heavy demolition.
             </p>
           </div>
@@ -374,7 +374,7 @@ MODULE 9: Applications & Project Cases
         {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
           <div className="section-gap">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
               {product.applications && product.applications.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
                   {product.applications.map((app: string, i: number) => (
@@ -395,7 +395,7 @@ MODULE 9: Applications & Project Cases
                         </div>
                       )}
                       <div style={{ padding: '12px 14px' }}>
-                        <p style={{ fontWeight: 600, fontSize: 13, color: '#1e3a5f', margin: 0 }}>{c.title || ''}</p>
+                        <p style={{ fontWeight: 600, fontSize: 13, color: '#0B4C8E', margin: 0 }}>{c.title || ''}</p>
                         {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
                       </div>
                     </div>
@@ -413,7 +413,7 @@ MODULE 10: Packaging Options (defensive: hidden when no image data)
         {packagingOpts.length >= 1 && (
           <div className="section-gap">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 14 }}>Packaging Options</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 14 }}>Packaging Options</h2>
               <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
                 We offer flexible packaging solutions to suit different order volumes and distribution channels. Custom labeling and branding available for wholesale clients.
               </p>
@@ -426,7 +426,7 @@ MODULE 10: Packaging Options (defensive: hidden when no image data)
                       </div>
                     ) : null}
                     <div style={{ padding: '14px 16px' }}>
-                      <div style={{ fontWeight: 700, color: '#1e3a5f', fontSize: 14, marginBottom: 4 }}>{opt.label || ''}</div>
+                      <div style={{ fontWeight: 700, color: '#0B4C8E', fontSize: 14, marginBottom: 4 }}>{opt.label || ''}</div>
                       <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{opt.desc || ''}</div>
                     </div>
                   </div>
@@ -443,20 +443,20 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
         {deliveryRecords.length >= 1 && (
           <div className="section-gap" id="recent-shipments">
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Latest Deliveries &amp; Container Loading</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="delivery-grid">
                 {deliveryRecords.slice(0, 6).map((d: any, i: number) => (
                   <div key={i} style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #e5e7eb', background: '#fff' }}>
                     {d.img ? (
                       <div style={{ position: 'relative', aspectRatio: '4/3', background: '#f9fafb' }}>
-                        <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 2, background: '#1e3a5f', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
+                        <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 2, background: '#0B4C8E', color: '#fff', padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600 }}>
                           {d.month} &rarr; {d.dest}
                         </div>
                         <Image src={d.img} alt={altText(`delivery ${i + 1} - ${d.product} to ${d.dest}`)} fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
                       </div>
                     ) : null}
                     <div style={{ padding: '12px 16px' }}>
-                      <p style={{ fontSize: 13, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{d.month} Delivery: {d.product} to {d.dest}</p>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#0B4C8E', margin: 0 }}>{d.month} Delivery: {d.product} to {d.dest}</p>
                     </div>
                   </div>
                 ))}
@@ -469,7 +469,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
             MODULE 8: Conversion Banner + Download Center
             ════════════════════════════════════════════ */}
         <div className="section-gap" id="conversion-banner">
-          <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%)', borderRadius: 14, padding: '36px', color: '#fff' }}>
+          <div style={{ background: 'linear-gradient(135deg, #0B4C8E 0%, #0f2440 100%)', borderRadius: 14, padding: '36px', color: '#fff' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center' }} className="conversion-grid">
               {/* Left: Copy + CTA */}
               <div>
@@ -479,7 +479,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
                 </p>
                 <InquiryModal locale={locale} productName={product.name} trigger={
                   <button
-                    style={{ padding: '14px 28px', background: '#f59e0b', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
+                    style={{ padding: '14px 28px', background: '#0E7A45', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
                   >Send Inquiry →</button>
                 } />
                 <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>We typically respond within 2 hours during business hours.</p>
@@ -493,7 +493,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
                   border: '1px solid rgba(255,255,255,0.2)',
                 }}>&#128196; Download Product Catalog (PDF)</a><p style={{ fontSize: 11, opacity: 0.6, margin: "8px 0 0", lineHeight: 1.5 }}>&#10003; Full Product Range &nbsp;|&nbsp; &#10003; Technical Specifications &nbsp;|&nbsp; &#10003; Container Loading Capacity &nbsp;|&nbsp; &#10003; OEM Service Guide</p>
                 <a href={`mailto:${email}?subject=${encodeURIComponent(`Catalog Request: ${product.name}`)}`} style={{
-                  display: 'block', padding: '14px 0', background: '#2563eb', color: '#fff',
+                  display: 'block', padding: '14px 0', background: '#0B4C8E', color: '#fff',
                   textDecoration: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, textAlign: 'center',
                 }}>&#9993; Request Catalog by Email</a>
               </div>
@@ -507,18 +507,18 @@ MODULE 12: Technical & Business FAQ (collapsible)
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1e3a5f', marginBottom: 18 }}>Frequently Asked Questions</h2>
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Frequently Asked Questions</h2>
+            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
             {((product as any).faq && (product as any).faq.length > 0 ? (product as any).faq : DEFAULT_FAQ.slice(0, 8)).map((item: any, i: number) => (
               <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
                 <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
               </details>
             ))}
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#1e3a5f', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
+            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
             {DEFAULT_FAQ.slice(8).map((item, i) => (
               <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#1e3a5f', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
                 <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
               </details>
             ))}
@@ -530,7 +530,7 @@ MODULE 12: Technical & Business FAQ (collapsible)
 MODULE 13: Related Products
             ════════════════════════════════════════════ */}
         <div className="section-gap">
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: '#1e3a5f', marginBottom: 20 }}>Related Products</h2>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 20 }}>Related Products</h2>
           <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
             {products
               .filter((p: any) => p.id !== slug)
@@ -551,7 +551,7 @@ MODULE 13: Related Products
                     <div style={{ aspectRatio: '4/3', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 12 }}>No image</div>
                   )}
                   <div style={{ padding: '12px 14px' }}>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: '#1e3a5f', margin: 0 }}>{p.name}</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: '#0B4C8E', margin: 0 }}>{p.name}</p>
                   </div>
                 </a>
               ))}
@@ -564,13 +564,13 @@ MODULE 13: Related Products
           {products.slice(0, 5).filter((p: any) => p.id !== slug).slice(0, 3).map((p: any, i: number) => (
             <span key={p.id}>
               {i > 0 && <span>&nbsp;•&nbsp;</span>}
-              <a href={getPath(`/products/${p.id}`)} style={{ color: '#2563eb', textDecoration: 'underline' }}>{p.name}</a>
+              <a href={getPath(`/products/${p.id}`)} style={{ color: '#0B4C8E', textDecoration: 'underline' }}>{p.name}</a>
             </span>
           ))}.
         </div>
         {/* Cross-link to Applications page (locale-aware) */}
         <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
-          <a href={getPath('/applications')} style={{ color: '#2563eb', textDecoration: 'underline', fontWeight: 600 }}>
+          <a href={getPath('/applications')} style={{ color: '#0B4C8E', textDecoration: 'underline', fontWeight: 600 }}>
             {locale === 'es' ? 'Explore las aplicaciones de redes' : locale === 'ru' ? 'Ознакомьтесь с областями применения' : locale === 'ar' ? 'استكشف تطبيقات الشباك' : 'Explore Netting Applications'}
           </a>
         </div>
@@ -655,8 +655,8 @@ MODULE 13: Related Products
         @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr !important; } }
         @media (min-width: 769px) and (max-width: 1024px) { .why-grid { grid-template-columns: repeat(2, 1fr) !important; } }
         body { padding-bottom: 60px; }
-        details summary::-webkit-details-marker { color: #2563eb; }
-        details[open] summary { color: #1e3a5f; }
+        details summary::-webkit-details-marker { color: #0B4C8E; }
+        details[open] summary { color: #0B4C8E; }
       `}} />
     </>
   );

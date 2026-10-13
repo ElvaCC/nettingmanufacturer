@@ -15,7 +15,7 @@ export default function ContactPage() {
   return (
     <div style={{ padding: "80px 24px", background: "#fff", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#1e3a5f" }}>Contact Us</h1>
+        <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>Contact Us</h1>
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 64, maxWidth: 700, margin: "0 auto 64px" }}>
           Get in touch with our team for quotes, samples, and OEM/ODM inquiries. We respond within 24 hours.
         </p>
@@ -23,15 +23,15 @@ export default function ContactPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 48 }}>
           {/* Contact Info */}
           <div>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: "#1e3a5f", marginBottom: 32 }}>Get In Touch</h2>
+            <h2 style={{ fontSize: 24, fontWeight: 700, color: "#0B4C8E", marginBottom: 32 }}>Get In Touch</h2>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
               {/* Email */}
               <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
-                <div style={{ width: 48, height: 48, background: "#1e3a5f", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>✉</div>
+                <div style={{ width: 48, height: 48, background: "#0B4C8E", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>✉</div>
                 <div>
-                  <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>Email</div>
-                  <a href={`mailto:${contact.email}`} style={{ color: "#2563eb", textDecoration: "none", fontSize: 15 }}>{contact.email}</a>
+                  <div style={{ fontWeight: 600, color: "#0B4C8E", marginBottom: 4 }}>Email</div>
+                  <a href={`mailto:${contact.email}`} style={{ color: "#0B4C8E", textDecoration: "none", fontSize: 15 }}>{contact.email}</a>
                 </div>
               </div>
 
@@ -45,8 +45,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WhatsApp</div>
-                    <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ color: "#2563eb", textDecoration: "none", fontSize: 15 }}>{contact.whatsapp}</a>
+                    <div style={{ fontWeight: 600, color: "#0B4C8E", marginBottom: 4 }}>WhatsApp</div>
+                    <a href={`https://wa.me/${contact.whatsapp.replace(/\s/g, "")}`} target="_blank" rel="noopener" style={{ color: "#0B4C8E", textDecoration: "none", fontSize: 15 }}>{contact.whatsapp}</a>
                     <div style={{ marginTop: 12 }}>
                       <img src={WHATSAPP_QR} alt="WhatsApp QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
                       <div style={{ fontSize: 12, color: "#999", marginTop: 4 }}>Scan to chat</div>
@@ -62,7 +62,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>WeChat</div>
+                    <div style={{ fontWeight: 600, color: "#0B4C8E", marginBottom: 4 }}>WeChat</div>
                     <span style={{ color: "#555", fontSize: 15 }}>{contact.wechat || "Netfactory01"}</span>
                     <div style={{ marginTop: 12 }}>
                       <img src={WECHAT_QR} alt="WeChat QR Code" style={{ width: 120, height: 120, borderRadius: 8, border: "1px solid #e5e7eb", objectFit: "cover" }} />
@@ -79,9 +79,9 @@ export default function ContactPage() {
                 rel="noopener"
                 style={{ display: "flex", alignItems: "flex-start", gap: 16, textDecoration: "none", color: "inherit" }}
               >
-                <div style={{ width: 48, height: 48, background: "#1e3a5f", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>📍</div>
+                <div style={{ width: 48, height: 48, background: "#0B4C8E", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>📍</div>
                 <div>
-                  <div style={{ fontWeight: 600, color: "#1e3a5f", marginBottom: 4 }}>Address</div>
+                  <div style={{ fontWeight: 600, color: "#0B4C8E", marginBottom: 4 }}>Address</div>
                   <div style={{ color: "#555", fontSize: 15, lineHeight: 1.6 }}>{contact.address}</div>
                 </div>
               </a>
@@ -90,7 +90,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div style={{ background: "#f9fafb", padding: 40, borderRadius: 16, border: "1px solid #e5e7eb" }}>
-            <h2 style={{ fontSize: 24, fontWeight: 700, color: "#1e3a5f", marginBottom: 32 }}>Send Us a Message</h2>
+            <h2 style={{ fontSize: 24, fontWeight: 700, color: "#0B4C8E", marginBottom: 32 }}>Send Us a Message</h2>
             <InquiryForm locale={locale} />
           </div>
         </div>
