@@ -3,6 +3,7 @@ import ProductDetailClient from './ProductDetailClient';
 import type { Metadata } from 'next';
 import contentData from '@/data/content.json';
 import { getLocalizedMetadata } from '@/lib/seo/metadata';
+import { SITE_URL } from '@/lib/site-config';
 import type { Locale } from '@/app/i18n';
 
 export const revalidate = 60;
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!product) return {};
 
   const description = product.description?.slice(0, 160) || `Professional ${product.name} from Jiacheng Netting - HDPE netting manufacturer.`;
-  const images = product.images?.map((img: string) => `https://www.nettingmanufacturer.com${img}`) || [];
+  const images = product.images?.map((img: string) => `${SITE_URL}${img}`) || [];
 
   const base = getLocalizedMetadata(locale as Locale, `/products/${slug}`);
 
@@ -60,7 +61,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     '@type': 'Product',
     name: product.name,
     description: product.description,
-    image: product.images?.map((img: string) => `https://www.nettingmanufacturer.com${img}`) || [],
+    image: product.images?.map((img: string) => `${SITE_URL}${img}`) || [],
     brand: {
       '@type': 'Brand',
       name: 'Jiacheng Netting',
@@ -68,7 +69,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     manufacturer: {
       '@type': 'Organization',
       name: 'Shandong Jiacheng Chemical Fiber Products Co., Ltd.',
-      url: 'https://www.nettingmanufacturer.com',
+      url: SITE_URL,
     },
     ...(product.specs && {
       additionalProperty: product.specs.map((spec: string) => {

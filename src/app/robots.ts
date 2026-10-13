@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/site-config";
+
 export default function robots() {
   return {
     rules: [
@@ -6,6 +8,6 @@ export default function robots() {
         disallow: ["/admin", "/api/"],
       },
     ],
-    sitemap: "https://www.nettingmanufacturer.com/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

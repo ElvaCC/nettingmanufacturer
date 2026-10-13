@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Filter, Grid, List } from "lucide-react";
+import { SITE_URL } from "@/lib/site-config";
 
 // Product data with full SEO content
 const allProducts = [
@@ -259,7 +260,7 @@ export default function ProductGrid({ locale }: { locale: string }) {
             "@type": "CollectionPage",
             "name": "HDPE Netting Products - Factory Direct",
             "description": "Professional manufacturer of industrial HDPE netting solutions including dust cover nets, shade nets, hail protection nets, olive nets, and bird nets.",
-            "url": "https://www.nettingmanufacturer.com/products",
+            "url": `${SITE_URL}/products`,
             "mainEntity": {
               "@type": "ItemList",
               "itemListElement": filteredProducts.map((product, index) => ({

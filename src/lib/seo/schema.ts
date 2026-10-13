@@ -1,12 +1,14 @@
 // SEO Schema configurations for structured data
 
+import { SITE_URL } from "@/lib/site-config";
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Shandong Jiacheng Chemical Fiber Products Co., Ltd.",
   "alternateName": "Jiacheng Netting",
-  "url": "https://www.nettingmanufacturer.com",
-  "logo": "https://www.nettingmanufacturer.com/logo.png",
+  "url": SITE_URL,
+  "logo": `${SITE_URL}/logo.png`,
   "description": "Professional manufacturer of HDPE warp knitting plastic nets. Construction safety nets, shade nets, hail nets, olive nets, bird nets, privacy screens, and more.",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
@@ -72,12 +74,12 @@ export const generateWebsiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Jiacheng Netting - HDPE Netting Manufacturer",
-  "url": "https://www.nettingmanufacturer.com",
+  "url": SITE_URL,
   "description": "Professional manufacturer of HDPE warp knitting plastic nets. Construction safety nets, shade nets, hail nets, olive nets, bird nets, and more.",
   "publisher": {
     "@type": "Organization",
     "name": "Shandong Jiacheng Chemical Fiber Products Co., Ltd.",
-    "url": "https://www.nettingmanufacturer.com"
+    "url": SITE_URL
   },
   "inLanguage": ["en", "es", "ru", "ar"]
 });

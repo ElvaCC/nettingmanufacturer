@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import InquiryModal from '@/components/forms/InquiryModal';
+import { SITE_URL } from '@/lib/site-config';
 
 interface ProductDetailClientProps {
   slug: string;
@@ -585,9 +586,9 @@ MODULE 13: Related Products
               {
                 '@type': 'BreadcrumbList',
                 'itemListElement': [
-                  { '@type': 'ListItem', position: 1, name: 'Home', item: `https://www.nettingmanufacturer.com/${locale}` },
-                  { '@type': 'ListItem', position: 2, name: 'Products', item: `https://www.nettingmanufacturer.com/${locale}/products` },
-                  { '@type': 'ListItem', position: 3, name: product.name, item: `https://www.nettingmanufacturer.com/${locale}/products/${slug}` },
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/${locale}` },
+                  { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/${locale}/products` },
+                  { '@type': 'ListItem', position: 3, name: product.name, item: `${SITE_URL}/${locale}/products/${slug}` },
                 ],
               },
               {
@@ -617,7 +618,7 @@ MODULE 13: Related Products
               {
                 '@type': 'ItemList',
                 'name': 'Related Products',
-                'url': `https://www.nettingmanufacturer.com/${locale}/products/${slug}`,
+                'url': `${SITE_URL}/${locale}/products/${slug}`,
                 'itemListOrder': 'http://schema.org/ItemListOrderDescending',
                 'numberOfItems': Math.min(products.filter((p: any) => p.id !== slug).length, 4),
                 'itemListElement': products
@@ -629,7 +630,7 @@ MODULE 13: Related Products
                     'item': {
                       '@type': 'Product',
                       'name': p.name,
-                      'url': `https://www.nettingmanufacturer.com/${locale}/products/${p.id}`,
+                      'url': `${SITE_URL}/${locale}/products/${p.id}`,
                     },
                   })),
               },

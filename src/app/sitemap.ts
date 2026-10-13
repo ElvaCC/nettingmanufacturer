@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { locales } from "@/app/i18n";
 import contentData from "@/data/content.json";
+import { SITE_URL } from "@/lib/site-config";
 
-const baseUrl = "https://www.nettingmanufacturer.com";
+const baseUrl = SITE_URL;
 
 const routes = [
   { path: "", priority: 1.0, changefreq: "weekly" as const },

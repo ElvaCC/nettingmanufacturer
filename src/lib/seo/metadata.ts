@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { locales, type Locale } from "@/app/i18n";
+import { SITE_URL } from "@/lib/site-config";
 
 const defaultMetadata = {
   title: {
@@ -23,11 +24,11 @@ const defaultMetadata = {
   authors: [{ name: "Shandong Jiacheng Chemical Fiber Products Co., Ltd." }],
   creator: "Shandong Jiacheng Chemical Fiber Products Co., Ltd.",
   publisher: "Shandong Jiacheng Chemical Fiber Products Co., Ltd.",
-  metadataBase: new URL("https://www.nettingmanufacturer.com"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.nettingmanufacturer.com",
+    url: SITE_URL,
     siteName: "Jiacheng Netting",
     title: "Jiacheng Netting | Professional HDPE Netting Manufacturer",
     description: "Factory-direct manufacturer of HDPE netting for construction, agriculture and shade applications.",
@@ -82,16 +83,16 @@ export function getLocalizedMetadata(locale: Locale, path?: string): Metadata {
     },
     description: localized.description,
     alternates: {
-      canonical: `https://www.nettingmanufacturer.com${basePath}`,
+      canonical: `${SITE_URL}${basePath}`,
       languages: Object.fromEntries(
-        locales.map((loc) => [loc, `https://www.nettingmanufacturer.com/${loc}${path || ""}`])
+        locales.map((loc) => [loc, `${SITE_URL}/${loc}${path || ""}`])
       ),
     },
     openGraph: {
       ...defaultMetadata.openGraph,
       title: localized.title,
       description: localized.description,
-      url: `https://www.nettingmanufacturer.com${basePath}`,
+      url: `${SITE_URL}${basePath}`,
       locale: locale === "ar" ? "ar_SA" : locale === "es" ? "es_ES" : locale === "ru" ? "ru_RU" : "en_US",
     },
   };
