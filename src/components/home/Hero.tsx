@@ -14,10 +14,10 @@ export default function Hero() {
       {/* Text + Image in 1200px container, matching site width */}
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px" }}>
         {/* Title + Subtitle */}
-        <h1 style={{ fontSize: 38, fontWeight: 800, lineHeight: 1.2, letterSpacing: "-0.5px", color: "#0B4C8E", marginBottom: 12, textAlign: "center" }}>
+        <h1 style={{ fontSize: 44, fontWeight: 800, lineHeight: 1.15, letterSpacing: "-0.5px", color: "#0B4C8E", marginBottom: 16, textAlign: "center" }}>
           {hero.title}
         </h1>
-        <p style={{ fontSize: 17, maxWidth: 720, margin: "0 auto 32px", lineHeight: 1.65, color: "#64748b", textAlign: "center" }}>
+        <p style={{ fontSize: 18, maxWidth: 760, margin: "0 auto 36px", lineHeight: 1.7, color: "#64748b", textAlign: "center" }}>
           {hero.subtitle}
         </p>
 
