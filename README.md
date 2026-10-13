@@ -151,3 +151,5 @@ The website is currently set up with placeholder content. You need to:
 ## 📄 License
 
 Proprietary - All rights reserved
+
+<!-- deploy-test: auto-deploy check 2026-10-13 -->
