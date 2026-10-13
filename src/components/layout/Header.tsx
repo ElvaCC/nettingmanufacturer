@@ -28,6 +28,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
     { label: "Products", href: "/products", hasDropdown: true, dropdown: products.map(p => ({ label: p.name, href: `/products/${p.id}` })) },
     { label: "Applications", href: "/applications", hasDropdown: false, dropdown: [] as any[] },
     { label: "Factory", href: "/factory", hasDropdown: false, dropdown: [] as any[] },
+    { label: "Contact Us", href: "/contact", hasDropdown: false, dropdown: [] as any[] },
   ];
 
   const getPath = (href: string) => `/${locale}${href}`;
