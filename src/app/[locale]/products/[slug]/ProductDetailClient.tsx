@@ -84,7 +84,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
             <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>HDPE Netting Manufacturer</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15 }}>{product.name}</h1>
+          <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15, color: '#fff' }}>{product.name}</h1>
         </div>
       </section>
 
@@ -168,27 +168,24 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             )}
 
             {/* CTA Card with single CTA button */}
-            <div style={{ background: '#0B4C8E', borderRadius: 14, padding: 24, color: '#fff' }}>
-              <h3 style={{ fontSize: 17, fontWeight: 700, marginBottom: 12 }}>Get Factory Price</h3>
+            <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 14, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+              <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 14, color: '#0B4C8E' }}>Get Factory Price</h3>
               <InquiryModal locale={locale} productName={product.name} trigger={
-                <div style={{ width: '100%', padding: '14px 0', background: '#0E7A45', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 8, transition: 'background 0.15s' }}
+                <div style={{ width: '100%', padding: '14px 0', background: '#0E7A45', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 14, transition: 'background 0.15s' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#0A5F36'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0E7A45'; }}>
                   Request Quote or Free Sample
                 </div>
               } />
-              <p style={{ fontSize: 10, opacity: 0.6, margin: '0 0 14px', lineHeight: 1.4, textAlign: 'center' }}>
-                Standard A4-sized swatches are free. Courier cost is refundable upon first official container order.
-              </p>
               <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}. Could you send me a quote?`)}`}
                 target="_blank" rel="noopener noreferrer" style={{
-                  display: 'block', width: '100%', padding: '11px 0', background: '#25d366',
+                  display: 'block', width: '100%', padding: '12px 0', background: '#25d366',
                   color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700,
-                  fontSize: 13, textAlign: 'center', marginBottom: 8,
+                  fontSize: 14, textAlign: 'center', marginBottom: 10,
                 }}>WhatsApp Us</a>
               <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
-                display: 'block', width: '100%', padding: '10px 0',
-                background: 'rgba(255,255,255,0.12)', color: '#fff',
+                display: 'block', width: '100%', padding: '11px 0',
+                background: '#fff', color: '#0B4C8E', border: '1px solid #0B4C8E',
                 textDecoration: 'none', borderRadius: 8, fontWeight: 600, fontSize: 13, textAlign: 'center',
               }}>&#128196; Download Product Catalog</a>
             </div>
@@ -473,7 +470,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28, alignItems: 'center' }} className="conversion-grid">
               {/* Left: Copy + CTA */}
               <div>
-                <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>Ready to Start Your Project?</h2>
+                <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3, color: '#fff' }}>Ready to Start Your Project?</h2>
                 <p style={{ fontSize: 14, opacity: 0.8, lineHeight: 1.6, marginBottom: 20 }}>
                   Get factory-direct pricing within 2 hours. Send us your requirements and we will reply with a tailored quote.
                 </p>
