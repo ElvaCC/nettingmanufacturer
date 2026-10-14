@@ -16,7 +16,7 @@ export default function BlogPage() {
         </p>
 
         {/* Blog Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 24 }}>
+        <div className="rgrid-auto" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: 24 }}>
           {(blog && blog.length > 0 ? blog : []).map((post: any) => (
             <div
               key={post.id}

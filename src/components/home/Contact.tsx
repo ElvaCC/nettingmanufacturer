@@ -52,7 +52,7 @@ export default function Contact() {
         <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48 }}>{pageSubtitle}</p>
 
         {/* Contact Layout */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 48 }}>
+        <div className="rgrid-split" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 48 }}>
           {/* Left - Contact Info */}
           <div>
             <div style={{ background: "#fff", borderRadius: 12, padding: 36, border: "1px solid #e5e7eb" }}>
@@ -75,7 +75,7 @@ export default function Contact() {
                 </div>
 
                 {/* WhatsApp & WeChat side by side */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <div className="rgrid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                   {/* WhatsApp */}
                   <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
                     <span style={{ fontSize: 20, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, background: "#25D366", borderRadius: 8 }}>
@@ -133,7 +133,7 @@ export default function Contact() {
             <h3 style={{ fontSize: 22, fontWeight: 600, color: "#0B4C8E", marginBottom: 24 }}>Send Inquiry</h3>
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="rgrid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: "#555", display: "block", marginBottom: 4 }}>Your Name *</label>
                   <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Full name"
@@ -148,7 +148,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div className="rgrid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 500, color: "#555", display: "block", marginBottom: 4 }}>Company Name</label>
                   <input type="text" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Your company"

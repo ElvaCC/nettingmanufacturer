@@ -36,7 +36,7 @@ export default function ProductsPage() {
       {/* Hero Header */}
       <div style={{ background: '#0B4C8E', color: '#fff', padding: '64px 24px 48px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 12 }}>Our Products</h1>
+          <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 12, color: '#fff' }}>Our Products</h1>
           <p style={{ fontSize: 16, opacity: 0.85, maxWidth: 700, margin: '0 auto', lineHeight: 1.7 }}>
             Made of 100% Virgin HDPE — Fire-Retardant · UV-Treated · Customizable Colors &amp; Specs · OEM/ODM Welcome
           </p>
@@ -74,8 +74,9 @@ export default function ProductsPage() {
         background: '#fff',
         borderBottom: '1px solid #e5e7eb',
         boxShadow: '0 1px 6px rgba(0,0,0,0.06)',
+        overflowX: 'auto',
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 0 }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'flex', gap: 0, width: 'max-content', minWidth: '100%' }}>
           {/* "All" button */}
           <button
             onClick={() => { setActiveCategory(null); document.getElementById('products-top')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
@@ -129,7 +130,7 @@ export default function ProductsPage() {
           return (
             <div key={cat.id} id={`cat-${cat.id}`} style={{ marginBottom: 64, scrollMarginTop: 130 }}>
               {/* Category Title */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 28 }}>{cat.emoji}</span>
                 <h2 style={{ fontSize: 24, fontWeight: 700, color: '#0B4C8E', margin: 0 }}>{cat.label}</h2>
                 <div style={{ flex: 1, height: 1, background: '#e5e7eb' }} />
@@ -138,7 +139,7 @@ export default function ProductsPage() {
               </div>
 
               {/* Product Cards Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
+              <div className="rgrid-auto" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))', gap: 24 }}>
                 {catProducts.map((product) => (
                   <ProductCard key={product.id} product={product} email={email} locale={locale} getSpecBadges={getSpecBadges} />
                 ))}
@@ -149,7 +150,7 @@ export default function ProductsPage() {
 
         {/* CTA */}
         <div style={{ marginTop: 16, padding: 48, background: '#0B4C8E', borderRadius: 16, textAlign: 'center', color: '#fff' }}>
-          <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12 }}>Can&apos;t find what you need?</h2>
+          <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12, color: '#fff' }}>Can&apos;t find what you need?</h2>
           <p style={{ opacity: 0.85, marginBottom: 28, fontSize: 15 }}>We offer OEM/ODM customization. Tell us your requirements and we&apos;ll make it.</p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <InquiryModal locale={locale} productName="" trigger={

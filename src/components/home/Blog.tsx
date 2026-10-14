@@ -14,7 +14,7 @@ export default function Blog() {
 
         {/* Blog Grid */}
         {blog && blog.length > 0 ? (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          <div className="rgrid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
             {blog.map((post: any) => (
               <article key={post.id} style={{ background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #e5e7eb", transition: "box-shadow 0.3s" }}>
                 {/* Image Placeholder */}

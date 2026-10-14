@@ -20,7 +20,7 @@ export default function ContactPage() {
           Get in touch with our team for quotes, samples, and OEM/ODM inquiries. We respond within 24 hours.
         </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 48 }}>
+        <div className="rgrid-2" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 48 }}>
           {/* Contact Info */}
           <div>
             <h2 style={{ fontSize: 24, fontWeight: 700, color: "#0B4C8E", marginBottom: 32 }}>Get In Touch</h2>
@@ -36,7 +36,7 @@ export default function ContactPage() {
               </div>
 
               {/* WhatsApp & WeChat side by side */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+              <div className="rgrid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
                 {/* WhatsApp */}
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
                   <div style={{ width: 48, height: 48, background: "#25d366", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>

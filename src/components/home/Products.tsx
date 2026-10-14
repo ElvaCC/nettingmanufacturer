@@ -17,7 +17,7 @@ export default function Products() {
         <h2 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 48, color: "#0B4C8E" }}>Our Products</h2>
 
         {/* Products Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+        <div className="rgrid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
           {products.slice(0, 9).map((product) => (
             <a key={product.id} href={getPath(`/products/${product.id}`)} style={{ textDecoration: "none", display: "block", background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #e5e7eb", transition: "box-shadow 0.3s", cursor: "pointer" }}>
               {/* Product Image */}

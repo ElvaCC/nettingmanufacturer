@@ -14,7 +14,7 @@ export default function Applications() {
 
         {/* Applications Grid */}
         {applications && applications.length > 0 ? (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
             {applications.map((app: any) => (
               <div key={app.name} style={{ background: "#f9fafb", borderRadius: 12, padding: 28, border: "1px solid #e5e7eb" }}>
                 <h3 style={{ fontSize: 18, fontWeight: 600, color: "#0B4C8E", marginBottom: 16 }}>{app.name}</h3>

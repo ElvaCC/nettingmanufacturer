@@ -59,8 +59,8 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           <span style={{ color: "#0B4C8E", marginLeft: 4 }}>NETTING</span>
         </Link>
 
-        {/* Navigation - 横向排列 */}
-        <nav style={{ display: "flex", flexDirection: "row", flex: 1, justifyContent: "center" }}>
+        {/* Navigation - 横向排列 (desktop only; hidden ≤900px) */}
+        <nav className="nav-desktop" style={{ display: "flex", flexDirection: "row", flex: 1, justifyContent: "center" }}>
           <ul style={{ display: "flex", flexDirection: "row", listStyle: "none", margin: 0, padding: 0, gap: 4 }}>
             {navItems.map(item => (
               <li 
@@ -123,8 +123,8 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button onClick={() => setIsMobileOpen(!isMobileOpen)} style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}>
+          {/* Mobile Menu Button (hidden >900px) */}
+          <button onClick={() => setIsMobileOpen(!isMobileOpen)} className="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded={isMobileOpen} style={{ flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}>
             <span style={{ display: "block", width: 24, height: 2, background: "#333", transition: "all 0.3s", transform: isMobileOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }}></span>
             <span style={{ display: "block", width: 24, height: 2, background: "#333", transition: "all 0.3s", opacity: isMobileOpen ? 0 : 1 }}></span>
             <span style={{ display: "block", width: 24, height: 2, background: "#333", transition: "all 0.3s", transform: isMobileOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }}></span>

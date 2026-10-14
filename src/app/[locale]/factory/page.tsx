@@ -14,7 +14,7 @@ export default function FactoryPage() {
         </p>
 
         {/* Factory Info Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, marginBottom: 64 }}>
+        <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, marginBottom: 64 }}>
           <div style={{ background: "#0B4C8E", color: "#fff", padding: 32, borderRadius: 12, textAlign: "center" }}>
             <div style={{ fontSize: 36, fontWeight: 700 }}>{factory.info.area}</div>
             <div style={{ fontSize: 14, marginTop: 8, opacity: 0.8 }}>Factory Area</div>
@@ -40,7 +40,7 @@ export default function FactoryPage() {
 
         {/* Production Process */}
         <h2 style={{ fontSize: 28, fontWeight: 700, textAlign: "center", marginBottom: 48, color: "#0B4C8E" }}>Production Process</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+        <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
           {factory.process.map((item) => (
             <div key={item.step} style={{ background: "#fff", padding: 28, borderRadius: 12, border: "1px solid #e5e7eb", textAlign: "center" }}>
               <div style={{ fontSize: 32, fontWeight: 800, color: "#e5e7eb", marginBottom: 12 }}>{item.step}</div>

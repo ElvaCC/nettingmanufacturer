@@ -57,7 +57,7 @@ export default function CategoryLanding({ categoryId, locale }: Props) {
 
       {/* Product cards */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '36px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 24 }}>
+        <div className="rgrid-auto" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))', gap: 24 }}>
           {catProducts.map((product: any) => (
             <div
               key={product.id}

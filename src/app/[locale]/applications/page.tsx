@@ -44,7 +44,7 @@ export default function ApplicationsPage() {
                   {app.name || `Category ${i + 1}`}
                 </h2>
                 {(app.items && app.items.length > 0) ? (
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 12 }}>
+                  <div className="rgrid-auto" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 250px), 1fr))", gap: 12 }}>
                     {app.items.map((item: string, j: number) => (
                       <div key={j} style={{
                         display: "flex", alignItems: "center", gap: 10, fontSize: 14,

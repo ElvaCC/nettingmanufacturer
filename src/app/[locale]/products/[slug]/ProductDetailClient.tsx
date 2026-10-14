@@ -127,7 +127,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               <div className="section-gap">
                 <div style={{ background: '#fff', borderRadius: 14, padding: '24px 28px', border: '1px solid #e5e7eb' }}>
                   <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Product Detail Close-ups</h2>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
+                  <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
                     {detailImages.map((img: string, i: number) => (
                       <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
                         <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
@@ -373,7 +373,7 @@ MODULE 9: Applications & Project Cases
             <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
               {product.applications && product.applications.length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
+                <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
                   {product.applications.map((app: string, i: number) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
                       <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
@@ -643,11 +643,13 @@ MODULE 13: Related Products
           .section-gap { margin-top: 28px; }
           .why-grid { grid-template-columns: 1fr !important; }
           .pkg-grid { grid-template-columns: 1fr !important; }
+          .delivery-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 900px) {
           .product-hero-grid { grid-template-columns: 1fr !important; }
           .conversion-grid { grid-template-columns: 1fr !important; }
           .related-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .delivery-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 600px) { .related-grid { grid-template-columns: 1fr !important; } }
         @media (min-width: 769px) and (max-width: 1024px) { .why-grid { grid-template-columns: repeat(2, 1fr) !important; } }

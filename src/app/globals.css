@@ -80,18 +80,30 @@ h4 { font-size: var(--text-h4); }
   }
 }
 
-/* Force horizontal navigation */
-.header-container {
-  display: flex !important;
-  flex-direction: row !important;
-}
-
+/* ─── Navigation (desktop horizontal, mobile hamburger) ─── */
 .nav-desktop {
-  display: flex !important;
-  flex-direction: row !important;
+  display: flex;
+  flex-direction: row;
 }
 
-.nav-list {
-  display: flex !important;
-  flex-direction: row !important;
+.mobile-menu-btn {
+  display: none;
+}
+
+/* ─── Responsive grid helpers (inline-style grids can't be overridden
+        without an explicit class + !important) ─── */
+@media (max-width: 900px) {
+  .nav-desktop { display: none !important; }
+  .mobile-menu-btn { display: flex !important; }
+  .rgrid-3, .rgrid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .rgrid-2, .rgrid-split { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 620px) {
+  .rgrid-3 { grid-template-columns: 1fr !important; }
+}
+
+/* Prevent auto-fill grids from forcing horizontal overflow on narrow phones */
+@media (max-width: 480px) {
+  .rgrid-auto { grid-template-columns: 1fr !important; }
 }

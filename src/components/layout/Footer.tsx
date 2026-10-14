@@ -14,7 +14,7 @@ export default function Footer() {
     <footer style={{ background: "#0B4C8E", color: "#fff", padding: "60px 24px 30px" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Footer Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32, marginBottom: 40 }}>
+        <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 32, marginBottom: 40 }}>
           {/* Company */}
           <div>
             <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>{footer.company} <span style={{ color: "#fbbf24" }}>NETTING</span></div>
