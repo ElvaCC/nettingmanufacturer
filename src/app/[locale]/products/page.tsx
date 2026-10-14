@@ -5,14 +5,7 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useContent } from '@/context/ContentContext';
 import InquiryModal from '@/components/forms/InquiryModal';
-
-// Product category definitions for anchor navigation
-const CATEGORIES = [
-  { id: 'construction', label: 'Construction Safety', emoji: '🏗️', productIds: ['debris-net', 'square-net', 'mesh-tarp'] },
-  { id: 'shade', label: 'Shade & Sun Protection', emoji: '☀️', productIds: ['tape-shade-net', 'shade-sail'] },
-  { id: 'agriculture', label: 'Agriculture & Harvest', emoji: '🌾', productIds: ['anti-hail-net', 'olive-net', 'weed-barrier'] },
-  { id: 'protection', label: 'Protection & Barrier', emoji: '🛡️', productIds: ['privacy-screen', 'anti-bee-net', 'anti-bird-net'] },
-];
+import { PRODUCT_CATEGORIES as CATEGORIES } from '@/data/product-categories';
 
 export default function ProductsPage() {
   const params = useParams();
@@ -141,6 +134,7 @@ export default function ProductsPage() {
                 <h2 style={{ fontSize: 24, fontWeight: 700, color: '#0B4C8E', margin: 0 }}>{cat.label}</h2>
                 <div style={{ flex: 1, height: 1, background: '#e5e7eb' }} />
                 <span style={{ fontSize: 13, color: '#aaa' }}>{catProducts.length} product{catProducts.length > 1 ? 's' : ''}</span>
+                <a href={`/${locale}/products/${cat.slug}`} style={{ fontSize: 13, fontWeight: 600, color: '#0B4C8E', textDecoration: 'none', whiteSpace: 'nowrap' }}>View series →</a>
               </div>
 
               {/* Product Cards Grid */}

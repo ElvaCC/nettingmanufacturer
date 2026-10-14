@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useContent } from "@/context/ContentContext";
+import { PRODUCT_CATEGORIES } from "@/data/product-categories";
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -22,10 +23,17 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
   const currentLang = languages.find(l => l.code === locale) || languages[0];
   const { products } = useContent();
 
+  // Products dropdown: 3 category series first, then the full product list
+  const productDropdown: any[] = [
+    ...PRODUCT_CATEGORIES.map((c) => ({ label: c.label, href: `/products/${c.slug}`, type: "category" })),
+    { divider: true },
+    ...products.map((p) => ({ label: p.name, href: `/products/${p.id}`, type: "product" })),
+  ];
+
   // Dynamic product dropdown from content data
   const navItems = [
     { label: "Home", href: "/", hasDropdown: false, dropdown: [] as any[] },
-    { label: "Products", href: "/products", hasDropdown: true, dropdown: products.map(p => ({ label: p.name, href: `/products/${p.id}` })) },
+    { label: "Products", href: "/products", hasDropdown: true, dropdown: productDropdown },
     { label: "Applications", href: "/applications", hasDropdown: false, dropdown: [] as any[] },
     { label: "Factory", href: "/factory", hasDropdown: false, dropdown: [] as any[] },
     { label: "Contact Us", href: "/contact", hasDropdown: false, dropdown: [] as any[] },
@@ -70,11 +78,15 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
                 </Link>
 
                 {item.hasDropdown && activeDropdown === item.label && (
-                  <div style={{ position: "absolute", top: "100%", left: 0, background: "#fff", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", borderRadius: 8, padding: "8px 0", minWidth: 180 }}>
-                    {item.dropdown?.map(sub => (
-                      <Link key={sub.label} href={getPath(sub.href)} style={{ display: "block", padding: "10px 20px", color: "#333", textDecoration: "none", fontSize: 14 }}>
-                        {sub.label}
-                      </Link>
+                  <div style={{ position: "absolute", top: "100%", left: 0, background: "#fff", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", borderRadius: 8, padding: "8px 0", minWidth: 250 }}>
+                    {item.dropdown?.map((sub, idx) => (
+                      sub.divider ? (
+                        <div key={`div-${idx}`} style={{ height: 1, background: "#e5e7eb", margin: "6px 16px" }} />
+                      ) : (
+                        <Link key={sub.label} href={getPath(sub.href)} style={{ display: "block", padding: "9px 20px", color: sub.type === "category" ? "#0B4C8E" : "#333", textDecoration: "none", fontSize: 14, fontWeight: sub.type === "category" ? 600 : 400, whiteSpace: "nowrap" }}>
+                          {sub.label}
+                        </Link>
+                      )
                     ))}
                   </div>
                 )}
@@ -130,10 +142,14 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
               </Link>
               {item.hasDropdown && (
                 <div style={{ paddingLeft: 16 }}>
-                  {item.dropdown?.map(sub => (
-                    <Link key={sub.label} href={getPath(sub.href)} style={{ display: "block", padding: "8px 0", color: "#666", textDecoration: "none", fontSize: 14 }}>
-                      {sub.label}
-                    </Link>
+                  {item.dropdown?.map((sub, idx) => (
+                    sub.divider ? (
+                      <div key={`mdiv-${idx}`} style={{ height: 1, background: "#e5e7eb", margin: "6px 0" }} />
+                    ) : (
+                      <Link key={sub.label} href={getPath(sub.href)} style={{ display: "block", padding: "8px 0", color: sub.type === "category" ? "#0B4C8E" : "#666", textDecoration: "none", fontSize: 14, fontWeight: sub.type === "category" ? 600 : 400 }}>
+                        {sub.label}
+                      </Link>
+                    )
                   ))}
                 </div>
               )}
