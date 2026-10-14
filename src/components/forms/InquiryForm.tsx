@@ -3,24 +3,6 @@
 import { useState } from "react";
 import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
-// Keep in sync with content.json product names (or pass from caller).
-const productOptions = [
-  "Safety Debris Netting",
-  "Scaffolding Net",
-  "Shade Net",
-  "Tape Shade Net",
-  "Shade Sail",
-  "Anti-Hail Net",
-  "Privacy Screen",
-  "Olive Net",
-  "Anti-Bee Net",
-  "Anti-Bird Net",
-  "Weed Barrier",
-  "Other",
-];
-
-const quantityUnits = ["sqm", "pcs", "kg", "tons"];
-
 export default function InquiryForm({
   locale,
   productName,
@@ -33,13 +15,12 @@ export default function InquiryForm({
     company: "",
     email: "",
     phone: "",
-    country: "",
-    product: productName && productOptions.includes(productName) ? productName : "",
-    quantity: "",
-    unit: "sqm",
+    product: productName || "",
     message: "",
     website: "", // honeypot, must remain empty
   });
+  const [emailConfirmed, setEmailConfirmed] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState("");
@@ -51,9 +32,9 @@ export default function InquiryForm({
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email";
     }
-    if (!formData.product) newErrors.product = "Please select a product";
-    if (!formData.quantity) newErrors.quantity = "Quantity is required";
+    if (!formData.product.trim()) newErrors.product = "Please enter the product you are interested in";
     if (!formData.message.trim()) newErrors.message = "Please describe your requirements";
+    if (!emailConfirmed) newErrors.emailConfirm = "Please confirm your email address before submitting";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -74,28 +55,26 @@ export default function InquiryForm({
           email: formData.email,
           company: formData.company,
           phone: formData.phone,
-          country: formData.country,
           product: formData.product,
-          message: `${formData.quantity} ${formData.unit} - ${formData.message}`,
+          message: formData.message,
           website: formData.website,
         }),
       });
 
       const data = await res.json().catch(() => null);
       if (res.ok && data && data.success) {
+        setSubmittedEmail(formData.email);
         setStatus("success");
         setFormData({
           name: "",
           company: "",
           email: "",
           phone: "",
-          country: "",
-          product: productName && productOptions.includes(productName) ? productName : "",
-          quantity: "",
-          unit: "sqm",
+          product: productName || "",
           message: "",
           website: "",
         });
+        setEmailConfirmed(false);
       } else {
         setStatus("error");
         setServerError(
@@ -127,9 +106,17 @@ export default function InquiryForm({
           <CheckCircle className="w-8 h-8 text-green-600" aria-hidden="true" />
         </div>
         <h3 className="text-xl font-bold text-text-primary mb-2">Thank You!</h3>
-        <p className="text-text-secondary mb-6">
+        <p className="text-text-secondary mb-4">
           Your inquiry has been submitted successfully. Our team will contact you within 24 hours.
         </p>
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg text-left">
+          <p className="text-sm text-amber-800 leading-relaxed">
+            <strong>Please double-check your email address:</strong>{" "}
+            <span className="break-all">{submittedEmail}</span>
+            <br />
+            We will reply to this address. If it is incorrect, we will not be able to reach you — please refresh this page and submit again with the right email.
+          </p>
+        </div>
         <button
           onClick={() => setStatus("idle")}
           className="text-primary font-medium hover:underline"
@@ -206,12 +193,15 @@ export default function InquiryForm({
             aria-required="true"
             aria-invalid={!!errors.email}
           />
+          <p className="text-xs text-text-secondary mt-1">
+            We will reply to this address — please double-check it.
+          </p>
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-1">
-            Phone Number
+            Phone Number <span className="text-gray-400 font-normal">(optional)</span>
           </label>
           <input
             type="tel"
@@ -225,79 +215,23 @@ export default function InquiryForm({
         </div>
       </div>
 
-      <div>
-        <label htmlFor="country" className="block text-sm font-medium text-text-primary mb-1">
-          Country / Region
-        </label>
-        <input
-          type="text"
-          id="country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-          placeholder="United States"
-        />
-      </div>
-
-      {/* Product Selection */}
+      {/* Product Interest — free text */}
       <div>
         <label htmlFor="product" className="block text-sm font-medium text-text-primary mb-1">
           Product Interest <span className="text-red-500" aria-label="required">*</span>
         </label>
-        <select
+        <input
+          type="text"
           id="product"
           name="product"
           value={formData.product}
           onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border ${errors.product ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white`}
+          className={`w-full px-4 py-3 rounded-lg border ${errors.product ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
+          placeholder="e.g. Debris Netting, Shade Net, Olive Net..."
           aria-required="true"
           aria-invalid={!!errors.product}
-        >
-          <option value="">Select a product type</option>
-          {productOptions.map((option) => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        />
         {errors.product && <p className="text-red-500 text-xs mt-1">{errors.product}</p>}
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="quantity" className="block text-sm font-medium text-text-primary mb-1">
-            Quantity <span className="text-red-500" aria-label="required">*</span>
-          </label>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-            min="1"
-            className={`w-full px-4 py-3 rounded-lg border ${errors.quantity ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
-            placeholder="500"
-            aria-required="true"
-            aria-invalid={!!errors.quantity}
-          />
-          {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="unit" className="block text-sm font-medium text-text-primary mb-1">
-            Unit
-          </label>
-          <select
-            id="unit"
-            name="unit"
-            value={formData.unit}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-white"
-          >
-            {quantityUnits.map((unit) => (
-              <option key={unit} value={unit}>{unit.toUpperCase()}</option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <div>
@@ -316,6 +250,31 @@ export default function InquiryForm({
           aria-invalid={!!errors.message}
         />
         {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+      </div>
+
+      {/* Email confirmation */}
+      <div>
+        <label
+          htmlFor="emailConfirm"
+          className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${errors.emailConfirm ? "border-red-400 bg-red-50" : "border-gray-200 bg-gray-50"}`}
+        >
+          <input
+            type="checkbox"
+            id="emailConfirm"
+            name="emailConfirm"
+            checked={emailConfirmed}
+            onChange={(e) => {
+              setEmailConfirmed(e.target.checked);
+              if (errors.emailConfirm) setErrors((prev) => ({ ...prev, emailConfirm: "" }));
+            }}
+            className="mt-0.5 w-4 h-4 shrink-0 accent-[#0B4C8E]"
+            aria-invalid={!!errors.emailConfirm}
+          />
+          <span className="text-sm text-text-primary leading-relaxed">
+            I confirm my email address is correct, so you can reach me.
+          </span>
+        </label>
+        {errors.emailConfirm && <p className="text-red-500 text-xs mt-1">{errors.emailConfirm}</p>}
       </div>
 
       {status === "error" && (

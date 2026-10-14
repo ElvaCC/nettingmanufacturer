@@ -84,7 +84,7 @@ async function sendEmail(data: InquiryPayload): Promise<boolean> {
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
 
-    const subject = `New Inquiry: ${data.product} (${data.country || "N/A"})`;
+    const subject = `New Inquiry: ${data.product}`;
     const html = `
       <h2 style="margin:0 0 8px">New B2B Inquiry</h2>
       <table style="border-collapse:collapse;font-size:14px;font-family:Arial,sans-serif">
@@ -92,7 +92,7 @@ async function sendEmail(data: InquiryPayload): Promise<boolean> {
         <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td>${escapeHtml(data.email)}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">Company</td><td>${escapeHtml(data.company || "N/A")}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${escapeHtml(data.phone || "N/A")}</td></tr>
-        <tr><td style="padding:4px 12px 4px 0;color:#666">Country</td><td>${escapeHtml(data.country || "N/A")}</td></tr>
+        ${data.country ? `<tr><td style="padding:4px 12px 4px 0;color:#666">Country</td><td>${escapeHtml(data.country)}</td></tr>` : ""}
         <tr><td style="padding:4px 12px 4px 0;color:#666">Product</td><td>${escapeHtml(data.product)}</td></tr>
       </table>
       <p style="margin:16px 0 4px;color:#666">Message</p>
