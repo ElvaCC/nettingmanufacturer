@@ -145,7 +145,7 @@ export default function InquiryForm({
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-1">
-            Full Name <span className="text-red-500" aria-label="required">*</span>
+            Full Name
           </label>
           <input
             type="text"
@@ -218,7 +218,7 @@ export default function InquiryForm({
       {/* Product Interest — free text */}
       <div>
         <label htmlFor="product" className="block text-sm font-medium text-text-primary mb-1">
-          Product Interest <span className="text-red-500" aria-label="required">*</span>
+          Product Interest
         </label>
         <input
           type="text"
