@@ -71,3 +71,59 @@ export function getCategoryBySlug(slug: string): ProductCategory | undefined {
 export function getCategoryById(id: string): ProductCategory | undefined {
   return PRODUCT_CATEGORIES.find((c) => c.id === id);
 }
+
+export function getCategoryByProductId(productId: string): ProductCategory | undefined {
+  return PRODUCT_CATEGORIES.find((c) => c.productIds.includes(productId));
+}
+
+// Use-case relevance order for the "Related Products" module.
+// Ordered by what a buyer of this product is most likely to need next,
+// NOT by keyword or list order. Only ids above are referenced.
+// Editable: reorder or change ids here — no other file needs touching.
+export const RELATED_PRODUCT_IDS: Record<string, string[]> = {
+  // Construction & site protection
+  'debris-net': ['square-net', 'mesh-tarp', 'privacy-screen'],
+  'square-net': ['debris-net', 'mesh-tarp', 'privacy-screen'],
+  'mesh-tarp': ['square-net', 'debris-net', 'shade-sail'],
+  // Shade & privacy
+  'tape-shade-net': ['shade-sail', 'privacy-screen', 'anti-hail-net'],
+  'shade-sail': ['tape-shade-net', 'privacy-screen', 'mesh-tarp'],
+  'privacy-screen': ['tape-shade-net', 'shade-sail', 'debris-net'],
+  // Orchard & crop protection
+  'anti-hail-net': ['olive-net', 'anti-bird-net', 'anti-bee-net'],
+  'olive-net': ['anti-hail-net', 'anti-bird-net', 'anti-bee-net'],
+  'anti-bee-net': ['anti-bird-net', 'anti-hail-net', 'olive-net'],
+  'anti-bird-net': ['anti-bee-net', 'anti-hail-net', 'olive-net'],
+  'weed-barrier': ['anti-bird-net', 'anti-hail-net', 'olive-net'],
+};
+
+/**
+ * Resolve related product ids for internal linking.
+ * Order: use-case relevance first, then remaining products of the same series.
+ * Returns fewer than `limit` items when there is not enough relevant content —
+ * unrelated products are never padded in.
+ */
+export function getRelatedProductIds(
+  productId: string,
+  availableIds?: string[],
+  limit = 4
+): string[] {
+  const pool =
+    availableIds && availableIds.length
+      ? availableIds
+      : PRODUCT_CATEGORIES.flatMap((c) => c.productIds);
+
+  const out: string[] = [];
+  const push = (id: string) => {
+    if (id === productId) return;
+    if (!pool.includes(id)) return;
+    if (out.includes(id)) return;
+    out.push(id);
+  };
+
+  (RELATED_PRODUCT_IDS[productId] || []).forEach(push);
+  const sameCategory = getCategoryByProductId(productId);
+  if (sameCategory) sameCategory.productIds.forEach(push);
+
+  return out.slice(0, limit);
+}

@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import contentData from '@/data/content.json';
 import { getLocalizedMetadata } from '@/lib/seo/metadata';
 import { SITE_URL } from '@/lib/site-config';
+import { getCategoryByProductId } from '@/data/product-categories';
+import { getLocalizedProduct } from '@/lib/product-i18n';
 import type { Locale } from '@/app/i18n';
 
 export const revalidate = 60;
@@ -28,18 +30,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = contentData.products.find((p) => p.id === slug);
   if (!product) return {};
 
-  const description = product.description?.slice(0, 160) || `Professional ${product.name} from Jiacheng Netting - HDPE netting manufacturer.`;
+  // Localized product fields win; English is the fallback. Nothing is invented.
+  const localized = getLocalizedProduct(product, locale);
+  const name = localized.name || product.name;
+  const fullDescription = localized.description || product.description || '';
+  const description =
+    fullDescription.slice(0, 160) ||
+    `Professional ${name} from Jiacheng Netting - HDPE netting manufacturer.`;
   const images = product.images?.map((img: string) => `${SITE_URL}${img}`) || [];
 
   const base = getLocalizedMetadata(locale as Locale, `/products/${slug}`);
 
   return {
     ...base,
-    title: product.name,
+    title: name,
     description,
     openGraph: {
       ...base.openGraph,
-      title: `${product.name} | Jiacheng Netting`,
+      title: `${name} | Jiacheng Netting`,
       description,
       type: 'website',
       images: images.length > 0 ? [images[0]] : [],
@@ -56,11 +64,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
   }
 
   // JSON-LD Product Schema for Google rich snippets
+  const localizedProduct = getLocalizedProduct(product, locale);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.name,
-    description: product.description,
+    name: localizedProduct.name || product.name,
+    description: localizedProduct.description || product.description,
+    ...(getCategoryByProductId(slug)?.label && {
+      category: getCategoryByProductId(slug)!.label,
+    }),
     image: product.images?.map((img: string) => `${SITE_URL}${img}`) || [],
     brand: {
       '@type': 'Brand',

@@ -84,9 +84,13 @@ export function getLocalizedMetadata(locale: Locale, path?: string): Metadata {
     description: localized.description,
     alternates: {
       canonical: `${SITE_URL}${basePath}`,
-      languages: Object.fromEntries(
-        locales.map((loc) => [loc, `${SITE_URL}/${loc}${path || ""}`])
-      ),
+      languages: {
+        ...Object.fromEntries(
+          locales.map((loc) => [loc, `${SITE_URL}/${loc}${path || ""}`])
+        ),
+        // Default language for users whose language we cannot detect.
+        "x-default": `${SITE_URL}/en${path || ""}`,
+      },
     },
     openGraph: {
       ...defaultMetadata.openGraph,

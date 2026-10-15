@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import InquiryModal from '@/components/forms/InquiryModal';
 import { SITE_URL } from '@/lib/site-config';
+import { getCategoryByProductId, getRelatedProductIds } from '@/data/product-categories';
+import { getLocalizedProduct } from '@/lib/product-i18n';
 
 interface ProductDetailClientProps {
   slug: string;
@@ -58,6 +60,62 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const projectCases = (product as any).projectCases || [];
   const faqItems = (product as any).faq || [];
 
+  // Localized display fields — fall back to English when no translation exists.
+  const localizedProduct = getLocalizedProduct(product, locale);
+  const displayName = localizedProduct.name || product.name;
+  const displayDescription = localizedProduct.description || product.description || '';
+
+  // Related products: use-case relevance first, then the same series.
+  // Never padded with unrelated products just to fill the grid.
+  const relatedProducts = getRelatedProductIds(
+    slug,
+    products.map((p: any) => p.id),
+    4
+  )
+    .map((id) => products.find((p: any) => p.id === id))
+    .filter(Boolean) as any[];
+
+  // "How To Choose…" selection guide is DATA-DRIVEN. With no verified
+  // per-product data the whole module is skipped — generic scaffolding advice
+  // is never shown for unrelated products.
+  const selectionGuide: any = (product as any).selectionGuide;
+  const selectionRows: any[] = Array.isArray(selectionGuide?.rows) ? selectionGuide.rows : [];
+  const guideRows = selectionRows.slice(0, 8);
+  const selectionCols: string[] =
+    Array.isArray(selectionGuide?.columns) && selectionGuide.columns.length === 3
+      ? selectionGuide.columns
+      : ['Weight / Density', 'Recommended Applications', 'Key Features'];
+
+  // Product Quick Facts: derived only from the product's real spec values.
+  // No hardcoded rows and no padding to a fixed field count.
+  const quickFacts: Array<[string, string]> = (() => {
+    const specs: string[] = product.specs || [];
+    const matchers: Array<[string, string[]]> = [
+      ['Material', ['material']],
+      ['Mesh Opening', ['mesh']],
+      ['Weight / GSM', ['gsm', 'weight']],
+      ['Roll Width', ['width']],
+      ['Roll Length', ['length']],
+      ['Fire Rating', ['fire']],
+      ['Colour', ['color', 'colour']],
+    ];
+    const used = new Set<number>();
+    const rows: Array<[string, string]> = [];
+    matchers.forEach(([label, keywords]) => {
+      const idx = specs.findIndex(
+        (s, i) => !used.has(i) && keywords.some((k) => s.toLowerCase().includes(k))
+      );
+      if (idx >= 0) {
+        used.add(idx);
+        const spec = specs[idx];
+        const sep = spec.indexOf(':');
+        const value = sep > 0 ? spec.slice(sep + 1).trim() : spec.trim();
+        if (value) rows.push([label, value]);
+      }
+    });
+    return rows.slice(0, 5);
+  })();
+
   const parseSpec = (spec: string): [string, string, string] => {
     // Format: "Parameter: Value" or "Parameter: Value | Options"
     const parts = spec.split('|').map(s => s.trim());
@@ -84,7 +142,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, fontSize: 12, opacity: 0.5, textTransform: 'uppercase', letterSpacing: 1.5 }}>
             <span>Jiacheng Netting</span><span style={{ opacity: 0.4 }}>|</span><span>HDPE Netting Manufacturer</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15, color: '#fff' }}>{product.name}</h1>
+          <h1 style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, marginBottom: 6, lineHeight: 1.15, color: '#fff' }}>{displayName}</h1>
         </div>
       </section>
 
@@ -170,14 +228,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {/* CTA Card with single CTA button */}
             <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 14, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
               <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 14, color: '#0B4C8E' }}>Get Factory Price</h3>
-              <InquiryModal locale={locale} productName={product.name} trigger={
+              <InquiryModal locale={locale} productName={displayName} trigger={
                 <div style={{ width: '100%', padding: '14px 0', background: '#0E7A45', color: '#fff', borderRadius: 8, fontWeight: 700, fontSize: 15, textAlign: 'center', cursor: 'pointer', marginBottom: 14, transition: 'background 0.15s' }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#0A5F36'; }}
                   onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0E7A45'; }}>
                   Request Quote or Free Sample
                 </div>
               } />
-              <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${product.name}. Could you send me a quote?`)}`}
+              <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${displayName}. Could you send me a quote?`)}`}
                 target="_blank" rel="noopener noreferrer" style={{
                   display: 'block', width: '100%', padding: '12px 0', background: '#25d366',
                   color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700,
@@ -234,21 +292,16 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
         {/* ════════════════════════════════════════════
             MODULE 6: Product Quick Facts (Key-Value Table)
-            ============================================ -->
+            ============================================ */}
+        {quickFacts.length > 0 && (
         <div className="section-gap">
           <div style={{ background: "#fff", borderRadius: 14, padding: "24px 28px", border: "1px solid #e5e7eb" }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: "#0B4C8E", marginBottom: 14 }}>Product Quick Facts</h2>
             <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #e5e7eb" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                 <tbody>
-                  {[
-                    ["Product", product.name],
-                    ["Material", product.specs?.find((s: string) => s.toLowerCase().includes('material'))?.split(':')?.[1]?.trim() || '100% Virgin HDPE'],
-                    ["Applications", product.applications?.[0] || 'Industrial netting'],
-                    ["Customization", 'Custom colors, mesh size, width and GSM available'],
-                    ["Export Regions", 'Middle East, Europe, North America — contact us to confirm your market'],
-                  ].map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < 4 ? "1px solid #f0f2f5" : "none" }}>
+                  {quickFacts.map((row, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < quickFacts.length - 1 ? "1px solid #f0f2f5" : "none" }}>
                       <td style={{ padding: "10px 18px", color: "#0B4C8E", fontWeight: 600, width: "30%" }}>{row[0]}</td>
                       <td style={{ padding: "10px 18px", color: "#555" }}>{row[1]}</td>
                     </tr>
@@ -258,6 +311,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </div>
           </div>
         </div>
+        )}
 
         {/* ============================================
             MODULE 6: Structured Product Description (h3 subheadings)
@@ -268,11 +322,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {/* AI Overviews / Featured Snippet pure-fact definition */}
             <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #0B4C8E', fontSize: 14, lineHeight: 1.7, color: '#0B4C8E' }}>
               <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#0B4C8E' }}>Quick Definition</strong>
-              {product.name} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
+              {displayName} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
             </div>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
-              {product.description}
+              {displayDescription || product.description}
             </p>
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Material &amp; UV Protection</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
@@ -323,46 +377,48 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             
 MODULE: How To Choose The Right Netting (Decision Matrix)
             ════════════════════════════════════════════ */}
+        {guideRows.length > 0 && (
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
-              How To Choose The Right {product.name.includes('Netting') ? 'Netting' : 'Product'}
+              How To Choose The Right {displayName.includes('Netting') ? 'Netting' : 'Product'}
             </h2>
-            <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
-              Select the appropriate density and configuration based on your specific application requirements:
-            </p>
+            {selectionGuide?.intro && (
+              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+                {selectionGuide.intro}
+              </p>
+            )}
             <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: '#0B4C8E', color: '#fff' }}>
-                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Weight / Density</th>
-                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Recommended Applications</th>
-                    <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Key Features</th>
+                    {selectionCols.map((col, i) => (
+                      <th key={i} style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>{col}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    { weight: '50-70 GSM', apps: 'Dust control, light debris containment, temporary fencing', features: 'Lightweight, economical, easy to handle' },
-                    { weight: '80-100 GSM', apps: 'Standard scaffolding protection, construction enclosure, wind barrier', features: 'Balanced strength and flexibility, fire-retardant option available', popular: true },
-                    { weight: '110-140 GSM', apps: 'Heavy duty construction, demolition sites, high-wind areas', features: 'Maximum tear resistance, extended UV lifespan, reinforced edges' },
-                  ].map((row, i) => (
-                    <tr key={i} style={{ background: row.popular ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < 2 ? '1px solid #f0f2f5' : 'none' }}>
-                      <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '22%' }}>{row.weight}</td>
+                  {guideRows.map((row, i) => (
+                    <tr key={i} style={{ background: row.highlight ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < guideRows.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
+                      <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '22%' }}>{row.col1}</td>
                       <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>
-                        {row.apps}
-                        {row.popular && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>Most Popular</span>}
+                        {row.col2}
+                        {row.highlight && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>{selectionGuide?.highlightLabel || 'Most Popular'}</span>}
                       </td>
-                      <td style={{ padding: '12px 18px', color: '#555' }}>{row.features}</td>
+                      <td style={{ padding: '12px 18px', color: '#555' }}>{row.col3}</td>
                     </tr>
                   ))}
               </tbody>
             </table>
             </div>
-            <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
-              <strong>Which GSM should I choose?</strong> 50gsm is for light duty temporary enclosure; 80gsm-100gsm is the industrial standard for scaffolding safety; 120gsm is designed for high wind areas and heavy demolition.
-            </p>
+            {selectionGuide?.note && (
+              <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
+                {selectionGuide.note}
+              </p>
+            )}
           </div>
         </div>
+        )}
 
         {/* ════════════════════════════════════════════
             
@@ -472,14 +528,14 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
               <div>
                 <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, lineHeight: 1.3, color: '#fff' }}>Ready to Start Your Project?</h2>
                 <p style={{ fontSize: 14, opacity: 0.8, lineHeight: 1.6, marginBottom: 20 }}>
-                  Get factory-direct pricing within 2 hours. Send us your requirements and we will reply with a tailored quote.
+                  Send us your specifications, quantity and destination port — we will reply with a tailored factory-direct quotation.
                 </p>
-                <InquiryModal locale={locale} productName={product.name} trigger={
+                <InquiryModal locale={locale} productName={displayName} trigger={
                   <button
                     style={{ padding: '14px 28px', background: '#0E7A45', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
                   >Send Inquiry →</button>
                 } />
-                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>We typically respond within 2 hours during business hours.</p>
+                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>Include mesh size, weight, UV or fire-retardant requirements, quantity and destination port for a faster quotation.</p>
               </div>
               {/* Right: download buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -526,13 +582,11 @@ MODULE 12: Technical & Business FAQ (collapsible)
             
 MODULE 13: Related Products
             ════════════════════════════════════════════ */}
+        {relatedProducts.length > 0 && (
         <div className="section-gap">
           <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 20 }}>Related Products</h2>
-          <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
-            {products
-              .filter((p: any) => p.id !== slug)
-              .slice(0, 4)
-              .map((p: any) => (
+          <div className="related-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18 }}>
+            {relatedProducts.map((p: any) => (
                 <a key={p.id} href={getPath(`/products/${p.id}`)} style={{
                   background: '#fff', borderRadius: 10, overflow: 'hidden',
                   border: '1px solid #e5e7eb', textDecoration: 'none', display: 'block',
@@ -548,23 +602,26 @@ MODULE 13: Related Products
                     <div style={{ aspectRatio: '4/3', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 12 }}>No image</div>
                   )}
                   <div style={{ padding: '12px 14px' }}>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: '#0B4C8E', margin: 0 }}>{p.name}</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: '#0B4C8E', margin: 0 }}>{getLocalizedProduct(p, locale).name}</p>
                   </div>
                 </a>
               ))}
           </div>
         </div>
+        )}
 
-        {/* Internal cross-links */}
+        {/* Internal cross-links — same relevance order as Related Products above */}
+        {relatedProducts.length > 1 && (
         <div style={{ padding: '0', marginTop: 8, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
           Explore more industrial netting solutions:&nbsp;
-          {products.slice(0, 5).filter((p: any) => p.id !== slug).slice(0, 3).map((p: any, i: number) => (
+          {relatedProducts.slice(0, 3).map((p: any, i: number) => (
             <span key={p.id}>
               {i > 0 && <span>&nbsp;•&nbsp;</span>}
-              <a href={getPath(`/products/${p.id}`)} style={{ color: '#0B4C8E', textDecoration: 'underline' }}>{p.name}</a>
+              <a href={getPath(`/products/${p.id}`)} style={{ color: '#0B4C8E', textDecoration: 'underline' }}>{getLocalizedProduct(p, locale).name}</a>
             </span>
           ))}.
         </div>
+        )}
         {/* Cross-link to Applications page (locale-aware) */}
         <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
           <a href={getPath('/applications')} style={{ color: '#0B4C8E', textDecoration: 'underline', fontWeight: 600 }}>
@@ -585,16 +642,16 @@ MODULE 13: Related Products
                 'itemListElement': [
                   { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/${locale}` },
                   { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/${locale}/products` },
-                  { '@type': 'ListItem', position: 3, name: product.name, item: `${SITE_URL}/${locale}/products/${slug}` },
+                  { '@type': 'ListItem', position: 3, name: displayName, item: `${SITE_URL}/${locale}/products/${slug}` },
                 ],
               },
               {
                 '@type': 'Product',
-                'name': product.name,
-                'description': product.description?.slice(0, 200),
+                'name': displayName,
+                'description': displayDescription.slice(0, 200),
                 'brand': { '@type': 'Brand', 'name': 'Jiacheng Netting' },
                 'manufacturer': { '@type': 'Organization', 'name': 'Shandong Jiacheng Chemical Fiber Products Co., Ltd.' },
-                'category': (product as any).category || 'Industrial Netting',
+                'category': getCategoryByProductId(slug)?.label || 'Industrial Netting',
                 'offers': {
                   '@type': 'Offer',
                   'availability': 'https://schema.org/InStock',
@@ -617,19 +674,16 @@ MODULE 13: Related Products
                 'name': 'Related Products',
                 'url': `${SITE_URL}/${locale}/products/${slug}`,
                 'itemListOrder': 'http://schema.org/ItemListOrderDescending',
-                'numberOfItems': Math.min(products.filter((p: any) => p.id !== slug).length, 4),
-                'itemListElement': products
-                  .filter((p: any) => p.id !== slug)
-                  .slice(0, 4)
-                  .map((p: any, idx: number) => ({
-                    '@type': 'ListItem',
-                    'position': idx + 1,
-                    'item': {
-                      '@type': 'Product',
-                      'name': p.name,
-                      'url': `${SITE_URL}/${locale}/products/${p.id}`,
-                    },
-                  })),
+                'numberOfItems': relatedProducts.length,
+                'itemListElement': relatedProducts.map((p: any, idx: number) => ({
+                  '@type': 'ListItem',
+                  'position': idx + 1,
+                  'item': {
+                    '@type': 'Product',
+                    'name': getLocalizedProduct(p, locale).name,
+                    'url': `${SITE_URL}/${locale}/products/${p.id}`,
+                  },
+                })),
               },
             ],
           }),
