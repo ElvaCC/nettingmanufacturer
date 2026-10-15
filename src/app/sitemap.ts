@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { locales } from "@/app/i18n";
 import contentData from "@/data/content.json";
-import { SITE_URL } from "@/lib/site-config";
+import { SITE_URL, SITE_INDEXABLE } from "@/lib/site-config";
 
 const baseUrl = SITE_URL;
 
@@ -20,6 +20,10 @@ const routes = [
 const productSlugs = contentData.products.map((p) => p.id);
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Not publicly launched yet: return an empty sitemap so we do not push
+  // unfinished pages to search engines. Flip SITE_INDEXABLE to restore.
+  if (!SITE_INDEXABLE) return [];
+
   const entries: MetadataRoute.Sitemap = [];
 
   // Root domain

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { locales, type Locale } from "@/app/i18n";
-import { SITE_URL } from "@/lib/site-config";
+import { SITE_URL, SITE_INDEXABLE } from "@/lib/site-config";
 
 const defaultMetadata = {
   title: {
@@ -47,10 +47,11 @@ const defaultMetadata = {
     description: "Factory-direct manufacturer of HDPE netting for construction, agriculture and shade applications.",
     images: ["/og-image.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // Controlled by the single global switch in site-config.ts (SITE_INDEXABLE).
+  // false → noindex, nofollow so search engines stay away until the site is ready.
+  robots: SITE_INDEXABLE
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 const localizedMetadata: Record<Locale, { title: string; description: string }> = {
