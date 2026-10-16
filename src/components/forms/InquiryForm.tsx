@@ -6,9 +6,12 @@ import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 export default function InquiryForm({
   locale,
   productName,
+  showProductField = true,
 }: {
   locale: string;
   productName?: string;
+  /** Set to false on generic contact pages where there is no product context. */
+  showProductField?: boolean;
 }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -32,7 +35,7 @@ export default function InquiryForm({
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email";
     }
-    if (!formData.product.trim()) newErrors.product = "Please enter the product you are interested in";
+    if (showProductField && !formData.product.trim()) newErrors.product = "Please enter the product you are interested in";
     if (!formData.message.trim()) newErrors.message = "Please describe your requirements";
     if (!emailConfirmed) newErrors.emailConfirm = "Please confirm your email address before submitting";
     setErrors(newErrors);
@@ -215,24 +218,26 @@ export default function InquiryForm({
         </div>
       </div>
 
-      {/* Product Interest — free text */}
-      <div>
-        <label htmlFor="product" className="block text-sm font-medium text-text-primary mb-1">
-          Product Interest
-        </label>
-        <input
-          type="text"
-          id="product"
-          name="product"
-          value={formData.product}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 rounded-lg border ${errors.product ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
-          placeholder="e.g. Debris Netting, Shade Net, Olive Net..."
-          aria-required="true"
-          aria-invalid={!!errors.product}
-        />
-        {errors.product && <p className="text-red-500 text-xs mt-1">{errors.product}</p>}
-      </div>
+      {/* Product Interest — free text (hidden on pages without product context) */}
+      {showProductField && (
+        <div>
+          <label htmlFor="product" className="block text-sm font-medium text-text-primary mb-1">
+            Product Interest
+          </label>
+          <input
+            type="text"
+            id="product"
+            name="product"
+            value={formData.product}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg border ${errors.product ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
+            placeholder="e.g. Debris Netting, Shade Net, Olive Net..."
+            aria-required="true"
+            aria-invalid={!!errors.product}
+          />
+          {errors.product && <p className="text-red-500 text-xs mt-1">{errors.product}</p>}
+        </div>
+      )}
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-text-primary mb-1">
