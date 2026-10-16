@@ -46,7 +46,7 @@
       "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
       "specs": [
         "Material: 100% virgin HDPE",
-        "Mesh: 1/8\", 1/16\" opening",
+        "Mesh Opening: 1/8\", 1/16\" opening",
         "Fire-Retardant: NFPA 701 Method II",
         "Reinforced eyelet holes",
         "Will not unravel when cut",
@@ -123,7 +123,7 @@
       "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Edges are hemmed & reinforced for easy installation. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
       "specs": [
         "Material: 100% virgin HDPE",
-        "Mesh: 1/4\" hole opening",
+        "Mesh Opening: 1/4\" hole opening",
         "Fire-Retardant: NFPA 701 Method II",
         "Edges hemmed & reinforced",
         "Will not unravel when cut",
@@ -179,7 +179,7 @@
       "description": "1/16\" mesh hole openings, made of 100% virgin HDPE. Brass grommets spaced apart every 2\" on all edges. Double-stitch sides and all hems are re-enforced with polyester webbing. UV treated & protected. Fire-Retardant: Meets NFPA 701 Method 2. Will not unravel when cut. Stays flexible in cold weather.",
       "specs": [
         "Material: 100% virgin HDPE",
-        "Mesh: 1/16\" openings",
+        "Mesh Opening: 1/16\" openings",
         "Brass grommets every 2\"",
         "Double-stitched, reinforced hems",
         "UV treated & protected",

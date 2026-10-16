@@ -28,6 +28,7 @@ const DEFAULT_FAQ = [
   { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.' },
   { q: 'Can you provide samples?', a: 'Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.' },
   { q: 'How long does shipping take?', a: 'Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.' },
+  { q: 'What is the production lead time?', a: 'Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.' },
   { q: 'What payment methods do you accept?', a: 'We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.' },
   { q: 'Do you offer after-sales support?', a: 'Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.' },
   { q: 'What if the product does not meet specifications?', a: 'We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.' },
@@ -65,6 +66,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const displayName = localizedProduct.name || product.name;
   const displayDescription = localizedProduct.description || product.description || '';
 
+  // Typical buyer groups per product series ("Who we work with"). This
+  // describes the buyer types each product line is made for — it does NOT
+  // claim that these are existing clients.
+  const TYPICAL_BUYERS: Record<string, string> = {
+    construction: 'Construction safety-netting importers, scaffolding suppliers, building-material distributors, and contractor-supply companies.',
+    agriculture: 'Agricultural-netting importers, horticultural suppliers, farm and orchard-supply distributors, and crop-protection wholesalers.',
+    'shade-privacy': 'Shade-net and privacy-screen importers, landscape and outdoor-living distributors, garden-product wholesalers, and commercial screen installers.',
+  };
+  const typicalBuyers = TYPICAL_BUYERS[getCategoryByProductId(slug)?.id || ''] || '';
+
+  // Right-column quick specs: real "field name: value" items only. Free-text
+  // features (no colon) are not parameters, so they must never be rendered as
+  // a label with a missing value — they appear in the Detailed Specifications
+  // table as feature rows instead.
+  const keyValueSpecs = (product.specs || []).filter((s: string) => s.indexOf(':') > 0);
+
   // Related products: use-case relevance first, then the same series.
   // Never padded with unrelated products just to fill the grid.
   const relatedProducts = getRelatedProductIds(
@@ -90,16 +107,19 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   //  together with its duplicate table — the sticky Key Spec Tags in the right
   //  column now present the same field-name + value summary.)
 
-  const parseSpec = (spec: string): [string, string, string] => {
-    // Format: "Parameter: Value" or "Parameter: Value | Options"
+  // Spec parsing. Two shapes exist in the data:
+  //   "Parameter: Value" or "Parameter: Value | Options"  → parameter row
+  //   "Reinforced eyelet holes" (no colon)                → free-text feature
+  // A feature is NOT a parameter and must never be auto-filled with "Yes".
+  const parseSpec = (spec: string): { label: string; value: string; options: string; isFeature: boolean } => {
     const parts = spec.split('|').map(s => s.trim());
     const first = parts[0] || '';
     const options = parts[1] || '';
     const idx = first.indexOf(':');
     if (idx > 0) {
-      return [first.slice(0, idx).trim(), first.slice(idx + 1).trim(), options || '-'];
+      return { label: first.slice(0, idx).trim(), value: first.slice(idx + 1).trim(), options: options || '-', isFeature: false };
     }
-    return [first, 'Yes', options || '-'];
+    return { label: first, value: '', options: options || '-', isFeature: true };
   };
 
   const altText = (ctx: string) => {
@@ -178,15 +198,18 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               Professional HDPE netting direct from our China factory. Custom sizes &amp; colors available.
             </p>
 
-            {/* Key Spec Tags — field name + value.
+            {/* Key Spec Tags — field name + value only.
                 This is the at-a-glance spec summary for buyers, and the block that
-                AI answer engines extract most readily (GEO). */}
-            {(product.specs || []).slice(0, 6).length > 0 && (
+                AI answer engines extract most readily (GEO). Free-text features
+                (no colon in the source data) are excluded here so that no tag is
+                ever shown without a value; they are listed in Detailed
+                Specifications below. */}
+            {keyValueSpecs.slice(0, 6).length > 0 && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 20, fontSize: 13 }}>
-                {(product.specs || []).slice(0, 6).map((spec: string, i: number) => {
+                {keyValueSpecs.slice(0, 6).map((spec: string, i: number) => {
                   const sep = spec.indexOf(':');
-                  const label = sep > 0 ? spec.slice(0, sep).trim() : spec.trim();
-                  const val = sep > 0 ? spec.slice(sep + 1).trim() : '';
+                  const label = spec.slice(0, sep).trim();
+                  const val = spec.slice(sep + 1).trim();
                   return (
                     <div key={i} style={{
                       padding: '9px 14px', borderRadius: 8,
@@ -234,13 +257,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
               {[
-                { icon: '\u2699\uFE0F', title: 'Experienced Manufacturer', desc: 'Long-standing HDPE netting manufacturing experience and continuous innovation.' },
-                { icon: '\u2705', title: 'Quality-Focused Factory', desc: 'Products engineered to international safety standards. Contact us for available certifications.' },
-                { icon: '\uD83C\uDFED', title: 'Modern Factory', desc: 'State-of-the-art warp knitting production facility with bulk capacity for large orders.' },
-                { icon: '\uD83C\uDF0D', title: 'Global Export', desc: 'Trusted by contractors and distributors across the Middle East, Europe, Americas, and Africa.' },
-                { icon: '\uD83D\uDCE6', title: 'OEM/ODM Available', desc: 'Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market.' },
-                { icon: '\uD83D\uDCCB', title: 'Factory Direct Pricing', desc: 'No middlemen. Get competitive wholesale pricing directly from the source manufacturer.' },
-                { icon: '\uD83D\uDD0D', title: 'Strict Quality Control', desc: `Every batch is inspected for tensile strength, UV aging, and flame retardancy before shipment.` },
+                // Three cards only. Every claim here must be verifiable: no
+                // experience years, no export-market lists, no inspection
+                // procedures, no capacity or quality promises.
+                { icon: '\uD83C\uDFED', title: 'Direct Manufacturer Supply', desc: 'We manufacture warp-knitted HDPE netting at our production facility. Buyers work directly with our team on product specifications and orders.' },
+                { icon: '\uD83D\uDCE6', title: 'Custom Specifications & OEM', desc: 'Depending on the product, customization may include mesh opening, roll width, GSM, colour, OEM labels and branded packaging.' },
+                { icon: '\uD83C\uDF0D', title: 'Multiple Netting Categories', desc: 'We supply construction safety, agricultural and horticultural, and shade and privacy netting, helping importers and distributors source related product lines from one supplier.' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                   <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
@@ -254,11 +276,13 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               ))}
             </div>
             <div style={{ marginTop: 20, paddingTop: 18, borderTop: '1px solid #e5e7eb' }}>
-              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
-                <strong style={{ color: '#0B4C8E' }}>Who we work with:</strong>&nbsp; Construction contractors, building material importers, wholesalers &amp; distributors, and government &amp; infrastructure projects.
-              </p>
-              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: '8px 0 0' }}>
-                <strong style={{ color: '#0B4C8E' }}>Export markets:</strong>&nbsp; Middle East, Europe, and North America. Contact us to confirm delivery to your region.
+              {typicalBuyers && (
+                <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: 0 }}>
+                  <strong style={{ color: '#0B4C8E' }}>Who we work with:</strong>&nbsp; {typicalBuyers}
+                </p>
+              )}
+              <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, margin: typicalBuyers ? '8px 0 0' : 0 }}>
+                We supply overseas importers and distributors — contact us to confirm delivery to your region.
               </p>
             </div>
           </div>
@@ -315,9 +339,25 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   </thead>
                   <tbody>
                     {product.specs.map((spec: string, idx: number) => {
-                      const [label, value, options] = parseSpec(spec);
+                      const { label, value, options, isFeature } = parseSpec(spec);
+                      const rowStyle = {
+                        background: idx % 2 === 0 ? '#fff' : '#f8fafc',
+                        borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none',
+                      };
+                      if (isFeature) {
+                        // A product feature, not a parameter — rendered across the
+                        // full row so it is never mistaken for a field with an
+                        // empty value (and never auto-filled with "Yes").
+                        return (
+                          <tr key={idx} style={rowStyle}>
+                            <td colSpan={3} style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600 }}>
+                              &#10003; {label}
+                            </td>
+                          </tr>
+                        );
+                      }
                       return (
-                        <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
+                        <tr key={idx} style={rowStyle}>
                           <td style={{ padding: '12px 18px', color: '#6b7280', fontWeight: 500, width: '28%', verticalAlign: 'top' }}>{label}</td>
                           <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '36%', verticalAlign: 'top' }}>{value}</td>
                           <td style={{ padding: '12px 18px', color: '#6b7280', fontSize: 13, verticalAlign: 'top' }}>{options}</td>
@@ -523,14 +563,14 @@ MODULE 12: Technical & Business FAQ (collapsible)
             {((product as any).faq && (product as any).faq.length > 0 ? (product as any).faq : DEFAULT_FAQ.slice(0, 8)).map((item: any, i: number) => (
               <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
                 <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
               </details>
             ))}
             <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
             {DEFAULT_FAQ.slice(8).map((item, i) => (
               <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
                 <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4 }}>{item.a}</p>
+                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
               </details>
             ))}
           </div>
