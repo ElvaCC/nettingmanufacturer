@@ -86,35 +86,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
       ? selectionGuide.columns
       : ['Weight / Density', 'Recommended Applications', 'Key Features'];
 
-  // Product Quick Facts: derived only from the product's real spec values.
-  // No hardcoded rows and no padding to a fixed field count.
-  const quickFacts: Array<[string, string]> = (() => {
-    const specs: string[] = product.specs || [];
-    const matchers: Array<[string, string[]]> = [
-      ['Material', ['material']],
-      ['Mesh Opening', ['mesh']],
-      ['Weight / GSM', ['gsm', 'weight']],
-      ['Roll Width', ['width']],
-      ['Roll Length', ['length']],
-      ['Fire Rating', ['fire']],
-      ['Colour', ['color', 'colour']],
-    ];
-    const used = new Set<number>();
-    const rows: Array<[string, string]> = [];
-    matchers.forEach(([label, keywords]) => {
-      const idx = specs.findIndex(
-        (s, i) => !used.has(i) && keywords.some((k) => s.toLowerCase().includes(k))
-      );
-      if (idx >= 0) {
-        used.add(idx);
-        const spec = specs[idx];
-        const sep = spec.indexOf(':');
-        const value = sep > 0 ? spec.slice(sep + 1).trim() : spec.trim();
-        if (value) rows.push([label, value]);
-      }
-    });
-    return rows.slice(0, 5);
-  })();
+  // (The former "Product Quick Facts" derivation lived here. It was removed
+  //  together with its duplicate table — the sticky Key Spec Tags in the right
+  //  column now present the same field-name + value summary.)
 
   const parseSpec = (spec: string): [string, string, string] => {
     // Format: "Parameter: Value" or "Parameter: Value | Options"
@@ -204,21 +178,26 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
               Professional HDPE netting direct from our China factory. Custom sizes &amp; colors available.
             </p>
 
-            {/* Key Spec Tags */}
+            {/* Key Spec Tags — field name + value.
+                This is the at-a-glance spec summary for buyers, and the block that
+                AI answer engines extract most readily (GEO). */}
             {(product.specs || []).slice(0, 6).length > 0 && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 20, fontSize: 13 }}>
                 {(product.specs || []).slice(0, 6).map((spec: string, i: number) => {
-                  const val = spec.includes(':') ? spec.split(':').slice(1).join(':').trim() : spec;
+                  const sep = spec.indexOf(':');
+                  const label = sep > 0 ? spec.slice(0, sep).trim() : spec.trim();
+                  const val = sep > 0 ? spec.slice(sep + 1).trim() : '';
                   return (
                     <div key={i} style={{
-                      padding: '9px 14px', borderRadius: 8, fontWeight: 600,
+                      padding: '9px 14px', borderRadius: 8,
                       background: i % 2 === 0 ? '#eef2ff' : '#f0fdf4',
                       color: i % 2 === 0 ? '#3730a3' : '#166534',
                       border: `1px solid ${i % 2 === 0 ? '#c7d2fe' : '#bbf7d0'}`,
-                      display: 'flex', alignItems: 'center', gap: 8,
+                      display: 'flex', alignItems: 'baseline', gap: 8, lineHeight: 1.45,
                     }}>
                       <span style={{ flexShrink: 0 }}>&#10003;</span>
-                      {val.length > 40 ? val.slice(0, 40) + '...' : val}
+                      <span style={{ fontWeight: 700, flexShrink: 0 }}>{label}{val ? ':' : ''}</span>
+                      {val && <span style={{ fontWeight: 500, opacity: 0.92 }}>{val.length > 40 ? val.slice(0, 40) + '...' : val}</span>}
                     </div>
                   );
                 })}
@@ -239,13 +218,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 target="_blank" rel="noopener noreferrer" style={{
                   display: 'block', width: '100%', padding: '12px 0', background: '#25d366',
                   color: '#fff', textDecoration: 'none', borderRadius: 8, fontWeight: 700,
-                  fontSize: 14, textAlign: 'center', marginBottom: 10,
+                  fontSize: 14, textAlign: 'center', marginBottom: 0,
                 }}>WhatsApp Us</a>
-              <a href={(product as any).catalogUrl || '/files/product-catalog.pdf'} download style={{
-                display: 'block', width: '100%', padding: '11px 0',
-                background: '#fff', color: '#0B4C8E', border: '1px solid #0B4C8E',
-                textDecoration: 'none', borderRadius: 8, fontWeight: 600, fontSize: 13, textAlign: 'center',
-              }}>&#128196; Download Product Catalog</a>
             </div>
           </div>
         </div>
@@ -290,28 +264,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           </div>
         </div>
 
-        {/* ════════════════════════════════════════════
-            MODULE 6: Product Quick Facts (Key-Value Table)
-            ============================================ */}
-        {quickFacts.length > 0 && (
-        <div className="section-gap">
-          <div style={{ background: "#fff", borderRadius: 14, padding: "24px 28px", border: "1px solid #e5e7eb" }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: "#0B4C8E", marginBottom: 14 }}>Product Quick Facts</h2>
-            <div style={{ overflowX: "auto", borderRadius: 10, border: "1px solid #e5e7eb" }}>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
-                <tbody>
-                  {quickFacts.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#f8fafc", borderBottom: i < quickFacts.length - 1 ? "1px solid #f0f2f5" : "none" }}>
-                      <td style={{ padding: "10px 18px", color: "#0B4C8E", fontWeight: 600, width: "30%" }}>{row[0]}</td>
-                      <td style={{ padding: "10px 18px", color: "#555" }}>{row[1]}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        )}
+        {/* ────────────────────────────────────────────
+            (Removed) Product Quick Facts table.
+            It duplicated the Detailed Specifications table below. The same
+            field-name + value summary now lives in the sticky right-column
+            Key Spec Tags, so this separate block was removed to cut repetition.
+            ──────────────────────────────────────────── */}
 
         {/* ============================================
             MODULE 6: Structured Product Description (h3 subheadings)
@@ -610,18 +568,9 @@ MODULE 13: Related Products
         </div>
         )}
 
-        {/* Internal cross-links — same relevance order as Related Products above */}
-        {relatedProducts.length > 1 && (
-        <div style={{ padding: '0', marginTop: 8, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
-          Explore more industrial netting solutions:&nbsp;
-          {relatedProducts.slice(0, 3).map((p: any, i: number) => (
-            <span key={p.id}>
-              {i > 0 && <span>&nbsp;•&nbsp;</span>}
-              <a href={getPath(`/products/${p.id}`)} style={{ color: '#0B4C8E', textDecoration: 'underline' }}>{getLocalizedProduct(p, locale).name}</a>
-            </span>
-          ))}.
-        </div>
-        )}
+        {/* (Removed) text-only cross-links that repeated the Related Products
+            cards directly above. The same three product links are already
+            present as the cards, so no internal link was lost. */}
         {/* Cross-link to Applications page (locale-aware) */}
         <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
           <a href={getPath('/applications')} style={{ color: '#0B4C8E', textDecoration: 'underline', fontWeight: 600 }}>
