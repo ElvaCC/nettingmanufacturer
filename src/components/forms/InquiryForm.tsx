@@ -7,11 +7,14 @@ export default function InquiryForm({
   locale,
   productName,
   showProductField = true,
+  showPhoneField = true,
 }: {
   locale: string;
   productName?: string;
   /** Set to false on generic contact pages where there is no product context. */
   showProductField?: boolean;
+  /** Set to false on generic contact pages where phone is not requested. */
+  showPhoneField?: boolean;
 }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -180,7 +183,7 @@ export default function InquiryForm({
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-5">
+      <div className={showPhoneField ? "grid sm:grid-cols-2 gap-5" : undefined}>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-1">
             Email Address <span className="text-red-500" aria-label="required">*</span>
@@ -202,20 +205,22 @@ export default function InquiryForm({
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
 
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-1">
-            Phone Number <span className="text-gray-400 font-normal">(optional)</span>
-          </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-            placeholder="+1 234 567 8900"
-          />
-        </div>
+        {showPhoneField && (
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-1">
+              Phone Number <span className="text-gray-400 font-normal">(optional)</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+              placeholder="+1 234 567 8900"
+            />
+          </div>
+        )}
       </div>
 
       {/* Product Interest — free text (hidden on pages without product context) */}

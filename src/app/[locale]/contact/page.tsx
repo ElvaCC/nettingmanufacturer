@@ -91,7 +91,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div style={{ background: "#f9fafb", padding: 40, borderRadius: 16, border: "1px solid #e5e7eb" }}>
             <h2 style={{ fontSize: 24, fontWeight: 700, color: "#0B4C8E", marginBottom: 32 }}>Send Us a Message</h2>
-            <InquiryForm locale={locale} showProductField={false} />
+            <InquiryForm locale={locale} showProductField={false} showPhoneField={false} />
           </div>
         </div>
       </div>

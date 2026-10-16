@@ -91,7 +91,7 @@ async function sendEmail(data: InquiryPayload): Promise<boolean> {
         <tr><td style="padding:4px 12px 4px 0;color:#666">Name</td><td>${escapeHtml(data.name)}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td>${escapeHtml(data.email)}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">Company</td><td>${escapeHtml(data.company || "N/A")}</td></tr>
-        <tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${escapeHtml(data.phone || "N/A")}</td></tr>
+        ${data.phone ? `<tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${escapeHtml(data.phone)}</td></tr>` : ""}
         ${data.country ? `<tr><td style="padding:4px 12px 4px 0;color:#666">Country</td><td>${escapeHtml(data.country)}</td></tr>` : ""}
         ${data.product ? `<tr><td style="padding:4px 12px 4px 0;color:#666">Product</td><td>${escapeHtml(data.product)}</td></tr>` : ""}
       </table>
