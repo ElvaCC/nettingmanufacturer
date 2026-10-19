@@ -66,7 +66,6 @@
         "/products/debris-net/black-debris-netting-roll-orange-edge.jpg",
         "/products/debris-net/grey-debris-netting-roll-orange-edge.jpg",
         "/products/debris-net/red-debris-netting-building-facade.jpg",
-        "/products/debris-net/white-debris-netting-facade-mesh-close-up.jpg",
         "/products/debris-net/debris-netting-rolls-colour-range.jpg"
       ],
       "appImages": [
@@ -126,10 +125,10 @@
         "/products/debris-net/main-2.jpg": "Folded debris netting bundles in blue, green, teal and red",
         "/products/debris-net/safety-debris-netting-mesh-close-up.jpg": "Close-up of red HDPE debris netting showing the woven square mesh openings",
         "/products/debris-net/black-debris-netting-roll-orange-edge.jpg": "Roll of black HDPE debris netting with an orange reinforced edge, photographed on a white background",
-        "/products/debris-net/grey-debris-netting-roll-orange-edge.jpg": "Grey-black HDPE debris netting roll with an orange edge band on a white background",
+        "/products/debris-net/grey-debris-netting-roll-orange-edge.jpg": "Close-up of grey knitted debris netting with the orange reinforced edge band running across the mesh",
         "/products/debris-net/red-debris-netting-building-facade.jpg": "Red debris netting fixed over the scaffolding of a multi-storey building under construction",
         "/products/debris-net/white-debris-netting-facade-mesh-close-up.jpg": "White debris netting covering a building facade, with a circular close-up of the knitted mesh",
-        "/products/debris-net/debris-netting-rolls-colour-range.jpg": "Debris netting rolls in orange, red, blue, green and teal stacked on a factory rack",
+        "/products/debris-net/debris-netting-rolls-colour-range.jpg": "Debris netting rolls in a range of colours including orange, red, blue, yellow, green and teal, displayed on a factory rack",
         "/products/debris-net/debris-netting-white-mesh-close-up.jpg": "Close-up of white HDPE debris netting showing the square knitted mesh openings"
       }
     },
@@ -158,9 +157,8 @@
       "images": [
         "/products/square-net/red-square-mesh-netting-roll.jpg",
         "/products/square-net/red-square-mesh-netting-close-up.jpg",
-        "/products/square-net/blue-square-mesh-netting-roll-mesh-detail.jpg",
-        "/products/square-net/blue-square-mesh-netting-scaffold.jpg",
-        "/products/square-net/green-scaffold-safety-netting.jpg"
+        "/products/square-net/green-scaffold-safety-netting.jpg",
+        "/products/square-net/blue-square-mesh-netting-roll-mesh-detail.jpg"
       ],
       "appImages": [],
       "productionImages": [
@@ -229,11 +227,11 @@
         "Plastering, stucco, EIFS, masonry"
       ],
       "images": [
-        "/products/mesh-tarp/black-mesh-tarp-grommet-corner.jpg",
         "/products/mesh-tarp/grey-mesh-tarp-grommets-flat.jpg",
+        "/products/mesh-tarp/black-mesh-tarp-grommet-corner.jpg",
+        "/products/mesh-tarp/black-mesh-tarp-shade-cover-patio.jpg",
         "/products/mesh-tarp/green-mesh-tarp-folded-grommets.jpg",
-        "/products/mesh-tarp/brown-mesh-tarp-folded.jpg",
-        "/products/mesh-tarp/black-mesh-tarp-shade-cover-patio.jpg"
+        "/products/mesh-tarp/brown-mesh-tarp-folded.jpg"
       ],
       "appImages": [
         "/products/mesh-tarp/apps/app-1.jpg",
@@ -307,10 +305,10 @@
       ],
       "images": [
         "/products/tape-shade-net/tape-shade-netting-rolls-colour-range.jpg",
-        "/products/tape-shade-net/beige-tape-shade-netting-folded-panels.jpg",
         "/products/tape-shade-net/dark-grey-tape-shade-netting-grommets.jpg",
         "/products/tape-shade-net/green-shade-netting-fence-installation.jpg",
-        "/products/tape-shade-net/black-tape-shade-netting-roll.jpg"
+        "/products/tape-shade-net/black-tape-shade-netting-roll.jpg",
+        "/products/tape-shade-net/beige-tape-shade-netting-folded-panels.jpg"
       ],
       "appImages": [
         "/products/tape-shade-net/apps/app-1.jpg",
@@ -353,7 +351,7 @@
         "/products/tape-shade-net/shade-net-courtyard-canopy.jpg": "Beige shade netting stretched as a canopy above an outdoor seating area",
         "/products/tape-shade-net/main-3.png": "Grey flat tape shade netting close-up",
         "/products/tape-shade-net/tape-shade-netting-mesh-close-up.jpg": "Close-up of flat tape shade netting showing the parallel tape strips and open mesh",
-        "/products/tape-shade-net/tape-shade-netting-rolls-colour-range.jpg": "Tape shade netting rolls in orange, blue and two shades of green on a white background",
+        "/products/tape-shade-net/tape-shade-netting-rolls-colour-range.jpg": "Tape shade netting rolls in beige, orange, blue and green on a white background",
         "/products/tape-shade-net/beige-tape-shade-netting-folded-panels.jpg": "Stack of folded beige tape shade netting panels with brass grommets",
         "/products/tape-shade-net/dark-grey-tape-shade-netting-grommets.jpg": "Dark grey tape shade netting with brass grommets along the reinforced edge",
         "/products/tape-shade-net/green-shade-netting-fence-installation.jpg": "Dark green tape shade netting fixed along a fence beside a house",
@@ -445,10 +443,10 @@
       ],
       "images": [
         "/products/anti-hail-net/white-anti-hail-netting-roll-yellow-edge.jpg",
-        "/products/anti-hail-net/sand-anti-hail-netting-roll-gold-edge.jpg",
-        "/products/anti-hail-net/white-anti-hail-netting-roll-red-edge.jpg",
         "/products/anti-hail-net/anti-hail-netting-triangular-mesh-macro.jpg",
-        "/products/anti-hail-net/anti-hail-netting-drape-over-fruit.jpg"
+        "/products/anti-hail-net/anti-hail-netting-drape-over-fruit.jpg",
+        "/products/anti-hail-net/white-anti-hail-netting-roll-red-edge.jpg",
+        "/products/anti-hail-net/sand-anti-hail-netting-roll-gold-edge.jpg"
       ],
       "appImages": [
         "/products/anti-hail-net/apps/app-1.jpg",
@@ -672,8 +670,8 @@
       ],
       "images": [
         "/products/anti-bee-net/white-anti-bee-netting-roll.jpg",
-        "/products/anti-bee-net/anti-bee-net-vineyard-cover.jpg",
-        "/products/anti-bee-net/dark-green-anti-bee-netting-mesh.jpg"
+        "/products/anti-bee-net/dark-green-anti-bee-netting-mesh.jpg",
+        "/products/anti-bee-net/anti-bee-net-vineyard-cover.jpg"
       ],
       "appImages": [
         "/products/anti-bee-net/apps/app-1.jpg",
@@ -712,7 +710,7 @@
         "/products/anti-bee-net/anti-bee-net-vineyard-cover.jpg": "White anti-bee netting covering vineyard rows during flowering",
         "/products/anti-bee-net/main-1.jpg": "Dark green anti-bee netting close-up showing the fine mesh",
         "/products/anti-bee-net/white-anti-bee-netting-roll.jpg": "Roll of white anti-bee netting on a white background",
-        "/products/anti-bee-net/dark-green-anti-bee-netting-mesh.jpg": "Dark green anti-bee netting close-up showing the fine mesh"
+        "/products/anti-bee-net/dark-green-anti-bee-netting-mesh.jpg": "White fine-mesh anti-bee netting photographed close up against a dark background"
       }
     },
     {
@@ -735,10 +733,8 @@
         "Building and structure protection"
       ],
       "images": [
-        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg",
-        "/products/anti-bird-net/anti-bird-netting-mesh-samples.jpg",
         "/products/anti-bird-net/anti-bird-net-blueberry-cover.jpg",
-        "/products/anti-bird-net/anti-bird-netting-fruit-tree.jpg",
+        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg",
         "/products/anti-bird-net/black-anti-bird-netting-mesh.jpg"
       ],
       "appImages": [
@@ -776,10 +772,10 @@
       "imageAlt": {
         "/products/anti-bird-net/anti-bird-netting-mesh-samples.jpg": "Two anti-bird netting samples compared, showing the green and black diamond mesh",
         "/products/anti-bird-net/main-1-web.jpg": "Green diamond-mesh anti-bird netting with white edge binding",
-        "/products/anti-bird-net/anti-bird-net-blueberry-cover.jpg": "White anti-bird netting draped over blueberry bushes to keep birds off the fruit",
+        "/products/anti-bird-net/anti-bird-net-blueberry-cover.jpg": "Green anti-bird netting draped over grape vines, with bunches of grapes visible behind the mesh",
         "/products/anti-bird-net/main-2.jpg": "Black diamond-mesh anti-bird netting close-up",
         "/products/anti-bird-net/anti-bird-netting-fruit-tree.jpg": "Anti-bird netting covering a plum tree to protect ripening fruit",
-        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg": "Green diamond-mesh anti-bird netting with white edge binding",
+        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg": "Green diamond-mesh anti-bird netting laid out flat, showing the knotted mesh structure",
         "/products/anti-bird-net/black-anti-bird-netting-mesh.jpg": "Black diamond-mesh anti-bird netting close-up"
       }
     },
@@ -801,11 +797,11 @@
         "Ground cover, garden, driveways"
       ],
       "images": [
+        "/products/weed-barrier/weed-barrier-fabric-black-roll.jpg",
         "/products/weed-barrier/weed-barrier-fabric-strawberry-rows.jpg",
-        "/products/weed-barrier/weed-barrier-fabric-white-roll.jpg",
         "/products/weed-barrier/weed-control-fabric-garden-path.jpg",
         "/products/weed-barrier/weed-barrier-fabric-orchard-row.jpg",
-        "/products/weed-barrier/weed-barrier-fabric-black-roll.jpg"
+        "/products/weed-barrier/weed-barrier-fabric-white-roll.jpg"
       ],
       "appImages": [
         "/products/weed-barrier/apps/app-1.jpg",
@@ -840,12 +836,12 @@
       ],
       "detailImages": [],
       "imageAlt": {
-        "/products/weed-barrier/weed-barrier-fabric-white-roll.jpg": "White weed barrier fabric roll with a close-up of the woven ground-cover mesh",
+        "/products/weed-barrier/weed-barrier-fabric-white-roll.jpg": "White woven weed barrier fabric roll with the fabric unrolled on a white background",
         "/products/weed-barrier/weed-control-fabric-garden-path.jpg": "Black weed control fabric laid along a garden path with gravel on top",
         "/products/weed-barrier/weed-barrier-fabric-orchard-row.jpg": "Weed barrier fabric laid between rows of trees in an orchard",
         "/products/weed-barrier/weed-barrier-strawberry-field.jpg": "Black weed barrier fabric used between strawberry planting rows",
         "/products/weed-barrier/weed-barrier-fabric-black-roll.jpg": "Black weed barrier fabric roll laid out on the ground",
-        "/products/weed-barrier/weed-barrier-fabric-strawberry-rows.jpg": "Black weed barrier fabric laid between strawberry rows, with plants growing through the planting holes"
+        "/products/weed-barrier/weed-barrier-fabric-strawberry-rows.jpg": "Green weed barrier fabric laid between strawberry rows, with plants growing through the planting holes"
       }
     }
   ],
