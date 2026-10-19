@@ -122,7 +122,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
     return { label: first, value: '', options: options || '-', isFeature: true };
   };
 
-  const altText = (ctx: string) => {
+  // Per-image alt text. Each photo gets its own description of what the picture
+  // actually shows (stored in content.json as product.imageAlt[src]). Only when
+  // an image has no entry do we fall back to the generic template below.
+  const imageAltMap = ((product as any).imageAlt || {}) as Record<string, string>;
+  const altText = (ctx: string, src?: string) => {
+    if (src && imageAltMap[src]) return imageAltMap[src];
     const material = product.specs?.find((s: string) => s.toLowerCase().includes('material'))?.split(':')?.[1]?.trim() || 'HDPE';
     const usage = product.applications?.[0] || 'industrial netting';
     return `${product.name} - ${ctx} - ${material} ${usage}`;
@@ -150,7 +155,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {currentSrc && (
               <>
                 <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', background: '#f9fafb', border: '1px solid #e5e7eb', marginBottom: 14, aspectRatio: '4/3' }}>
-                  <Image src={currentSrc} alt={altText('main product photo')} fill sizes="(max-width: 900px) 100vw, 66vw" priority style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
+                  <Image src={currentSrc} alt={altText('main product photo', currentSrc)} fill sizes="(max-width: 900px) 100vw, 66vw" priority style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
                   <div style={{ position: 'absolute', top: 10, right: 10, background: 'rgba(0,0,0,0.55)', color: '#fff', padding: '3px 9px', borderRadius: 5, fontSize: 11 }}>
                     {currentImgIndex + 1} / {allImages.length}
                   </div>
@@ -166,7 +171,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                         boxShadow: currentImgIndex === i ? '0 0 0 3px #bfdbfe' : 'none',
                         opacity: currentImgIndex === i ? 1 : 0.7,
                       }}>
-                        <Image src={img} alt={altText(`thumbnail ${i + 1}`)} width={76} height={76} style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
+                        <Image src={img} alt={altText(`thumbnail ${i + 1}`, img)} width={76} height={76} style={{ objectFit: 'contain', display: 'block', background: '#f9fafb' }} />
                       </div>
                     ))}
                   </div>
@@ -182,7 +187,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
                     {detailImages.map((img: string, i: number) => (
                       <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
-                        <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`, img)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
                       </div>
                     ))}
                   </div>

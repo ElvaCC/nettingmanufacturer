@@ -26,7 +26,7 @@ export default function Products() {
                 {product.images && product.images.length > 0 ? (
                   <Image
                     src={product.images[0]}
-                    alt={`${product.name} - Home Product Showcase | Jiacheng Netting Manufacturer`}
+                    alt={(product as any).imageAlt?.[product.images[0]] || `${product.name} - Home Product Showcase | Jiacheng Netting Manufacturer`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ objectFit: 'contain', display: 'block' }}

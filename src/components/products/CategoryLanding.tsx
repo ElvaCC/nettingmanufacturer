@@ -76,7 +76,7 @@ export default function CategoryLanding({ categoryId, locale }: Props) {
                   {product.images && product.images.length > 0 ? (
                     <Image
                       src={product.images[0]}
-                      alt={`${product.name} - ${category.label} | Jiacheng Netting Manufacturer`}
+                      alt={(product as any).imageAlt?.[product.images[0]] || `${product.name} - ${category.label} | Jiacheng Netting Manufacturer`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       style={{ objectFit: 'contain', display: 'block' }}
