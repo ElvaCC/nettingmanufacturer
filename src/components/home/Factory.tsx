@@ -41,7 +41,7 @@ export default function Factory() {
       }))
     : [
         { src: "/images/factory/jiacheng-factory-exterior-panorama.jpg", alt: "Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Zhanjia Industrial Park Jinan Shandong China showing factory buildings and packaged net rolls ready for bulk export", label: "Factory Exterior — 20,000 m² Manufacturing Base", objectPosition: "center center", span: "full" },
-        { src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg", alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20000 square meter workshop", label: "Karl Mayer Warp Knitting Lines", objectPosition: "center center", span: "half" },
+        { src: "/images/factory/jiacheng-workshop-karl-mayer-machines.jpg", alt: "Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets inside Jiacheng Netting clean 20,000 m² workshop", label: "Karl Mayer Warp Knitting Lines", objectPosition: "center center", span: "half" },
         { src: "/images/factory/jiacheng-workshop-wide-angle-production.jpg", alt: "Wide angle view of Jiacheng Netting modern production workshop showing multiple warp knitting machines and skilled workers for custom HDPE netting", label: "Production Workshop", objectPosition: "center center", span: "half" },
         { src: "/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg", alt: "Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green, blue, red, black, and white at Jiacheng Netting factory for construction debris netting, agricultural shade netting, and privacy screen bulk orders", label: "Custom Colored HDPE Netting Production", objectPosition: "center center", span: "full" },
         { src: "/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg", alt: "Large scale warehouse at Jiacheng Netting with thousands of finished HDPE netting rolls stacked on racks ready for container shipment and wholesale export", label: "Bulk Inventory — Ready for Global Export", objectPosition: "center center", span: "full" },
@@ -53,7 +53,7 @@ export default function Factory() {
     { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
     { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
     { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
-    { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, mesh sizes, roll widths, and private-label packaging tailored to your market needs." },
+    { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, knitting structures, roll widths, and private-label packaging tailored to your market needs." },
     { icon: "\uD83C\uDF0D", title: "Export to 50+ Countries", desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents." },
   ];
   const defaultInfoCards = [
@@ -259,7 +259,7 @@ export default function Factory() {
            ═══════════════════════════════════════════ */
         .factory-highlights-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 20px;
           margin-top: 48px;
         }

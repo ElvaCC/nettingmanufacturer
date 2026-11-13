@@ -12,7 +12,7 @@ const stats = [
 
 const certifications = [
   { name: "BSCI", desc: "Business Social Compliance Initiative" },
-  { name: "NFPA-701", desc: "Fire-Retardant Standard Method II" },
+  { name: "NFPA-701", desc: "Fire-Retardant Standard" },
   { name: "OEM/ODM", desc: "Custom Manufacturing Service" },
   { name: "21+ Years", desc: "Industry Experience" },
 ];
@@ -62,7 +62,7 @@ export default async function AboutPage({
                   to one of the leading HDPE netting manufacturers in China.
                 </p>
                 <p>
-                  Our state-of-the-art facility spans over 20,000 square meters, equipped with 
+                  Our state-of-the-art facility spans over 20,000 m², equipped with 
                   modern production equipment and a top-notch technical team capable of producing a wide range of 
                   warp knitting plastic netting products.
                 </p>

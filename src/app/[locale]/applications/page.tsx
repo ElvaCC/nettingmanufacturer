@@ -7,7 +7,7 @@ import { useContent } from '@/context/ContentContext';
 // Application categories mapped to real product ids (from content.json)
 // Mirrors the category→product mapping used on the Products page.
 const APPLICATION_PRODUCTS: Record<string, string[]> = {
-  'Construction Safety': ['debris-net', 'square-net', 'mesh-tarp'],
+  'Construction Safety': ['debris-net', 'debris-netting', 'mesh-tarp'],
   'Agriculture': ['anti-hail-net', 'olive-net', 'anti-bee-net', 'anti-bird-net', 'weed-barrier'],
   'Shade Solutions': ['tape-shade-net', 'shade-sail'],
   'Privacy Screen': ['privacy-screen'],

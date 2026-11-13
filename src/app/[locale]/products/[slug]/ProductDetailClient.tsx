@@ -16,9 +16,9 @@ interface ProductDetailClientProps {
 const DEFAULT_FAQ = [
   // ── Technical FAQs ──
   { q: 'What is HDPE debris netting?', a: 'HDPE debris netting is a lightweight, high-strength knitted mesh made from 100% virgin HDPE. It is used on construction sites to contain falling debris, dust, and tools while allowing airflow and light penetration.' },
-  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for extended outdoor service. Actual lifespan depends on climate, exposure, and mesh density — please contact us with your application and we will recommend the right UV treatment.' },
+  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for extended outdoor service. Actual lifespan depends on climate, exposure, and knitting structure — please contact us with your application and we will recommend the right UV treatment.' },
   { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we typically recommend 80-120 GSM density. Heavier GSM is ideal for high-wind areas and demolition sites requiring maximum durability.' },
-  { q: 'What mesh size blocks debris?', a: 'Common mesh sizes range from 1/16" (fine) to 1/4" (standard). For most construction scaffolding, 1/8" opening provides optimal debris containment while allowing airflow.' },
+  { q: 'What mesh opening blocks debris?', a: 'The knitting structure sets the opening. Common openings range from 1/16" (fine) to 1/4" (standard). For most construction scaffolding, 1/8" provides optimal debris containment while allowing airflow.' },
   { q: 'What is the difference between knitted and woven netting?', a: 'Knitted netting is more flexible, lightweight, and resistant to unraveling when cut. Woven netting is heavier and more rigid. Our HDPE debris nets are knitted for superior flexibility and job-site durability.' },
   { q: 'Is HDPE netting recyclable?', a: 'Yes, 100% virgin HDPE netting is fully recyclable. We recommend checking local recycling guidelines for disposal.' },
   { q: 'What temperature range can HDPE netting withstand?', a: 'HDPE netting remains flexible across a wide temperature range and does not become brittle in cold weather, making it suitable for winter construction projects in cold climates.' },
@@ -76,11 +76,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   };
   const typicalBuyers = TYPICAL_BUYERS[getCategoryByProductId(slug)?.id || ''] || '';
 
-  // Right-column quick specs: real "field name: value" items only. Free-text
-  // features (no colon) are not parameters, so they must never be rendered as
-  // a label with a missing value — they appear in the Detailed Specifications
-  // table as feature rows instead.
-  const keyValueSpecs = (product.specs || []).filter((s: string) => s.indexOf(':') > 0);
+  // All specifications are summarised in ONE place: the right-column spec
+  // cards below. There is no separate specifications table any more — the two
+  // showed the same data twice. Free-text features (no colon in the source)
+  // are rendered as a check-mark line with no value, never as a field with a
+  // missing value and never auto-filled with "Yes".
 
   // Related products: use-case relevance first, then the same series.
   // Never padded with unrelated products just to fill the grid.
@@ -200,21 +200,19 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           <div style={{ position: 'sticky', top: 90 }}>
             {/* MODULE 3: Key Specifications & CTA */}
             <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.6, marginBottom: 16, fontWeight: 500 }}>
-              Professional HDPE netting direct from our China factory. Custom sizes &amp; colors available.
+              Custom sizes &amp; colors available. Customization for different products.
             </p>
 
-            {/* Key Spec Tags — field name + value only.
-                This is the at-a-glance spec summary for buyers, and the block that
-                AI answer engines extract most readily (GEO). Free-text features
-                (no colon in the source data) are excluded here so that no tag is
-                ever shown without a value; they are listed in Detailed
-                Specifications below. */}
-            {keyValueSpecs.slice(0, 6).length > 0 && (
+            {/* Key Spec Tags — the single place where specifications are
+                listed. Every spec from the product data appears once: parameter
+                rows show "Field: value", free-text features show a check mark
+                and the feature text only. This is the at-a-glance summary for
+                buyers and the block AI answer engines extract most readily
+                (GEO). */}
+            {(product.specs || []).length > 0 && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 20, fontSize: 13 }}>
-                {keyValueSpecs.slice(0, 6).map((spec: string, i: number) => {
-                  const sep = spec.indexOf(':');
-                  const label = spec.slice(0, sep).trim();
-                  const val = spec.slice(sep + 1).trim();
+                {(product.specs || []).map((spec: string, i: number) => {
+                  const { label, value, isFeature } = parseSpec(spec);
                   return (
                     <div key={i} style={{
                       padding: '9px 14px', borderRadius: 8,
@@ -224,8 +222,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                       display: 'flex', alignItems: 'baseline', gap: 8, lineHeight: 1.45,
                     }}>
                       <span style={{ flexShrink: 0 }}>&#10003;</span>
-                      <span style={{ fontWeight: 700, flexShrink: 0 }}>{label}{val ? ':' : ''}</span>
-                      {val && <span style={{ fontWeight: 500, opacity: 0.92 }}>{val.length > 40 ? val.slice(0, 40) + '...' : val}</span>}
+                      <span style={{ fontWeight: 700, flexShrink: isFeature ? 0 : 1 }}>{label}{!isFeature && value ? ':' : ''}</span>
+                      {!isFeature && value && <span style={{ fontWeight: 500, opacity: 0.92 }}>{value}</span>}
                     </div>
                   );
                 })}
@@ -260,14 +258,15 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0B4C8E', marginBottom: 20, textAlign: 'center' }}>
               Why Choose Jiacheng
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="why-grid">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }} className="why-grid">
               {[
-                // Three cards only. Every claim here must be verifiable: no
+                // Four cards. Every claim here must be verifiable: no
                 // experience years, no export-market lists, no inspection
                 // procedures, no capacity or quality promises.
-                { icon: '\uD83C\uDFED', title: 'Direct Manufacturer Supply', desc: 'We manufacture warp-knitted HDPE netting at our production facility. Buyers work directly with our team on product specifications and orders.' },
-                { icon: '\uD83D\uDCE6', title: 'Custom Specifications & OEM', desc: 'Depending on the product, customization may include mesh opening, roll width, GSM, colour, OEM labels and branded packaging.' },
-                { icon: '\uD83C\uDF0D', title: 'Multiple Netting Categories', desc: 'We supply construction safety, agricultural and horticultural, and shade and privacy netting, helping importers and distributors source related product lines from one supplier.' },
+                { icon: '\uD83C\uDFED', title: 'Factory-Direct Pricing', desc: 'You are buying from the factory, not from a trading company.' },
+                { icon: '\u2699\uFE0F', title: '70 Machines, 10 Containers a Week', desc: '70 machines, up to 10 containers a week \u2014 bulk supply on schedule.' },
+                { icon: '\uD83C\uDFA8', title: 'Flexible Customization', desc: 'Knitting structure, width, GSM, colour, and fire-retardant or UV \u2014 made to your market.' },
+                { icon: '\uD83C\uDF0D', title: 'Export-Oriented Cooperation', desc: 'We handle specifications, samples, scheduling and export documents with you.' },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
                   <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
@@ -295,9 +294,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
         {/* ────────────────────────────────────────────
             (Removed) Product Quick Facts table.
-            It duplicated the Detailed Specifications table below. The same
-            field-name + value summary now lives in the sticky right-column
-            Key Spec Tags, so this separate block was removed to cut repetition.
+            It repeated the same field-name + value summary that the sticky
+            right-column Key Spec Tags already show, so the block was removed
+            to cut repetition.
             ──────────────────────────────────────────── */}
 
         {/* ============================================
@@ -315,68 +314,22 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
               {displayDescription || product.description}
             </p>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Material &amp; UV Protection</h3>
-            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
-              Manufactured from 100% virgin high-density polyethylene (HDPE) with UV-stabilizing compound treatment for extended outdoor service. Fire-retardant options are available on request. Actual UV lifespan depends on climate and exposure. Material resists degradation from sunlight, moisture, and temperature variations.
-            </p>
+            {/* The former "Material & UV Protection" block was deleted: this
+                netting is fire-retardant, and UV additive is not applied to
+                fire-retardant constructions, so a UV-protection paragraph
+                contradicts the product. */}
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Customization Options</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
-              Available in custom colors (Pantone match), mesh sizes, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
+              Available in custom colors (Pantone match), knitting structures, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
             </p>
           </div>
         </div>
 
-        {/* ════════════════════════════════════════════
-            MODULE 7: Detailed Specifications Table (3 columns)
-            ════════════════════════════════════════════ */}
-        {product.specs && product.specs.length > 0 && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Detailed Specifications</h2>
-              <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-                  <thead>
-                    <tr style={{ background: '#0B4C8E', color: '#fff' }}>
-                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Parameter</th>
-                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Value</th>
-                      <th style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Options</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {product.specs.map((spec: string, idx: number) => {
-                      const { label, value, options, isFeature } = parseSpec(spec);
-                      const rowStyle = {
-                        background: idx % 2 === 0 ? '#fff' : '#f8fafc',
-                        borderBottom: idx < product.specs.length - 1 ? '1px solid #f0f2f5' : 'none',
-                      };
-                      if (isFeature) {
-                        // A product feature, not a parameter — rendered across the
-                        // full row so it is never mistaken for a field with an
-                        // empty value (and never auto-filled with "Yes").
-                        return (
-                          <tr key={idx} style={rowStyle}>
-                            <td colSpan={3} style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600 }}>
-                              &#10003; {label}
-                            </td>
-                          </tr>
-                        );
-                      }
-                      return (
-                        <tr key={idx} style={rowStyle}>
-                          <td style={{ padding: '12px 18px', color: '#6b7280', fontWeight: 500, width: '28%', verticalAlign: 'top' }}>{label}</td>
-                          <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '36%', verticalAlign: 'top' }}>{value}</td>
-                          <td style={{ padding: '12px 18px', color: '#6b7280', fontSize: 13, verticalAlign: 'top' }}>{options}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* The former "Detailed Specifications" table was removed: it repeated
+            exactly the same parameters as the spec cards in the right column.
+            One field now appears once, in the block buyers scan first. */}
 
-        {/* ════════════════════════════════════════════
+{/* ════════════════════════════════════════════
             
 MODULE: How To Choose The Right Netting (Decision Matrix)
             ════════════════════════════════════════════ */}
@@ -538,7 +491,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
                     style={{ padding: '14px 28px', background: '#0E7A45', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
                   >Send Inquiry →</button>
                 } />
-                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>Include mesh size, weight, UV or fire-retardant requirements, quantity and destination port for a faster quotation.</p>
+                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>Include knitting structure, weight, UV or fire-retardant requirements, quantity and destination port for a faster quotation.</p>
               </div>
               {/* Right: download buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

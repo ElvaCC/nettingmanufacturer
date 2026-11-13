@@ -19,12 +19,12 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     slug: 'construction-safety-netting',
     label: 'Construction & Safety Netting',
     emoji: '🏗️',
-    productIds: ['debris-net', 'square-net', 'mesh-tarp'],
+    productIds: ['debris-net', 'debris-netting', 'mesh-tarp'],
     tagline: 'Debris containment and site safety netting for scaffolding, construction and general protection.',
     intro:
       'Our construction and safety range covers HDPE warp-knitted netting for debris containment, scaffold protection and general site screening. Made from 100% virgin HDPE with UV treatment, supplyable in custom roll sizes, colours and edge finishes.',
     selectionPoints: [
-      'Mesh opening — finer mesh for debris containment, larger openings for general site and scaffold protection',
+      'Knitting structure — finer mesh for debris containment, larger openings for general site and scaffold protection',
       'Fire-retardant options available on request',
       'Custom roll width and length, reinforced edges and eyelet spacing',
       'Colour options and OEM supply for distributors',
@@ -43,7 +43,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       'Match the net to the protection target — hail, birds, bees or weed control',
       'UV-stabilised material for long-term outdoor exposure',
       'Custom widths and any roll length',
-      'Colour and mesh options to suit local growing practice',
+      'Colour and knitting structure options to suit local growing practice',
     ],
   },
   {
@@ -82,9 +82,9 @@ export function getCategoryByProductId(productId: string): ProductCategory | und
 // Editable: reorder or change ids here — no other file needs touching.
 export const RELATED_PRODUCT_IDS: Record<string, string[]> = {
   // Construction & site protection
-  'debris-net': ['square-net', 'mesh-tarp', 'privacy-screen'],
-  'square-net': ['debris-net', 'mesh-tarp', 'privacy-screen'],
-  'mesh-tarp': ['square-net', 'debris-net', 'shade-sail'],
+  'debris-net': ['debris-netting', 'mesh-tarp', 'privacy-screen'],
+  'debris-netting': ['debris-net', 'mesh-tarp', 'privacy-screen'],
+  'mesh-tarp': ['debris-netting', 'debris-net', 'shade-sail'],
   // Shade & privacy
   'tape-shade-net': ['shade-sail', 'privacy-screen', 'anti-hail-net'],
   'shade-sail': ['tape-shade-net', 'privacy-screen', 'mesh-tarp'],

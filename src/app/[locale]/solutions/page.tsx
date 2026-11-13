@@ -27,7 +27,7 @@ const SOLUTIONS = [
     icon: "🏗️",
     intro:
       "Protect workers, pedestrians, and property on active job sites with high-strength, fire-retardant HDPE safety netting.",
-    productIds: ["debris-net", "square-net", "mesh-tarp"],
+    productIds: ["debris-net", "debris-netting", "mesh-tarp"],
     points: [
       "NFPA 701 fire-retardant options for enclosed scaffolding",
       "Reinforced eyelets for fast, secure installation",
@@ -42,7 +42,7 @@ const SOLUTIONS = [
       "Regulate temperature and light for agriculture, greenhouses, and outdoor spaces with UV-treated HDPE shade netting.",
     productIds: ["tape-shade-net", "shade-sail"],
     points: [
-      "Multiple shade factors and mesh densities",
+      "Multiple shade factors and knitting structures",
       "Custom sizes, colors, and edge finishing",
       "Breathable knit resists wind load and tearing",
     ],
@@ -55,7 +55,7 @@ const SOLUTIONS = [
       "Shield crops from hail, birds, insects, and weeds while supporting efficient harvesting workflows.",
     productIds: ["anti-hail-net", "olive-net", "anti-bee-net", "anti-bird-net", "weed-barrier"],
     points: [
-      "Crop-specific mesh sizes for targeted protection",
+      "Crop-specific knitting structures for targeted protection",
       "Lightweight yet durable for multi-season use",
       "Custom roll widths for large-area coverage",
     ],

@@ -9,7 +9,7 @@
   "about": {
     "title": "About Jiacheng Netting",
     "subtitle": "Your Trusted Netting Supplier",
-    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional and leading manufacturer engaged in the production, research, development, and sales of high-performance warp knitting plastic nets . Our factory is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, covering an area of approximately 20,000 square meters and equipped with modern production equipment and a top-notch technical team.\n\nWe focus on the production of plastic nets, including construction safety nets, hail nets, shade nets, shade sails, olive nets, bird nets, privacy screens, weed barrier fabric, wind barrier nets, aquaculture nets, and other warp knitting products. We have advanced production processes and technologies that support customization of plastic nets in various specifications, colors, and processes.\n\nAs an enterprise driven by innovation, we have a high-quality research and development team that continuously develops and manufactures new products to meet the ever-changing demands of our customers. We place great emphasis on product quality and technological innovation and have obtained BSCI and NFPA 701 certifications to ensure the safety and stability of product quality and production environment.\n\nOur products have been exporting to North America, South America, Europe, the Middle East, Asia, Africa, and other countries, receiving high praise and recognition from customers. We will continue to improve product quality and service levels, providing customers with the highest quality products and services.",
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional and leading manufacturer engaged in the production, research, development, and sales of high-performance warp knitting plastic nets . Our factory is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, covering an area of approximately 20,000 m² and equipped with modern production equipment and a top-notch technical team.\n\nWe focus on the production of plastic nets, including construction safety nets, hail nets, shade nets, shade sails, olive nets, bird nets, privacy screens, weed barrier fabric, wind barrier nets, aquaculture nets, and other warp knitting products. We have advanced production processes and technologies that support customization of plastic nets in various specifications, colors, and processes.\n\nAs an enterprise driven by innovation, we have a high-quality research and development team that continuously develops and manufactures new products to meet the ever-changing demands of our customers. We place great emphasis on product quality and technological innovation and have obtained BSCI and NFPA 701 certifications to ensure the safety and stability of product quality and production environment.\n\nOur products have been exporting to North America, South America, Europe, the Middle East, Asia, Africa, and other countries, receiving high praise and recognition from customers. We will continue to improve product quality and service levels, providing customers with the highest quality products and services.",
     "features": [
       "BSCI Certified Factory",
       "NFPA-701 Certificate",
@@ -43,11 +43,11 @@
       "id": "debris-net",
       "name": "Safety Debris Netting",
       "nameZh": "",
-      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
+      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
       "specs": [
         "Material: 100% virgin HDPE",
         "Mesh Opening: 1/8\", 1/16\" opening",
-        "Fire-Retardant: NFPA 701 Method II",
+        "Fire-Retardant: NFPA 701",
         "Reinforced eyelet holes",
         "Will not unravel when cut",
         "Flexible in cold weather",
@@ -118,33 +118,34 @@
         "/products/debris-net/debris-netting-white-mesh-close-up.jpg"
       ],
       "imageAlt": {
-        "/products/debris-net/safety-debris-netting-red-roll.jpg": "Red HDPE safety debris netting roll with a close-up of the woven square mesh",
+        "/products/debris-net/safety-debris-netting-red-roll.jpg": "Red HDPE safety debris netting roll with a close-up of the woven mesh",
         "/products/debris-net/red-debris-netting-scaffold-building.jpg": "Red safety debris netting fixed to the scaffolding of a building under construction",
         "/products/debris-net/debris-netting-high-rise-facade.jpg": "Debris netting wrapped around the facade of a high-rise building under construction",
         "/products/debris-net/blue-debris-netting-construction-site.jpg": "Blue debris netting covering the elevation of a building under construction",
         "/products/debris-net/main-2.jpg": "Folded debris netting bundles in blue, green, teal and red",
-        "/products/debris-net/safety-debris-netting-mesh-close-up.jpg": "Close-up of red HDPE debris netting showing the woven square mesh openings",
+        "/products/debris-net/safety-debris-netting-mesh-close-up.jpg": "Close-up of red HDPE debris netting showing the woven mesh openings",
         "/products/debris-net/black-debris-netting-roll-orange-edge.jpg": "Roll of black HDPE debris netting with an orange reinforced edge, photographed on a white background",
         "/products/debris-net/grey-debris-netting-roll-orange-edge.jpg": "Close-up of grey knitted debris netting with the orange reinforced edge band running across the mesh",
         "/products/debris-net/red-debris-netting-building-facade.jpg": "Red debris netting fixed over the scaffolding of a multi-storey building under construction",
         "/products/debris-net/white-debris-netting-facade-mesh-close-up.jpg": "White debris netting covering a building facade, with a circular close-up of the knitted mesh",
         "/products/debris-net/debris-netting-rolls-colour-range.jpg": "Debris netting rolls in a range of colours including orange, red, blue, yellow, green and teal, displayed on a factory rack",
-        "/products/debris-net/debris-netting-white-mesh-close-up.jpg": "Close-up of white HDPE debris netting showing the square knitted mesh openings"
+        "/products/debris-net/debris-netting-white-mesh-close-up.jpg": "Close-up of white HDPE debris netting showing the knitted mesh openings"
       }
     },
     {
-      "id": "square-net",
+      "id": "debris-netting",
       "name": "Construction Safety Debris Netting",
       "nameZh": "",
-      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701 Method II. Edges are hemmed & reinforced for easy installation. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
+      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701. Reinforced edge for fastening. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
       "specs": [
         "Material: 100% virgin HDPE",
         "Mesh Opening: 1/4\" hole opening",
-        "Fire-Retardant: NFPA 701 Method II",
-        "Edges hemmed & reinforced",
+        "Fire-Retardant: NFPA 701",
+        "Reinforced edge for fastening",
+        "Very high tear resistance",
         "Will not unravel when cut",
         "Flexible in cold weather",
-        "Color: Any color available"
+        "Color: Orange, Blue, White, Black ... any color available"
       ],
       "applications": [
         "Guardrail debris protection",
@@ -155,10 +156,10 @@
         "Safety fence, barrier net, snow fence"
       ],
       "images": [
-        "/products/square-net/red-square-mesh-netting-roll.jpg",
-        "/products/square-net/red-square-mesh-netting-close-up.jpg",
-        "/products/square-net/green-scaffold-safety-netting.jpg",
-        "/products/square-net/blue-square-mesh-netting-roll-mesh-detail.jpg"
+        "/products/debris-netting/red-debris-netting-roll.jpg",
+        "/products/debris-netting/red-debris-netting-close-up.jpg",
+        "/products/debris-netting/green-scaffold-safety-netting.jpg",
+        "/products/debris-netting/blue-debris-netting-roll-mesh-detail.jpg"
       ],
       "appImages": [],
       "productionImages": [
@@ -170,14 +171,28 @@
         "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
         "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
       ],
+      "packagingOptions": [
+        {
+          "label": "Standard Roll Packing",
+          "desc": "Each roll packed in a PE bag, with your custom label inserted inside."
+        },
+        {
+          "label": "Pallet Packing",
+          "desc": "Rolls stacked on pallets, stretch-wrapped with corner protectors."
+        },
+        {
+          "label": "OEM Custom Labeling & Color Cards",
+          "desc": "Private label branding with your logo, barcode stickers, color cards, and polybag printing. Contact us to confirm the minimum order quantity."
+        }
+      ],
       "faq": [
         {
-          "q": "What is square mesh debris netting used for?",
-          "a": "Construction safety debris netting with a 1/4\" square opening is used for guardrail debris protection, scaffolding and building enclosure, industrial plant and refinery maintenance, demolition containment, and as safety fence, barrier net or snow fence."
+          "q": "What is debris netting used for?",
+          "a": "Construction safety debris netting with a 1/4\" hole opening is used for guardrail debris protection, scaffolding and building enclosure, industrial plant and refinery maintenance, demolition containment, and as safety fence, barrier net or snow fence."
         },
         {
           "q": "What is the mesh opening size?",
-          "a": "This netting has a 1/4\" square hole opening. The edges are hemmed and reinforced for durability on site."
+          "a": "This netting has a 1/4\" hole opening. The edges are reinforced for fastening."
         },
         {
           "q": "Will it unravel if I cut it?",
@@ -189,19 +204,19 @@
         }
       ],
       "detailImages": [
-        "/products/square-net/red-square-mesh-netting-mesh-detail.jpg"
+        "/products/debris-netting/red-debris-netting-mesh-detail.jpg"
       ],
       "imageAlt": {
-        "/products/square-net/construction-safety-netting-black-roll.jpg": "Black HDPE construction safety netting roll with a close-up of the square mesh",
-        "/products/square-net/blue-square-mesh-netting-scaffold.jpg": "Blue square-mesh safety netting installed on the scaffolding of a building under construction",
-        "/products/square-net/green-scaffold-safety-netting.jpg": "Green square-mesh safety netting covering the scaffolding of a building under renovation",
-        "/products/square-net/main-1-web.jpg": "Red square-mesh construction netting roll",
-        "/products/square-net/construction-safety-netting-mesh-detail.jpg": "Close-up of black construction safety netting showing the knitted square openings",
-        "/products/square-net/main-2-web.jpg": "Red and white square-mesh construction netting close-up",
-        "/products/square-net/red-square-mesh-netting-roll.jpg": "Red square-mesh HDPE construction netting roll on a white background",
-        "/products/square-net/red-square-mesh-netting-close-up.jpg": "Close-up of red square-mesh construction netting showing the evenly knitted grid",
-        "/products/square-net/blue-square-mesh-netting-roll-mesh-detail.jpg": "Blue square-mesh netting roll with a circular close-up of the knitted mesh",
-        "/products/square-net/red-square-mesh-netting-mesh-detail.jpg": "Close-up of red square-mesh netting showing the knitted grid and the reinforced edge band"
+        "/products/debris-netting/construction-safety-netting-black-roll.jpg": "Black HDPE construction safety netting roll with a close-up of the mesh",
+        "/products/debris-netting/blue-debris-netting-scaffold.jpg": "Blue debris netting installed on the scaffolding of a building under construction",
+        "/products/debris-netting/green-scaffold-safety-netting.jpg": "Green debris netting covering the scaffolding of a building under renovation",
+        "/products/debris-netting/main-1-web.jpg": "Red debris netting roll",
+        "/products/debris-netting/construction-safety-netting-mesh-detail.jpg": "Close-up of black construction safety netting showing the knitted mesh openings",
+        "/products/debris-netting/main-2-web.jpg": "Red and white debris netting close-up",
+        "/products/debris-netting/red-debris-netting-roll.jpg": "Red HDPE debris netting roll on a white background",
+        "/products/debris-netting/red-debris-netting-close-up.jpg": "Close-up of red debris netting showing the evenly knitted grid",
+        "/products/debris-netting/blue-debris-netting-roll-mesh-detail.jpg": "Blue debris netting roll with a circular close-up of the knitted mesh",
+        "/products/debris-netting/red-debris-netting-mesh-detail.jpg": "Close-up of red debris netting showing the knitted grid and the reinforced edge band"
       }
     },
     {
@@ -426,7 +441,7 @@
       "id": "anti-hail-net",
       "name": "Anti Hail Net / Drape Net",
       "nameZh": "",
-      "description": "100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different mesh type options available.",
+      "description": "100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different knitting structures - different mesh opening and density - are available.",
       "specs": [
         "Material: 100% virgin HDPE",
         "Width: Max 12m",
@@ -434,7 +449,7 @@
         "Weight: 45-70g GSM or custom",
         "UV treated & protected",
         "Color: Any color available",
-        "Mesh type: Customizable"
+        "Knitting structure: Customizable"
       ],
       "applications": [
         "Comprehensive protection against hail for crops",
@@ -468,7 +483,7 @@
         },
         {
           "q": "What weight/GSM is available?",
-          "a": "The net is available in 45-70 GSM or custom weights, with customizable mesh type and any length."
+          "a": "The net is available in 45-70 GSM or custom weights, with a customizable knitting structure and any length."
         },
         {
           "q": "What width can I order?",
@@ -580,14 +595,14 @@
       "id": "olive-net",
       "name": "Olive Net / Harvest Net",
       "nameZh": "",
-      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different mesh type and GSM options available.",
+      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different knitting structures - different mesh opening and density - and GSM options are available.",
       "specs": [
         "Material: 100% virgin HDPE",
         "Width: Max 12m",
         "Length: Any length",
         "UV Treated",
         "Color: Any color available",
-        "Mesh type, GSM and color: Customizable"
+        "Knitting structure, GSM and color: Customizable"
       ],
       "applications": [
         "Olive collection",
@@ -618,8 +633,8 @@
           "a": "Olive nets (also called harvest nets) are used for olive collection, and for harvesting walnuts, hazelnuts, chestnuts, plums and other fruit."
         },
         {
-          "q": "Can I customize the mesh and GSM?",
-          "a": "Yes, mesh type, GSM and color are all customizable to match your crop and harvesting method."
+          "q": "Can I customize the knitting structure and GSM?",
+          "a": "Yes, knitting structure, GSM and color are all customizable to match your crop and harvesting method."
         },
         {
           "q": "What width is available?",
@@ -848,7 +863,7 @@
   "factory": {
     "title": "Our Manufacturing Facility",
     "subtitle": "State-of-the-Art Production Capability",
-    "description": "Our 20,000 square meter manufacturing facility is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production equipment and a top-notch technical team, we support customization of plastic nets in various specifications, colors, and processes.",
+    "description": "Our 20,000 m² manufacturing facility is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production equipment and a top-notch technical team, we support customization of plastic nets in various specifications, colors, and processes.",
     "info": {
       "area": "20,000 m²",
       "experience": "—",
@@ -911,7 +926,7 @@
       {
         "icon": "📦",
         "title": "OEM / ODM Available",
-        "desc": "Custom colors, mesh, width, length , private-label packaging tailored to your market needs."
+        "desc": "Custom colors, knitting structure, width, length, private-label packaging tailored to your market needs."
       },
       {
         "icon": "🌍",
@@ -1020,7 +1035,7 @@
     "fobPort": "Qingdao, China",
     "sample": "Free samples available (freight collect)",
     "payment": "T/T, L/C, Western Union",
-    "customization": "Custom size, color, GSM, mesh density, logo printing, private label"
+    "customization": "Custom size, color, GSM, knitting structure, logo printing, private label"
   },
   "blog": [
     {
@@ -1041,7 +1056,7 @@
       "id": 3,
       "title": "Understanding NFPA 701 Fire-Retardant Net Standards",
       "date": "2024-03-05",
-      "excerpt": "Everything you need to know about NFPA 701 Method II fire-retardant netting regulations...",
+      "excerpt": "Everything you need to know about NFPA 701 fire-retardant netting regulations...",
       "category": "Compliance"
     },
     {
