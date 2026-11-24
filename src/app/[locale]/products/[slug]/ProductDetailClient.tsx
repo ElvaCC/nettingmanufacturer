@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import InquiryModal from '@/components/forms/InquiryModal';
@@ -38,6 +38,21 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const { products, contact } = useContent();
   const product = products.find((p: any) => p.id === slug);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  // Thumbnails are deliberately small so the section stays short; clicking one
+  // opens the full-size photo in an overlay.
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [lightbox]);
 
   if (!product) {
     return (
@@ -183,7 +198,11 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             {detailImages.length > 0 && (
               <div className="section-gap">
                 <div style={{ background: '#fff', borderRadius: 14, padding: '24px 28px', border: '1px solid #e5e7eb' }}>
-                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Product Detail Close-ups</h2>
+                  {/* Heading text is editable per product in /admin
+                      ("Detail Section Title"). Falls back to "Product Detail". */}
+                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>
+                    {(product as any).detailTitle || 'Product Detail'}
+                  </h2>
                   <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
                     {detailImages.map((img: string, i: number) => (
                       <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
@@ -255,7 +274,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             ════════════════════════════════════════════ */}
         <div className="section-gap">
           <div style={{ background: '#f8fafc', borderRadius: 14, padding: '36px 32px' }}>
-            <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0B4C8E', marginBottom: 20, textAlign: 'center' }}>
+            <h2 id="why-choose" style={{ fontSize: 22, fontWeight: 700, color: '#0B4C8E', marginBottom: 20, textAlign: 'center', scrollMarginTop: 90 }}>
               Why Choose Jiacheng
             </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }} className="why-grid">
@@ -263,19 +282,83 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 // Four cards. Every claim here must be verifiable: no
                 // experience years, no export-market lists, no inspection
                 // procedures, no capacity or quality promises.
-                { icon: '\uD83C\uDFED', title: 'Factory-Direct Pricing', desc: 'You are buying from the factory, not from a trading company.' },
-                { icon: '\u2699\uFE0F', title: '70 Machines, 10 Containers a Week', desc: '70 machines, up to 10 containers a week \u2014 bulk supply on schedule.' },
-                { icon: '\uD83C\uDFA8', title: 'Flexible Customization', desc: 'Knitting structure, width, GSM, colour, and fire-retardant or UV \u2014 made to your market.' },
-                { icon: '\uD83C\uDF0D', title: 'Export-Oriented Cooperation', desc: 'We handle specifications, samples, scheduling and export documents with you.' },
+                // Text sits above the photos: the claim is read first, the
+                // photos below are the proof. Cards 1, 2 and 3 show factory
+                // photos because those claims are about the factory, not about
+                // the product. Card 4 deliberately pulls the product's own
+                // detail photo, so no product page shows another product's
+                // netting. It sits last because it is the only card that
+                // changes from one product to another.
+                {
+                  icon: '\uD83C\uDFED',
+                  title: 'Factory-Direct Pricing',
+                  desc: 'You are buying from the factory, not from a trading company.',
+                  imgs: [
+                    { src: '/images/factory/jiacheng-factory-hero.jpg', alt: 'Shandong Jiacheng factory building with the company sign, a container being loaded with netting rolls', pos: 'center top' },
+                  ],
+                },
+                {
+                  icon: '\u2699\uFE0F',
+                  title: '70 Machines, 10 Containers a Week',
+                  desc: '70 machines, up to 10 containers a week \u2014 bulk supply on schedule.',
+                  imgs: [
+                    { src: '/images/factory/jiacheng-workshop-wide-angle-production.jpg', alt: 'Rows of warp knitting machines running along the length of the Jiacheng workshop' },
+                    { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Warp knitting machines with yarn creels, an operator checking the fabric beam' },
+                  ],
+                },
+                {
+                  icon: '\uD83C\uDF0D',
+                  title: 'Export-Oriented Cooperation',
+                  desc: 'We handle specifications, samples, scheduling and export documents with you.',
+                  imgs: [
+                    { src: '/products/debris-netting/debris-netting-factory-loading.jpg', alt: 'Netting rolls being loaded into an open container in front of the Jiacheng factory building', pos: 'center top' },
+                    { src: '/images/factory/jiacheng-warehouse-packed-rolls-pallet.jpg', alt: 'Bundled netting rolls strapped on pallets waiting to be loaded' },
+                  ],
+                },
+                {
+                  icon: '\uD83C\uDFA8',
+                  title: 'Flexible Customization',
+                  desc: 'Knitting structure, width, GSM, colour, and fire-retardant or UV \u2014 made to your market.',
+                  imgs: [
+                    { src: (product as any).detailImages?.[0] || (product as any).images?.[1] || (product as any).images?.[0] || '', alt: `${product.name} close-up showing the knitting structure` },
+                  ],
+                },
               ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: 12, padding: 16, background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb' }}>
-                  <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
-                  <div>
-                    <div style={{ fontWeight: 700, color: '#0B4C8E', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
-                    <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
-                      {item.desc}
+                <div key={i} style={{ background: '#fff', borderRadius: 10, border: '1px solid #e5e7eb', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ display: 'flex', gap: 10, padding: '16px 16px 12px' }}>
+                    <span style={{ fontSize: 22, flexShrink: 0, lineHeight: '26px' }}>{item.icon}</span>
+                    <div>
+                      <div style={{ fontWeight: 700, color: '#0B4C8E', fontSize: 14, marginBottom: 3 }}>{item.title}</div>
+                      <div style={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>
+                        {item.desc}
+                      </div>
                     </div>
                   </div>
+                  {item.imgs.filter(Boolean).length ? (
+                    <div style={{ display: 'flex', gap: 8, padding: '0 16px 16px', alignItems: 'flex-start' }}>
+                      {item.imgs.filter(Boolean).map((img, k) => (
+                        <button
+                          key={k}
+                          type="button"
+                          onClick={() => setLightbox({ src: img.src, alt: img.alt })}
+                          aria-label={`Enlarge photo: ${img.alt}`}
+                          style={{
+                            position: 'relative', flex: 1, minWidth: 0, height: 200,
+                            padding: 0, border: '1px solid #f1f3f6', background: '#fbfcfd',
+                            borderRadius: 6, overflow: 'hidden', cursor: 'zoom-in',
+                            display: 'block',
+                          }}
+                        >
+                          <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 45vw, 25vw" style={{ objectFit: 'contain' }} />
+                          <span style={{
+                            position: 'absolute', right: 6, bottom: 6, width: 22, height: 22,
+                            borderRadius: '50%', background: 'rgba(0,0,0,.55)', color: '#fff',
+                            fontSize: 12, lineHeight: '22px', textAlign: 'center', pointerEvents: 'none',
+                          }}>&#43;</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -658,6 +741,38 @@ MODULE 13: Related Products
         details summary::-webkit-details-marker { color: #0B4C8E; }
         details[open] summary { color: #0B4C8E; }
       `}} />
+
+      {/* Full-size photo overlay for the Why Choose thumbnails */}
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightbox.alt}
+          onClick={() => setLightbox(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,.88)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px',
+            cursor: 'zoom-out',
+          }}
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setLightbox(null)}
+            style={{
+              position: 'absolute', top: 16, right: 20, width: 44, height: 44,
+              borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,.16)',
+              color: '#fff', fontSize: 26, lineHeight: 1, cursor: 'pointer',
+            }}
+          >&#215;</button>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: 'relative', width: 'min(1200px, 92vw)', height: 'min(820px, 84vh)', cursor: 'default' }}
+          >
+            <Image src={lightbox.src} alt={lightbox.alt} fill sizes="92vw" style={{ objectFit: 'contain' }} />
+          </div>
+        </div>
+      )}
     </>
   );
 }

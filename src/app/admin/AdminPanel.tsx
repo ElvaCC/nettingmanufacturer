@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 interface FactoryImage { src: string; alt: string; label: string; span: 'full' | 'half'; }
 interface FactoryHighlight { icon: string; title: string; desc: string; }
 interface FactoryInfoCard { icon: string; title: string; value: string; }
-interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
+interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; detailTitle?: string; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
 interface BlogPost { id: number; title: string; date: string; excerpt: string; category: string; }
 interface AppCategory { name: string; items: string[]; }
 interface Stat { number: string; label: string; }
@@ -427,6 +427,28 @@ export default function AdminPanel() {
                     </div>
                   ))}
                   <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], packagingImages: [...(p[i].packagingImages || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Packaging Image</button>
+                </div>
+              </div>
+              {/* ── Detail Section (title + close-up photos) ── */}
+              <div>
+                <label style={lbl}>Detail Section Title</label>
+                <input type="text" value={product.detailTitle || ''} placeholder="Product Detail" onChange={e => { const p = [...content.products]; p[i] = { ...p[i], detailTitle: e.target.value }; setContent({ ...content, products: p }); }} style={{ ...s(), maxWidth: 420 }} />
+              </div>
+              <div>
+                <label style={lbl}>Detail Images ({product.detailImages?.length || 0})</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {(product.detailImages || []).map((imgUrl, imgIdx) => (
+                    <div key={imgIdx} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <div style={{ width: 60, height: 60, borderRadius: 8, overflow: 'hidden', border: '1px solid #e2e8f0', background: '#f1f5f9', flexShrink: 0 }}>
+                        {imgUrl ? <img src={imgUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 10 }}>No Img</div>}
+                      </div>
+                      <input type="text" value={imgUrl} onChange={e => { const p = [...content.products]; const ni = [...(p[i].detailImages || [])]; ni[imgIdx] = e.target.value; p[i] = { ...p[i], detailImages: ni }; setContent({ ...content, products: p }); }} style={{ ...s(), flex: 1 }} />
+                      <button disabled={imgIdx === 0} onClick={() => { if (imgIdx > 0) { const p = [...content.products]; const n = [...(p[i].detailImages || [])]; [n[imgIdx - 1], n[imgIdx]] = [n[imgIdx], n[imgIdx - 1]]; p[i] = { ...p[i], detailImages: n }; setContent({ ...content, products: p }); }}} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                      <button disabled={imgIdx === (product.detailImages?.length || 0) - 1} onClick={() => { if (imgIdx < (product.detailImages?.length || 0) - 1) { const p = [...content.products]; const n = [...(p[i].detailImages || [])]; [n[imgIdx], n[imgIdx + 1]] = [n[imgIdx + 1], n[imgIdx]]; p[i] = { ...p[i], detailImages: n }; setContent({ ...content, products: p }); }}} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: imgIdx === (product.detailImages?.length || 0) - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                      <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], detailImages: (p[i].detailImages || []).filter((_, idx) => idx !== imgIdx) }; setContent({ ...content, products: p }); }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                    </div>
+                  ))}
+                  <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], detailImages: [...(p[i].detailImages || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Detail Image</button>
                 </div>
               </div>
               <button onClick={() => { setContent({ ...content, products: content.products.filter((_, idx) => idx !== i) }); setEditProd(null); }} style={{ padding: '8px 18px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626', alignSelf: 'flex-start' }}>Delete Product</button>

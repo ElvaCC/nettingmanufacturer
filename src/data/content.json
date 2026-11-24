@@ -72,15 +72,8 @@
         "/products/debris-net/apps/app-1.jpg",
         "/products/debris-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "packagingOptions": [
         {
           "label": "Standard Roll Packing",
@@ -162,15 +155,8 @@
         "/products/debris-netting/blue-debris-netting-roll-mesh-detail.jpg"
       ],
       "appImages": [],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "packagingOptions": [
         {
           "label": "Standard Roll Packing",
@@ -252,15 +238,8 @@
         "/products/mesh-tarp/apps/app-1.jpg",
         "/products/mesh-tarp/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is a mesh tarp used for?",
@@ -329,15 +308,8 @@
         "/products/tape-shade-net/apps/app-1.jpg",
         "/products/tape-shade-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What shade rates are available?",
@@ -399,15 +371,8 @@
         "/products/shade-sail/shade-sail-green-garden.jpg"
       ],
       "appImages": [],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is a shade sail used for?",
@@ -467,15 +432,8 @@
         "/products/anti-hail-net/apps/app-1.jpg",
         "/products/anti-hail-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is anti-hail netting used for?",
@@ -547,15 +505,8 @@
         "/products/privacy-screen/apps/app-1.jpg",
         "/products/privacy-screen/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is a privacy screen used for?",
@@ -618,15 +569,8 @@
         "/products/olive-net/apps/app-1.jpg",
         "/products/olive-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is an olive net used for?",
@@ -692,15 +636,8 @@
         "/products/anti-bee-net/apps/app-1.jpg",
         "/products/anti-bee-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is anti-bee netting used for?",
@@ -756,15 +693,8 @@
         "/products/anti-bird-net/apps/app-1.jpg",
         "/products/anti-bird-net/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is anti-bird netting used for?",
@@ -822,15 +752,8 @@
         "/products/weed-barrier/apps/app-1.jpg",
         "/products/weed-barrier/apps/app-2.jpg"
       ],
-      "productionImages": [
-        "https://images.unsplash.com/photo-1581092162384-8987c1d6472d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop"
-      ],
-      "packagingImages": [
-        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1566576912321-b58dd7a258b7?w=500&h=400&fit=crop"
-      ],
+      "productionImages": [],
+      "packagingImages": [],
       "faq": [
         {
           "q": "What is weed barrier fabric used for?",
