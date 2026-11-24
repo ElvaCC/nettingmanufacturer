@@ -38,7 +38,7 @@ export default function ProductsPage() {
         <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
           <h1 style={{ fontSize: 40, fontWeight: 800, marginBottom: 12, color: '#fff' }}>Our Products</h1>
           <p style={{ fontSize: 16, opacity: 0.85, maxWidth: 700, margin: '0 auto', lineHeight: 1.7 }}>
-            Made of 100% Virgin HDPE — Fire-Retardant · UV-Treated · Customizable Colors &amp; Specs · OEM/ODM Welcome
+            Made from high density polyethylene (HDPE) — Fire-Retardant or UV-Treated · Customizable Colors &amp; Specs · OEM/ODM Welcome
           </p>
           {/* Download Catalog Button */}
           <a

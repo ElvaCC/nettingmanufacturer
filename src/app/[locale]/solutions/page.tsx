@@ -30,7 +30,7 @@ const SOLUTIONS = [
     productIds: ["debris-net", "debris-netting", "mesh-tarp"],
     points: [
       "NFPA 701 fire-retardant options for enclosed scaffolding",
-      "Reinforced eyelets for fast, secure installation",
+      "Reinforced border edges for fast, secure installation",
       "UV-stabilized for long outdoor service life",
     ],
   },

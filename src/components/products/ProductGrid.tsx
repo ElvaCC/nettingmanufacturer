@@ -17,7 +17,7 @@ const allProducts = [
     price: "$1.2",
     moq: "500 sqm",
     description: "Heavy-duty HDPE dust containment net with 80g/m² weight. Ideal for construction sites, scaffolding, and renovation projects. UV stabilized for outdoor use up to 3 years.",
-    specs: { weight: "80g/m²", mesh: "1-2mm", width: "2-8m", color: "Green/Blue/White", material: "100% Virgin HDPE" },
+    specs: { weight: "80g/m²", mesh: "1-2mm", width: "2-8m", color: "Green/Blue/White", material: "High Density Polyethylene (HDPE)" },
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=400&fit=crop",
     inStock: true
   },
@@ -30,7 +30,7 @@ const allProducts = [
     price: "$1.8",
     moq: "500 sqm",
     description: "Premium HDPE dust net with 120g/m² weight for heavy-duty containment. Suitable for demolition sites and industrial applications. Fire-retardant option available.",
-    specs: { weight: "120g/m²", mesh: "1-3mm", width: "3-10m", color: "Green/Black", material: "100% Virgin HDPE" },
+    specs: { weight: "120g/m²", mesh: "1-3mm", width: "3-10m", color: "Green/Black", material: "High Density Polyethylene (HDPE)" },
     image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=400&fit=crop",
     inStock: true
   },

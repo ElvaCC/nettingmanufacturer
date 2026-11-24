@@ -22,11 +22,11 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     productIds: ['debris-net', 'debris-netting', 'mesh-tarp'],
     tagline: 'Debris containment and site safety netting for scaffolding, construction and general protection.',
     intro:
-      'Our construction and safety range covers HDPE warp-knitted netting for debris containment, scaffold protection and general site screening. Made from 100% virgin HDPE with UV treatment, supplyable in custom roll sizes, colours and edge finishes.',
+      'Our construction and safety range covers HDPE warp-knitted netting for debris containment, scaffold protection and general site screening. Made from high density polyethylene (HDPE), with UV treatment available, supplyable in custom roll sizes, colours and edge finishes.',
     selectionPoints: [
       'Knitting structure — finer mesh for debris containment, larger openings for general site and scaffold protection',
       'Fire-retardant options available on request',
-      'Custom roll width and length, reinforced edges and eyelet spacing',
+      'Custom roll width and length, reinforced border edges',
       'Colour options and OEM supply for distributors',
     ],
   },

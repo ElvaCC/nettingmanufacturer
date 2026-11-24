@@ -108,7 +108,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
 
   // Spec parsing. Two shapes exist in the data:
   //   "Parameter: Value" or "Parameter: Value | Options"  → parameter row
-  //   "Reinforced eyelet holes" (no colon)                → free-text feature
+  //   "Reinforced border edge for fastening" (no colon)   → free-text feature
   // A feature is NOT a parameter and must never be auto-filled with "Yes".
   const parseSpec = (spec: string): { label: string; value: string; options: string; isFeature: boolean } => {
     const parts = spec.split('|').map(s => s.trim());
