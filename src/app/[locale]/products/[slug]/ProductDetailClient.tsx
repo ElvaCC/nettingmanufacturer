@@ -13,27 +13,6 @@ interface ProductDetailClientProps {
   locale: string;
 }
 
-const DEFAULT_FAQ = [
-  // ── Technical FAQs ──
-  { q: 'What is HDPE debris netting?', a: 'HDPE debris netting is a lightweight, high-strength knitted mesh made from 100% virgin HDPE. It is used on construction sites to contain falling debris, dust, and tools while allowing airflow and light penetration.' },
-  { q: 'How long does UV protection last?', a: 'Our HDPE nets are UV-stabilized for extended outdoor service. Actual lifespan depends on climate, exposure, and knitting structure — please contact us with your application and we will recommend the right UV treatment.' },
-  { q: 'What GSM is suitable for scaffolding?', a: 'For scaffolding enclosure and debris containment, we typically recommend 80-120 GSM density. Heavier GSM is ideal for high-wind areas and demolition sites requiring maximum durability.' },
-  { q: 'What mesh opening blocks debris?', a: 'The knitting structure sets the opening. Common openings range from 1/16" (fine) to 1/4" (standard). For most construction scaffolding, 1/8" provides optimal debris containment while allowing airflow.' },
-  { q: 'What is the difference between knitted and woven netting?', a: 'Knitted netting is more flexible, lightweight, and resistant to unraveling when cut. Woven netting is heavier and more rigid. Our HDPE debris nets are knitted for superior flexibility and job-site durability.' },
-  { q: 'Is HDPE netting recyclable?', a: 'Yes, 100% virgin HDPE netting is fully recyclable. We recommend checking local recycling guidelines for disposal.' },
-  { q: 'What temperature range can HDPE netting withstand?', a: 'HDPE netting remains flexible across a wide temperature range and does not become brittle in cold weather, making it suitable for winter construction projects in cold climates.' },
-  { q: 'Does the netting meet fire safety standards?', a: 'Fire-retardant options are available. Please contact us with your project\u2019s fire code requirements and we will confirm the applicable standard and certification for your market.' },
-  // ── Business FAQs ──
-  { q: 'What is the MOQ?', a: 'MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.' },
-  { q: 'Can you provide OEM labels & packaging?', a: 'Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.' },
-  { q: 'Can you provide samples?', a: 'Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.' },
-  { q: 'How long does shipping take?', a: 'Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.' },
-  { q: 'What is the production lead time?', a: 'Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.' },
-  { q: 'What payment methods do you accept?', a: 'We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.' },
-  { q: 'Do you offer after-sales support?', a: 'Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.' },
-  { q: 'What if the product does not meet specifications?', a: 'We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.' },
-];
-
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
   const { products, contact } = useContent();
   const product = products.find((p: any) => p.id === slug);
@@ -74,7 +53,12 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const deliveryRecords = (product as any).deliveryRecords || [];
   const packagingOpts = (product as any).packagingOptions || [];
   const projectCases = (product as any).projectCases || [];
-  const faqItems = (product as any).faq || [];
+  // Rows left blank in the admin are skipped rather than rendered as empty headings.
+  const faqItems = (((product as any).faq || []) as { q: string; a: string; group?: string }[])
+    .filter(f => f.q && f.a);
+  // Group is optional: anything not marked "biz" is treated as technical.
+  const techFaq = faqItems.filter(f => (f.group || 'tech') !== 'biz');
+  const bizFaq = faqItems.filter(f => f.group === 'biz');
 
   // Localized display fields — fall back to English when no translation exists.
   const localizedProduct = getLocalizedProduct(product, locale);
@@ -597,25 +581,35 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
             
 MODULE 12: Technical & Business FAQ (collapsible)
             ════════════════════════════════════════════ */}
+        {faqItems.length > 0 && (
         <div className="section-gap">
           <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
             <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Frequently Asked Questions</h2>
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
-            {((product as any).faq && (product as any).faq.length > 0 ? (product as any).faq : DEFAULT_FAQ.slice(0, 8)).map((item: any, i: number) => (
-              <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
-              </details>
-            ))}
-            <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 16 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
-            {DEFAULT_FAQ.slice(8).map((item, i) => (
-              <details key={i} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
-              </details>
-            ))}
+            {techFaq.length > 0 && (
+              <>
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
+                {techFaq.map((item, i) => (
+                  <details key={`t${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
+                  </details>
+                ))}
+              </>
+            )}
+            {bizFaq.length > 0 && (
+              <>
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: techFaq.length > 0 ? 16 : 4 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
+                {bizFaq.map((item, i) => (
+                  <details key={`b${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
+                  </details>
+                ))}
+              </>
+            )}
           </div>
         </div>
+        )}
 
         {/* ════════════════════════════════════════════
             
@@ -691,14 +685,16 @@ MODULE 13: Related Products
                   },
                 },
               },
-              {
+              // Only emit FAQPage when there is at least one Q&A — an empty
+              // mainEntity is a schema error, and the block is hidden anyway.
+              ...(faqItems.length > 0 ? [{
                 '@type': 'FAQPage',
-                'mainEntity': (faqItems.length > 0 ? [...faqItems, ...DEFAULT_FAQ.slice(8)] : DEFAULT_FAQ).map((item: any) => ({
+                'mainEntity': faqItems.map((item) => ({
                   '@type': 'Question',
                   'name': item.q,
                   'acceptedAnswer': { '@type': 'Answer', 'text': item.a },
                 })),
-              },
+              }] : []),
               {
                 '@type': 'ItemList',
                 'name': 'Related Products',

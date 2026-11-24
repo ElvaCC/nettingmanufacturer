@@ -92,19 +92,63 @@
       "faq": [
         {
           "q": "What is HDPE debris netting used for?",
-          "a": "Safety debris netting is used on construction sites to contain falling debris, dust, tools and job site materials, and to serve as scaffolding enclosure, guardrail barrier, building wrap and construction windscreen."
+          "a": "Safety debris netting is used on construction sites to contain falling debris, dust, tools and job site materials, and to serve as scaffolding enclosure, guardrail barrier, building wrap and construction windscreen.",
+          "group": "tech"
         },
         {
           "q": "What mesh opening should I choose?",
-          "a": "This netting is available in 1/8\" and 1/16\" mesh openings. The 1/8\" opening offers a good balance of debris containment and airflow, while the finer 1/16\" opening provides tighter containment for smaller particles and dust."
+          "a": "This netting is available in 1/8\" and 1/16\" mesh openings. The 1/8\" opening offers a good balance of debris containment and airflow, while the finer 1/16\" opening provides tighter containment for smaller particles and dust.",
+          "group": "tech"
         },
         {
           "q": "Will the netting unravel when cut to size?",
-          "a": "No. The HDPE netting is knitted so it will not unravel when cut, and it features reinforced eyelet holes for easy and secure installation on scaffolding or structures."
+          "a": "No. The HDPE netting is knitted so it will not unravel when cut, and it features reinforced eyelet holes for easy and secure installation on scaffolding or structures.",
+          "group": "tech"
         },
         {
           "q": "Can I order a custom color?",
-          "a": "Yes, the netting is available in any color. Contact us with your color and quantity requirements and we will confirm availability and lead time."
+          "a": "Yes, the netting is available in any color. Contact us with your color and quantity requirements and we will confirm availability and lead time.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -174,19 +218,63 @@
       "faq": [
         {
           "q": "What is debris netting used for?",
-          "a": "Construction safety debris netting with a 1/4\" hole opening is used for guardrail debris protection, scaffolding and building enclosure, industrial plant and refinery maintenance, demolition containment, and as safety fence, barrier net or snow fence."
+          "a": "Construction safety debris netting with a 1/4\" hole opening is used for guardrail debris protection, scaffolding and building enclosure, industrial plant and refinery maintenance, demolition containment, and as safety fence, barrier net or snow fence.",
+          "group": "tech"
         },
         {
           "q": "What is the mesh opening size?",
-          "a": "This netting has a 1/4\" hole opening. The edges are reinforced for fastening."
+          "a": "This netting has a 1/4\" hole opening. The edges are reinforced for fastening.",
+          "group": "tech"
         },
         {
           "q": "Will it unravel if I cut it?",
-          "a": "No, the knitted HDPE construction will not unravel when cut, which makes it easy to trim to the exact size needed on the job site."
+          "a": "No, the knitted HDPE construction will not unravel when cut, which makes it easy to trim to the exact size needed on the job site.",
+          "group": "tech"
         },
         {
           "q": "Is it suitable for cold-weather work?",
-          "a": "Yes, the netting remains flexible in cold weather, making it suitable for winter construction and demolition projects."
+          "a": "Yes, the netting remains flexible in cold weather, making it suitable for winter construction and demolition projects.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -243,19 +331,63 @@
       "faq": [
         {
           "q": "What is a mesh tarp used for?",
-          "a": "Mesh tarp is used for construction building and scaffolding enclosure, privacy and wind barriers, shade cloth, covering loads on dump trucks, and plastering, stucco, EIFS and masonry work."
+          "a": "Mesh tarp is used for construction building and scaffolding enclosure, privacy and wind barriers, shade cloth, covering loads on dump trucks, and plastering, stucco, EIFS and masonry work.",
+          "group": "tech"
         },
         {
           "q": "How is the mesh tarp secured?",
-          "a": "It features brass grommets every 2\" along with double-stitched, reinforced hems, so it can be tied or fastened securely for enclosure or load-covering applications."
+          "a": "It features brass grommets every 2\" along with double-stitched, reinforced hems, so it can be tied or fastened securely for enclosure or load-covering applications.",
+          "group": "tech"
         },
         {
           "q": "What mesh opening does it have?",
-          "a": "The tarp has fine 1/16\" openings, providing good containment while still allowing airflow."
+          "a": "The tarp has fine 1/16\" openings, providing good containment while still allowing airflow.",
+          "group": "tech"
         },
         {
           "q": "Can I order a custom color?",
-          "a": "Yes, the mesh tarp is available in any color to match your project or branding needs."
+          "a": "Yes, the mesh tarp is available in any color to match your project or branding needs.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -313,19 +445,63 @@
       "faq": [
         {
           "q": "What shade rates are available?",
-          "a": "Tape shade net is available in shade rates from 30% up to 95%, so you can choose the right level of shade for your application."
+          "a": "Tape shade net is available in shade rates from 30% up to 95%, so you can choose the right level of shade for your application.",
+          "group": "tech"
         },
         {
           "q": "What is tape shade net used for?",
-          "a": "It is used for courtyards, swimming pools, patios, open garages, gardens, tennis courts, greenhouses, chicken coops, pergolas, carports and privacy screens."
+          "a": "It is used for courtyards, swimming pools, patios, open garages, gardens, tennis courts, greenhouses, chicken coops, pergolas, carports and privacy screens.",
+          "group": "tech"
         },
         {
           "q": "Is it waterproof?",
-          "a": "Yes, this shade net is waterproof and UV treated, making it suitable for long-term outdoor use."
+          "a": "Yes, this shade net is waterproof and UV treated, making it suitable for long-term outdoor use.",
+          "group": "tech"
         },
         {
           "q": "What widths are available?",
-          "a": "The netting is available in widths from 1m to 12m and any length, and can be packed as 1 roll per bag or 1 sheet per bag."
+          "a": "The netting is available in widths from 1m to 12m and any length, and can be packed as 1 roll per bag or 1 sheet per bag.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -376,19 +552,63 @@
       "faq": [
         {
           "q": "What is a shade sail used for?",
-          "a": "Shade sails are used for patio, pool and garden shade, playgrounds, outdoor dining areas, parking area covers and commercial outdoor spaces."
+          "a": "Shade sails are used for patio, pool and garden shade, playgrounds, outdoor dining areas, parking area covers and commercial outdoor spaces.",
+          "group": "tech"
         },
         {
           "q": "How much UV does a shade sail block?",
-          "a": "The shade sail blocks 95% of harmful UV rays and uses UV-stabilizing compound treatment for long outdoor life."
+          "a": "The shade sail blocks 95% of harmful UV rays and uses UV-stabilizing compound treatment for long outdoor life.",
+          "group": "tech"
         },
         {
           "q": "How are the corners reinforced?",
-          "a": "The corners feature durable D-rings, and all seams are double-layered and reinforced stitched for strength under tension."
+          "a": "The corners feature durable D-rings, and all seams are double-layered and reinforced stitched for strength under tension.",
+          "group": "tech"
         },
         {
           "q": "Can I order a custom color?",
-          "a": "Yes, shade sails are available in any color."
+          "a": "Yes, shade sails are available in any color.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [],
@@ -437,19 +657,63 @@
       "faq": [
         {
           "q": "What is anti-hail netting used for?",
-          "a": "Anti-hail net (also called drape net) provides comprehensive protection against hail for crops, fruit orchard protection, and protection from birds and fruit bats."
+          "a": "Anti-hail net (also called drape net) provides comprehensive protection against hail for crops, fruit orchard protection, and protection from birds and fruit bats.",
+          "group": "tech"
         },
         {
           "q": "What weight/GSM is available?",
-          "a": "The net is available in 45-70 GSM or custom weights, with a customizable knitting structure and any length."
+          "a": "The net is available in 45-70 GSM or custom weights, with a customizable knitting structure and any length.",
+          "group": "tech"
         },
         {
           "q": "What width can I order?",
-          "a": "The netting is available up to 12m wide, with any length available."
+          "a": "The netting is available up to 12m wide, with any length available.",
+          "group": "tech"
         },
         {
           "q": "Is it UV treated?",
-          "a": "Yes, the net is UV treated and protected for outdoor durability in orchard and agricultural use."
+          "a": "Yes, the net is UV treated and protected for outdoor durability in orchard and agricultural use.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -510,19 +774,63 @@
       "faq": [
         {
           "q": "What is a privacy screen used for?",
-          "a": "Privacy screens block neighbors from seeing through, separate streets, roads and construction sites, reduce surrounding noise and street view, and can stop dogs from barking at neighbors."
+          "a": "Privacy screens block neighbors from seeing through, separate streets, roads and construction sites, reduce surrounding noise and street view, and can stop dogs from barking at neighbors.",
+          "group": "tech"
         },
         {
           "q": "How much visibility does it block?",
-          "a": "The screen provides 90% visibility blockage for effective privacy."
+          "a": "The screen provides 90% visibility blockage for effective privacy.",
+          "group": "tech"
         },
         {
           "q": "How is it secured?",
-          "a": "It features heavy-duty bindings and stainless copper grommets, with all stitching reinforced for durability."
+          "a": "It features heavy-duty bindings and stainless copper grommets, with all stitching reinforced for durability.",
+          "group": "tech"
         },
         {
           "q": "What size is available?",
-          "a": "The privacy screen is available up to 12m wide and any length, in any color."
+          "a": "The privacy screen is available up to 12m wide and any length, in any color.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -574,19 +882,63 @@
       "faq": [
         {
           "q": "What is an olive net used for?",
-          "a": "Olive nets (also called harvest nets) are used for olive collection, and for harvesting walnuts, hazelnuts, chestnuts, plums and other fruit."
+          "a": "Olive nets (also called harvest nets) are used for olive collection, and for harvesting walnuts, hazelnuts, chestnuts, plums and other fruit.",
+          "group": "tech"
         },
         {
           "q": "Can I customize the knitting structure and GSM?",
-          "a": "Yes, knitting structure, GSM and color are all customizable to match your crop and harvesting method."
+          "a": "Yes, knitting structure, GSM and color are all customizable to match your crop and harvesting method.",
+          "group": "tech"
         },
         {
           "q": "What width is available?",
-          "a": "The net is available up to 12m wide and any length."
+          "a": "The net is available up to 12m wide and any length.",
+          "group": "tech"
         },
         {
           "q": "Is it UV treated?",
-          "a": "Yes, the net is UV treated for reliable outdoor use across harvest seasons."
+          "a": "Yes, the net is UV treated for reliable outdoor use across harvest seasons.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [
@@ -641,19 +993,63 @@
       "faq": [
         {
           "q": "What is anti-bee netting used for?",
-          "a": "Anti-bee net impedes bees and predators such as wasps, restricts pollination, and is used for greenhouse isolation and agricultural crop protection."
+          "a": "Anti-bee net impedes bees and predators such as wasps, restricts pollination, and is used for greenhouse isolation and agricultural crop protection.",
+          "group": "tech"
         },
         {
           "q": "Is it weather resistant?",
-          "a": "Yes, the net is weather, water and acid resistant, and UV-stabilized for outdoor use."
+          "a": "Yes, the net is weather, water and acid resistant, and UV-stabilized for outdoor use.",
+          "group": "tech"
         },
         {
           "q": "What width is available?",
-          "a": "The net is available up to 12m wide and any length."
+          "a": "The net is available up to 12m wide and any length.",
+          "group": "tech"
         },
         {
           "q": "Can I order a custom color?",
-          "a": "Yes, the anti-bee net is available in any color."
+          "a": "Yes, the anti-bee net is available in any color.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [],
@@ -698,19 +1094,63 @@
       "faq": [
         {
           "q": "What is anti-bird netting used for?",
-          "a": "Anti-bird net is used for fruit orchard bird protection, crop protection from birds, pond and fish farm protection, and building and structure protection."
+          "a": "Anti-bird net is used for fruit orchard bird protection, crop protection from birds, pond and fish farm protection, and building and structure protection.",
+          "group": "tech"
         },
         {
           "q": "Is it weather resistant?",
-          "a": "Yes, the net is UV-stabilized and weather, water and acid resistant for long-term outdoor use."
+          "a": "Yes, the net is UV-stabilized and weather, water and acid resistant for long-term outdoor use.",
+          "group": "tech"
         },
         {
           "q": "What width is available?",
-          "a": "The net is available up to 12m wide and any length."
+          "a": "The net is available up to 12m wide and any length.",
+          "group": "tech"
         },
         {
           "q": "Can I order a custom color?",
-          "a": "Yes, the anti-bird net is available in any color."
+          "a": "Yes, the anti-bird net is available in any color.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [],
@@ -757,19 +1197,63 @@
       "faq": [
         {
           "q": "What is weed barrier fabric used for?",
-          "a": "Weed barrier fabric is used as an underlayer for artificial grass, and for vegetable patches, flower beds, ground cover, gardens and driveways."
+          "a": "Weed barrier fabric is used as an underlayer for artificial grass, and for vegetable patches, flower beds, ground cover, gardens and driveways.",
+          "group": "tech"
         },
         {
           "q": "Does it let water through?",
-          "a": "Yes, the fabric is needle-punched for water and air transmission with superior permeability, so water and air can pass through while blocking weeds."
+          "a": "Yes, the fabric is needle-punched for water and air transmission with superior permeability, so water and air can pass through while blocking weeds.",
+          "group": "tech"
         },
         {
           "q": "Is it chemical free?",
-          "a": "Yes, the fabric is chemical free, durable and corrosion resistant."
+          "a": "Yes, the fabric is chemical free, durable and corrosion resistant.",
+          "group": "tech"
         },
         {
           "q": "Can it be reused?",
-          "a": "Yes, the weed barrier is reusable and can be cleaned with water for repeated use."
+          "a": "Yes, the weed barrier is reusable and can be cleaned with water for repeated use.",
+          "group": "tech"
+        },
+        {
+          "q": "What is the MOQ?",
+          "a": "MOQ depends on the product, specification, and color. Contact us with your requirements and we will confirm the minimum order quantity for your specific needs, including flexible trial-order options.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide OEM labels & packaging?",
+          "a": "Yes, we offer OEM/ODM services including custom logo printing, private label packaging, barcode stickers, and branded polybag wrapping. Please contact us to discuss your labeling and packaging requirements.",
+          "group": "biz"
+        },
+        {
+          "q": "Can you provide samples?",
+          "a": "Sample availability and terms vary by product. Contact us with the product you are interested in and we will confirm sample options, sizes, and shipping arrangements.",
+          "group": "biz"
+        },
+        {
+          "q": "How long does shipping take?",
+          "a": "Production lead time and shipping duration depend on the product, quantity, and destination. Contact us for a confirmed lead time and delivery schedule for your order.",
+          "group": "biz"
+        },
+        {
+          "q": "What is the production lead time?",
+          "a": "Production preparation usually takes about one week before manufacturing begins. For orders involving multiple containers, the first container usually takes the longest to complete and dispatch. Subsequent containers may move faster once production is running smoothly.\n\nPlease note that the one-week period refers to pre-production preparation only, not the total order lead time. Total lead time depends on product specifications, order quantity, and the current production schedule. Contact us for an estimate for your specific order.",
+          "group": "biz"
+        },
+        {
+          "q": "What payment methods do you accept?",
+          "a": "We support common international trade payment methods. Contact us to agree on the payment terms that work best for both parties.",
+          "group": "biz"
+        },
+        {
+          "q": "Do you offer after-sales support?",
+          "a": "Yes, our sales team provides ongoing support after shipment, including tracking updates, loading photos, and documentation for customs clearance.",
+          "group": "biz"
+        },
+        {
+          "q": "What if the product does not meet specifications?",
+          "a": "We inspect each batch before shipment and stand behind our product quality. Please contact us to discuss our quality assurance and after-sales terms in detail.",
+          "group": "biz"
         }
       ],
       "detailImages": [],

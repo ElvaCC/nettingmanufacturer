@@ -451,6 +451,31 @@ export default function AdminPanel() {
                   <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], detailImages: [...(p[i].detailImages || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Detail Image</button>
                 </div>
               </div>
+              {/* ── FAQ (per-product, fully editable) ── */}
+              <div>
+                <label style={lbl}>FAQ ({product.faq?.length || 0})</label>
+                <p style={{ fontSize: 12, color: '#94a3b8', margin: '0 0 10px' }}>Shown on this product page only. Technical questions appear first, commercial ones in the second block. Empty rows are hidden on the site.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {(product.faq || []).map((f: any, fi: number) => (
+                    <div key={fi} style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: 12, background: '#fafbfc', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <span style={{ fontSize: 12, color: '#94a3b8', minWidth: 20 }}>{fi + 1}</span>
+                        <select value={f.group || 'tech'} onChange={e => { const p = [...content.products]; const n = [...(p[i].faq || [])]; n[fi] = { ...n[fi], group: e.target.value }; p[i] = { ...p[i], faq: n }; setContent({ ...content, products: p }); }} style={s({ width: 160, padding: '6px 10px' })}>
+                          <option value="tech">Technical</option>
+                          <option value="biz">Commercial</option>
+                        </select>
+                        <span style={{ flex: 1 }} />
+                        <button disabled={fi === 0} onClick={() => { if (fi > 0) { const p = [...content.products]; const n = [...(p[i].faq || [])]; [n[fi - 1], n[fi]] = [n[fi], n[fi - 1]]; p[i] = { ...p[i], faq: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: fi === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                        <button disabled={fi === (product.faq?.length || 0) - 1} onClick={() => { if (fi < (product.faq?.length || 0) - 1) { const p = [...content.products]; const n = [...(p[i].faq || [])]; [n[fi], n[fi + 1]] = [n[fi + 1], n[fi]]; p[i] = { ...p[i], faq: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: fi === (product.faq?.length || 0) - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                        <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], faq: (p[i].faq || []).filter((_, idx) => idx !== fi) }; setContent({ ...content, products: p }); }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                      </div>
+                      <input type="text" value={f.q || ''} placeholder="Question e.g. What mesh opening should I choose?" onChange={e => { const p = [...content.products]; const n = [...(p[i].faq || [])]; n[fi] = { ...n[fi], q: e.target.value }; p[i] = { ...p[i], faq: n }; setContent({ ...content, products: p }); }} style={s()} />
+                      <textarea value={f.a || ''} placeholder="Answer — 2 to 3 sentences, plain English" rows={3} onChange={e => { const p = [...content.products]; const n = [...(p[i].faq || [])]; n[fi] = { ...n[fi], a: e.target.value }; p[i] = { ...p[i], faq: n }; setContent({ ...content, products: p }); }} style={s({ resize: 'vertical', lineHeight: 1.55, fontFamily: 'inherit', minHeight: 68 })} />
+                    </div>
+                  ))}
+                  <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], faq: [...(p[i].faq || []), { q: '', a: '', group: 'tech' }] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add FAQ</button>
+                </div>
+              </div>
               <button onClick={() => { setContent({ ...content, products: content.products.filter((_, idx) => idx !== i) }); setEditProd(null); }} style={{ padding: '8px 18px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626', alignSelf: 'flex-start' }}>Delete Product</button>
             </div>
           )}
