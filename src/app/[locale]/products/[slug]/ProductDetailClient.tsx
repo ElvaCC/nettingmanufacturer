@@ -311,8 +311,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   title: 'Export-Oriented Cooperation',
                   desc: 'We handle specifications, samples, scheduling and export documents with you.',
                   imgs: [
-                    { src: '/products/debris-netting/debris-netting-factory-loading.jpg', alt: 'Netting rolls being loaded into an open container in front of the Jiacheng factory building', pos: 'center top' },
-                    { src: '/images/factory/jiacheng-warehouse-packed-rolls-pallet.jpg', alt: 'Bundled netting rolls strapped on pallets waiting to be loaded' },
+                    { src: '/images/factory/jiacheng-loading-yard-forklift.jpg', alt: 'Forklift pushing a pallet of red netting rolls into an open container in front of the Jiacheng factory building' },
+                    { src: '/images/factory/jiacheng-container-interior-rolls.jpg', alt: 'Red netting rolls stacked floor to ceiling inside a shipping container' },
                   ],
                 },
                 {
