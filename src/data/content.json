@@ -43,12 +43,12 @@
       "id": "debris-net",
       "name": "Safety Debris Netting",
       "nameZh": "",
-      "description": "High density knitted polyethylene mesh netting (100% virgin HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701. Reinforced eyelet holes for fastening. Will not unravel when cut. Stays flexible in cold weather.",
+      "description": "High density knitted polyethylene mesh netting (HDPE). 1/8\", 1/16\" mesh hole opening. Fire-Retardant: Meets NFPA 701. Reinforced border edge for fastening. Will not unravel when cut. Stays flexible in cold weather.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Mesh Opening: 1/8\", 1/16\" opening",
         "Fire-Retardant: NFPA 701",
-        "Reinforced eyelet holes",
+        "Reinforced border edge for fastening",
         "Will not unravel when cut",
         "Flexible in cold weather",
         "Color: Any color available"
@@ -102,7 +102,7 @@
         },
         {
           "q": "Will the netting unravel when cut to size?",
-          "a": "No. The HDPE netting is knitted so it will not unravel when cut, and it features reinforced eyelet holes for easy and secure installation on scaffolding or structures.",
+          "a": "No. The HDPE netting is knitted so it will not unravel when cut, and it features a reinforced border edge for easy and secure installation on scaffolding or structures.",
           "group": "tech"
         },
         {
@@ -175,7 +175,7 @@
       "nameZh": "",
       "description": "High density knitted polyethylene mesh netting . 1/4\" mesh hole opening. Fire-Retardant: Meets NFPA 701. Reinforced edge for fastening. Will not unravel when cut. Stays flexible in cold weather. Any color is available.",
       "specs": [
-        "Material:  High density knitted polyethylene(HDPE)",
+        "Material: High density knitted polyethylene (HDPE)",
         "Mesh Opening: 1/4\"×1/4\" hole opening",
         "Flame Retardant: Meets NFPA 701",
         "Reinforced edge for fastening",
@@ -303,9 +303,9 @@
       "id": "mesh-tarp",
       "name": "Mesh Tarp",
       "nameZh": "",
-      "description": "1/16\" mesh hole openings, made of 100% virgin HDPE. Brass grommets spaced apart every 2\" on all edges. Double-stitch sides and all hems are re-enforced with polyester webbing. UV treated & protected. Fire-Retardant: Meets NFPA 701 Method 2. Will not unravel when cut. Stays flexible in cold weather.",
+      "description": "1/16\" mesh hole openings, made of high density polyethylene (HDPE). Brass grommets spaced apart every 2\" on all edges. Double-stitch sides and all hems are re-enforced with polyester webbing. UV treated & protected. Fire-Retardant: Meets NFPA 701 Method 2. Will not unravel when cut. Stays flexible in cold weather.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Mesh Opening: 1/16\" openings",
         "Brass grommets every 2\"",
         "Double-stitched, reinforced hems",
@@ -418,9 +418,9 @@
       "id": "tape-shade-net",
       "name": "Tape Shade Net",
       "nameZh": "",
-      "description": "Made of 100% virgin HDPE. 30%-95% shade rate. Water-proof. UV treated. Width: 1m-12m (any length available). Color: Customize any color. Packaging: 1 roll/bag or 1 sheet/bag.",
+      "description": "Made of high density polyethylene (HDPE). 30%-95% shade rate. Water-proof. UV treated. Width: 1m-12m (any length available). Color: Customize any color. Packaging: 1 roll/bag or 1 sheet/bag.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Shade rate: 30%-95%",
         "Water-proof",
         "UV treated",
@@ -532,9 +532,9 @@
       "id": "shade-sail",
       "name": "Shade Sail",
       "nameZh": "",
-      "description": "Made of 100% virgin HDPE. Treated with a UV-stabilizing compound to prevent shade sails from drying out, tearing, and fading, significantly extending the lifespan. All edges are constructed with heavy-duty double-layered reinforced stitched seams, preventing frayed edges and out of shape. Each corner ends with a durable D-ring for easy hanging. Blocks 95% of harmful UV.",
+      "description": "Made of high density polyethylene (HDPE). Treated with a UV-stabilizing compound to prevent shade sails from drying out, tearing, and fading, significantly extending the lifespan. All edges are constructed with heavy-duty double-layered reinforced stitched seams, preventing frayed edges and out of shape. Each corner ends with a durable D-ring for easy hanging. Blocks 95% of harmful UV.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "UV-stabilizing compound treatment",
         "Double-layered reinforced stitched seams",
         "Durable D-ring corners",
@@ -632,9 +632,9 @@
       "id": "anti-hail-net",
       "name": "Anti Hail Net / Drape Net",
       "nameZh": "",
-      "description": "100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different knitting structures - different mesh opening and density - are available.",
+      "description": "High density polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different knitting structures - different mesh opening and density - are available.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length available",
         "Weight: 45-70g GSM or custom",
@@ -750,9 +750,9 @@
       "id": "privacy-screen",
       "name": "Privacy Screen",
       "nameZh": "",
-      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. 90% Visibility Blockage. Edges are finished with heavy duty bindings and stainless copper grommets, all stitching are reinforced. Any color is available.",
+      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. 90% Visibility Blockage. Edges are finished with heavy duty bindings and stainless copper grommets, all stitching are reinforced. Any color is available.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length",
         "90% Visibility blockage",
@@ -860,9 +860,9 @@
       "id": "olive-net",
       "name": "Olive Net / Harvest Net",
       "nameZh": "",
-      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different knitting structures - different mesh opening and density - and GSM options are available.",
+      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different knitting structures - different mesh opening and density - and GSM options are available.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length",
         "UV Treated",
@@ -970,9 +970,9 @@
       "id": "anti-bee-net",
       "name": "Anti-Bee Net",
       "nameZh": "",
-      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows the light, moisture, and spraying to reach the plants. Impedes bees and other predators such as wasps. Restricts pollination.",
+      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows the light, moisture, and spraying to reach the plants. Impedes bees and other predators such as wasps. Restricts pollination.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length",
         "UV-stabilized",
@@ -1071,9 +1071,9 @@
       "id": "anti-bird-net",
       "name": "Anti-Bird Net",
       "nameZh": "",
-      "description": "Made of 100% Virgin High Density Polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows light, moisture, and spraying to reach the plants.",
+      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV-stabilized. Any color is available. Weather, water, and acid resistant. Allows light, moisture, and spraying to reach the plants.",
       "specs": [
-        "Material: 100% virgin HDPE",
+        "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length",
         "UV-stabilized",
@@ -1286,8 +1286,8 @@
     "process": [
       {
         "step": "01",
-        "title": "Virgin HDPE",
-        "desc": "Premium virgin HDPE raw material selection"
+        "title": "HDPE Material",
+        "desc": "High density polyethylene (HDPE) selected for outdoor netting"
       },
       {
         "step": "02",
