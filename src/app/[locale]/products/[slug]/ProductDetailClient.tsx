@@ -14,7 +14,7 @@ interface ProductDetailClientProps {
 }
 
 export default function ProductDetailClient({ slug, locale }: ProductDetailClientProps) {
-  const { products, contact } = useContent();
+  const { products, contact, rangeNotice } = useContent();
   const product = products.find((p: any) => p.id === slug);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   // Thumbnails are deliberately small so the section stays short; clicking one
@@ -50,6 +50,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   const allImages = product.images || [];
   const currentSrc = allImages[currentImgIndex] || '';
   const detailImages = (product as any).detailImages || [];
+  // Popular roll sizes in imperial units, editable per product in /admin.
+  // Blank rows are dropped so a trailing empty input does not render an empty cell.
+  const popularSizes = (((product as any).popularSizes || []) as string[]).filter(s => s && s.trim());
   const deliveryRecords = (product as any).deliveryRecords || [];
   const packagingOpts = (product as any).packagingOptions || [];
   const projectCases = (product as any).projectCases || [];
@@ -187,12 +190,57 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>
                     {(product as any).detailTitle || 'Product Detail'}
                   </h2>
-                  <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
-                    {detailImages.map((img: string, i: number) => (
-                      <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
-                        <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`, img)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                  {/* Two columns when the product has US roll sizes: the close-up
+                      photo on the left, the size list on the right. With a single
+                      detail image the photo grid used to leave a dead half-row, so
+                      the sizes take that space instead of sitting below the fold.
+                      On narrow screens "rgrid-2" collapses both columns. */}
+                  <div className={popularSizes.length > 0 ? 'rgrid-2' : ''} style={{ display: 'grid', gridTemplateColumns: popularSizes.length > 0 ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr', gap: 20, alignItems: 'start' }}>
+                    {/* Without size entries the photo grid keeps its original two-column
+                        layout, so products that have no size list are unchanged. Only
+                        the size list needs the left column to itself. */}
+                    <div style={{ display: 'grid', gridTemplateColumns: detailImages.length > 1 || popularSizes.length === 0 ? 'repeat(2, minmax(0, 1fr))' : '1fr', gap: 14 }}>
+                      {detailImages.map((img: string, i: number) => (
+                        <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                          <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`, img)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Popular US roll sizes (imperial, per product, editable in /admin).
+                        Sizes are what buyers actually search for ("4 ft x 150 ft debris
+                        netting"), so they belong in plain text rather than in an image. */}
+                    {popularSizes.length > 0 && (
+                      <div>
+                        <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>
+                          Popular Roll Sizes for the US Market
+                        </h3>
+                        <p style={{ fontSize: 12, color: '#4b5563', lineHeight: 1.6, marginBottom: 12 }}>
+                          These are some of the popular roll sizes we supply to the US market. Custom widths and lengths are available to meet your specific requirements.
+                        </p>
+                        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }}>
+                          {popularSizes.map((size, i) => (
+                            <li
+                              key={`${i}-${size}`}
+                              style={{
+                                background: '#f6f9fd',
+                                border: '1px solid #e3ebf5',
+                                borderRadius: 8,
+                                padding: '13px 8px',
+                                textAlign: 'center',
+                                fontSize: 14,
+                                fontWeight: 700,
+                                color: '#0B4C8E',
+                                fontVariantNumeric: 'tabular-nums',
+                                letterSpacing: '.01em',
+                              }}
+                            >
+                              {size}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
+                    )}
                   </div>
                 </div>
               </div>
@@ -646,6 +694,50 @@ MODULE 13: Related Products
         {/* (Removed) text-only cross-links that repeated the Related Products
             cards directly above. The same three product links are already
             present as the cards, so no internal link was lost. */}
+
+        {/* Range notice — site-wide copy edited once in /admin, rendered on all
+            product pages. Placed right under Related Products because this is
+            the moment a buyer works out that their product is not on the page
+            and is about to leave; the link back to the full list is the exit
+            we want them to take instead. */}
+        {rangeNotice?.title && (
+          <div className="range-notice" style={{
+            marginTop: 22, padding: '22px 26px', borderRadius: 12,
+            background: '#f0f7ff', border: '1px solid #dbe7f5',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
+          }}>
+            <div style={{ maxWidth: 620 }}>
+              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0B4C8E', margin: '0 0 8px' }}>
+                {rangeNotice.title}
+              </h3>
+              {rangeNotice.text && (
+                <p style={{ fontSize: 13.5, color: '#4b5563', lineHeight: 1.7, margin: 0 }}>
+                  {rangeNotice.text}
+                </p>
+              )}
+            </div>
+            <div className="range-notice-actions" style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
+              <InquiryModal locale={locale} productName={displayName} trigger={
+                <div style={{
+                  padding: '12px 26px', background: '#0E7A45', color: '#fff', borderRadius: 8,
+                  fontWeight: 700, fontSize: 14, textAlign: 'center', cursor: 'pointer',
+                  whiteSpace: 'nowrap', transition: 'background 0.15s',
+                }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#0A5F36'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0E7A45'; }}>
+                  Contact Us
+                </div>
+              } />
+              <a href={getPath('/products')} style={{
+                fontSize: 13, fontWeight: 600, color: '#0B4C8E', textAlign: 'center',
+                textDecoration: 'underline',
+              }}>
+                View All Products →
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* Cross-link to Applications page (locale-aware) */}
         <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
           <a href={getPath('/applications')} style={{ color: '#0B4C8E', textDecoration: 'underline', fontWeight: 600 }}>
@@ -724,6 +816,8 @@ MODULE 13: Related Products
           .why-grid { grid-template-columns: 1fr !important; }
           .pkg-grid { grid-template-columns: 1fr !important; }
           .delivery-grid { grid-template-columns: 1fr !important; }
+          .range-notice { flex-direction: column; align-items: flex-start !important; }
+          .range-notice-actions { width: 100%; }
         }
         @media (max-width: 900px) {
           .product-hero-grid { grid-template-columns: 1fr !important; }

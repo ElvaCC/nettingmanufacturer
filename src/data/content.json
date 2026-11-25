@@ -280,6 +280,12 @@
       "detailImages": [
         "/products/debris-netting/red-debris-netting-mesh-detail.jpg"
       ],
+      "popularSizes": [
+        "4' × 150'",
+        "5'6\" × 150'",
+        "8'6\" × 150'",
+        "10'6\" × 150'"
+      ],
       "imageAlt": {
         "/products/debris-netting/construction-safety-netting-black-roll.jpg": "Black HDPE construction safety netting roll with a close-up of the mesh",
         "/products/debris-netting/blue-debris-netting-scaffold.jpg": "Blue debris netting installed on the scaffolding of a building under construction",
@@ -1519,5 +1525,9 @@
       "label": "Bulk Inventory - Ready for Global Export",
       "span": "full"
     }
-  ]
+  ],
+  "rangeNotice": {
+    "title": "Looking for Something Else?",
+    "text": "The products shown on this website represent only part of our range. If you can't find what you're looking for, please contact us. We also offer customized netting solutions to meet your specific requirements."
+  }
 }

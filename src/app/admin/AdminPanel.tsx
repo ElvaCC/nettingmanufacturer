@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 interface FactoryImage { src: string; alt: string; label: string; span: 'full' | 'half'; }
 interface FactoryHighlight { icon: string; title: string; desc: string; }
 interface FactoryInfoCard { icon: string; title: string; value: string; }
-interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; detailTitle?: string; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
+interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; detailTitle?: string; popularSizes?: string[]; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
 interface BlogPost { id: number; title: string; date: string; excerpt: string; category: string; }
 interface AppCategory { name: string; items: string[]; }
 interface Stat { number: string; label: string; }
@@ -25,6 +25,7 @@ interface SiteContent {
   featuresSection: { title: string; description: string; customDescription: string; image: string; stats: Stat[] };
   applications: AppCategory[];
   contactPage: { title: string; subtitle: string; exportMarkets: string };
+  rangeNotice: { title: string; text: string };
 }
 
 const defaultContent: SiteContent = {
@@ -41,9 +42,10 @@ const defaultContent: SiteContent = {
   featuresSection: { title: '', description: '', customDescription: '', image: '', stats: [] },
   applications: [],
   contactPage: { title: '', subtitle: '', exportMarkets: '' },
+  rangeNotice: { title: '', text: '' },
 };
 
-const TABS = ['hero', 'about', 'factory', 'products', 'blog', 'applications', 'cta', 'features', 'business', 'contact', 'footer'] as const;
+const TABS = ['hero', 'about', 'factory', 'products', 'blog', 'applications', 'cta', 'features', 'business', 'notice', 'contact', 'footer'] as const;
 type TabKey = typeof TABS[number];
 
 const TAB_LABELS: Record<TabKey, string> = {
@@ -56,6 +58,7 @@ const TAB_LABELS: Record<TabKey, string> = {
   cta: 'CTA Section',
   features: 'Features',
   business: 'Business Info',
+  notice: 'Product Page Notice',
   contact: 'Contact',
   footer: 'Footer',
 };
@@ -139,6 +142,7 @@ export default function AdminPanel() {
           featuresSection: data.featuresSection || defaultContent.featuresSection,
           applications: data.applications || defaultContent.applications,
           contactPage: data.contactPage || defaultContent.contactPage,
+          rangeNotice: data.rangeNotice || defaultContent.rangeNotice,
         };
         setContent(sc);
       })
@@ -167,6 +171,7 @@ export default function AdminPanel() {
           featuresSection: content.featuresSection,
           applications: content.applications,
           contactPage: content.contactPage,
+          rangeNotice: content.rangeNotice,
         }),
       });
       const data = await res.json();
@@ -451,6 +456,22 @@ export default function AdminPanel() {
                   <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], detailImages: [...(p[i].detailImages || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Detail Image</button>
                 </div>
               </div>
+              {/* ── Popular US roll sizes (imperial sizes buyers search for) ── */}
+              <div>
+                <label style={lbl}>Popular US Roll Sizes ({product.popularSizes?.length || 0})</label>
+                <p style={{ fontSize: 12, color: '#94a3b8', margin: '0 0 10px' }}>Shown under the detail photos on this product page. Write them the way US buyers do, e.g. 4&apos; × 150&apos;. Leave empty to hide the table.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {(product.popularSizes || []).map((size, si) => (
+                    <div key={si} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <input type="text" value={size} placeholder="4' × 150'" onChange={e => { const p = [...content.products]; const n = [...(p[i].popularSizes || [])]; n[si] = e.target.value; p[i] = { ...p[i], popularSizes: n }; setContent({ ...content, products: p }); }} style={{ ...s(), flex: 1 }} />
+                      <button disabled={si === 0} onClick={() => { if (si > 0) { const p = [...content.products]; const n = [...(p[i].popularSizes || [])]; [n[si - 1], n[si]] = [n[si], n[si - 1]]; p[i] = { ...p[i], popularSizes: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: si === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                      <button disabled={si === (product.popularSizes?.length || 0) - 1} onClick={() => { if (si < (product.popularSizes?.length || 0) - 1) { const p = [...content.products]; const n = [...(p[i].popularSizes || [])]; [n[si], n[si + 1]] = [n[si + 1], n[si]]; p[i] = { ...p[i], popularSizes: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: si === (product.popularSizes?.length || 0) - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                      <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], popularSizes: (p[i].popularSizes || []).filter((_, idx) => idx !== si) }; setContent({ ...content, products: p }); }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                    </div>
+                  ))}
+                  <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], popularSizes: [...(p[i].popularSizes || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Size</button>
+                </div>
+              </div>
               {/* ── FAQ (per-product, fully editable) ── */}
               <div>
                 <label style={lbl}>FAQ ({product.faq?.length || 0})</label>
@@ -588,6 +609,26 @@ export default function AdminPanel() {
     </div>
   );
 
+  const NoticeTab = (
+    <div style={{ maxWidth: 800 }}>
+      <h2 style={{ color: '#0B4C8E' }}>Product Page Notice</h2>
+      <p style={{ color: '#64748b', fontSize: 13, marginBottom: 20 }}>
+        Shown on <strong>every product page</strong>, directly under Related Products. One copy here updates all products at once, so the wording stays identical across the site. Clear both fields to hide the block.
+      </p>
+      <div style={card}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div><label style={lbl}>Heading</label><input type="text" value={content.rangeNotice.title} onChange={e => upd('rangeNotice', 'title', e.target.value)} placeholder="Looking for Something Else?" style={s()} /></div>
+          <div><label style={lbl}>Message</label><textarea value={content.rangeNotice.text} onChange={e => upd('rangeNotice', 'text', e.target.value)} rows={4} style={s({ resize: 'vertical' as const })} /></div>
+        </div>
+      </div>
+      <div style={{ ...card, background: '#f8fafc' }}>
+        <p style={{ fontSize: 12, color: '#64748b', margin: 0, lineHeight: 1.7 }}>
+          The block always carries two buttons that are not editable text: <strong>Contact Us</strong> (opens the inquiry form) and <strong>View All Products</strong> (links to the product list). They are there because a notice without an exit does not convert.
+        </p>
+      </div>
+    </div>
+  );
+
   const ContactTab = (
     <div style={{ maxWidth: 800 }}>
       <h2 style={{ color: '#0B4C8E' }}>Contact Information</h2>
@@ -637,6 +678,7 @@ export default function AdminPanel() {
     cta: CTATab,
     features: FeaturesTab,
     business: BusinessTab,
+    notice: NoticeTab,
     contact: ContactTab,
     footer: FooterTab,
   };

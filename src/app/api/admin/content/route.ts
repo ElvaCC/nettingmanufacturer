@@ -25,6 +25,7 @@ export async function GET() {
         featuresSection: githubData.featuresSection || {},
         contactPage: githubData.contactPage || {},
         business: githubData.business || {},
+        rangeNotice: githubData.rangeNotice || {},
         _source: 'github',
       };
       return NextResponse.json(result, {
@@ -54,6 +55,7 @@ export async function GET() {
       featuresSection: data.featuresSection || {},
       contactPage: data.contactPage || {},
       business: data.business || {},
+      rangeNotice: data.rangeNotice || {},
       _source: 'file',
     };
 

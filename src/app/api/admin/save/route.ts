@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
     if (patch.ctaSection) existing.ctaSection = { ...existing.ctaSection, ...patch.ctaSection };
     if (patch.featuresSection) existing.featuresSection = { ...existing.featuresSection, ...patch.featuresSection };
     if (patch.contactPage) existing.contactPage = { ...existing.contactPage, ...patch.contactPage };
+    if (patch.rangeNotice) existing.rangeNotice = { ...existing.rangeNotice, ...patch.rangeNotice };
     if (patch.business) existing.business = { ...existing.business, ...patch.business };
 
     // 3. Save to GitHub (persistent, never expires)
