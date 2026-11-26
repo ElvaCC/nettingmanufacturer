@@ -9,9 +9,19 @@ export default function FactoryPage() {
     <div style={{ padding: "80px 24px", background: "#f9fafb", minHeight: "100vh" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <h1 style={{ fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 16, color: "#0B4C8E" }}>{factory.title}</h1>
-        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 48, maxWidth: 800, margin: "0 auto 48px" }}>
+        <p style={{ textAlign: "center", color: "#666", fontSize: 16, marginBottom: 32, maxWidth: 800, margin: "0 auto 32px" }}>
           {factory.subtitle}
         </p>
+
+        {/* Factory hero — container loading with our company name visible */}
+        <div className="factory-hero">
+          <img
+            src="/images/factory/factory-hero-container-loading.jpg"
+            alt="Shandong Jiacheng Chemical Fiber Products factory building with an export container being loaded at our own gate"
+            width={1400}
+            height={648}
+          />
+        </div>
 
         {/* Factory Info Cards */}
         <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, marginBottom: 64 }}>
@@ -21,7 +31,7 @@ export default function FactoryPage() {
           </div>
           <div style={{ background: "#fff", padding: 32, borderRadius: 12, textAlign: "center", border: "1px solid #e5e7eb" }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: "#0B4C8E" }}>{factory.info.experience}</div>
-            <div style={{ fontSize: 14, marginTop: 8, color: "#666" }}>Experience</div>
+            <div style={{ fontSize: 14, marginTop: 8, color: "#666" }}>Knitting Machines</div>
           </div>
           <div style={{ background: "#fff", padding: 32, borderRadius: 12, textAlign: "center", border: "1px solid #e5e7eb" }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: "#0B4C8E" }}>{factory.info.employees}</div>
@@ -66,6 +76,30 @@ export default function FactoryPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Container Loading Gallery */}
+        <h2 style={{ fontSize: 28, fontWeight: 700, textAlign: "center", margin: "72px 0 12px", color: "#0B4C8E" }}>
+          Loading at Our Own Gate
+        </h2>
+        <p style={{ textAlign: "center", color: "#8a94a6", fontSize: 14, marginBottom: 32 }}>
+          Containers packed and loaded in Shandong — see our name on the building, not just on the invoice.
+        </p>
+        <div className="loading-gallery">
+          <img
+            src="/images/factory/loading-gallery-1.jpg"
+            alt="Forklift loading HDPE netting rolls into a container outside the Shandong Jiacheng Chemical Fiber Products factory"
+            width={900}
+            height={675}
+            loading="lazy"
+          />
+          <img
+            src="/images/factory/loading-gallery-2.jpg"
+            alt="Palletised pink HDPE netting rolls ready for container loading with the Jiacheng company name on the building"
+            width={900}
+            height={675}
+            loading="lazy"
+          />
         </div>
       </div>
     </div>
