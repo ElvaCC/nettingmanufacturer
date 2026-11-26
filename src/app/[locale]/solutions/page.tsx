@@ -42,7 +42,7 @@ const SOLUTIONS = [
       "Regulate temperature and light for agriculture, greenhouses, and outdoor spaces with UV-treated HDPE shade netting.",
     productIds: ["tape-shade-net", "shade-sail"],
     points: [
-      "Multiple shade factors and knitting structures",
+      "Multiple shade factors and mesh patterns",
       "Custom sizes, colors, and edge finishing",
       "Breathable knit resists wind load and tearing",
     ],
@@ -55,7 +55,7 @@ const SOLUTIONS = [
       "Shield crops from hail, birds, insects, and weeds while supporting efficient harvesting workflows.",
     productIds: ["anti-hail-net", "olive-net", "anti-bee-net", "anti-bird-net", "weed-barrier"],
     points: [
-      "Crop-specific knitting structures for targeted protection",
+      "Crop-specific mesh patterns for targeted protection",
       "Lightweight yet durable for multi-season use",
       "Custom roll widths for large-area coverage",
     ],

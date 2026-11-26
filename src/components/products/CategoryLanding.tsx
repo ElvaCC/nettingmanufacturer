@@ -131,7 +131,7 @@ export default function CategoryLanding({ categoryId, locale }: Props) {
             Request a quote for {category.label}
           </h2>
           <p style={{ opacity: 0.85, marginBottom: 28, fontSize: 15, lineHeight: 1.7, maxWidth: 640, marginLeft: 'auto', marginRight: 'auto' }}>
-            Tell us the product, knitting structure, size and quantity — we will reply with factory-direct pricing.
+            Tell us the product, mesh pattern, size and quantity — we will reply with factory-direct pricing.
           </p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <InquiryModal locale={locale} productName={category.label} trigger={

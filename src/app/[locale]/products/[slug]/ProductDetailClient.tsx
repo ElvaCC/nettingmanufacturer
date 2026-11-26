@@ -369,8 +369,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 },
                 {
                   icon: '\u2699\uFE0F',
-                  title: '70 Machines, 10 Containers a Week',
-                  desc: '70 machines, up to 10 containers a week \u2014 bulk supply on schedule.',
+                  title: '70 Machines, 14 Containers a Week',
+                  desc: '70 machines, up to 14 containers a week \u2014 bulk supply on schedule.',
                   imgs: [
                     { src: '/images/factory/jiacheng-workshop-wide-angle-production.jpg', alt: 'Rows of warp knitting machines running along the length of the Jiacheng workshop' },
                     { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Warp knitting machines with yarn creels, an operator checking the fabric beam' },
@@ -378,8 +378,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 },
                 {
                   icon: '\uD83C\uDF0D',
-                  title: 'Export-Oriented Cooperation',
-                  desc: 'We handle specifications, samples, scheduling and export documents with you.',
+                  title: 'Export Experience',
+                  desc: 'We support you with product specifications, samples, production scheduling, and export documentation.',
                   imgs: [
                     { src: '/images/factory/jiacheng-loading-yard-forklift.jpg', alt: 'Forklift pushing a pallet of red netting rolls into an open container in front of the Jiacheng factory building' },
                     { src: '/images/factory/jiacheng-container-interior-rolls.jpg', alt: 'Red netting rolls stacked floor to ceiling inside a shipping container' },
@@ -388,9 +388,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 {
                   icon: '\uD83C\uDFA8',
                   title: 'Flexible Customization',
-                  desc: 'Knitting structure, width, GSM, colour, and fire-retardant or UV \u2014 made to your market.',
+                  desc: 'Mesh Pattern, GSM, width, color, and other specifications can be customized to your requirements.',
                   imgs: [
-                    { src: (product as any).detailImages?.[0] || (product as any).images?.[1] || (product as any).images?.[0] || '', alt: `${product.name} close-up showing the knitting structure` },
+                    { src: (product as any).detailImages?.[0] || (product as any).images?.[1] || (product as any).images?.[0] || '', alt: `${product.name} close-up showing the mesh pattern` },
                   ],
                 },
               ].map((item, i) => (
@@ -473,7 +473,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 contradicts the product. */}
             <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Customization Options</h3>
             <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
-              Available in custom colors (Pantone match), knitting structures, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
+              Available in custom colors (Pantone match), mesh patterns, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
             </p>
           </div>
         </div>
@@ -644,7 +644,7 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
                     style={{ padding: '14px 28px', background: '#0E7A45', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}
                   >Send Inquiry →</button>
                 } />
-                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>Include knitting structure, weight, UV or fire-retardant requirements, quantity and destination port for a faster quotation.</p>
+                <p style={{ fontSize: 11, opacity: 0.5, margin: '14px 0 0' }}>Include mesh pattern, weight, UV or fire-retardant requirements, quantity and destination port for a faster quotation.</p>
               </div>
               {/* Right: download buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -24,7 +24,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     intro:
       'Our construction and safety range covers HDPE warp-knitted netting for debris containment, scaffold protection and general site screening. Made from high density polyethylene (HDPE), with UV treatment available, supplyable in custom roll sizes, colours and edge finishes.',
     selectionPoints: [
-      'Knitting structure — finer mesh for debris containment, larger openings for general site and scaffold protection',
+      'Mesh pattern — finer mesh for debris containment, larger openings for general site and scaffold protection',
       'Fire-retardant options available on request',
       'Custom roll width and length, reinforced edges',
       'Colour options and OEM supply for distributors',
@@ -43,7 +43,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       'Match the net to the protection target — hail, birds, bees or weed control',
       'UV-stabilised material for long-term outdoor exposure',
       'Custom widths and any roll length',
-      'Colour and knitting structure options to suit local growing practice',
+      'Colour and mesh pattern options to suit local growing practice',
     ],
   },
   {

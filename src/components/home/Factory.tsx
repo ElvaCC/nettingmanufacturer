@@ -53,7 +53,7 @@ export default function Factory() {
     { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
     { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
     { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
-    { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, knitting structures, roll widths, and private-label packaging tailored to your market needs." },
+    { icon: "\uD83D\uDCE6", title: "OEM / ODM Available", desc: "Custom colors, mesh patterns, roll widths, and private-label packaging tailored to your market needs." },
     { icon: "\uD83C\uDF0D", title: "Export to 50+ Countries", desc: "Serving construction contractors, agricultural wholesalers, and distributors across 5 continents." },
   ];
   const defaultInfoCards = [

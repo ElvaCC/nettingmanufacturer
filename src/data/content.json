@@ -638,7 +638,7 @@
       "id": "anti-hail-net",
       "name": "Anti Hail Net / Drape Net",
       "nameZh": "",
-      "description": "High density polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different knitting structures - different mesh opening and density - are available.",
+      "description": "High density polyethylene (HDPE). Width: Maximum 12m. Length: Available in any length. Weight (GSM): 45g, 50g, 55g, 60g, 65g, 70g or as your request. Color: Black, Yellow, Green, Blue, Red, Orange or as your request. UV treated & protected. Comprehensive protection against hail for crops, fruit orchard or other things. Different mesh patterns - different mesh opening and density - are available.",
       "specs": [
         "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
@@ -646,7 +646,7 @@
         "Weight: 45-70g GSM or custom",
         "UV treated & protected",
         "Color: Any color available",
-        "Knitting structure: Customizable"
+        "Mesh pattern: Customizable"
       ],
       "applications": [
         "Comprehensive protection against hail for crops",
@@ -674,7 +674,7 @@
         },
         {
           "q": "What weight/GSM is available?",
-          "a": "The net is available in 45-70 GSM or custom weights, with a customizable knitting structure and any length.",
+          "a": "The net is available in 45-70 GSM or custom weights, with a customizable mesh pattern and any length.",
           "group": "tech"
         },
         {
@@ -739,16 +739,16 @@
         "/products/anti-hail-net/anti-hail-net-orchard-cover.jpg": "Anti-hail netting installed over an orchard to protect the trees",
         "/products/anti-hail-net/anti-hail-net-field-cover.jpg": "White anti-hail netting covering a field of crops",
         "/products/anti-hail-net/main-3-web.jpg": "White anti-hail netting roll",
-        "/products/anti-hail-net/anti-hail-netting-mesh-types.jpg": "Sample strips of anti-hail netting in different mesh sizes compared side by side",
+        "/products/anti-hail-net/anti-hail-netting-mesh-types.jpg": "Sample strips of anti-hail netting in different mesh patterns compared side by side",
         "/products/anti-hail-net/main-1.png": "Grey-green anti-hail netting close-up",
         "/products/anti-hail-net/main-2.jpg": "Anti-hail netting samples in several colours with roll labels",
         "/products/anti-hail-net/white-anti-hail-netting-roll-yellow-edge.jpg": "Roll of white anti-hail netting with a yellow reinforced edge on a white background",
         "/products/anti-hail-net/sand-anti-hail-netting-roll-gold-edge.jpg": "Roll of sand-coloured anti-hail netting with a gold reinforced edge",
         "/products/anti-hail-net/white-anti-hail-netting-roll-red-edge.jpg": "Roll of white anti-hail netting with a red reinforced edge on a white background",
-        "/products/anti-hail-net/anti-hail-netting-triangular-mesh-macro.jpg": "Macro close-up of anti-hail netting showing the triangular knitted mesh structure",
+        "/products/anti-hail-net/anti-hail-netting-triangular-mesh-macro.jpg": "Macro close-up of anti-hail netting showing the triangular knitted mesh pattern",
         "/products/anti-hail-net/anti-hail-netting-yellow-edge-mesh-detail.jpg": "Close-up of anti-hail netting with a yellow edge band alongside the knitted mesh",
         "/products/anti-hail-net/anti-hail-netting-blue-edge-mesh-detail.jpg": "Close-up of anti-hail netting with a blue edge band showing the knitted mesh",
-        "/products/anti-hail-net/anti-hail-netting-warp-knit-structure.jpg": "Close-up of the warp-knitted mesh structure of anti-hail netting",
+        "/products/anti-hail-net/anti-hail-netting-warp-knit-structure.jpg": "Close-up of the warp-knitted mesh pattern of anti-hail netting",
         "/products/anti-hail-net/anti-hail-netting-drape-over-fruit.jpg": "White anti-hail netting draped over fruit trees as a protective cover"
       }
     },
@@ -866,14 +866,14 @@
       "id": "olive-net",
       "name": "Olive Net / Harvest Net",
       "nameZh": "",
-      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different knitting structures - different mesh opening and density - and GSM options are available.",
+      "description": "Made of high density polyethylene (HDPE). Width: Maximum 12m. Length: Any length is available. UV Treated. Any color is available. Can also be used to collect many fruits such as walnuts, hazelnuts, chestnuts and plums. Different mesh patterns - different mesh opening and density - and GSM options are available.",
       "specs": [
         "Material: High density knitted polyethylene (HDPE)",
         "Width: Max 12m",
         "Length: Any length",
         "UV Treated",
         "Color: Any color available",
-        "Knitting structure, GSM and color: Customizable"
+        "Mesh pattern, GSM and color: Customizable"
       ],
       "applications": [
         "Olive collection",
@@ -898,8 +898,8 @@
           "group": "tech"
         },
         {
-          "q": "Can I customize the knitting structure and GSM?",
-          "a": "Yes, knitting structure, GSM and color are all customizable to match your crop and harvesting method.",
+          "q": "Can I customize the mesh pattern and GSM?",
+          "a": "Yes, mesh pattern, GSM and color are all customizable to match your crop and harvesting method.",
           "group": "tech"
         },
         {
@@ -963,7 +963,7 @@
         "/products/olive-net/olive-harvest-net-grove.jpg": "Olive harvest netting laid out between rows of olive trees",
         "/products/olive-net/olive-netting-under-tree-with-fruit.jpg": "Olive netting spread beneath an olive tree with olives resting on the mesh",
         "/products/olive-net/main-2.jpg": "Orange-edged olive harvest netting spread on the ground",
-        "/products/olive-net/olive-netting-mesh-brown.jpg": "Close-up of brown olive netting showing the knitted mesh structure",
+        "/products/olive-net/olive-netting-mesh-brown.jpg": "Close-up of brown olive netting showing the knitted mesh pattern",
         "/products/olive-net/olive-netting-mesh-teal.jpg": "Close-up of teal olive netting showing the fine knitted mesh",
         "/products/olive-net/teal-olive-harvest-netting-mesh.jpg": "Close-up of teal olive harvest netting showing the fine knitted mesh",
         "/products/olive-net/sand-olive-harvest-netting-mesh.jpg": "Close-up of sand-coloured olive harvest netting showing the open knitted mesh",
@@ -1172,7 +1172,7 @@
         "/products/anti-bird-net/anti-bird-net-blueberry-cover.jpg": "Green anti-bird netting draped over grape vines, with bunches of grapes visible behind the mesh",
         "/products/anti-bird-net/main-2.jpg": "Black diamond-mesh anti-bird netting close-up",
         "/products/anti-bird-net/anti-bird-netting-fruit-tree.jpg": "Anti-bird netting covering a plum tree to protect ripening fruit",
-        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg": "Green diamond-mesh anti-bird netting laid out flat, showing the knotted mesh structure",
+        "/products/anti-bird-net/green-anti-bird-netting-white-binding.jpg": "Green diamond-mesh anti-bird netting laid out flat, showing the knotted mesh pattern",
         "/products/anti-bird-net/black-anti-bird-netting-mesh.jpg": "Black diamond-mesh anti-bird netting close-up"
       }
     },
@@ -1361,7 +1361,7 @@
       {
         "icon": "📦",
         "title": "OEM / ODM Available",
-        "desc": "Custom colors, knitting structure, width, length, private-label packaging tailored to your market needs."
+        "desc": "Custom colors, mesh pattern, width, length, private-label packaging tailored to your market needs."
       },
       {
         "icon": "🌍",
@@ -1470,7 +1470,7 @@
     "fobPort": "Qingdao, China",
     "sample": "Free samples available (freight collect)",
     "payment": "T/T, L/C, Western Union",
-    "customization": "Custom size, color, GSM, knitting structure, logo printing, private label"
+    "customization": "Custom size, color, GSM, mesh pattern, logo printing, private label"
   },
   "blog": [
     {
