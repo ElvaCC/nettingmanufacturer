@@ -1276,7 +1276,7 @@
   "factory": {
     "title": "Our Manufacturing Facility",
     "subtitle": "State-of-the-Art Production Capability",
-    "description": "Our 20,000 m² manufacturing facility is located in Zhanjia Industrial Park, Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production equipment and a top-notch technical team, we support customization of plastic nets in various specifications, colors, and processes.",
+    "description": "Our 20,000 m² manufacturing facility is located in Shanghe County, Jinan City, Shandong Province, China. Equipped with modern production machinery and supported by an experienced technical team, we manufacture customized HDPE warp-knitted netting in a wide range of specifications, colors, and mesh designs to meet different customer requirements.",
     "info": {
       "area": "20,000 m²",
       "experience": "—",
@@ -1287,58 +1287,42 @@
       {
         "step": "01",
         "title": "HDPE Material",
-        "desc": "High density polyethylene (HDPE) selected for outdoor netting",
-        "image": "/images/factory/process/01-hdpe-raw-material.jpg",
-        "imageAlt": "Stacked HDPE resin bags in the raw material warehouse of Shandong Jiacheng Chemical Fiber Products factory"
+        "desc": "High density polyethylene (HDPE) selected for outdoor netting"
       },
       {
         "step": "02",
         "title": "Drawing",
-        "desc": "Extrusion and filament drawing process",
-        "image": "/images/factory/process/02-yarn-creel-drawing.jpg",
-        "imageAlt": "Rows of HDPE yarn bobbins on the creel feeding the drawing and warping line at Jiacheng Netting"
+        "desc": "Extrusion and filament drawing process"
       },
       {
         "step": "03",
         "title": "Threading the Needle",
-        "desc": "Preparation for precision knitting",
-        "image": "/images/factory/process/03-threading-needle-warp-knitting.jpg",
-        "imageAlt": "Worker threading HDPE yarn sheets into the needle bed of a warp knitting machine"
+        "desc": "Preparation for precision knitting"
       },
       {
         "step": "04",
         "title": "Knitting",
-        "desc": "High-speed warp knitting production",
-        "image": "/images/factory/process/04-warp-knitting-production.jpg",
-        "imageAlt": "Warp knitting machine producing HDPE netting fabric in multiple colours"
+        "desc": "High-speed warp knitting production"
       },
       {
         "step": "05",
         "title": "Quality Testing",
-        "desc": "Rigorous testing of each batch produced",
-        "image": "/images/factory/process/05-mesh-quality-inspection.jpg",
-        "imageAlt": "Finished HDPE netting stretched on a backlit inspection frame during quality testing"
+        "desc": "Rigorous testing of each batch produced"
       },
       {
         "step": "06",
         "title": "Rolling",
-        "desc": "Professional rolling and winding",
-        "image": "/images/factory/process/06-roll-winding-handling.jpg",
-        "imageAlt": "Workers handling a finished HDPE netting roll coming off the winder"
+        "desc": "Professional rolling and winding"
       },
       {
         "step": "07",
         "title": "Packaging",
-        "desc": "Professional packaging for export standards",
-        "image": "/images/factory/jiacheng-warehouse-packed-rolls-pallet.jpg",
-        "imageAlt": "Finished HDPE netting rolls wrapped and stacked on pallets ready for export"
+        "desc": "Professional packaging for export standards"
       },
       {
         "step": "08",
         "title": "Loading Container",
-        "desc": "Global logistics coordination and delivery",
-        "image": "/images/factory/jiacheng-loading-yard-forklift.jpg",
-        "imageAlt": "Forklift loading palletised HDPE netting rolls into an export container at the factory yard"
+        "desc": "Global logistics coordination and delivery"
       }
     ],
     "highlights": [
