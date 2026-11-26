@@ -1327,22 +1327,22 @@
       },
       {
         "step": "06",
-        "title": "Rolling",
-        "desc": "Controlled-tension winding into export rolls",
+        "title": "Cutting & Rolling",
+        "desc": "Cutting netting to customer-specified lengths and tightly winding rolls to maximize container loading capacity.",
         "image": "/images/factory/process/06-netting-roll-winding-frame.jpg",
         "imageAlt": "HDPE netting web running through the winding frame before being taken up into a roll"
       },
       {
         "step": "07",
         "title": "Packaging",
-        "desc": "Film-wrapped rolls, palletised for shipment",
+        "desc": "Each roll is packed in a PE bag with the customer's label. Customized packaging bags are available upon request.",
         "image": "/images/factory/process/07-roll-film-wrapping-packaging.jpg",
         "imageAlt": "Two workers wrapping a finished HDPE netting roll in protective film at the packaging station"
       },
       {
         "step": "08",
-        "title": "Loading Container",
-        "desc": "Containers loaded at our own factory gate",
+        "title": "Container Loading",
+        "desc": "Finished rolls carefully loaded into containers.",
         "image": "/images/factory/process/08-container-loading-company-gate.jpg",
         "imageAlt": "Export containers being loaded with palletised HDPE netting rolls in front of the Shandong Jiacheng Chemical Fiber Products factory building"
       }
