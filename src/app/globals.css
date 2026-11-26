@@ -376,6 +376,28 @@ h4 { font-size: var(--text-h4); }
   }
 }
 
+/* Info cards use inline padding, which on a 2-up phone grid squeezes the
+   big numbers past the viewport edge. Tighten them so 390px screens fit. */
+.info-card {
+  min-width: 0;
+}
+
+@media (max-width: 620px) {
+  .info-card {
+    padding: 22px 10px !important;
+  }
+
+  .info-card > div:first-child {
+    font-size: 26px !important;
+    line-height: 1.15;
+    word-break: break-word;
+  }
+
+  .info-card > div:last-child {
+    font-size: 12px !important;
+  }
+}
+
 @media (max-width: 620px) {
   .process-grid { grid-template-columns: 1fr !important; }
 }
