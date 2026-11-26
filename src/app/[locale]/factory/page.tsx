@@ -39,13 +39,31 @@ export default function FactoryPage() {
         </p>
 
         {/* Production Process */}
-        <h2 style={{ fontSize: 28, fontWeight: 700, textAlign: "center", marginBottom: 48, color: "#0B4C8E" }}>Production Process</h2>
-        <div className="rgrid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
-          {factory.process.map((item) => (
-            <div key={item.step} style={{ background: "#fff", padding: 28, borderRadius: 12, border: "1px solid #e5e7eb", textAlign: "center" }}>
-              <div style={{ fontSize: 32, fontWeight: 800, color: "#e5e7eb", marginBottom: 12 }}>{item.step}</div>
-              <h3 style={{ fontSize: 16, fontWeight: 600, color: "#0B4C8E", marginBottom: 8 }}>{item.title}</h3>
-              <p style={{ fontSize: 13, color: "#888", lineHeight: 1.5 }}>{item.desc}</p>
+        <h2 style={{ fontSize: 28, fontWeight: 700, textAlign: "center", marginBottom: 12, color: "#0B4C8E" }}>Production Process</h2>
+        <p style={{ textAlign: "center", color: "#8a94a6", fontSize: 14, marginBottom: 40 }}>
+          Eight steps from HDPE resin to a container loaded at our own gate
+        </p>
+        <div className="rgrid-4 process-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          {factory.process.map((item: any) => (
+            <div key={item.step} className="process-card">
+              {item.image && (
+                <div className="process-media">
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt || `${item.title} — HDPE netting production at Jiacheng Netting`}
+                    width={672}
+                    height={377}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="process-step">{item.step}</span>
+                </div>
+              )}
+              <div className="process-body">
+                {!item.image && <div className="process-step-inline">{item.step}</div>}
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
