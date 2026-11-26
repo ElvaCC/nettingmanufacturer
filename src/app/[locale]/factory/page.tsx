@@ -34,7 +34,7 @@ export default function FactoryPage() {
         </div>
 
         {/* Description */}
-        <p style={{ fontSize: 16, lineHeight: 1.8, color: "#555", marginBottom: 64, textAlign: "center", maxWidth: 900, margin: "0 auto 64px" }}>
+        <p style={{ fontSize: 16, lineHeight: 1.8, color: "#555", marginBottom: 64, textAlign: "left", maxWidth: 900, margin: "0 auto 64px" }}>
           {factory.description}
         </p>
 
