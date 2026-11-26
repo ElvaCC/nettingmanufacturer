@@ -1287,42 +1287,58 @@
       {
         "step": "01",
         "title": "HDPE Material",
-        "desc": "High density polyethylene (HDPE) selected for outdoor netting"
+        "desc": "High density polyethylene (HDPE) selected for outdoor netting",
+        "image": "/images/factory/process/01-hdpe-raw-material.jpg",
+        "imageAlt": "Stacked HDPE resin bags in the raw material warehouse of Shandong Jiacheng Chemical Fiber Products factory"
       },
       {
         "step": "02",
         "title": "Drawing",
-        "desc": "Extrusion and filament drawing process"
+        "desc": "Extrusion and filament drawing process",
+        "image": "/images/factory/process/02-yarn-creel-drawing.jpg",
+        "imageAlt": "Rows of HDPE yarn bobbins on the creel feeding the drawing and warping line at Jiacheng Netting"
       },
       {
         "step": "03",
         "title": "Threading the Needle",
-        "desc": "Preparation for precision knitting"
+        "desc": "Preparation for precision knitting",
+        "image": "/images/factory/process/03-threading-needle-warp-knitting.jpg",
+        "imageAlt": "Worker threading HDPE yarn sheets into the needle bed of a warp knitting machine"
       },
       {
         "step": "04",
         "title": "Knitting",
-        "desc": "High-speed warp knitting production"
+        "desc": "High-speed warp knitting production",
+        "image": "/images/factory/process/04-warp-knitting-production.jpg",
+        "imageAlt": "Warp knitting machine producing HDPE netting fabric in multiple colours"
       },
       {
         "step": "05",
         "title": "Quality Testing",
-        "desc": "Rigorous testing of each batch produced"
+        "desc": "Rigorous testing of each batch produced",
+        "image": "/images/factory/process/05-mesh-quality-inspection.jpg",
+        "imageAlt": "Finished HDPE netting stretched on a backlit inspection frame during quality testing"
       },
       {
         "step": "06",
         "title": "Rolling",
-        "desc": "Professional rolling and winding"
+        "desc": "Professional rolling and winding",
+        "image": "/images/factory/process/06-roll-winding-handling.jpg",
+        "imageAlt": "Workers handling a finished HDPE netting roll coming off the winder"
       },
       {
         "step": "07",
         "title": "Packaging",
-        "desc": "Professional packaging for export standards"
+        "desc": "Professional packaging for export standards",
+        "image": "/images/factory/jiacheng-warehouse-packed-rolls-pallet.jpg",
+        "imageAlt": "Finished HDPE netting rolls wrapped and stacked on pallets ready for export"
       },
       {
         "step": "08",
         "title": "Loading Container",
-        "desc": "Global logistics coordination and delivery"
+        "desc": "Global logistics coordination and delivery",
+        "image": "/images/factory/jiacheng-loading-yard-forklift.jpg",
+        "imageAlt": "Forklift loading palletised HDPE netting rolls into an export container at the factory yard"
       }
     ],
     "highlights": [
