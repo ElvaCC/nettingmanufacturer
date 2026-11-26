@@ -32,7 +32,19 @@ export async function POST(request: NextRequest) {
     }
     if (patch.contact) existing.contact = { ...existing.contact, ...patch.contact };
     if (patch.footer) existing.footer = { ...existing.footer, ...patch.footer };
-    if (patch.factory) existing.factory = { ...existing.factory, ...patch.factory };
+    if (patch.factory) {
+      const mergedFactory = { ...existing.factory, ...patch.factory };
+      // A stale /admin tab can POST a factory.process array captured before the
+      // workshop photos were attached. Carry the stored image fields over so a
+      // routine copy edit never strips the production step photos again.
+      if (Array.isArray(patch.factory.process) && Array.isArray(existing.factory?.process)) {
+        mergedFactory.process = patch.factory.process.map((step: any) => {
+          const prev = existing.factory.process.find((s: any) => s.step === step.step);
+          return prev && !step.image ? { ...step, image: prev.image, imageAlt: prev.imageAlt } : step;
+        });
+      }
+      existing.factory = mergedFactory;
+    }
     if (patch.factoryImages) existing.factoryImages = patch.factoryImages;
     if (patch.products) existing.products = patch.products;
     if (patch.blog) existing.blog = patch.blog;
