@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 interface FactoryImage { src: string; alt: string; label: string; span: 'full' | 'half'; }
 interface FactoryHighlight { icon: string; title: string; desc: string; }
 interface FactoryInfoCard { icon: string; title: string; value: string; }
-interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; detailTitle?: string; popularSizes?: string[]; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
+interface Product { id: string; name: string; nameZh: string; description: string; specs: string[]; applications: string[]; images: string[]; appImages: string[]; productionImages: string[]; packagingImages: string[]; detailImages: string[]; detailTitle?: string; popularSizes?: string[]; popularGsm?: string[]; exportMarkets: string[]; projectCases: any[]; packagingOptions: any[]; deliveryRecords: any[]; faq: any[]; catalogUrl: string; selectionGuide?: { columns?: string[]; rows?: any[]; intro?: string; note?: string; highlightLabel?: string }; locales?: Record<string, any>; }
 interface BlogPost { id: number; title: string; date: string; excerpt: string; category: string; }
 interface AppCategory { name: string; items: string[]; }
 interface Stat { number: string; label: string; }
@@ -470,6 +470,22 @@ export default function AdminPanel() {
                     </div>
                   ))}
                   <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], popularSizes: [...(p[i].popularSizes || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add Size</button>
+                </div>
+              </div>
+              {/* ── Popular GSM (weights US buyers quote in) ── */}
+              <div>
+                <label style={lbl}>Popular GSM ({product.popularGsm?.length || 0})</label>
+                <p style={{ fontSize: 12, color: '#94a3b8', margin: '0 0 10px' }}>Shown under the roll sizes on this product page. Write them the way US buyers do, e.g. 90g. Leave empty to hide this block.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {(product.popularGsm || []).map((gsm, gi) => (
+                    <div key={gi} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <input type="text" value={gsm} placeholder="90g" onChange={e => { const p = [...content.products]; const n = [...(p[i].popularGsm || [])]; n[gi] = e.target.value; p[i] = { ...p[i], popularGsm: n }; setContent({ ...content, products: p }); }} style={{ ...s(), flex: 1 }} />
+                      <button disabled={gi === 0} onClick={() => { if (gi > 0) { const p = [...content.products]; const n = [...(p[i].popularGsm || [])]; [n[gi - 1], n[gi]] = [n[gi], n[gi - 1]]; p[i] = { ...p[i], popularGsm: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: gi === 0 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↑</button>
+                      <button disabled={gi === (product.popularGsm?.length || 0) - 1} onClick={() => { if (gi < (product.popularGsm?.length || 0) - 1) { const p = [...content.products]; const n = [...(p[i].popularGsm || [])]; [n[gi], n[gi + 1]] = [n[gi + 1], n[gi]]; p[i] = { ...p[i], popularGsm: n }; setContent({ ...content, products: p }); } }} style={{ padding: '6px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#fff', cursor: gi === (product.popularGsm?.length || 0) - 1 ? 'not-allowed' : 'pointer', fontSize: 13 }}>↓</button>
+                      <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], popularGsm: (p[i].popularGsm || []).filter((_, idx) => idx !== gi) }; setContent({ ...content, products: p }); }} style={{ padding: '6px 10px', border: '1px solid #fecaca', borderRadius: 8, background: '#fff', cursor: 'pointer', fontSize: 13, color: '#dc2626' }}>✕</button>
+                    </div>
+                  ))}
+                  <button onClick={() => { const p = [...content.products]; p[i] = { ...p[i], popularGsm: [...(p[i].popularGsm || []), ''] }; setContent({ ...content, products: p }); }} style={{ padding: '8px 16px', border: '2px dashed #94a3b8', borderRadius: 8, background: 'transparent', cursor: 'pointer', fontSize: 13, color: '#64748b', alignSelf: 'flex-start' }}>+ Add GSM</button>
                 </div>
               </div>
               {/* ── FAQ (per-product, fully editable) ── */}

@@ -53,6 +53,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   // Popular roll sizes in imperial units, editable per product in /admin.
   // Blank rows are dropped so a trailing empty input does not render an empty cell.
   const popularSizes = (((product as any).popularSizes || []) as string[]).filter(s => s && s.trim());
+  // Popular weights for the same market, per product, editable in /admin.
+  const popularGsm = (((product as any).popularGsm || []) as string[]).filter(s => s && s.trim());
   const deliveryRecords = (product as any).deliveryRecords || [];
   const packagingOpts = (product as any).packagingOptions || [];
   const projectCases = (product as any).projectCases || [];
@@ -239,6 +241,42 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                             </li>
                           ))}
                         </ul>
+
+                        {/* Popular weights for the same market. GSM is the unit US
+                            buyers quote in ("90 gsm debris netting"), and ~500 gsm is
+                            a real production ceiling, so it is stated as a number
+                            rather than hidden behind "custom weight available". */}
+                        {popularGsm.length > 0 && (
+                          <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid #eef2f7' }}>
+                            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
+                              Popular GSM for the US Market
+                            </h3>
+                            <ul style={{ listStyle: 'none', margin: '0 0 10px', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 6 }}>
+                              {popularGsm.map((g, i) => (
+                                <li
+                                  key={`${i}-${g}`}
+                                  style={{
+                                    background: '#f6f9fd',
+                                    border: '1px solid #e3ebf5',
+                                    borderRadius: 8,
+                                    padding: '10px 4px',
+                                    textAlign: 'center',
+                                    fontSize: 12.5,
+                                    fontWeight: 700,
+                                    color: '#0B4C8E',
+                                    fontVariantNumeric: 'tabular-nums',
+                                    letterSpacing: '.01em',
+                                  }}
+                                >
+                                  {g}
+                                </li>
+                              ))}
+                            </ul>
+                            <p style={{ fontSize: 11.5, color: '#4b5563', lineHeight: 1.55, margin: 0 }}>
+                              Any other weight up to about 500 gsm is made to order.
+                            </p>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
