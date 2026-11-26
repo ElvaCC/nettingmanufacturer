@@ -286,6 +286,12 @@
         "8'6\" × 150'",
         "10'6\" × 150'"
       ],
+      "popularGsm": [
+        "70g",
+        "80g",
+        "90g",
+        "100g"
+      ],
       "imageAlt": {
         "/products/debris-netting/construction-safety-netting-black-roll.jpg": "Black HDPE construction safety netting roll with a close-up of the mesh",
         "/products/debris-netting/blue-debris-netting-scaffold.jpg": "Blue debris netting installed on the scaffolding of a building under construction",
@@ -1315,30 +1321,30 @@
       {
         "step": "05",
         "title": "Quality Testing",
-        "desc": "Rigorous testing of each batch produced",
-        "image": "/images/factory/process/05-mesh-quality-inspection.jpg",
-        "imageAlt": "Finished HDPE netting stretched on a backlit inspection frame during quality testing"
+        "desc": "Electronic control and in-line monitoring on every line",
+        "image": "/images/factory/process/05-quality-testing-control-panel.jpg",
+        "imageAlt": "Electronic control cabinet on the knitting line monitoring heating temperature and line tension at Jiacheng Netting"
       },
       {
         "step": "06",
         "title": "Rolling",
-        "desc": "Professional rolling and winding",
-        "image": "/images/factory/process/06-roll-winding-handling.jpg",
-        "imageAlt": "Workers handling a finished HDPE netting roll coming off the winder"
+        "desc": "Controlled-tension winding into export rolls",
+        "image": "/images/factory/process/06-netting-roll-winding-frame.jpg",
+        "imageAlt": "HDPE netting web running through the winding frame before being taken up into a roll"
       },
       {
         "step": "07",
         "title": "Packaging",
-        "desc": "Professional packaging for export standards",
-        "image": "/images/factory/jiacheng-warehouse-packed-rolls-pallet.jpg",
-        "imageAlt": "Finished HDPE netting rolls wrapped and stacked on pallets ready for export"
+        "desc": "Film-wrapped rolls, palletised for shipment",
+        "image": "/images/factory/process/07-roll-film-wrapping-packaging.jpg",
+        "imageAlt": "Two workers wrapping a finished HDPE netting roll in protective film at the packaging station"
       },
       {
         "step": "08",
         "title": "Loading Container",
-        "desc": "Global logistics coordination and delivery",
-        "image": "/images/factory/jiacheng-loading-yard-forklift.jpg",
-        "imageAlt": "Forklift loading palletised HDPE netting rolls into an export container at the factory yard"
+        "desc": "Containers loaded at our own factory gate",
+        "image": "/images/factory/process/08-container-loading-company-gate.jpg",
+        "imageAlt": "Export containers being loaded with palletised HDPE netting rolls in front of the Shandong Jiacheng Chemical Fiber Products factory building"
       }
     ],
     "highlights": [
