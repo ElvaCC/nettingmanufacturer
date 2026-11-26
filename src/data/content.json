@@ -1422,7 +1422,10 @@
         "Scaffolding enclosure",
         "Building windscreen",
         "Safety fence / barrier net"
-      ]
+      ],
+      "image": "/applications/debris-netting-sheet-green-scaffold-facade-01.jpg",
+      "imageAlt": "Green HDPE debris netting fixed over the scaffolding of a multi-storey building under construction",
+      "caption": "Green HDPE warp-knitted netting stretched over a high-rise scaffold. Supplied in 1/4\" square mesh with reinforced fixing edges, custom widths and any colour."
     },
     {
       "name": "Agriculture",
@@ -1431,7 +1434,10 @@
         "Anti hail protection",
         "Bird/bee protection",
         "Weed barrier control"
-      ]
+      ],
+      "image": "/applications/anti-bee-netting-sheet-white-vineyard-cover-01.jpg",
+      "imageAlt": "White HDPE anti-bee netting draped over vineyard rows to protect ripening grapes",
+      "caption": "White HDPE netting draped over vineyard rows. The same drape construction is used for anti-bee, anti-bird and anti-hail cover, sized by mesh opening."
     },
     {
       "name": "Shade Solutions",
@@ -1440,7 +1446,10 @@
         "Swimming pool cover",
         "Greenhouse shading",
         "Carport canopy"
-      ]
+      ],
+      "image": "/applications/shade-sail-panel-brown-patio-cover-01.jpg",
+      "imageAlt": "Brown HDPE shade sail panels stretched over a residential patio to block direct sunlight",
+      "caption": "HDPE shade sail panels over a patio. Panel size, shade rate, edge reinforcement and hardware are made to order."
     },
     {
       "name": "Privacy Screen",
@@ -1449,7 +1458,10 @@
         "Construction site barrier",
         "Industrial partition",
         "Fence screening"
-      ]
+      ],
+      "image": "/applications/privacy-screen-panel-green-fence-fixing-01.jpg",
+      "imageAlt": "Dark green HDPE privacy screen zip-tied through brass grommets to a chain-link fence",
+      "caption": "Green privacy screen fixed to a chain-link fence through brass grommets. Height, colour and shade rate are made to order."
     }
   ],
   "contactPage": {
