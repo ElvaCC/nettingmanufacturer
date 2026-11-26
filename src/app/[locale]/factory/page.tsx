@@ -138,19 +138,19 @@ export default function FactoryPage() {
 
         {/* Factory Info Cards */}
         <div className="rgrid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, marginBottom: 72 }}>
-          <div style={{ background: '#0B4C8E', color: '#fff', padding: 32, borderRadius: 12, textAlign: 'center' }}>
+          <div className="info-card" style={{ background: '#0B4C8E', color: '#fff', padding: 32, borderRadius: 12, textAlign: 'center' }}>
             <div style={{ fontSize: 36, fontWeight: 700 }}>{factory.info.area}</div>
             <div style={{ fontSize: 14, marginTop: 8, opacity: 0.8 }}>Factory Area</div>
           </div>
-          <div style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
+          <div className="info-card" style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: '#0B4C8E' }}>{factory.info.experience}</div>
             <div style={{ fontSize: 14, marginTop: 8, color: '#666' }}>Experience</div>
           </div>
-          <div style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
+          <div className="info-card" style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: '#0B4C8E' }}>{factory.info.employees}</div>
             <div style={{ fontSize: 14, marginTop: 8, color: '#666' }}>Employees</div>
           </div>
-          <div style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
+          <div className="info-card" style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: '#0B4C8E' }}>{factory.info.exports}</div>
             <div style={{ fontSize: 14, marginTop: 8, color: '#666' }}>Export Markets</div>
           </div>
