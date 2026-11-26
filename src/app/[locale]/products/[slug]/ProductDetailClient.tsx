@@ -249,7 +249,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                         {popularGsm.length > 0 && (
                           <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid #eef2f7' }}>
                             <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
-                              Popular GSM for the US Market
+                              Common GSM(gram/㎡) in the US Market
                             </h3>
                             <ul style={{ listStyle: 'none', margin: '0 0 10px', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 6 }}>
                               {popularGsm.map((g, i) => (
@@ -273,7 +273,7 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                               ))}
                             </ul>
                             <p style={{ fontSize: 11.5, color: '#4b5563', lineHeight: 1.55, margin: 0 }}>
-                              Any other weight up to about 500 gsm is made to order.
+                              70, 80, 90 and 100 GSM are commonly used. Custom GSM are available up to approximately 500 GSM.
                             </p>
                           </div>
                         )}
