@@ -31,6 +31,18 @@ const PRODUCTS_IN_PRODUCTION = [
     image: '/images/factory/production/production-anti-hail-netting-warp-knitting.jpg',
     alt: 'White anti-hail netting being wound on a warp knitting machine at Jiacheng',
   },
+  {
+    title: 'Anti-Bee Netting',
+    desc: 'Fine white insect netting knitted continuously along the machine.',
+    image: '/images/factory/production/production-anti-bee-netting-warp-knitting.jpg',
+    alt: 'Fine white anti-bee netting running the length of a warp knitting machine at Jiacheng',
+  },
+  {
+    title: 'Scaffolding Net',
+    desc: 'Black scaffold netting with red reinforced stripes coming off the beam.',
+    image: '/images/factory/production/production-black-scaffolding-netting-warp-knitting.jpg',
+    alt: 'Black HDPE scaffolding safety netting with red reinforcing stripes on a warp knitting machine',
+  },
 ];
 
 /** Packaging and outbound logistics, grouped by the stage it documents. */
@@ -179,7 +191,7 @@ export default function FactoryPage() {
           <h2>Products in Production</h2>
           <p>Every product we quote, running on our own knitting machines.</p>
         </div>
-        <div className="rgrid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+        <div className="rgrid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {PRODUCTS_IN_PRODUCTION.map((item) => (
             <div key={item.title} className="showcase-card">
               <div className="showcase-media">
