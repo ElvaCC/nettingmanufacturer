@@ -659,6 +659,63 @@ MODULE 12: Technical & Business FAQ (collapsible)
         </div>
         )}
 
+        {/* Range notice — site-wide copy edited once in /admin, rendered on all
+            product pages. Sits ABOVE Related Products on purpose: the buyer has
+            just finished reading this product, and before we show three
+            neighbouring products we want them to know the site lists only part
+            of the range. Both buttons are one-click channels (mail and
+            WhatsApp) rather than a form, because a buyer who has already
+            decided their product is not here will not fill a form in. */}
+        {rangeNotice?.title && (
+          <div className="section-gap">
+            <div className="range-notice" style={{
+              padding: '22px 26px', borderRadius: 12,
+              background: '#f0f7ff', border: '1px solid #dbe7f5',
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
+            }}>
+              <div style={{ maxWidth: 620 }}>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0B4C8E', margin: '0 0 8px' }}>
+                  {rangeNotice.title}
+                </h3>
+                {rangeNotice.text && (
+                  <p style={{ fontSize: 13.5, color: '#4b5563', lineHeight: 1.7, margin: 0 }}>
+                    {rangeNotice.text}
+                  </p>
+                )}
+              </div>
+              <div className="range-notice-actions" style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }}>
+                  <a href={`mailto:${email}?subject=${encodeURIComponent(`Product Inquiry: ${displayName}`)}`} style={{
+                    padding: '12px 22px', background: '#0B4C8E', color: '#fff', borderRadius: 8,
+                    fontWeight: 700, fontSize: 14, textAlign: 'center', textDecoration: 'none',
+                    whiteSpace: 'nowrap', transition: 'background 0.15s',
+                  }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#093a6d'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0B4C8E'; }}>
+                    &#9993; Email Us
+                  </a>
+                  <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi, I'm interested in ${displayName}. Could you send me a quote?`)}`}
+                    target="_blank" rel="noopener noreferrer" style={{
+                      padding: '12px 22px', background: '#25d366', color: '#fff', borderRadius: 8,
+                      fontWeight: 700, fontSize: 14, textAlign: 'center', textDecoration: 'none',
+                      whiteSpace: 'nowrap', transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#1ebe58'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#25d366'; }}>
+                    WhatsApp
+                  </a>
+                </div>
+                <a href={getPath('/products')} style={{
+                  fontSize: 13, fontWeight: 600, color: '#0B4C8E', textAlign: 'center',
+                  textDecoration: 'underline',
+                }}>
+                  View All Products →
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ════════════════════════════════════════════
             
 MODULE 13: Related Products
@@ -695,48 +752,7 @@ MODULE 13: Related Products
             cards directly above. The same three product links are already
             present as the cards, so no internal link was lost. */}
 
-        {/* Range notice — site-wide copy edited once in /admin, rendered on all
-            product pages. Placed right under Related Products because this is
-            the moment a buyer works out that their product is not on the page
-            and is about to leave; the link back to the full list is the exit
-            we want them to take instead. */}
-        {rangeNotice?.title && (
-          <div className="range-notice" style={{
-            marginTop: 22, padding: '22px 26px', borderRadius: 12,
-            background: '#f0f7ff', border: '1px solid #dbe7f5',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
-          }}>
-            <div style={{ maxWidth: 620 }}>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0B4C8E', margin: '0 0 8px' }}>
-                {rangeNotice.title}
-              </h3>
-              {rangeNotice.text && (
-                <p style={{ fontSize: 13.5, color: '#4b5563', lineHeight: 1.7, margin: 0 }}>
-                  {rangeNotice.text}
-                </p>
-              )}
-            </div>
-            <div className="range-notice-actions" style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
-              <InquiryModal locale={locale} productName={displayName} trigger={
-                <div style={{
-                  padding: '12px 26px', background: '#0E7A45', color: '#fff', borderRadius: 8,
-                  fontWeight: 700, fontSize: 14, textAlign: 'center', cursor: 'pointer',
-                  whiteSpace: 'nowrap', transition: 'background 0.15s',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#0A5F36'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#0E7A45'; }}>
-                  Contact Us
-                </div>
-              } />
-              <a href={getPath('/products')} style={{
-                fontSize: 13, fontWeight: 600, color: '#0B4C8E', textAlign: 'center',
-                textDecoration: 'underline',
-              }}>
-                View All Products →
-              </a>
-            </div>
-          </div>
-        )}
+        {/* Range notice is rendered above Related Products (see MODULE 13). */}
 
         {/* Cross-link to Applications page (locale-aware) */}
         <div style={{ padding: '0', marginTop: 6, fontSize: 13, color: '#6b7280', lineHeight: 1.8 }}>
