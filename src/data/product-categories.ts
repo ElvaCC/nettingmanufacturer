@@ -26,7 +26,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     selectionPoints: [
       'Knitting structure — finer mesh for debris containment, larger openings for general site and scaffold protection',
       'Fire-retardant options available on request',
-      'Custom roll width and length, reinforced border edges',
+      'Custom roll width and length, reinforced edges',
       'Colour options and OEM supply for distributors',
     ],
   },
