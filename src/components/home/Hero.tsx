@@ -21,7 +21,7 @@ export default function Hero() {
           {hero.subtitle}
         </p>
 
-        {/* Key Highlights — Exporting to 50+ Countries | 21+ Years Experience */}
+        {/* Key Highlights — Exporting to 50+ Countries | 25+ Years Experience */}
         <div
           style={{
             display: "flex",

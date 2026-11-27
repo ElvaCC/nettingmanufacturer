@@ -7,7 +7,7 @@ const news = [
   {
     date: "2026-04-10",
     title: "Premium HDPE Netting Solutions for Global Construction",
-    excerpt: "Leading supplier of high-density polyethylene netting for construction safety, agricultural protection, and industrial applications. 20+ years of manufacturing excellence.",
+    excerpt: "Leading supplier of high-density polyethylene netting for construction safety, agricultural protection, and industrial applications. 25+ years of manufacturing excellence.",
   },
   {
     date: "2026-04-05",

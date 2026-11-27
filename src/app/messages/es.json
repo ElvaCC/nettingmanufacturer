@@ -17,7 +17,7 @@
   },
   "hero": {
     "title": "Fabricante Profesional de Mallas HDPE",
-    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — Más de 20 años de experiencia en redes de seguridad para construcción, mallas de sombra, redes agrícolas y soluciones personalizadas.",
+    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — Más de 25 años de experiencia en redes de seguridad para construcción, mallas de sombra, redes agrícolas y soluciones personalizadas.",
     "cta": "Solicitar Cotización",
     "secondary": "Explorar Productos"
   },
@@ -56,15 +56,14 @@
   },
   "about": {
     "title": "Sobre Jiacheng Netting",
-    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. es un fabricante profesional de mallas HDPE con más de 20 años de experiencia. Nuestra fábrica de 20.000 m² exporta a Norteamérica, Sudamérica, Europa, Medio Oriente, Asia y África."
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. es un fabricante profesional de mallas HDPE con más de 25 años de experiencia. Nuestra fábrica de 20.000 m² exporta a Norteamérica, Sudamérica, Europa, Medio Oriente, Asia y África."
   },
   "contact": {
     "title": "Contáctenos",
     "subtitle": "¿Listo para discutir su proyecto? Complete el formulario y nuestro equipo responderá en 24 horas.",
     "form": {
-      "name": "Nombre Completo",
+      "name": "Nombre",
       "email": "Correo Electrónico",
-      "company": "Nombre de la Empresa",
       "country": "País",
       "product": "Producto de Interés",
       "message": "Su Mensaje",

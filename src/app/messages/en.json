@@ -17,7 +17,7 @@
   },
   "hero": {
     "title": "Professional HDPE Netting Manufacturer",
-    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — 20+ years of expertise in construction safety nets, shade nets, agricultural nets, and custom netting solutions.",
+    "subtitle": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. — 25+ years of expertise in construction safety nets, shade nets, agricultural nets, and custom netting solutions.",
     "cta": "Request a Quote",
     "secondary": "Explore Products"
   },
@@ -56,15 +56,14 @@
   },
   "about": {
     "title": "About Jiacheng Netting",
-    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional manufacturer of HDPE netting with over 20 years of experience. Our 20,000㎡ factory exports to North America, South America, Europe, the Middle East, Asia, and Africa."
+    "description": "Shandong Jiacheng Chemical Fiber Products Co., Ltd. is a professional manufacturer of HDPE netting with over 25 years of experience. Our 20,000㎡ factory exports to North America, South America, Europe, the Middle East, Asia, and Africa."
   },
   "contact": {
     "title": "Get In Touch",
     "subtitle": "Ready to discuss your project? Fill out the form below and our team will respond within 24 hours.",
     "form": {
-      "name": "Full Name",
+      "name": "Name",
       "email": "Email Address",
-      "company": "Company Name",
       "country": "Country",
       "product": "Interested Product",
       "message": "Your Message",
