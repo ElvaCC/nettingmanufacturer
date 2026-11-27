@@ -4,7 +4,7 @@ import { getLocalizedMetadata } from "@/lib/seo/metadata";
 import { unstable_setRequestLocale } from "next-intl/server";
 
 const stats = [
-  { value: "21+", label: "Years Experience" },
+  { value: "25+", label: "Years Experience" },
   { value: "50+", label: "Countries Served" },
   { value: "11", label: "Product Lines" },
   { value: "20,000", label: "m² Factory Area" },
@@ -14,7 +14,7 @@ const certifications = [
   { name: "BSCI", desc: "Business Social Compliance Initiative" },
   { name: "NFPA-701", desc: "Fire-Retardant Standard" },
   { name: "OEM/ODM", desc: "Custom Manufacturing Service" },
-  { name: "21+ Years", desc: "Industry Experience" },
+  { name: "25+ Years", desc: "Industry Experience" },
 ];
 
 export async function generateMetadata({
@@ -44,7 +44,7 @@ export default async function AboutPage({
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">About Our Company</h1>
             <p className="text-xl text-white/80">
-              With over 21 years of experience, we are a trusted global leader in HDPE netting manufacturing.
+              With over 25 years of experience, we are a trusted global leader in HDPE netting manufacturing.
             </p>
           </div>
         </div>

@@ -126,9 +126,9 @@ export default function FactoryPage() {
         <figure className="factory-overview-media">
           <img
             src="/images/factory/factory-overview-yard.jpg"
-            alt="Aerial view of the Shandong Jiacheng Chemical Fiber Products factory yard, office building and HDPE netting workshop"
+            alt="Wide view of the Jiacheng factory yard in Shanghe County: office building, HDPE netting workshop and stacked finished rolls"
             width={1600}
-            height={459}
+            height={727}
             loading="eager"
             decoding="async"
           />
@@ -144,7 +144,7 @@ export default function FactoryPage() {
           </div>
           <div className="info-card" style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: '#0B4C8E' }}>{factory.info.experience}</div>
-            <div style={{ fontSize: 14, marginTop: 8, color: '#666' }}>Experience</div>
+            <div style={{ fontSize: 14, marginTop: 8, color: '#666' }}>Years of Experience</div>
           </div>
           <div className="info-card" style={{ background: '#fff', padding: 32, borderRadius: 12, textAlign: 'center', border: '1px solid #e5e7eb' }}>
             <div style={{ fontSize: 36, fontWeight: 700, color: '#0B4C8E' }}>{factory.info.employees}</div>

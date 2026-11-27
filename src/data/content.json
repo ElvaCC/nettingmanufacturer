@@ -13,7 +13,7 @@
     "features": [
       "BSCI Certified Factory",
       "NFPA-701 Certificate",
-      "20+ Years Experience",
+      "25+ Years Experience",
       "20",
       "000m² Production Facility",
       "Export to 50+ Countries",
@@ -21,7 +21,7 @@
     ],
     "stats": [
       {
-        "number": "21+",
+        "number": "25+",
         "label": "Years Experience"
       },
       {
@@ -1281,13 +1281,13 @@
   ],
   "factory": {
     "title": "Our Manufacturing Facility",
-    "subtitle": "State-of-the-Art Production Capability",
+    "subtitle": "HDPE Warp-Knitted Netting Manufacturer",
     "description": "Located in Shanghe County, Jinan City, Shandong Province, China, our factory specializes in HDPE warp-knitted netting. We manufacture customized netting in a wide range of specifications, colors, and mesh designs to meet different application requirements.",
     "info": {
       "area": "20,000 m²",
-      "experience": "65+",
+      "experience": "25+",
       "employees": "100+",
-      "exports": "50+ Countries"
+      "exports": "50+"
     },
     "process": [
       {
@@ -1306,8 +1306,8 @@
       },
       {
         "step": "03",
-        "title": "Threading the Needle",
-        "desc": "Preparation for precision knitting",
+        "title": "Yarn Threading",
+        "desc": "Yarn threaded through the guide needles, ready for knitting",
         "image": "/images/factory/process/03-threading-needle-warp-knitting.jpg",
         "imageAlt": "Worker threading HDPE yarn sheets into the needle bed of a warp knitting machine"
       },
@@ -1397,7 +1397,7 @@
     "image": "/images/factory/jiacheng-factory-hero.jpg",
     "stats": [
       {
-        "number": "21+",
+        "number": "25+",
         "label": "Years Experience"
       },
       {
