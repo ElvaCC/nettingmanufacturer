@@ -18,7 +18,6 @@ export default function InquiryForm({
 }) {
   const [formData, setFormData] = useState({
     name: "",
-    company: "",
     email: "",
     phone: "",
     product: productName || "",
@@ -59,7 +58,6 @@ export default function InquiryForm({
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          company: formData.company,
           phone: formData.phone,
           product: formData.product,
           message: formData.message,
@@ -73,7 +71,6 @@ export default function InquiryForm({
         setStatus("success");
         setFormData({
           name: "",
-          company: "",
           email: "",
           phone: "",
           product: productName || "",
@@ -148,39 +145,22 @@ export default function InquiryForm({
       />
 
       {/* Contact Information */}
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-1">
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 rounded-lg border ${errors.name ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
-            placeholder="John Smith"
-            aria-required="true"
-            aria-invalid={!!errors.name}
-          />
-          {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium text-text-primary mb-1">
-            Company Name
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-            placeholder="ABC Construction Ltd."
-          />
-        </div>
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-1">
+          Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={`w-full px-4 py-3 rounded-lg border ${errors.name ? "border-red-500" : "border-gray-200"} focus:ring-2 focus:ring-primary focus:border-primary transition-colors`}
+          placeholder="John Smith"
+          aria-required="true"
+          aria-invalid={!!errors.name}
+        />
+        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
 
       <div className={showPhoneField ? "grid sm:grid-cols-2 gap-5" : undefined}>
