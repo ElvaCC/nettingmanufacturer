@@ -1422,7 +1422,21 @@
         "Scaffolding enclosure",
         "Building windscreen",
         "Safety fence / barrier net"
-      ]
+      ],
+      "image": "/applications/construction-debris-netting-green-scaffold-facade-01.jpg",
+      "imageAlt": "Green HDPE debris netting stretched over the scaffold of a building under construction",
+      "caption": "Green HDPE warp-knitted netting over a high-rise scaffold. Supplied from 1/4 inch square mesh upward and cut to the height of each working lift.",
+      "gallery": [
+        {
+          "image": "/applications/construction-debris-netting-red-building-facade-02.jpg",
+          "imageAlt": "Orange HDPE debris netting covering the facade of a high-rise building under construction"
+        },
+        {
+          "image": "/applications/construction-debris-netting-red-mesh-detail-03.jpg",
+          "imageAlt": "Close-up of orange HDPE debris netting showing the warp-knitted mesh structure"
+        }
+      ],
+      "intro": "Debris netting for scaffold enclosure, guardrail protection and building windscreen. Supplied in rolls with reinforced fixing edges, in any colour, GSM and mesh opening."
     },
     {
       "name": "Agriculture",
@@ -1431,7 +1445,21 @@
         "Anti hail protection",
         "Bird/bee protection",
         "Weed barrier control"
-      ]
+      ],
+      "image": "/applications/agriculture-anti-bee-netting-white-vineyard-cover-01.jpg",
+      "imageAlt": "White HDPE netting draped over vineyard rows to protect ripening grapes",
+      "caption": "White HDPE netting draped over vineyard rows. The same drape construction covers anti-bee, anti-bird and anti-hail, sized by mesh opening.",
+      "gallery": [
+        {
+          "image": "/applications/agriculture-anti-hail-netting-apple-orchard-drape-02.jpg",
+          "imageAlt": "White anti-hail netting draped directly over apple trees in an orchard"
+        },
+        {
+          "image": "/applications/agriculture-olive-harvest-netting-grove-03.jpg",
+          "imageAlt": "Green olive harvest netting spread under olive trees to catch the falling fruit"
+        }
+      ],
+      "intro": "Drape netting for vineyards, orchards and field crops. The mesh opening is chosen by pest or hail size, and the same construction carries anti-bee, anti-bird and anti-hail duty."
     },
     {
       "name": "Shade Solutions",
@@ -1440,7 +1468,17 @@
         "Swimming pool cover",
         "Greenhouse shading",
         "Carport canopy"
-      ]
+      ],
+      "image": "/applications/shade-solutions-shade-sail-brown-patio-cover-01.jpg",
+      "imageAlt": "Brown HDPE shade sail panels stretched over a residential patio",
+      "caption": "HDPE shade sail panels over a patio. Panel size, shade rate, edge reinforcement and hardware are made to order.",
+      "gallery": [
+        {
+          "image": "/applications/shade-solutions-shade-netting-green-fence-02.jpg",
+          "imageAlt": "Green HDPE shade netting fixed to a metal fence for screening and sun reduction"
+        }
+      ],
+      "intro": "Shade netting and shade sails for courtyards, carports, greenhouses and pool covers. Shade rate, panel size and edge reinforcement are made to order."
     },
     {
       "name": "Privacy Screen",
@@ -1449,7 +1487,21 @@
         "Construction site barrier",
         "Industrial partition",
         "Fence screening"
-      ]
+      ],
+      "image": "/applications/privacy-screen-green-chain-link-fence-01.jpg",
+      "imageAlt": "Dark green HDPE privacy screen zip-tied through metal grommets to a chain-link fence",
+      "caption": "Green privacy screen fixed to a chain-link fence through metal grommets. Height, colour and shade rate are made to order.",
+      "gallery": [
+        {
+          "image": "/applications/privacy-screen-beige-chain-link-fence-02.jpg",
+          "imageAlt": "Beige HDPE privacy screen fixed to a chain-link fence with metal grommets"
+        },
+        {
+          "image": "/applications/privacy-screen-brown-panel-grommet-detail-03.jpg",
+          "imageAlt": "Brown HDPE privacy screen panel with silver metal grommets along the reinforced edge"
+        }
+      ],
+      "intro": "Privacy screens for chain-link fencing, construction sites and industrial partitions, supplied with metal grommets along the edge in any height and colour."
     }
   ],
   "contactPage": {
