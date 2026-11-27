@@ -126,9 +126,9 @@ export default function FactoryPage() {
         <figure className="factory-overview-media">
           <img
             src="/images/factory/factory-overview-yard.jpg"
-            alt="Wide view of the Jiacheng factory yard in Shanghe County: office building, HDPE netting workshop and stacked finished rolls"
+            alt="Aerial view of the Shandong Jiacheng Chemical Fiber Products factory yard, office building and HDPE netting workshop"
             width={1600}
-            height={727}
+            height={459}
             loading="eager"
             decoding="async"
           />
