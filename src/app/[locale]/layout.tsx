@@ -2,6 +2,7 @@ import "../globals.css";
 import { locales, isRtlLocale, type Locale } from "@/app/i18n";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SupplyStatement from "@/components/layout/SupplyStatement";
 import FloatingContact from "@/components/layout/FloatingContact";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
@@ -54,6 +55,7 @@ export default async function LocaleLayout({
           <ContentProvider>
             <Header locale={locale} />
             <main className="flex-1 pt-16">{children}</main>
+            <SupplyStatement variant="band" />
             <Footer />
             <FloatingContact />
           </ContentProvider>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useContent } from '@/context/ContentContext';
 import InquiryModal from '@/components/forms/InquiryModal';
+import SupplyStatement from '@/components/layout/SupplyStatement';
 import { SITE_URL } from '@/lib/site-config';
 import { getCategoryByProductId, getRelatedProductIds } from '@/data/product-categories';
 import { getLocalizedProduct } from '@/lib/product-i18n';
@@ -80,6 +81,15 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
   };
   const typicalBuyers = TYPICAL_BUYERS[getCategoryByProductId(slug)?.id || ''] || '';
 
+  // Actual container loading figures, recorded from shipments rather than
+  // calculated from a roll volume. Only a product with a verified record has an
+  // entry here; the block is hidden everywhere else instead of showing an
+  // estimate. Never publish the full set of figures for every specification.
+  const LOADING_RECORD: Record<string, string> = {
+    'debris-netting': "Up to 3,630 rolls of 4' \u00d7 150' at 100 gsm fit in one 40'HQ. Loading capacity changes with roll size and weight, so confirm the figure for your specification before booking.",
+  };
+
+
   // All specifications are summarised in ONE place: the right-column spec
   // cards below. There is no separate specifications table any more — the two
   // showed the same data twice. Free-text features (no colon in the source)
@@ -149,6 +159,14 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
         </div>
       </section>
 
+      {/* ===== B2B POSITIONING STRIP =====
+          Sits directly under the H1 so both a buyer and an AI answer engine
+          learn within the first screen that this is a factory selling to
+          importers / wholesalers / distributors — not a retailer.
+          Text lives in components/layout/SupplyStatement.tsx (shared with the
+          site-wide band above the footer) so the wording is identical everywhere. */}
+      <SupplyStatement variant="strip" />
+
       {/* ===== MAIN GRID: LEFT (Gallery + Detail Images) + RIGHT (Specs + CTA) ===== */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '28px 24px 48px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 36, alignItems: 'start' }} className="product-hero-grid">
@@ -181,107 +199,6 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   </div>
                 )}
               </>
-            )}
-
-            {/* MODULE 2: Product Detail Images (micro mesh / edge close-ups) */}
-            {detailImages.length > 0 && (
-              <div className="section-gap">
-                <div style={{ background: '#fff', borderRadius: 14, padding: '24px 28px', border: '1px solid #e5e7eb' }}>
-                  {/* Heading text is editable per product in /admin
-                      ("Detail Section Title"). Falls back to "Product Detail". */}
-                  <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>
-                    {(product as any).detailTitle || 'Product Detail'}
-                  </h2>
-                  {/* Two columns when the product has US roll sizes: the close-up
-                      photo on the left, the size list on the right. With a single
-                      detail image the photo grid used to leave a dead half-row, so
-                      the sizes take that space instead of sitting below the fold.
-                      On narrow screens "rgrid-2" collapses both columns. */}
-                  <div className={popularSizes.length > 0 ? 'rgrid-2' : ''} style={{ display: 'grid', gridTemplateColumns: popularSizes.length > 0 ? 'minmax(0, 1fr) minmax(0, 1fr)' : '1fr', gap: 20, alignItems: 'start' }}>
-                    {/* Without size entries the photo grid keeps its original two-column
-                        layout, so products that have no size list are unchanged. Only
-                        the size list needs the left column to itself. */}
-                    <div style={{ display: 'grid', gridTemplateColumns: detailImages.length > 1 || popularSizes.length === 0 ? 'repeat(2, minmax(0, 1fr))' : '1fr', gap: 14 }}>
-                      {detailImages.map((img: string, i: number) => (
-                        <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
-                          <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh and edge`, img)} fill sizes="(max-width: 768px) 50vw, 33vw" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Popular US roll sizes (imperial, per product, editable in /admin).
-                        Sizes are what buyers actually search for ("4 ft x 150 ft debris
-                        netting"), so they belong in plain text rather than in an image. */}
-                    {popularSizes.length > 0 && (
-                      <div>
-                        <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>
-                          Popular Roll Sizes for the US Market
-                        </h3>
-                        <p style={{ fontSize: 12, color: '#4b5563', lineHeight: 1.6, marginBottom: 12 }}>
-                          These are some of the popular roll sizes we supply to the US market. Custom widths and lengths are available to meet your specific requirements.
-                        </p>
-                        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }}>
-                          {popularSizes.map((size, i) => (
-                            <li
-                              key={`${i}-${size}`}
-                              style={{
-                                background: '#f6f9fd',
-                                border: '1px solid #e3ebf5',
-                                borderRadius: 8,
-                                padding: '13px 8px',
-                                textAlign: 'center',
-                                fontSize: 14,
-                                fontWeight: 700,
-                                color: '#0B4C8E',
-                                fontVariantNumeric: 'tabular-nums',
-                                letterSpacing: '.01em',
-                              }}
-                            >
-                              {size}
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Popular weights for the same market. GSM is the unit US
-                            buyers quote in ("90 gsm debris netting"), and ~500 gsm is
-                            a real production ceiling, so it is stated as a number
-                            rather than hidden behind "custom weight available". */}
-                        {popularGsm.length > 0 && (
-                          <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid #eef2f7' }}>
-                            <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
-                              Common GSM(gram/㎡) in the US Market
-                            </h3>
-                            <ul style={{ listStyle: 'none', margin: '0 0 10px', padding: 0, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 6 }}>
-                              {popularGsm.map((g, i) => (
-                                <li
-                                  key={`${i}-${g}`}
-                                  style={{
-                                    background: '#f6f9fd',
-                                    border: '1px solid #e3ebf5',
-                                    borderRadius: 8,
-                                    padding: '10px 4px',
-                                    textAlign: 'center',
-                                    fontSize: 12.5,
-                                    fontWeight: 700,
-                                    color: '#0B4C8E',
-                                    fontVariantNumeric: 'tabular-nums',
-                                    letterSpacing: '.01em',
-                                  }}
-                                >
-                                  {g}
-                                </li>
-                              ))}
-                            </ul>
-                            <p style={{ fontSize: 11.5, color: '#4b5563', lineHeight: 1.55, margin: 0 }}>
-                              70, 80, 90 and 100 GSM are commonly used. Custom GSM are available up to approximately 500 GSM.
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
             )}
           </div>
 
@@ -338,6 +255,214 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             </div>
           </div>
         </div>
+
+        {/* ════════════════════════════════════════════
+            MODULE 4: Specifications & Production Range
+            Straight after the first screen, because weight, width and roll
+            length are what a buyer checks before reading any prose.
+            Only RANGE facts live here — the product's own values stay in the
+            sticky Key Specifications cards, so no field is listed twice.
+            ════════════════════════════════════════════ */}
+        <div className="section-gap" id="specifications">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>Specifications &amp; Production Range</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, marginBottom: 18 }}>
+              The ranges below are what we can produce. The exact values for your order are confirmed in the quotation.
+            </p>
+            <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13.5 }}>
+                <thead>
+                  <tr style={{ background: '#0B4C8E', color: '#fff' }}>
+                    <th style={{ padding: '11px 18px', textAlign: 'left', fontWeight: 600, width: '24%' }}>Item</th>
+                    <th style={{ padding: '11px 18px', textAlign: 'left', fontWeight: 600 }}>Range</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['Material', 'High density knitted polyethylene (HDPE)'],
+                    ['Mesh pattern', 'Made to your hole opening \u2014 any pattern can be produced'],
+                    ['Weight', '30 \u2013 500 gsm'],
+                    ['Roll width', 'Up to 12 m as one seamless piece. Wider than 12 m is made by stitching panels.'],
+                    ['Roll length', 'Custom. 150 ft is the usual length for the US market.'],
+                    ['Colour', 'Custom, including Pantone matching'],
+                  ].map((row, i, all) => (
+                    <tr key={row[0]} style={{ background: i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < all.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
+                      <td style={{ padding: '11px 18px', color: '#0B4C8E', fontWeight: 600 }}>{row[0]}</td>
+                      <td style={{ padding: '11px 18px', color: '#555' }}>{row[1]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {(popularSizes.length > 0 || popularGsm.length > 0) && (
+              <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 18, marginTop: 20 }}>
+                {popularSizes.length > 0 && (
+                  <div style={{ background: '#f6f9fd', border: '1px solid #e3ebf5', borderRadius: 10, padding: '16px 18px' }}>
+                    <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>Popular Roll Sizes for the US Market</h3>
+                    <p style={{ fontSize: 12, color: '#4b5563', lineHeight: 1.6, marginBottom: 12 }}>
+                      These are some of the popular roll sizes we supply to the US market. Custom widths and lengths are available to meet your specific requirements.
+                    </p>
+                    <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }}>
+                      {popularSizes.map((size, i) => (
+                        <li key={`${i}-${size}`} style={{ background: '#fff', border: '1px solid #e3ebf5', borderRadius: 8, padding: '12px 8px', textAlign: 'center', fontSize: 14, fontWeight: 700, color: '#0B4C8E', fontVariantNumeric: 'tabular-nums' }}>
+                          {size}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {popularGsm.length > 0 && (
+                  <div style={{ background: '#f6f9fd', border: '1px solid #e3ebf5', borderRadius: 10, padding: '16px 18px' }}>
+                    <h3 style={{ fontSize: 14, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>Common GSM(gram/㎡) in the US Market</h3>
+                    <p style={{ fontSize: 12, color: '#4b5563', lineHeight: 1.6, marginBottom: 12 }}>
+                      70, 80, 90 and 100 GSM are commonly used. Custom GSM are available up to approximately 500 GSM.
+                    </p>
+                    <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 8 }}>
+                      {popularGsm.map((g, i) => (
+                        <li key={`${i}-${g}`} style={{ background: '#fff', border: '1px solid #e3ebf5', borderRadius: 8, padding: '12px 4px', textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#0B4C8E', fontVariantNumeric: 'tabular-nums' }}>
+                          {g}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div style={{ marginTop: 18, padding: '14px 18px', background: '#fff7ed', borderRadius: 8, borderLeft: '4px solid #f59e0b', fontSize: 13, color: '#555', lineHeight: 1.7 }}>
+              <strong style={{ color: '#b45309' }}>Flame retardant and UV are alternatives, not a combination.</strong> Flame-retardant constructions meet NFPA 701 and do not carry a UV additive. UV-stabilised netting is supplied non-FR. Tell us which one your market requires.
+            </div>
+
+            {LOADING_RECORD[slug] && (
+              <div style={{ marginTop: 10, padding: '14px 18px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E', fontSize: 13, color: '#555', lineHeight: 1.7 }}>
+                <strong style={{ color: '#0B4C8E' }}>Container loading.</strong> {LOADING_RECORD[slug]}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ============================================
+            MODULE 5: Product Overview (description merged with the detail photos)
+            ════════════════════════════════════════════ */}
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Product Overview</h2>
+            {/* Text on the left, close-up photos in a narrow column on the
+                right. A single photo used to sit below the text at full card
+                width, which either filled half the card or left a dead area
+                beside it. Empty products (no detail photos) fall back to a
+                single column. */}
+            <div className={detailImages.length > 0 ? 'rgrid-2' : ''} style={{ display: 'grid', gridTemplateColumns: detailImages.length > 0 ? 'minmax(0, 1fr) 360px' : '1fr', gap: 28, alignItems: 'start' }}>
+              <div>
+                {/* AI Overviews / Featured Snippet pure-fact definition */}
+                <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #0B4C8E', fontSize: 14, lineHeight: 1.7, color: '#0B4C8E' }}>
+                  <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#0B4C8E' }}>Quick Definition</strong>
+                  {displayName} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
+                  {displayDescription || product.description}
+                </p>
+              </div>
+              {detailImages.length > 0 && (
+                <div style={{ display: 'grid', gap: 14 }}>
+                  {detailImages.map((img: string, i: number) => (
+                    <div key={i} style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', aspectRatio: '1/1', background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                      <Image src={img} alt={altText(`detail close-up ${i + 1} - mesh pattern and edge`, img)} fill sizes="(max-width: 900px) 100vw, 360px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+{/* ════════════════════════════════════════════
+            
+MODULE: How To Choose The Right Netting (Decision Matrix)
+            ════════════════════════════════════════════ */}
+        {guideRows.length > 0 && (
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
+              How To Choose The Right {displayName.includes('Netting') ? 'Netting' : 'Product'}
+            </h2>
+            {selectionGuide?.intro && (
+              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
+                {selectionGuide.intro}
+              </p>
+            )}
+            <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                <thead>
+                  <tr style={{ background: '#0B4C8E', color: '#fff' }}>
+                    {selectionCols.map((col, i) => (
+                      <th key={i} style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>{col}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {guideRows.map((row, i) => (
+                    <tr key={i} style={{ background: row.highlight ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < guideRows.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
+                      <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '22%' }}>{row.col1}</td>
+                      <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>
+                        {row.col2}
+                        {row.highlight && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>{selectionGuide?.highlightLabel || 'Most Popular'}</span>}
+                      </td>
+                      <td style={{ padding: '12px 18px', color: '#555' }}>{row.col3}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            </div>
+            {selectionGuide?.note && (
+              <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
+                {selectionGuide.note}
+              </p>
+            )}
+          </div>
+        </div>
+        )}
+
+        {/* ════════════════════════════════════════════
+            
+MODULE 9: Applications & Project Cases
+            ════════════════════════════════════════════ */}
+        {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
+          <div className="section-gap">
+            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
+              {product.applications && product.applications.length > 0 && (
+                <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
+                  {product.applications.map((app: string, i: number) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
+                      <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
+                      <span>{app}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {projectCases.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
+                  {projectCases.map((c: any, i: number) => (
+                    <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
+                      {c.image && (
+                        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#f9fafb' }}>
+                          <Image src={c.image} alt={altText(`project case ${i + 1}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
+                        </div>
+                      )}
+                      <div style={{ padding: '12px 14px' }}>
+                        <p style={{ fontWeight: 600, fontSize: 13, color: '#0B4C8E', margin: 0 }}>{c.title || ''}</p>
+                        {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ════════════════════════════════════════════
             MODULE 4: Why Choose Jiacheng
@@ -445,6 +570,37 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
           </div>
         </div>
 
+        {/* ════════════════════════════════════════════
+            MODULE 9: Ordering, Samples & Lead Time
+            The four questions a US importer asks before sending an enquiry.
+            Nothing is invented: whatever depends on the specification is stated
+            as confirmed in the quotation instead of a made-up figure.
+            ════════════════════════════════════════════ */}
+        <div className="section-gap" id="ordering">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 6 }}>Ordering, Samples &amp; Lead Time</h2>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.6, marginBottom: 18 }}>
+              We supply importers, wholesalers and distributors in bulk. Quantity, price and delivery date are confirmed per specification, colour and total volume.
+            </p>
+            <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 14 }}>
+              {[
+                { t: 'Minimum Order Quantity', d: 'Set by mesh pattern, weight, colour and total volume \u2014 there is no single figure across the range. Send the roll size and the quantity you need, and we confirm the MOQ for that combination.' },
+                { t: 'Lead Time', d: 'Confirmed with the quotation. It depends on the specification and on the production schedule at the time of order, so we quote a date instead of a general promise.' },
+                { t: 'Samples Before Bulk', d: 'An A4 swatch or a short sample roll can be sent before production, so mesh pattern, weight and colour are agreed before the bulk run starts.' },
+                { t: 'OEM & Private Label', d: 'Private label packaging, printed polybags, barcode stickers and branded cartons for importers and distributors selling under their own name.' },
+              ].map((item, i) => (
+                <div key={i} style={{ background: '#f8fafc', border: '1px solid #f0f2f5', borderRadius: 10, padding: '16px 18px' }}>
+                  <div style={{ fontWeight: 700, color: '#0B4C8E', fontSize: 14, marginBottom: 6 }}>{item.t}</div>
+                  <div style={{ fontSize: 13, color: '#555', lineHeight: 1.65 }}>{item.d}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: 13, color: '#555', lineHeight: 1.7, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
+              <strong style={{ color: '#0B4C8E' }}>Not sure which mesh pattern you need?</strong> Buyers and suppliers often use different names for the same netting. Send a photo of the net in use, or the hole opening in millimetres, and we match the pattern, weight and roll size before quoting.
+            </p>
+          </div>
+        </div>
+
         {/* ────────────────────────────────────────────
             (Removed) Product Quick Facts table.
             It repeated the same field-name + value summary that the sticky
@@ -452,121 +608,9 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
             to cut repetition.
             ──────────────────────────────────────────── */}
 
-        {/* ============================================
-            MODULE 6: Structured Product Description (h3 subheadings)
-            ════════════════════════════════════════════ */}
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Product Description</h2>
-            {/* AI Overviews / Featured Snippet pure-fact definition */}
-            <div style={{ background: '#f0f7ff', borderRadius: 8, padding: '14px 18px', marginBottom: 20, borderLeft: '4px solid #0B4C8E', fontSize: 14, lineHeight: 1.7, color: '#0B4C8E' }}>
-              <strong style={{ display: 'block', marginBottom: 2, fontSize: 13, textTransform: 'uppercase', letterSpacing: 0.5, color: '#0B4C8E' }}>Quick Definition</strong>
-              {displayName} is a {product.specs?.[0]?.includes('HDPE') ? 'knitted HDPE mesh netting' : 'specialized industrial netting'} designed for {product.applications?.[0] || 'industrial applications'}. Manufactured from {product.specs?.[0]?.split(':')?.[1] || 'premium materials'}.
-            </div>
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8, marginTop: 4 }}>Overview</h3>
-            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', marginBottom: 16 }}>
-              {displayDescription || product.description}
-            </p>
-            {/* The former "Material & UV Protection" block was deleted: this
-                netting is fire-retardant, and UV additive is not applied to
-                fire-retardant constructions, so a UV-protection paragraph
-                contradicts the product. */}
-            <h3 style={{ fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Customization Options</h3>
-            <p style={{ fontSize: 14, lineHeight: 1.8, color: '#555', margin: 0 }}>
-              Available in custom colors (Pantone match), mesh patterns, roll widths, and GSM densities. OEM/ODM services include private label packaging, custom logo printing, barcode stickers, and branded polybag wrapping. Contact our sales team for minimum order quantities, specifications and lead time.
-            </p>
-          </div>
-        </div>
-
         {/* The former "Detailed Specifications" table was removed: it repeated
             exactly the same parameters as the spec cards in the right column.
             One field now appears once, in the block buyers scan first. */}
-
-{/* ════════════════════════════════════════════
-            
-MODULE: How To Choose The Right Netting (Decision Matrix)
-            ════════════════════════════════════════════ */}
-        {guideRows.length > 0 && (
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 8 }}>
-              How To Choose The Right {displayName.includes('Netting') ? 'Netting' : 'Product'}
-            </h2>
-            {selectionGuide?.intro && (
-              <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 18, lineHeight: 1.5 }}>
-                {selectionGuide.intro}
-              </p>
-            )}
-            <div style={{ overflowX: 'auto', borderRadius: 10, border: '1px solid #e5e7eb' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-                <thead>
-                  <tr style={{ background: '#0B4C8E', color: '#fff' }}>
-                    {selectionCols.map((col, i) => (
-                      <th key={i} style={{ padding: '12px 18px', textAlign: 'left', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>{col}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {guideRows.map((row, i) => (
-                    <tr key={i} style={{ background: row.highlight ? '#fefce8' : i % 2 === 0 ? '#fff' : '#f8fafc', borderBottom: i < guideRows.length - 1 ? '1px solid #f0f2f5' : 'none' }}>
-                      <td style={{ padding: '12px 18px', color: '#0B4C8E', fontWeight: 600, width: '22%' }}>{row.col1}</td>
-                      <td style={{ padding: '12px 18px', color: '#555', width: '40%' }}>
-                        {row.col2}
-                        {row.highlight && <span style={{ display: 'inline-block', marginLeft: 8, padding: '2px 8px', background: '#f59e0b', color: '#fff', borderRadius: 10, fontSize: 10, fontWeight: 700, verticalAlign: 'middle' }}>{selectionGuide?.highlightLabel || 'Most Popular'}</span>}
-                      </td>
-                      <td style={{ padding: '12px 18px', color: '#555' }}>{row.col3}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-            </div>
-            {selectionGuide?.note && (
-              <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, marginTop: 16, padding: '12px 16px', background: '#f0f7ff', borderRadius: 8, borderLeft: '4px solid #0B4C8E' }}>
-                {selectionGuide.note}
-              </p>
-            )}
-          </div>
-        </div>
-        )}
-
-        {/* ════════════════════════════════════════════
-            
-MODULE 9: Applications & Project Cases
-            ════════════════════════════════════════════ */}
-        {((product.applications && product.applications.length > 0) || projectCases.length > 0) && (
-          <div className="section-gap">
-            <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 16 }}>Applications &amp; Project Cases</h2>
-              {product.applications && product.applications.length > 0 && (
-                <div className="rgrid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: projectCases.length > 0 ? 20 : 20 }}>
-                  {product.applications.map((app: string, i: number) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#555', padding: '10px 14px', background: '#f8fafc', borderRadius: 8, border: '1px solid #f0f2f5' }}>
-                      <span style={{ color: '#10b981', fontWeight: 700, flexShrink: 0 }}>&#10003;</span>
-                      <span>{app}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {projectCases.length > 0 && (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 14 }}>
-                  {projectCases.map((c: any, i: number) => (
-                    <div key={i} style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-                      {c.image && (
-                        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#f9fafb' }}>
-                          <Image src={c.image} alt={altText(`project case ${i + 1}`)} fill sizes="240px" style={{ objectFit: 'contain', background: '#f9fafb' }} />
-                        </div>
-                      )}
-                      <div style={{ padding: '12px 14px' }}>
-                        <p style={{ fontWeight: 600, fontSize: 13, color: '#0B4C8E', margin: 0 }}>{c.title || ''}</p>
-                        {c.description && <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>{c.description}</p>}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* ════════════════════════════════════════════
             
@@ -628,6 +672,40 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
         )}
 
         {/* ════════════════════════════════════════════
+            
+MODULE 12: Technical & Business FAQ (collapsible)
+            ════════════════════════════════════════════ */}
+        {faqItems.length > 0 && (
+        <div className="section-gap">
+          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Frequently Asked Questions</h2>
+            {techFaq.length > 0 && (
+              <>
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
+                {techFaq.map((item, i) => (
+                  <details key={`t${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
+                  </details>
+                ))}
+              </>
+            )}
+            {bizFaq.length > 0 && (
+              <>
+                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: techFaq.length > 0 ? 16 : 4 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
+                {bizFaq.map((item, i) => (
+                  <details key={`b${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
+                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
+                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
+                  </details>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+        )}
+
+        {/* ════════════════════════════════════════════
             MODULE 8: Conversion Banner + Download Center
             ════════════════════════════════════════════ */}
         <div className="section-gap" id="conversion-banner">
@@ -662,40 +740,6 @@ MODULE 11: Latest Deliveries & Container Loading (defensive: hidden when no imag
             </div>
           </div>
         </div>
-
-        {/* ════════════════════════════════════════════
-            
-MODULE 12: Technical & Business FAQ (collapsible)
-            ════════════════════════════════════════════ */}
-        {faqItems.length > 0 && (
-        <div className="section-gap">
-          <div style={{ background: '#fff', borderRadius: 14, padding: '28px 32px', border: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: '#0B4C8E', marginBottom: 18 }}>Frequently Asked Questions</h2>
-            {techFaq.length > 0 && (
-              <>
-                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: 4 }}>&#128295; Technical &amp; Specifications Q&amp;A</h3>
-                {techFaq.map((item, i) => (
-                  <details key={`t${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
-                  </details>
-                ))}
-              </>
-            )}
-            {bizFaq.length > 0 && (
-              <>
-                <h3 style={{ fontSize: 15, fontWeight: 600, color: '#0B4C8E', marginBottom: 10, marginTop: techFaq.length > 0 ? 16 : 4 }}>&#128230; Commercial &amp; Logistics Q&amp;A</h3>
-                {bizFaq.map((item, i) => (
-                  <details key={`b${i}-${item.q}`} style={{ marginBottom: 8, borderBottom: '1px solid #f0f2f5', paddingBottom: 8 }}>
-                    <summary style={{ cursor: 'pointer', fontWeight: 600, color: '#0B4C8E', fontSize: 14, padding: '8px 0' }}>{item.q}</summary>
-                    <p style={{ fontSize: 13, color: '#555', lineHeight: 1.6, margin: '4px 0 8px', paddingLeft: 4, whiteSpace: 'pre-line' }}>{item.a}</p>
-                  </details>
-                ))}
-              </>
-            )}
-          </div>
-        </div>
-        )}
 
         {/* Range notice — site-wide copy edited once in /admin, rendered on all
             product pages. Sits ABOVE Related Products on purpose: the buyer has
