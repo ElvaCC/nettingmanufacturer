@@ -369,8 +369,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                 },
                 {
                   icon: '\u2699\uFE0F',
-                  title: '70+ Production Machines',
-                  desc: '70+ production machines running in-house \u2014 bulk supply on schedule.',
+                  title: '70+ Production Machines, 14 Containers a Week',
+                  desc: '70+ production machines, up to 14 containers a week \u2014 bulk supply on schedule.',
                   imgs: [
                     { src: '/images/factory/jiacheng-workshop-wide-angle-production.jpg', alt: 'Rows of warp knitting machines running along the length of the Jiacheng workshop' },
                     { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Warp knitting machines with yarn creels, an operator checking the fabric beam' },

@@ -49,7 +49,7 @@ export default function Factory() {
 
   // Fallback data (used before content loads or if API fails)
   const defaultHighlights = [
-    { icon: "\u2699\uFE0F", title: "Advanced Warp Knitting Lines", desc: "70+ Production Machines / Massive Bulk Capacity / Zero-Delay Turnaround" },
+    { icon: "\u2699\uFE0F", title: "Advanced Warp Knitting Lines", desc: "70+ Production Machines / Up to 14 Containers per Week / Zero-Delay Turnaround" },
     { icon: "\uD83C\uDFED", title: "20,000 m\u00B2 Workshop", desc: "Spacious production and warehousing facility in Zhanjia Industrial Park, Jinan, Shandong." },
     { icon: "\uD83D\uDC77", title: "Skilled QC Team", desc: "Experienced quality inspectors conducting tensile strength, UV-aging, and flame-retardant tests on every batch." },
     { icon: "\u2705", title: "BSCI & NFPA-701 Certified", desc: "Audited social compliance and fire-retardant certification for construction and public safety projects." },
