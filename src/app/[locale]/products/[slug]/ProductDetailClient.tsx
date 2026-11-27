@@ -381,8 +381,8 @@ export default function ProductDetailClient({ slug, locale }: ProductDetailClien
                   title: 'Export Experience',
                   desc: 'We support you with product specifications, samples, production scheduling, and export documentation.',
                   imgs: [
-                    { src: '/images/factory/jiacheng-loading-yard-forklift.jpg', alt: 'Forklift pushing a pallet of red netting rolls into an open container in front of the Jiacheng factory building' },
-                    { src: '/images/factory/jiacheng-container-interior-rolls.jpg', alt: 'Red netting rolls stacked floor to ceiling inside a shipping container' },
+                    { src: '/images/factory/jiacheng-loading-yard-forklift.jpg', alt: 'Forklift pushing a pallet of orange netting rolls into an open container in front of the Jiacheng factory building' },
+                    { src: '/images/factory/jiacheng-container-interior-rolls.jpg', alt: 'Orange netting rolls stacked floor to ceiling inside a shipping container' },
                   ],
                 },
                 {

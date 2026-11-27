@@ -132,7 +132,7 @@ export default function AdminPanel() {
             { src: '/images/factory/jiacheng-factory-exterior-panorama.jpg', alt: 'Exterior panoramic view of Jiacheng Netting HDPE plastic netting manufacturing facility in Jinan Shandong China', label: 'Factory Exterior - 20,000m2 Manufacturing Base', span: 'full' },
             { src: '/images/factory/jiacheng-workshop-karl-mayer-machines.jpg', alt: 'Advanced warp knitting production lines with Karl Mayer machines manufacturing HDPE nets', label: 'Karl Mayer Warp Knitting Lines', span: 'half' },
             { src: '/images/factory/jiacheng-workshop-wide-angle-production.jpg', alt: 'Wide angle view of Jiacheng Netting modern production workshop with warp knitting machines and skilled workers', label: 'Production Workshop', span: 'half' },
-            { src: '/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg', alt: 'Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green blue red black and white', label: 'Custom Colored HDPE Netting Production', span: 'full' },
+            { src: '/images/factory/jiacheng-warp-knitting-production-colorful-nets.jpg', alt: 'Karl Mayer warp knitting machines producing custom colored HDPE plastic netting in green blue orange black and white', label: 'Custom Colored HDPE Netting Production', span: 'full' },
             { src: '/images/factory/jiacheng-warehouse-hdpe-netting-rolls-stacked.jpg', alt: 'Large scale warehouse at Jiacheng Netting with finished HDPE netting rolls stacked on racks ready for export', label: 'Bulk Inventory - Ready for Global Export', span: 'full' },
           ],
           products: data.products || [],

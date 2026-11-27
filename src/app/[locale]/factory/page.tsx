@@ -9,9 +9,9 @@ import { useContent } from '@/context/ContentContext';
 const PRODUCTS_IN_PRODUCTION = [
   {
     title: 'Debris Netting',
-    desc: 'Red debris netting running on our warp knitting line, quarter-inch mesh.',
+    desc: 'Orange debris netting running on our warp knitting line, quarter-inch mesh.',
     image: '/images/factory/production/production-debris-netting-warp-knitting.jpg',
-    alt: 'Red HDPE debris netting being knitted on a warp knitting machine at Shandong Jiacheng',
+    alt: 'Orange HDPE debris netting being knitted on a warp knitting machine at Shandong Jiacheng',
   },
   {
     title: 'Shade Netting',
