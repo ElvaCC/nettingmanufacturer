@@ -73,16 +73,51 @@ const localizedMetadata: Record<Locale, { title: string; description: string }> 
   },
 };
 
+// 页面级 title / description，按路由 path 查表。
+// 英文站定稿阶段只填英文；es/ru/ar 暂回退英文，翻译阶段再补。
+// 未命中此表的路由仍用站点默认 title；已在各自 page.tsx 里显式覆盖的
+// （solutions / cases / 产品分类页 / 产品详情页）不受影响。
+const pageMetadata: Record<string, { title: string; description: string }> = {
+  "/products": {
+    title: "HDPE Netting Products",
+    description:
+      "Construction safety netting, debris netting, shade nets, hail nets, olive nets, bird nets and privacy screens, warp knitted in our own factory for bulk export.",
+  },
+  "/applications": {
+    title: "Netting Applications by Industry",
+    description:
+      "How HDPE netting is used in construction, agriculture, horticulture and industrial screening, and which knitting structure suits each application.",
+  },
+  "/factory": {
+    title: "Our Factory and Production Capacity",
+    description:
+      "Inside our HDPE netting factory in Shandong, China: 70 warp knitting machines and export capacity of up to 10 containers per week.",
+  },
+  "/blog": {
+    title: "Netting Specifications and Buying Notes",
+    description:
+      "Notes for importers and distributors on HDPE netting specifications, knitting structures, UV requirements and export packaging.",
+  },
+  "/contact": {
+    title: "Contact Us for a Factory Quotation",
+    description:
+      "Send your netting specification, quantity and destination port to get a factory-direct quotation from Shandong Jiacheng Chemical Fiber.",
+  },
+};
+
 export function getLocalizedMetadata(locale: Locale, path?: string): Metadata {
   const localized = localizedMetadata[locale] || localizedMetadata.en;
   const basePath = `/${locale}${path || ""}`;
+  const page = path ? pageMetadata[path] : undefined;
+  const title = page?.title ?? localized.title;
+  const description = page?.description ?? localized.description;
   return {
     ...defaultMetadata,
     title: {
       ...defaultMetadata.title,
-      default: localized.title,
+      default: title,
     },
-    description: localized.description,
+    description,
     alternates: {
       canonical: `${SITE_URL}${basePath}`,
       languages: {
@@ -95,10 +130,15 @@ export function getLocalizedMetadata(locale: Locale, path?: string): Metadata {
     },
     openGraph: {
       ...defaultMetadata.openGraph,
-      title: localized.title,
-      description: localized.description,
+      title,
+      description,
       url: `${SITE_URL}${basePath}`,
       locale: locale === "ar" ? "ar_SA" : locale === "es" ? "es_ES" : locale === "ru" ? "ru_RU" : "en_US",
+    },
+    twitter: {
+      ...defaultMetadata.twitter,
+      title,
+      description,
     },
   };
 }

@@ -17,10 +17,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const base = getLocalizedMetadata(locale as Locale, "/cases");
+  const description =
+    "Explore our successful projects across the globe, serving diverse industries with HDPE netting solutions.";
   return {
     ...base,
-    title: "Project Cases | Netting Manufacturer",
-    description: "Explore our successful projects across the globe, serving diverse industries with HDPE netting solutions.",
+    title: "Project Cases",
+    description,
+    openGraph: {
+      ...base.openGraph,
+      title: "Project Cases",
+      description,
+    },
+    twitter: {
+      ...base.twitter,
+      title: "Project Cases",
+      description,
+    },
   };
 }
 

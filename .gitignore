@@ -9,6 +9,13 @@ coverage/
 # Next.js
 /.next/
 /out/
+# Build folders renamed instead of deleted during debugging
+/.next_*/
+
+# Local screenshots and one-off scripts (never shipped)
+tmp_*
+.tmp_*
+tmp_ops/
 
 # Production
 /build/

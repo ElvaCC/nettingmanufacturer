@@ -9,7 +9,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const base = getLocalizedMetadata(locale as Locale, "/factory");
-  return { alternates: base.alternates };
+  return base;
 }
 
 export default function FactoryLayout({

@@ -11,11 +11,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const base = getLocalizedMetadata(locale as Locale, "/solutions");
+  const description =
+    "Industry-specific HDPE netting solutions for construction safety, agriculture, shade, and privacy. Factory-direct from Jiacheng Netting — BSCI & NFPA-701 certified.";
   return {
     ...base,
-    title: "HDPE Netting Solutions by Application | Jiacheng Netting",
-    description:
-      "Industry-specific HDPE netting solutions for construction safety, agriculture, shade, and privacy. Factory-direct from Jiacheng Netting — BSCI & NFPA-701 certified.",
+    title: "HDPE Netting Solutions by Application",
+    description,
+    openGraph: {
+      ...base.openGraph,
+      title: "HDPE Netting Solutions by Application",
+      description,
+    },
+    twitter: {
+      ...base.twitter,
+      title: "HDPE Netting Solutions by Application",
+      description,
+    },
   };
 }
 
